@@ -1,0 +1,79 @@
+/* SignInPage.module.scss */
+.container {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: white;
+}
+
+.card {
+	padding: 20px;
+	width: 320px;
+	text-align: center;
+	align-items: center;
+}
+
+.googleButton {
+	display: flex;
+	width: 100%;
+	background-color: #fff;
+	border: 0.5px solid #ccc;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 16px;
+	align-items: center;
+	justify-content: center;
+}
+
+.googleIcon {
+	object-fit: contain;
+	margin-right: 12px;
+}
+.googleText {
+	color: #333;
+	font-size: 16px;
+}
+
+.appleButton {
+	display: flex;
+	width: 100%;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 16px;
+	align-items: center;
+	justify-content: center;
+}
+
+.appleIcon {
+	object-fit: contain;
+	margin-right: 12px;
+}
+.appleText {
+	color: #333;
+	font-size: 16px;
+}
+
+.horizontalLine {
+	color: #eaeaea;
+	width: 100%;
+}
+
+.input {
+	padding: 8px;
+	width: 90%;
+	margin-top: 16px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.button {
+	margin-top: 24px;
+	width: 100%;
+	padding: 4px;
+	background-color: #333;
+	color: #eaeaea;
+}
