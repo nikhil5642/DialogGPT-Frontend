@@ -1,25 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
 	getAuth,
 	GoogleAuthProvider,
 	signInWithPopup,
+	signInWithRedirect,
 	OAuthProvider,
+	onAuthStateChanged,
 	signInWithEmailAndPassword,
 } from "firebase/auth";
 import styles from "./styles/signin.module.scss"; // Import the SCSS module
 import Image from "next/image";
-
-const auth = getAuth();
+import { useRouter } from "next/router";
+import AuthService from "../src/helper/AuthService";
+import { getRequest } from "../src/helper/http-helper";
 
 const SignInPage = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const router = useRouter();
+	const auth = getAuth();
+	const provider = new GoogleAuthProvider();
+
+	useEffect(() => {
+		const unsubscribe = onAuthStateChanged(auth, async (user) => {
+			if (user) {
+				await user.getIdToken().then((token) => AuthService.login(token));
+			} else {
+				// User is signed out
+				console.log("User is signed out");
+			}
+		});
+
+		return () => unsubscribe();
+	}, []);
 
 	const handleSignInWithGoogle = async () => {
-		const provider = new GoogleAuthProvider();
 		try {
-			await signInWithPopup(auth, provider);
-			// Google sign-in successful, handle user state or redirects here
+			await signInWithRedirect(auth, provider);
 		} catch (error) {
 			console.error("Google sign-in error:", error);
 		}
@@ -27,21 +44,23 @@ const SignInPage = () => {
 
 	const handleSignInWithApple = async () => {
 		const provider = new OAuthProvider("apple.com");
-		try {
-			await signInWithPopup(auth, provider);
-			// Apple sign-in successful, handle user state or redirects here
-		} catch (error) {
-			console.error("Apple sign-in error:", error);
-		}
+		signInWithPopup(auth, provider)
+			.then((userCredential) => {
+				const user = userCredential.user;
+			})
+			.catch((error) => {
+				console.error("Apple sign-in error:", error);
+			});
 	};
 
 	const handleSignInWithEmailAndPassword = async () => {
-		try {
-			await signInWithEmailAndPassword(auth, email, password);
-			// Email/password sign-in successful, handle user state or redirects here
-		} catch (error) {
-			console.error("Email/password sign-in error:", error);
-		}
+		signInWithEmailAndPassword(auth, email, password)
+			.then((userCredential) => {
+				const user = userCredential.user;
+			})
+			.catch((error) => {
+				console.error("Email/password sign-in error:", error);
+			});
 	};
 
 	return (
