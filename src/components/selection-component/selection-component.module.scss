@@ -1,0 +1,20 @@
+/* SelectionComponent.module.css */
+
+.selectionContainer {
+	display: inline-block;
+	padding: 8px;
+	margin: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s, color 0.3s;
+	color: #333;
+}
+
+.selectionContainer:hover {
+	background-color: transparent;
+	color: #007bff;
+}
+
+.selected {
+	background-color: transparent;
+	color: #dc3545;
+}

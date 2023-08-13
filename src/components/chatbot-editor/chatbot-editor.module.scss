@@ -1,0 +1,42 @@
+.chatBotEditorContainer {
+	flex: 1;
+	display: flex;
+	text-align: left;
+	flex-direction: column;
+	padding-top: 12px;
+	padding-bottom: 18px;
+	align-items: center;
+}
+.chatbotEditorTitleHeading {
+	font-size: 32px;
+	margin-bottom: 0px;
+	text-align: center;
+	margin-top: 0px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	color: rgba(0, 0, 0, 0.803);
+	font-family: "Roboto", sans-serif;
+}
+
+.button {
+	margin-top: 24px;
+	width: 100%;
+	padding: 8px;
+	background-color: #333;
+	color: #eaeaea;
+}
+
+@media only screen and (max-width: 720px) {
+	.chatBotEditorContainer {
+		justify-content: center;
+		padding-top: 8px;
+		padding-bottom: 8px;
+	}
+}
+
+@media only screen and (min-width: 1120px) {
+	.chatBotEditorContainer {
+		padding-left: calc(50vw - 560px);
+		padding-right: calc(50vw - 560px);
+	}
+}

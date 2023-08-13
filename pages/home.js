@@ -13,7 +13,7 @@ export default function HomeScreen() {
 				<title>Home</title>
 				<meta
 					name="description"
-					content="Become a Chess Master, One day at a time. Subscribe Now! "
+					content="Build a chatbot for your website, try now! "
 				/>
 				<link rel="canonical" href="https://chessmeito.com/home" />
 			</Head>

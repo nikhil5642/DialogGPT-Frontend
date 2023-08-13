@@ -25,6 +25,10 @@ const AuthService = {
 	getToken: () => {
 		return Cookies.get("jwtToken");
 	},
+	isAuthenticated: () => {
+		const token = Cookies.get("jwtToken");
+		return !!token;
+	},
 };
 
 export default AuthService;

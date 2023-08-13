@@ -24,9 +24,12 @@ const SignInPage = () => {
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, async (user) => {
 			if (user) {
-				await user.getIdToken().then((token) => AuthService.login(token));
+				await user
+					.getIdToken()
+					.then((token) =>
+						AuthService.login(token).then(() => router.push("/home")),
+					);
 			} else {
-				// User is signed out
 				console.log("User is signed out");
 			}
 		});
