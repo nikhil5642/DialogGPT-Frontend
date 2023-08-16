@@ -23,10 +23,15 @@ const attachTokenToHeaders = (headers = {}) => {
 };
 
 // Function to make GET requests with JWT token
-export const getRequest = async (endpoint, headers = {}) => {
+export const getRequest = async (
+	endpoint,
+	headers = {},
+	customTimeout = 10000,
+) => {
 	try {
 		const response = await instance.get(`${API_BASE_URL}${endpoint}`, {
 			headers: attachTokenToHeaders(headers),
+			timeout: customTimeout,
 		});
 
 		return response.data;
@@ -36,10 +41,16 @@ export const getRequest = async (endpoint, headers = {}) => {
 };
 
 // Function to make POST requests with JWT token
-export const postRequest = async (endpoint, data, headers = {}) => {
+export const postRequest = async (
+	endpoint,
+	data,
+	headers = {},
+	customTimeout = 10000,
+) => {
 	try {
 		const response = await instance.post(`${API_BASE_URL}${endpoint}`, data, {
 			headers: attachTokenToHeaders(headers),
+			timeout: customTimeout,
 		});
 
 		return response.data;

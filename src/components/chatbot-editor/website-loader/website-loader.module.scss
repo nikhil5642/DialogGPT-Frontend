@@ -1,0 +1,28 @@
+.container {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+}
+.inputURL {
+}
+.button {
+	margin-top: 24px;
+	width: 100%;
+	padding: 8px;
+	background-color: #333;
+	color: #eaeaea;
+}
+@media only screen and (max-width: 720px) {
+	.container {
+		justify-content: center;
+		padding-top: 8px;
+		padding-bottom: 8px;
+	}
+}
+
+@media only screen and (min-width: 1120px) {
+	.container {
+		padding-left: calc(50vw - 560px);
+		padding-right: calc(50vw - 560px);
+	}
+}

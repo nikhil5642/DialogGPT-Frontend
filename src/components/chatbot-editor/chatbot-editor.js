@@ -5,6 +5,7 @@ import {
 	SourceOptionsEnum,
 	SourceSelector,
 } from "./chatbot-editor-source.utits";
+import WebisteLoader from "./website-loader/website-loader";
 
 export default function ChatBotEditor() {
 	const router = useRouter();
@@ -18,7 +19,7 @@ export default function ChatBotEditor() {
 		qna: [],
 	});
 
-	const [selector, setSelector] = useState("files");
+	const [selector, setSelector] = useState(SourceOptionsEnum.URLS);
 
 	return (
 		<div className={styles.chatBotEditorContainer}>
@@ -28,7 +29,9 @@ export default function ChatBotEditor() {
 
 			{selector === SourceOptionsEnum.FILES && <div>Files View</div>}
 			{selector === SourceOptionsEnum.TEXTS && <div>Texts View</div>}
-			{selector === SourceOptionsEnum.URLS && <div>URLs View</div>}
+			{selector === SourceOptionsEnum.URLS && (
+				<WebisteLoader bot_id={"abc"} data={data} setData={setData} />
+			)}
 			{selector === SourceOptionsEnum.QNA && <div>Q&A View</div>}
 
 			<button className={styles.button} onClick={createNewChatBot}>

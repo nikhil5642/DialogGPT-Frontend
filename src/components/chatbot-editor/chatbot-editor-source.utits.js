@@ -9,7 +9,7 @@ export const SourceOptionsEnum = {
 const SourceOptionLabels = {
 	[SourceOptionsEnum.FILES]: "Files",
 	[SourceOptionsEnum.TEXTS]: "Texts",
-	[SourceOptionsEnum.URLS]: "URLs",
+	[SourceOptionsEnum.URLS]: "Website",
 	[SourceOptionsEnum.QNA]: "Q&A",
 };
 
