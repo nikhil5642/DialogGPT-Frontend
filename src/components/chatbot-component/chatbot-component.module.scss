@@ -1,0 +1,40 @@
+.aboutContainer {
+	display: flex;
+	flex-direction: column;
+	background-color: #f6f6f6;
+	margin-top: 96px;
+	padding-top: 16px;
+	padding-left: calc(50vw - 360px);
+	padding-right: calc(50vw - 360px);
+}
+.aboutHorizontalContainer {
+	flex: 1;
+	flex-direction: column;
+	align-self: center;
+}
+
+.aboutCopyright {
+	font-size: 16px;
+	text-align: center;
+}
+
+.aboutContact {
+	font-size: 18px;
+	margin: 0px;
+	margin-bottom: 12px;
+}
+.aboutP {
+	font-size: 18px;
+	padding: 0px;
+	margin: 0px;
+	text-align: center;
+}
+
+@media only screen and (max-width: 720px) {
+	.aboutContainer {
+		flex-direction: column;
+		padding-left: 8px;
+		padding-right: 8px;
+		margin-top: 12px;
+	}
+}

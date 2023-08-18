@@ -6,9 +6,10 @@ import {
 	ChatBotOptionsEnum,
 } from "./chatbot-editor-source.utits";
 import { postRequest } from "../../../src/helper/http-helper";
+import ChatBotComponent from "../chatbot-component/chatbot-component";
 
 export default function ChatBotEditor({ botID }) {
-	const [selector, setSelector] = useState(ChatBotOptionsEnum.SOURCES);
+	const [selector, setSelector] = useState(ChatBotOptionsEnum.CHATBOT);
 	const [chatbotData, setChatbotData] = useState({
 		id: botID,
 		name: "",
@@ -37,7 +38,9 @@ export default function ChatBotEditor({ botID }) {
 			<ChatBotOptionSelector selector={selector} setSelector={setSelector} />
 
 			{selector === ChatBotOptionsEnum.SETTINGS && <div>Settings View</div>}
-			{selector === ChatBotOptionsEnum.CHATBOT && <div>Chatbot View</div>}
+			{selector === ChatBotOptionsEnum.CHATBOT && (
+				<ChatBotComponent botID={botID} />
+			)}
 			{selector === ChatBotOptionsEnum.SOURCES && (
 				<ChatBotSourceEditor botID={botID} />
 			)}
