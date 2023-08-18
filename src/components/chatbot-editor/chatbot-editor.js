@@ -13,7 +13,6 @@ export default function ChatBotEditor({ botID }) {
 		id: botID,
 		name: "",
 		status: "untrained",
-		content: [],
 	});
 	useEffect(() => {
 		loadChatBotData();
@@ -21,12 +20,11 @@ export default function ChatBotEditor({ botID }) {
 
 	const loadChatBotData = () => {
 		if (botID) {
-			postRequest("/load_chatbot", { botID: botID }).then((res) =>
+			postRequest("/load_chatbot_info", { botID: botID }).then((res) =>
 				setChatbotData({
 					...chatbotData,
 					name: res.result.chatbot_name || "",
 					status: res.result.chatbot_status || "",
-					content: res.result.content_list || [],
 				}),
 			);
 		}
@@ -40,7 +38,9 @@ export default function ChatBotEditor({ botID }) {
 
 			{selector === ChatBotOptionsEnum.SETTINGS && <div>Settings View</div>}
 			{selector === ChatBotOptionsEnum.CHATBOT && <div>Chatbot View</div>}
-			{selector === ChatBotOptionsEnum.SOURCES && <ChatBotSourceEditor />}
+			{selector === ChatBotOptionsEnum.SOURCES && (
+				<ChatBotSourceEditor botID={botID} />
+			)}
 		</div>
 	);
 }

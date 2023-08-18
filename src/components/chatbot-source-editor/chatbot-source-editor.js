@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./chatbot-source-editor.module.scss";
 import { useRouter } from "next/router";
 import {
@@ -6,20 +6,28 @@ import {
 	SourceSelector,
 } from "./chatbot-source-editor.utits";
 import WebisteLoader from "./website-loader/website-loader";
+import { postRequest } from "../../helper/http-helper";
 
-export default function ChatBotSourceEditor() {
-	const router = useRouter();
-	const createNewChatBot = () => {
-		router.push("/create-new-chatbot");
+export default function ChatBotSourceEditor({ botID }) {
+	const trainChatBot = () => {
+		postRequest("/train_chatbot", { botID: botID, data: data });
 	};
-	const [data, setData] = useState({
-		files: [],
-		texts: [],
-		urls: [],
-		qna: [],
-	});
+	const [data, setData] = useState([]);
+	const loadChatBotData = () => {
+		if (botID) {
+			postRequest("/load_chatbot_content", { botID: botID }).then((res) =>
+				setData(res.result),
+			);
+		}
+	};
 
-	const [selector, setSelector] = useState(SourceOptionsEnum.URLS);
+	useEffect(() => {
+		if (botID) {
+			loadChatBotData();
+		}
+	}, [botID]);
+
+	const [selector, setSelector] = useState(SourceOptionsEnum.URL);
 
 	return (
 		<div className={styles.chatBotEditorContainer}>
@@ -27,15 +35,15 @@ export default function ChatBotSourceEditor() {
 
 			<SourceSelector selector={selector} setSelector={setSelector} />
 
-			{selector === SourceOptionsEnum.FILES && <div>Files View</div>}
-			{selector === SourceOptionsEnum.TEXTS && <div>Texts View</div>}
-			{selector === SourceOptionsEnum.URLS && (
-				<WebisteLoader bot_id={"abc"} data={data} setData={setData} />
+			{selector === SourceOptionsEnum.FILE && <div>Files View</div>}
+			{selector === SourceOptionsEnum.TEXT && <div>Texts View</div>}
+			{selector === SourceOptionsEnum.URL && (
+				<WebisteLoader bot_id={botID} data={data} setData={setData} />
 			)}
 			{selector === SourceOptionsEnum.QNA && <div>Q&A View</div>}
 
-			<button className={styles.button} onClick={createNewChatBot}>
-				Create ChatBot
+			<button className={styles.button} onClick={trainChatBot}>
+				Train ChatBot
 			</button>
 		</div>
 	);

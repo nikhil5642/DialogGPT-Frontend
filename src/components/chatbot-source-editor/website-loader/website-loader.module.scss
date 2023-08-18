@@ -12,6 +12,31 @@
 	background-color: #333;
 	color: #eaeaea;
 }
+
+.buttonAddURL {
+	width: 100px;
+	background-color: #333;
+	color: #eaeaea;
+	align-self: flex-end;
+}
+.urlItem {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #ccc;
+	padding: 8px 0;
+}
+
+.urlItemP {
+	margin: 0;
+}
+
+.urlItemButton {
+	background-color: #ff0000;
+	color: #ffffff;
+	border: none;
+	cursor: pointer;
+}
 @media only screen and (max-width: 720px) {
 	.container {
 		justify-content: center;

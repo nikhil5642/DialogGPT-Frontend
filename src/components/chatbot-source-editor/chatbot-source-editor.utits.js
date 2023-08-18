@@ -1,23 +1,23 @@
 import SelectionComponent from "../selection-component/selection-component";
 
 export const SourceOptionsEnum = {
-	FILES: "files",
-	TEXTS: "texts",
-	URLS: "urls",
+	FILE: "file",
+	TEXT: "text",
+	URL: "url",
 	QNA: "qna",
 };
 const SourceOptionLabels = {
-	[SourceOptionsEnum.FILES]: "Files",
-	[SourceOptionsEnum.TEXTS]: "Texts",
-	[SourceOptionsEnum.URLS]: "Website",
+	[SourceOptionsEnum.FILE]: "Files",
+	[SourceOptionsEnum.TEXT]: "Texts",
+	[SourceOptionsEnum.URL]: "Website",
 	[SourceOptionsEnum.QNA]: "Q&A",
 };
 
 export const SourceSelector = ({ selector, setSelector }) => {
 	const sourceOptions = [
-		SourceOptionsEnum.FILES,
-		SourceOptionsEnum.TEXTS,
-		SourceOptionsEnum.URLS,
+		SourceOptionsEnum.FILE,
+		SourceOptionsEnum.TEXT,
+		SourceOptionsEnum.URL,
 		SourceOptionsEnum.QNA,
 	];
 	return (
@@ -37,3 +37,17 @@ export const SourceSelector = ({ selector, setSelector }) => {
 export const getSourceLabel = (sourceOption) => {
 	return SourceOptionLabels[sourceOption] || "";
 };
+
+export function generateRandomString(length) {
+	const characters =
+		"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	const charactersLength = characters.length;
+	let result = "";
+
+	for (let i = 0; i < length; i++) {
+		const randomIndex = Math.floor(Math.random() * charactersLength);
+		result += characters.charAt(randomIndex);
+	}
+
+	return result;
+}
