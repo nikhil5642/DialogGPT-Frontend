@@ -4,10 +4,10 @@ export default function About() {
 		<div className={styles.aboutContainer}>
 			<p className={styles.aboutP}>
 				<b className={styles.aboutContact}>Contact us: </b>
-				contact@chessmeito.com
+				nikhil@websitegpt.com
 			</p>
 			<br></br>
-			<p className={styles.aboutCopyright}>© 2022 ChessMeito.com</p>
+			<p className={styles.aboutCopyright}>© 2023 WebsiteGPT.com</p>
 		</div>
 	);
 }

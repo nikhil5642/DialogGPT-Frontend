@@ -2,10 +2,15 @@ import styles from "./styles/home.module.scss";
 import { useEffect } from "react";
 // import ReactGA from "react-ga4";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import AuthService from "../src/helper/AuthService";
 
 export default function HomeScreen() {
+	const router = useRouter();
 	useEffect(() => {
-		// ReactGA.send({ hitType: "pageview", page: window.location.pathname });
+		if (AuthService.isAuthenticated()) {
+			router.push("/my-chatbots");
+		}
 	}, []);
 	return (
 		<>
