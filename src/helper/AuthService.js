@@ -19,7 +19,7 @@ const AuthService = {
 			throw error;
 		}
 	},
-	logout: () => {
+	logout: async () => {
 		Cookies.remove("jwtToken");
 	},
 	getToken: () => {

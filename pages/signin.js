@@ -12,7 +12,6 @@ import styles from "./styles/signin.module.scss"; // Import the SCSS module
 import Image from "next/image";
 import { useRouter } from "next/router";
 import AuthService from "../src/helper/AuthService";
-import { getRequest } from "../src/helper/http-helper";
 
 const SignInPage = () => {
 	const [email, setEmail] = useState("");

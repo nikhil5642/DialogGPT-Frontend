@@ -10,6 +10,8 @@ export default function HomeScreen() {
 	useEffect(() => {
 		if (AuthService.isAuthenticated()) {
 			router.push("/my-chatbots");
+		} else {
+			router.push("/signin");
 		}
 	}, []);
 	return (
