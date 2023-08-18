@@ -1,30 +1,28 @@
 import SelectionComponent from "../selection-component/selection-component";
 
-export const SourceOptionsEnum = {
-	FILES: "files",
-	TEXTS: "texts",
-	URLS: "urls",
-	QNA: "qna",
+export const ChatBotOptionsEnum = {
+	SOURCES: "sources",
+	SETTINGS: "settings",
+	CHATBOT: "chatbots",
 };
-const SourceOptionLabels = {
-	[SourceOptionsEnum.FILES]: "Files",
-	[SourceOptionsEnum.TEXTS]: "Texts",
-	[SourceOptionsEnum.URLS]: "Website",
-	[SourceOptionsEnum.QNA]: "Q&A",
+const ChatBotOptionLabels = {
+	[ChatBotOptionsEnum.SOURCES]: "Sources",
+	[ChatBotOptionsEnum.SETTINGS]: "Settings",
+	[ChatBotOptionsEnum.CHATBOT]: "ChatBot",
 };
 
-export const SourceSelector = ({ selector, setSelector }) => {
+export const ChatBotOptionSelector = ({ selector, setSelector }) => {
 	const sourceOptions = [
-		SourceOptionsEnum.FILES,
-		SourceOptionsEnum.TEXTS,
-		SourceOptionsEnum.URLS,
-		SourceOptionsEnum.QNA,
+		ChatBotOptionsEnum.SOURCES,
+		ChatBotOptionsEnum.SETTINGS,
+		ChatBotOptionsEnum.CHATBOT,
 	];
 	return (
 		<div>
 			{sourceOptions.map((item) => (
 				<SelectionComponent
-					text={getSourceLabel(item)}
+					key={item}
+					text={getLabel(item)}
 					isSelected={item === selector}
 					onClick={() => setSelector(item)}
 				/>
@@ -33,6 +31,6 @@ export const SourceSelector = ({ selector, setSelector }) => {
 	);
 };
 
-export const getSourceLabel = (sourceOption) => {
-	return SourceOptionLabels[sourceOption] || "";
+const getLabel = (sourceOption) => {
+	return ChatBotOptionLabels[sourceOption] || "";
 };

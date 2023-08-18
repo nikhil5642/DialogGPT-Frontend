@@ -6,9 +6,12 @@ import Link from "next/link"; // Import the Link component
 
 export default function MyChatBots() {
 	const router = useRouter();
+
 	const [chatbotsList, setChatBotsList] = useState([]);
 	const createNewChatBot = () => {
-		getRequest("/createBot").then((res) => console.log("create chatbots", res));
+		getRequest("/createBot").then((res) =>
+			router.push(`/chatbot/${res.chatbot_id}`),
+		);
 	};
 
 	useEffect(() => {

@@ -1,42 +1,46 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./chatbot-editor.module.scss";
-import { useRouter } from "next/router";
+import ChatBotSourceEditor from "../chatbot-source-editor/chatbot-source-editor";
 import {
-	SourceOptionsEnum,
-	SourceSelector,
+	ChatBotOptionSelector,
+	ChatBotOptionsEnum,
 } from "./chatbot-editor-source.utits";
-import WebisteLoader from "./website-loader/website-loader";
+import { postRequest } from "../../../src/helper/http-helper";
 
-export default function ChatBotEditor() {
-	const router = useRouter();
-	const createNewChatBot = () => {
-		router.push("/create-new-chatbot");
-	};
-	const [data, setData] = useState({
-		files: [],
-		texts: [],
-		urls: [],
-		qna: [],
+export default function ChatBotEditor({ botID }) {
+	const [selector, setSelector] = useState(ChatBotOptionsEnum.SOURCES);
+	const [chatbotData, setChatbotData] = useState({
+		id: botID,
+		name: "",
+		status: "untrained",
+		content: [],
 	});
+	useEffect(() => {
+		loadChatBotData();
+	}, [botID]);
 
-	const [selector, setSelector] = useState(SourceOptionsEnum.URLS);
+	const loadChatBotData = () => {
+		if (botID) {
+			postRequest("/load_chatbot", { botID: botID }).then((res) =>
+				setChatbotData({
+					...chatbotData,
+					name: res.result.chatbot_name || "",
+					status: res.result.chatbot_status || "",
+					content: res.result.content_list || [],
+				}),
+			);
+		}
+	};
 
 	return (
 		<div className={styles.chatBotEditorContainer}>
-			<h1 className={styles.chatbotEditorTitleHeading}>Data Sources</h1>
+			<h1 className={styles.chatbotEditorTitleHeading}>{chatbotData.name}</h1>
 
-			<SourceSelector selector={selector} setSelector={setSelector} />
+			<ChatBotOptionSelector selector={selector} setSelector={setSelector} />
 
-			{selector === SourceOptionsEnum.FILES && <div>Files View</div>}
-			{selector === SourceOptionsEnum.TEXTS && <div>Texts View</div>}
-			{selector === SourceOptionsEnum.URLS && (
-				<WebisteLoader bot_id={"abc"} data={data} setData={setData} />
-			)}
-			{selector === SourceOptionsEnum.QNA && <div>Q&A View</div>}
-
-			<button className={styles.button} onClick={createNewChatBot}>
-				Create ChatBot
-			</button>
+			{selector === ChatBotOptionsEnum.SETTINGS && <div>Settings View</div>}
+			{selector === ChatBotOptionsEnum.CHATBOT && <div>Chatbot View</div>}
+			{selector === ChatBotOptionsEnum.SOURCES && <ChatBotSourceEditor />}
 		</div>
 	);
 }
