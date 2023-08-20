@@ -1,12 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { postRequest } from "../../helper/http-helper";
+import styles from "./chatbot-component.module.scss";
+import Image from "next/image";
 
 export default function ChatBotComponent({ botID }) {
 	const [messages, setMessages] = useState([]);
 	const [newMessage, setNewMessage] = useState("");
 	const [history, setHistory] = useState([]);
-
+	const messagesEndRef = useRef(null);
 	const [sending, setSending] = useState(false);
+	const [rows, setRows] = useState(1);
+
+	useEffect(() => {
+		const numOfLineBreaks = (newMessage.match(/\n/g) || []).length;
+		setRows(Math.min(numOfLineBreaks + 1, 5));
+	}, [newMessage]);
+
+	useEffect(() => {
+		messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+	}, [messages]);
 
 	const handleSend = () => {
 		if (newMessage.trim() !== "") {
@@ -27,65 +39,55 @@ export default function ChatBotComponent({ botID }) {
 						...messages,
 						{ id: messages.length, text: res.result.reply, type: "incoming" },
 					]),
-						setSending((sending) => false);
+						setSending(() => false);
 				});
 			}
 		}
 	};
 
 	return (
-		<div>
-			<div
-				style={{
-					height: "300px",
-					overflowY: "scroll",
-					border: "1px solid #ccc",
-					padding: "10px",
-				}}
-			>
+		<div className={styles.chatbotContainer}>
+			<div className={styles.chatbotMessagesContainer}>
 				{messages.map((message) => (
 					<div
 						key={message.id}
-						style={{
-							backgroundColor:
-								message.type === "incoming" ? "#f0f0f0" : "#0084ff",
-							color: message.type === "incoming" ? "#000" : "#fff",
-							padding: "8px",
-							borderRadius: "8px",
-							marginBottom: "8px",
-							alignSelf:
-								message.type === "incoming" ? "flex-start" : "flex-end",
-						}}
+						className={
+							message.type === "incoming"
+								? styles.incomingBubble
+								: styles.outgoingBubble
+						}
 					>
-						{message.text}
+						<div
+							className={
+								message.type === "incoming"
+									? styles.incomingMessageContainer
+									: styles.outgoingMessageContainer
+							}
+						>
+							{message.text}
+						</div>
 					</div>
 				))}
+				<div ref={messagesEndRef} />
 			</div>
-			<div style={{ marginTop: "10px" }}>
-				<input
-					type="text"
+			<div className={styles.inputContainer}>
+				<textarea
+					rows={rows}
 					placeholder="Type a message..."
 					value={newMessage}
 					onChange={(e) => setNewMessage(e.target.value)}
-					style={{
-						padding: "8px",
-						marginRight: "10px",
-						borderRadius: "4px",
-						border: "1px solid #ccc",
-					}}
-				/>
-				<button
-					onClick={handleSend}
-					style={{
-						padding: "8px",
-						borderRadius: "4px",
-						backgroundColor: "#0084ff",
-						color: "#fff",
-						border: "none",
-						cursor: "pointer",
-					}}
-				>
-					Send
+					className={styles.inputTextArea}
+				></textarea>
+
+				<button onClick={handleSend} className={styles.sendButton}>
+					<Image
+						src="/assets/send_message.png"
+						alt={"Send"}
+						title={"Send"}
+						loading="eager"
+						height={24}
+						width={24}
+					></Image>
 				</button>
 			</div>
 		</div>

@@ -1,40 +1,110 @@
-.aboutContainer {
+.chatbotContainer {
+	padding-top: 16px;
+	margin-left: 16px;
+	margin-right: 16px;
+	max-width: 1080px;
+	width: calc(100vw - 64px);
+	border: 1px solid #ccc;
+	height: 50vh;
+	padding: 12px;
 	display: flex;
 	flex-direction: column;
-	background-color: #f6f6f6;
-	margin-top: 96px;
-	padding-top: 16px;
-	padding-left: calc(50vw - 360px);
-	padding-right: calc(50vw - 360px);
 }
-.aboutHorizontalContainer {
+
+.chatbotMessagesContainer {
 	flex: 1;
+	display: flex;
+	max-height: 50vh;
+	overflow-y: scroll;
 	flex-direction: column;
-	align-self: center;
 }
 
-.aboutCopyright {
-	font-size: 16px;
-	text-align: center;
+.incomingBubble {
+	justify-content: flex-start;
+	display: flex;
+	margin-bottom: 8px;
+}
+.outgoingBubble {
+	justify-content: flex-end;
+	display: flex;
+	margin-bottom: 8px;
 }
 
-.aboutContact {
-	font-size: 18px;
-	margin: 0px;
-	margin-bottom: 12px;
-}
-.aboutP {
-	font-size: 18px;
-	padding: 0px;
-	margin: 0px;
-	text-align: center;
+.baseMessageContainer {
+	display: flex;
+	padding: 8px;
+	border-radius: 15px;
+	max-width: 70%;
+	white-space: pre-wrap;
+	word-break: break-word;
 }
 
-@media only screen and (max-width: 720px) {
-	.aboutContainer {
-		flex-direction: column;
-		padding-left: 8px;
-		padding-right: 8px;
-		margin-top: 12px;
+.incomingMessageContainer {
+	@extend .baseMessageContainer;
+	background-color: #f0f0f0;
+	color: #000;
+}
+.outgoingMessageContainer {
+	@extend .baseMessageContainer;
+	background-color: #0084ff;
+	color: #fff;
+}
+
+.baseImage {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
+.receiverImg {
+	@extend .baseImage;
+	margin-right: 8px;
+}
+
+.senderImg {
+	@extend .baseImage;
+	margin-left: 8px;
+}
+
+.inputContainer {
+	position: relative;
+	display: flex;
+	border: 1px solid #ccc;
+	margin-top: 12px;
+	padding: 8px;
+}
+
+.inputTextArea {
+	flex: 1;
+	border: none;
+	padding: 8px;
+	margin-right: 16px;
+	resize: none;
+	overflow-y: auto;
+	box-sizing: border-box;
+	background-image: none;
+	&:focus {
+		outline: none;
+		box-shadow: none;
+	}
+	::selection {
+		background: transparent; // Removes the default color
+		border: none;
+	}
+}
+
+.sendButton {
+	padding: 16px;
+	border: none;
+	outline: none;
+	background-color: transparent;
+	cursor: pointer;
+	img {
+		display: block;
+		margin: 0 auto; // Center the image if needed
+		width: 24px;
+		height: 24px;
+		position: absolute;
+		bottom: 16px;
+		right: 16px;
 	}
 }
