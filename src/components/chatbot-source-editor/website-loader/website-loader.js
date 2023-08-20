@@ -6,14 +6,6 @@ import { generateRandomString } from "../chatbot-source-editor.utits";
 
 export default function WebisteLoader({ bot_id, data, setData }) {
 	const [url, setUrl] = useState("");
-	const [error, setError] = useState("");
-
-	useEffect(() => {
-		if (url != "") {
-			setError(isValidUrl(url) ? "" : "Invalid Url");
-		}
-	}, [url]);
-
 	const fetchUrls = () => {
 		postRequest("/fetch_urls", { url: url, botID: bot_id }, {}, 10000000).then(
 			(res) => {
@@ -21,7 +13,6 @@ export default function WebisteLoader({ bot_id, data, setData }) {
 			},
 		);
 	};
-
 	const addURL = () => {
 		setData([
 			...data,
@@ -57,38 +48,42 @@ export default function WebisteLoader({ bot_id, data, setData }) {
 				placeholder={"https://www.example.com"}
 				value={url}
 				onChange={(value) => setUrl(value)}
-				error={error}
 			/>
-			<button className={styles.button} onClick={fetchUrls}>
+			<button className={styles.buttonFetchLinks} onClick={fetchUrls}>
 				Fetch Links
 			</button>
 
 			<ul>
-				{data.map((item) => (
-					<li key={item.url} className={styles.urlItem}>
-						<EditBoxComponent
-							placeholder={"https://www.example.com"}
-							value={item.source}
-							onChange={(value) => handleEditUrl(item.content_id, value)}
-						/>
-						<button
-							onClick={() => handleDeleteUrl(item.content_id)}
-							className={styles.urlItemButton}
-						>
-							Delete
-						</button>
-					</li>
-				))}
+				{data
+					.filter((item) => item.source_type === "url")
+					.map((item) => (
+						<li key={item.url} className={styles.urlItem}>
+							<EditBoxComponent
+								placeholder={"https://www.example.com"}
+								value={item.source}
+								onChange={(value) => handleEditUrl(item.content_id, value)}
+							/>
+							{item.char_count > 0 && (
+								<p className={styles.urlCharCount}>{item.char_count}</p>
+							)}
+							<button
+								onClick={() => handleDeleteUrl(item.content_id)}
+								className={styles.urlItemButton}
+							>
+								<img src="/assets/bin.png" alt="Delete" />
+							</button>
+						</li>
+					))}
 			</ul>
-
+			<p className={styles.charDetected}>
+				{data
+					.filter((item) => item.source_type === "url")
+					.reduce((acc, curr) => acc + curr.char_count, 0)}{" "}
+				Char Detected
+			</p>
 			<button className={styles.buttonAddURL} onClick={addURL}>
 				Add URL
 			</button>
 		</div>
 	);
-}
-
-function isValidUrl(url) {
-	const pattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/;
-	return pattern.test(url);
 }

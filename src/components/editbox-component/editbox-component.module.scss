@@ -1,0 +1,14 @@
+.container {
+	width: 100%;
+}
+
+.inputTextArea {
+	width: 100%;
+	resize: none;
+	overflow-y: auto;
+	box-sizing: border-box;
+	background-image: none;
+	border-radius: 8px;
+	padding: 8px;
+	font-size: 18px;
+}

@@ -8,14 +8,14 @@ export const ChatBotOptionsEnum = {
 const ChatBotOptionLabels = {
 	[ChatBotOptionsEnum.SOURCES]: "Sources",
 	[ChatBotOptionsEnum.SETTINGS]: "Settings",
-	[ChatBotOptionsEnum.CHATBOT]: "ChatBot",
+	[ChatBotOptionsEnum.CHATBOT]: "Chatbot",
 };
 
 export const ChatBotOptionSelector = ({ selector, setSelector }) => {
 	const sourceOptions = [
+		ChatBotOptionsEnum.CHATBOT,
 		ChatBotOptionsEnum.SOURCES,
 		ChatBotOptionsEnum.SETTINGS,
-		ChatBotOptionsEnum.CHATBOT,
 	];
 	return (
 		<div>

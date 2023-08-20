@@ -1,11 +1,22 @@
 .container {
-	display: flex;
 	flex: 1;
+	display: flex;
 	flex-direction: column;
+	max-width: 1080px;
+	width: calc(100vw - 64px);
+	ul {
+		margin: 0;
+		margin-top: 16px;
+		padding: 0;
+		list-style-type: none; // This removes the default bullet points
+		li {
+			margin: 0;
+			padding: 0;
+		}
+	}
 }
-.inputURL {
-}
-.button {
+
+.buttonFetchLinks {
 	margin-top: 24px;
 	width: 100%;
 	padding: 8px;
@@ -14,7 +25,6 @@
 }
 
 .buttonAddURL {
-	width: 100px;
 	background-color: #333;
 	color: #eaeaea;
 	align-self: flex-end;
@@ -23,31 +33,33 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	border-bottom: 1px solid #ccc;
-	padding: 8px 0;
 }
 
 .urlItemP {
 	margin: 0;
 }
 
-.urlItemButton {
-	background-color: #ff0000;
-	color: #ffffff;
-	border: none;
-	cursor: pointer;
-}
-@media only screen and (max-width: 720px) {
-	.container {
-		justify-content: center;
-		padding-top: 8px;
-		padding-bottom: 8px;
-	}
+.urlCharCount {
+	margin-left: 8px;
+	font-size: 18px;
+	width: 60px;
 }
 
-@media only screen and (min-width: 1120px) {
-	.container {
-		padding-left: calc(50vw - 560px);
-		padding-right: calc(50vw - 560px);
+.charDetected {
+	margin-left: 16px;
+	font-size: 20px;
+	align-self: flex-end;
+}
+
+.urlItemButton {
+	background-color: transparent; // Make the button background transparent
+	border: none;
+	cursor: pointer;
+	padding: 0; // Remove padding if you want the image to fit the button exactly
+	img {
+		display: block;
+		width: 20px;
+		height: 20px;
+		margin-left: 16px;
 	}
 }
