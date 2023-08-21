@@ -1,37 +1,97 @@
 .headerContainer {
-	display: flex;
 	flex: 1;
+	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 }
 .headerLogoContainer {
-	flex: 1;
 	display: flex;
-	text-align: left;
 	padding-top: 12px;
-	padding-bottom: 18px;
+	padding-bottom: 12px;
+	margin-left: 16px;
 }
+
 .headerLogo {
 	object-fit: contain;
 	height: 80px;
 	width: 300px;
 }
+.linksContainer {
+	flex: 3;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.selectionItem {
+	margin: 0 10px;
+	display: inline-block;
+	padding: 8px 18px;
+	border: none;
+	border-radius: 12px;
+	color: black;
+	text-decoration: none;
+	font-weight: bold;
+	transition: background-color 0.3s, transform 0.3s;
+	cursor: pointer;
+}
 
-@media only screen and (max-width: 720px) {
-	.headerLogoContainer {
-		justify-content: center;
+.selectionItem:hover {
+	transform: translateY(-2px); /* Gives a slight lift effect on hover */
+	box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+}
+
+.selectionItem:active {
+	transform: translateY(1px); /* Pushes the button down a bit when clicked */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profileLogoContainer {
+	display: flex;
+	justify-content: end;
+	margin-left: 120px;
+	margin-right: 16px;
+}
+
+.profileLogo {
+	object-fit: contain;
+	height: 40px;
+	width: 40px;
+}
+
+.hamburgerContainer {
+	display: none;
+}
+
+.hamburgerLogo {
+	object-fit: contain;
+}
+
+@media only screen and (max-width: 1080px) {
+	.headerContainer {
 		padding-top: 8px;
 		padding-bottom: 8px;
+		// align-items: center;
 	}
-
 	.headerLogo {
+		object-fit: contain;
 		height: 50px;
 		width: 250px;
 	}
-}
-
-@media only screen and (min-width: 1080px) {
-	.headerLogoContainer {
-		padding-left: calc(50vw - 560px);
-		padding-right: calc(50vw - 560px);
+	.linksContainer {
+		display: none;
+	}
+	.profileLogoContainer {
+		display: none;
+	}
+	.hamburgerContainer {
+		display: flex;
+		position: absolute;
+		right: 16px;
+		top: 32px;
+	}
+	.hamburgerLogo {
+		object-fit: contain;
+		height: 24px;
+		width: 24px;
 	}
 }

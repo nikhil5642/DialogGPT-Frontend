@@ -1,0 +1,18 @@
+.pricingScreenContainer {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+}
+
+.pricingHeader {
+	font-size: 64px;
+	text-align: center;
+	margin: 0;
+}
+
+@media only screen and (min-width: 720px) {
+	.pricingScreenContainer {
+		padding-left: calc(50vw - 360px);
+		padding-right: calc(50vw - 360px);
+	}
+}
