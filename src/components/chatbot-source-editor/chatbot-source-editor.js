@@ -7,6 +7,7 @@ import {
 } from "./chatbot-source-editor.utits";
 import WebisteLoader from "./website-loader/website-loader";
 import { postRequest } from "../../helper/http-helper";
+import TextLoader from "./text-loader/text-loader";
 
 export default function ChatBotSourceEditor({ botID }) {
 	const trainChatBot = () => {
@@ -27,7 +28,7 @@ export default function ChatBotSourceEditor({ botID }) {
 		}
 	}, [botID]);
 
-	const [selector, setSelector] = useState(SourceOptionsEnum.URL);
+	const [selector, setSelector] = useState(SourceOptionsEnum.TEXT);
 
 	return (
 		<div className={styles.chatBotEditorContainer}>
@@ -36,7 +37,9 @@ export default function ChatBotSourceEditor({ botID }) {
 			<SourceSelector selector={selector} setSelector={setSelector} />
 
 			{selector === SourceOptionsEnum.FILE && <div>Files View</div>}
-			{selector === SourceOptionsEnum.TEXT && <div>Texts View</div>}
+			{selector === SourceOptionsEnum.TEXT && (
+				<TextLoader bot_id={botID} data={data} setData={setData}></TextLoader>
+			)}
 			{selector === SourceOptionsEnum.URL && (
 				<WebisteLoader bot_id={botID} data={data} setData={setData} />
 			)}
