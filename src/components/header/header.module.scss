@@ -12,8 +12,8 @@
 }
 .headerLogo {
 	object-fit: contain;
-	height: 120px;
-	width: 400px;
+	height: 80px;
+	width: 300px;
 }
 
 @media only screen and (max-width: 720px) {
@@ -29,7 +29,7 @@
 	}
 }
 
-@media only screen and (min-width: 1120px) {
+@media only screen and (min-width: 1080px) {
 	.headerLogoContainer {
 		padding-left: calc(50vw - 560px);
 		padding-right: calc(50vw - 560px);

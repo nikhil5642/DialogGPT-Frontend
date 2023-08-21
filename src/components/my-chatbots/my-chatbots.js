@@ -9,7 +9,7 @@ export default function MyChatBots() {
 
 	const [chatbotsList, setChatBotsList] = useState([]);
 	const createNewChatBot = () => {
-		getRequest("/createBot").then((res) =>
+		getRequest("/create_bot").then((res) =>
 			router.push(`/chatbot/${res.chatbot_id}`),
 		);
 	};

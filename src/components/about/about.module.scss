@@ -1,4 +1,8 @@
 .aboutContainer {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	left: 0;
 	display: flex;
 	flex-direction: column;
 	background-color: #f6f6f6;
@@ -6,6 +10,7 @@
 	padding-top: 16px;
 	padding-left: calc(50vw - 360px);
 	padding-right: calc(50vw - 360px);
+	align-self: flex-end;
 }
 .aboutHorizontalContainer {
 	flex: 1;
