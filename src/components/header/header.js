@@ -1,60 +1,87 @@
 import styles from "./header.module.scss";
 import Image from "next/image";
-
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 export default function Header() {
 	const router = useRouter();
+	const [menuVisible, setMenuVisible] = useState(false);
 
 	return (
 		<div bg="light" expand="lg" className={styles.headerContainer}>
-			<div style={{ display: "flex", alignItems: "center" }}>
-				<a className={styles.headerLogoContainer} href="/home">
-					<Image
-						className={styles.headerLogo}
-						src="/assets/dialog_gpt_logo_with_text.png"
-						alt={"ChessMeito"}
-						title={"ChessMeito"}
-						loading="eager"
-						height={80}
-						width={300}
-					></Image>
-				</a>
+			<a className={styles.headerLogoContainer} href="/home">
+				<Image
+					className={styles.headerLogo}
+					src="/assets/dialog_gpt_logo_with_text.png"
+					alt={"ChessMeito"}
+					title={"ChessMeito"}
+					loading="eager"
+					height={80}
+					width={300}
+				></Image>
+			</a>
 
-				<div className={styles.linksContainer}>
-					<a className={styles.selectionItem} href="/home">
-						Demo
-					</a>
-					<a className={styles.selectionItem} href="/pricing">
-						Pricing
-					</a>
-					<a className={styles.selectionItem} href="/my-chatbots">
-						My ChatBot's
-					</a>
-				</div>
-				<a className={styles.profileLogoContainer} href="/home">
-					<Image
-						className={styles.profileLogo}
-						src="/assets/profile_user.png"
-						alt={"ChessMeito"}
-						title={"ChessMeito"}
-						loading="eager"
-						height={40}
-						width={40}
-					></Image>
+			<div className={styles.linksContainer}>
+				<a className={styles.selectionItem} href="/home">
+					Demo
 				</a>
-				<a className={styles.hamburgerContainer}>
-					<Image
-						className={styles.hamburgerLogo}
-						src="/assets/hamburger.png"
-						alt={"ChessMeito"}
-						title={"ChessMeito"}
-						loading="eager"
-						height={40}
-						width={40}
-					></Image>
+				<a className={styles.selectionItem} href="/pricing">
+					Pricing
+				</a>
+				<a className={styles.selectionItem} href="/my-chatbots">
+					My ChatBot's
 				</a>
 			</div>
+			<a className={styles.profileLogoContainer} href="/home">
+				<Image
+					className={styles.profileLogo}
+					src="/assets/profile_user.png"
+					alt={"ChessMeito"}
+					title={"ChessMeito"}
+					loading="eager"
+					height={40}
+					width={40}
+				></Image>
+			</a>
+			<a
+				className={styles.hamburgerContainer}
+				onClick={() => setMenuVisible(true)}
+			>
+				<Image
+					className={styles.hamburgerLogo}
+					src="/assets/hamburger.png"
+					alt={"ChessMeito"}
+					title={"ChessMeito"}
+					loading="eager"
+					height={40}
+					width={40}
+				></Image>
+			</a>
+			{menuVisible && (
+				<div className={styles.menu}>
+					<button
+						className={styles.closeButton}
+						onClick={() => setMenuVisible(false)}
+					>
+						X
+					</button>
+					<ul>
+						<li>
+							<a href="/home">Demo</a>
+						</li>
+						<li>
+							<a href="/pricing">Pricing</a>
+						</li>
+						<li>
+							<a href="/my-chatbots">My ChatBot's</a>
+						</li>
+						<li>
+							<a href="/account">Account</a>
+						</li>
+						{/* Add more links as needed */}
+					</ul>
+				</div>
+			)}
 		</div>
 	);
 }
