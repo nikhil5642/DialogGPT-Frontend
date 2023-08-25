@@ -2,8 +2,9 @@ import Head from "next/head";
 import "./styles/global.scss";
 import Layout from "../src/components/layout/layout";
 import { initializeApp } from "firebase/app";
-
 import "firebase/auth";
+import LoaderProvider from "../src/components/loader/loader-provider";
+import Loader from "../src/components/loader/loader";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyCJ8u8nMGdqmaPeq9NBG5_wFJiKaTAozhA",
@@ -26,9 +27,12 @@ function MyApp({ Component, pageProps }) {
 					content="width=device-width, initial-scale=1.0, maximum-scale=5"
 				/>
 			</Head>
-			<Layout>
-				<Component {...pageProps} />
-			</Layout>
+			<LoaderProvider>
+				<Layout>
+					<Loader />
+					<Component {...pageProps} />
+				</Layout>
+			</LoaderProvider>
 		</>
 	);
 }

@@ -1,0 +1,10 @@
+.layoutContainer {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+.contentContainer {
+	flex: 1;
+	flex-grow: 1;
+	position: relative; /* Add this */
+}

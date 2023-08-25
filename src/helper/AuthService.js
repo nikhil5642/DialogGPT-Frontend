@@ -1,6 +1,6 @@
-import Cookies from "js-cookie";
 import axios from "axios";
 import { API_BASE_URL } from "./http-helper.js";
+import { removeCookie, storeCookie, getCookie } from "./cookie-helper.js";
 
 const AuthService = {
 	login: async (idToken) => {
@@ -9,24 +9,20 @@ const AuthService = {
 				token: idToken,
 			});
 			const jwttoken = response.data.access_token;
-			await Cookies.set("jwtToken", jwttoken, {
-				secure: true,
-				httpOnly: false,
-				sameSite: "strict",
-			});
+			await storeCookie("jwtToken", jwttoken);
 			return jwttoken;
 		} catch (error) {
 			throw error;
 		}
 	},
 	logout: async () => {
-		Cookies.remove("jwtToken");
+		removeCookie("jwtToken");
 	},
 	getToken: () => {
-		return Cookies.get("jwtToken");
+		return getCookie("jwtToken");
 	},
 	isAuthenticated: () => {
-		const token = Cookies.get("jwtToken");
+		const token = getCookie("jwtToken");
 		return !!token;
 	},
 };

@@ -1,27 +1,39 @@
 import styles from "./my-chatbots.module.scss";
 import { useRouter } from "next/router";
 import { getRequest, postRequest } from "../../helper/http-helper";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
+import LoaderContext from "../loader/loader-context";
 
 export default function MyChatBots() {
 	const router = useRouter();
+	const { showLoader, hideLoader } = useContext(LoaderContext);
 
 	const [chatbotsList, setChatBotsList] = useState([]);
 	const createNewChatBot = () => {
+		showLoader("Creating a bot...");
 		postRequest("/create_bot", {
 			chatBotName: "Untitled Chatbot " + (chatbotsList.length + 1),
 		})
-			.then((res) => router.push(`/chatbot/${res.chatbot_id}`))
-			.catch(() => {});
+			.then((res) => {
+				hideLoader();
+				router.push(`/chatbot/${res.chatbot_id}`);
+			})
+			.catch(() => {
+				hideLoader();
+			});
 	};
 
 	useEffect(() => {
+		showLoader("Loading Chatbot Data...");
 		getRequest("/my_chatbots")
 			.then((res) => {
 				setChatBotsList(res.chatbot_list);
+				hideLoader();
 			})
-			.catch(() => {});
+			.catch(() => {
+				hideLoader();
+			});
 	}, []);
 
 	return (

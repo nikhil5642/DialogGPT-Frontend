@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styles from "./chatbot-source-editor.module.scss";
-import { useRouter } from "next/router";
 import {
 	SourceOptionsEnum,
 	SourceSelector,
@@ -8,19 +7,33 @@ import {
 import WebisteLoader from "./website-loader/website-loader";
 import { postRequest } from "../../helper/http-helper";
 import TextLoader from "./text-loader/text-loader";
+import LoaderContext from "../loader/loader-context";
 
 export default function ChatBotSourceEditor({ botID }) {
+	const { showLoader, hideLoader } = useContext(LoaderContext);
+
 	const trainChatBot = () => {
+		showLoader("Training Chatbot...");
 		postRequest("/train_chatbot", { botID: botID, data: data })
-			.then(() => {})
-			.catch(() => {});
+			.then(() => {
+				hideLoader();
+			})
+			.catch(() => {
+				hideLoader();
+			});
 	};
 	const [data, setData] = useState([]);
 	const loadChatBotData = () => {
 		if (botID) {
+			showLoader("Loading Content");
 			postRequest("/load_chatbot_content", { botID: botID })
-				.then((res) => setData(res.result))
-				.catch(() => {});
+				.then((res) => {
+					hideLoader();
+					setData(res.result);
+				})
+				.catch(() => {
+					hideLoader();
+				});
 		}
 	};
 

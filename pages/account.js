@@ -1,29 +1,46 @@
 import styles from "./styles/account.module.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 // import ReactGA from "react-ga4";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import AuthService from "../src/helper/AuthService";
 import { getAuth, signOut } from "firebase/auth";
 import { getRequest } from "../src/helper/http-helper";
+import LoaderContext from "../src/components/loader/loader-context";
 
 export default function AccountScreen() {
 	const router = useRouter();
 	const [accountInfo, setAccountInfo] = useState({});
+	const { showLoader, hideLoader } = useContext(LoaderContext);
+
 	useEffect(() => {
+		showLoader("Loading Info...");
 		getRequest("/account_info", {})
-			.then((res) => setAccountInfo(res.result))
-			.catch(() => {});
+			.then((res) => {
+				hideLoader();
+				setAccountInfo(res.result);
+			})
+			.catch(() => {
+				hideLoader();
+			});
 	}, []);
 
 	const onLogout = () => {
-		AuthService.logout().then(() => {
-			signOut(getAuth())
-				.then(() => {
-					router.push("/signin");
-				})
-				.catch(() => {});
-		});
+		showLoader("Logging Out...");
+		AuthService.logout()
+			.then(() => {
+				signOut(getAuth())
+					.then(() => {
+						router.push("/signin");
+						hideLoader();
+					})
+					.catch(() => {
+						hideLoader();
+					});
+			})
+			.catch(() => {
+				hideLoader();
+			});
 	};
 	return (
 		<>

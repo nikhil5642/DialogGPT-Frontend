@@ -1,0 +1,18 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"jsx": "preserve",
+		"moduleResolution": "node",
+		"baseUrl": ".",
+		"paths": {
+			"@/components/*": ["components/*"],
+			"@/pages/*": ["pages/*"],
+			"@/styles/*": ["styles/*"],
+			"@/public/*": ["public/*"]
+			// Add other aliases if you have them
+		}
+	},
+	"exclude": ["node_modules"],
+	"include": ["**/*.js", "**/*.jsx"]
+}

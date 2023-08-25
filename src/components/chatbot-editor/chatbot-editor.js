@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styles from "./chatbot-editor.module.scss";
 import ChatBotSourceEditor from "../chatbot-source-editor/chatbot-source-editor";
 import {
@@ -8,9 +8,11 @@ import {
 import { postRequest } from "../../../src/helper/http-helper";
 import ChatBotComponent from "../chatbot-component/chatbot-component";
 import ChatBotSettings from "../chatbot-settings/chatbot-settings";
+import LoaderContext from "../loader/loader-context";
 
 export default function ChatBotEditor({ botID }) {
 	const [selector, setSelector] = useState(ChatBotOptionsEnum.SETTINGS);
+	const { showLoader, hideLoader } = useContext(LoaderContext);
 	const [chatbotData, setChatbotData] = useState({
 		id: botID,
 		name: "",
@@ -23,9 +25,10 @@ export default function ChatBotEditor({ botID }) {
 
 	const loadChatBotData = () => {
 		if (botID) {
+			showLoader("Loading Info...");
 			postRequest("/load_chatbot_info", { botID: botID })
 				.then((res) => {
-					console.log(res);
+					hideLoader();
 					setChatbotData({
 						...chatbotData,
 						id: botID,
@@ -34,7 +37,9 @@ export default function ChatBotEditor({ botID }) {
 						last_updated: res.result.last_updated,
 					});
 				})
-				.catch(() => {});
+				.catch(() => {
+					hideLoader();
+				});
 		}
 	};
 
