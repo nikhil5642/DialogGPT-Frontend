@@ -33,14 +33,16 @@ export default function ChatBotComponent({ botID }) {
 					botID: botID,
 					query: newMessage,
 					history: history,
-				}).then((res) => {
-					setHistory([...history, [res.result.query, res.result.query]]);
-					setMessages((messages) => [
-						...messages,
-						{ id: messages.length, text: res.result.reply, type: "incoming" },
-					]),
-						setSending(() => false);
-				});
+				})
+					.then((res) => {
+						setHistory([...history, [res.result.query, res.result.query]]);
+						setMessages((messages) => [
+							...messages,
+							{ id: messages.length, text: res.result.reply, type: "incoming" },
+						]),
+							setSending(() => false);
+					})
+					.catch(() => {});
 			}
 		}
 	};

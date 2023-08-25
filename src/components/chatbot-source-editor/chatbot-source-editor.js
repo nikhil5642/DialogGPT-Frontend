@@ -11,14 +11,16 @@ import TextLoader from "./text-loader/text-loader";
 
 export default function ChatBotSourceEditor({ botID }) {
 	const trainChatBot = () => {
-		postRequest("/train_chatbot", { botID: botID, data: data });
+		postRequest("/train_chatbot", { botID: botID, data: data })
+			.then(() => {})
+			.catch(() => {});
 	};
 	const [data, setData] = useState([]);
 	const loadChatBotData = () => {
 		if (botID) {
-			postRequest("/load_chatbot_content", { botID: botID }).then((res) =>
-				setData(res.result),
-			);
+			postRequest("/load_chatbot_content", { botID: botID })
+				.then((res) => setData(res.result))
+				.catch(() => {});
 		}
 	};
 

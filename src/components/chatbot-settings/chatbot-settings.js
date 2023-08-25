@@ -29,7 +29,9 @@ export default function ChatBotSettings({ data, setData }) {
 					postRequest("/update_chatbot_name", {
 						botID: data.id,
 						chatBotName: data.name,
-					});
+					})
+						.then(() => {})
+						.catch(() => {});
 				}}
 			/>
 		</div>

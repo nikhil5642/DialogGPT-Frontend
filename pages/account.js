@@ -11,7 +11,9 @@ export default function AccountScreen() {
 	const router = useRouter();
 	const [accountInfo, setAccountInfo] = useState({});
 	useEffect(() => {
-		getRequest("/account_info", {}).then((res) => setAccountInfo(res.result));
+		getRequest("/account_info", {})
+			.then((res) => setAccountInfo(res.result))
+			.catch(() => {});
 	}, []);
 
 	const onLogout = () => {
@@ -20,9 +22,7 @@ export default function AccountScreen() {
 				.then(() => {
 					router.push("/signin");
 				})
-				.catch((error) => {
-					console.log("Error", error);
-				});
+				.catch(() => {});
 		});
 	};
 	return (

@@ -1,5 +1,6 @@
 import axios from "axios";
 import AuthService from "./AuthService";
+import Router from "next/router";
 
 // Add your backend API base URL here
 export const API_BASE_URL = "http://localhost:8000";
@@ -10,7 +11,6 @@ const instance = axios.create({
 	baseURL: API_BASE_URL,
 	timeout: 10000, // Adjust timeout as needed
 });
-
 // Function to attach JWT token to headers
 const attachTokenToHeaders = (headers = {}) => {
 	const token = AuthService.getToken();
@@ -36,7 +36,7 @@ export const getRequest = async (
 
 		return response.data;
 	} catch (error) {
-		throw error;
+		handleHttpError(error);
 	}
 };
 
@@ -55,9 +55,16 @@ export const postRequest = async (
 
 		return response.data;
 	} catch (error) {
-		throw error;
+		handleHttpError(error);
 	}
 };
+
+function handleHttpError(error) {
+	console.log("error", error);
+	if (error.response.status == 401) {
+		Router.push("/signin");
+	}
+}
 
 // Export the instance for custom configurations
 export default instance;

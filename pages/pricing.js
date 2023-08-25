@@ -1,11 +1,6 @@
 import styles from "./styles/pricing.module.scss";
-import { useEffect, useState } from "react";
-// import ReactGA from "react-ga4";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import AuthService from "../src/helper/AuthService";
-import { getAuth, signOut } from "firebase/auth";
-import { getRequest } from "../src/helper/http-helper";
 
 export default function AccountScreen() {
 	const router = useRouter();

@@ -9,26 +9,23 @@ export default function TextLoader({ bot_id, data, setData }) {
 		if (text == "") {
 			const item = data.find((item) => item.source_type == "text");
 			if (item) {
-				postRequest(
-					"/load_content",
-					{ contentID: item.content_id },
-					{},
-					1000,
-				).then((res) => {
-					setText(res.result);
-				});
+				postRequest("/load_content", { contentID: item.content_id }, {}, 1000)
+					.then((res) => {
+						setText(res.result);
+					})
+					.catch(() => {});
 			}
 		}
 	}, [data]);
 
 	const saveText = () => {
-		postRequest("/save_text", { text: text, botID: bot_id }, {}, 1000).then(
-			(res) => {
+		postRequest("/save_text", { text: text, botID: bot_id }, {}, 1000)
+			.then((res) => {
 				if (!data.find((item) => item.source_type === "text")) {
 					setData([...data, res.result]);
 				}
-			},
-		);
+			})
+			.catch(() => {});
 	};
 
 	return (

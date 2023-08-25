@@ -7,11 +7,11 @@ import { generateRandomString } from "../chatbot-source-editor.utits";
 export default function WebisteLoader({ bot_id, data, setData }) {
 	const [url, setUrl] = useState("");
 	const fetchUrls = () => {
-		postRequest("/fetch_urls", { url: url, botID: bot_id }, {}, 10000000).then(
-			(res) => {
+		postRequest("/fetch_urls", { url: url, botID: bot_id }, {}, 10000000)
+			.then((res) => {
 				setData([...data, ...res.result]);
-			},
-		);
+			})
+			.catch(() => {});
 	};
 	const addURL = () => {
 		setData([

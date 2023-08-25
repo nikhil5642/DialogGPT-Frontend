@@ -23,16 +23,18 @@ export default function ChatBotEditor({ botID }) {
 
 	const loadChatBotData = () => {
 		if (botID) {
-			postRequest("/load_chatbot_info", { botID: botID }).then((res) => {
-				console.log(res);
-				setChatbotData({
-					...chatbotData,
-					id: botID,
-					name: res.result.chatbot_name || "",
-					status: res.result.chatbot_status || "",
-					last_updated: res.result.last_updated,
-				});
-			});
+			postRequest("/load_chatbot_info", { botID: botID })
+				.then((res) => {
+					console.log(res);
+					setChatbotData({
+						...chatbotData,
+						id: botID,
+						name: res.result.chatbot_name || "",
+						status: res.result.chatbot_status || "",
+						last_updated: res.result.last_updated,
+					});
+				})
+				.catch(() => {});
 		}
 	};
 

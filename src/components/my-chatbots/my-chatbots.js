@@ -11,13 +11,17 @@ export default function MyChatBots() {
 	const createNewChatBot = () => {
 		postRequest("/create_bot", {
 			chatBotName: "Untitled Chatbot " + (chatbotsList.length + 1),
-		}).then((res) => router.push(`/chatbot/${res.chatbot_id}`));
+		})
+			.then((res) => router.push(`/chatbot/${res.chatbot_id}`))
+			.catch(() => {});
 	};
 
 	useEffect(() => {
-		getRequest("/my_chatbots").then((res) => {
-			setChatBotsList(res.chatbot_list);
-		});
+		getRequest("/my_chatbots")
+			.then((res) => {
+				setChatBotsList(res.chatbot_list);
+			})
+			.catch(() => {});
 	}, []);
 
 	return (
