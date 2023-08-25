@@ -7,13 +7,15 @@ import {
 } from "./chatbot-editor.utits";
 import { postRequest } from "../../../src/helper/http-helper";
 import ChatBotComponent from "../chatbot-component/chatbot-component";
+import ChatBotSettings from "../chatbot-settings/chatbot-settings";
 
 export default function ChatBotEditor({ botID }) {
-	const [selector, setSelector] = useState(ChatBotOptionsEnum.SOURCES);
+	const [selector, setSelector] = useState(ChatBotOptionsEnum.SETTINGS);
 	const [chatbotData, setChatbotData] = useState({
 		id: botID,
 		name: "",
 		status: "untrained",
+		last_updated: "2023-08-22T14:00:18.796000",
 	});
 	useEffect(() => {
 		loadChatBotData();
@@ -21,13 +23,16 @@ export default function ChatBotEditor({ botID }) {
 
 	const loadChatBotData = () => {
 		if (botID) {
-			postRequest("/load_chatbot_info", { botID: botID }).then((res) =>
+			postRequest("/load_chatbot_info", { botID: botID }).then((res) => {
+				console.log(res);
 				setChatbotData({
 					...chatbotData,
+					id: botID,
 					name: res.result.chatbot_name || "",
 					status: res.result.chatbot_status || "",
-				}),
-			);
+					last_updated: res.result.last_updated,
+				});
+			});
 		}
 	};
 
@@ -42,6 +47,9 @@ export default function ChatBotEditor({ botID }) {
 			)}
 			{selector === ChatBotOptionsEnum.SOURCES && (
 				<ChatBotSourceEditor botID={botID} />
+			)}
+			{selector === ChatBotOptionsEnum.SETTINGS && (
+				<ChatBotSettings data={chatbotData} setData={setChatbotData} />
 			)}
 		</div>
 	);

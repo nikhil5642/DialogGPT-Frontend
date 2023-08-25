@@ -29,10 +29,10 @@ export default function Header() {
 					Pricing
 				</a>
 				<a className={styles.selectionItem} href="/my-chatbots">
-					My ChatBot's
+					My ChatBots
 				</a>
 			</div>
-			<a className={styles.profileLogoContainer} href="/home">
+			<a className={styles.profileLogoContainer} href="/account">
 				<Image
 					className={styles.profileLogo}
 					src="/assets/profile_user.png"
@@ -78,7 +78,6 @@ export default function Header() {
 						<li>
 							<a href="/account">Account</a>
 						</li>
-						{/* Add more links as needed */}
 					</ul>
 				</div>
 			)}

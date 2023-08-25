@@ -1,17 +1,17 @@
 import styles from "./my-chatbots.module.scss";
 import { useRouter } from "next/router";
-import { getRequest } from "../../helper/http-helper";
+import { getRequest, postRequest } from "../../helper/http-helper";
 import { useState, useEffect } from "react";
-import Link from "next/link"; // Import the Link component
+import Image from "next/image";
 
 export default function MyChatBots() {
 	const router = useRouter();
 
 	const [chatbotsList, setChatBotsList] = useState([]);
 	const createNewChatBot = () => {
-		getRequest("/create_bot").then((res) =>
-			router.push(`/chatbot/${res.chatbot_id}`),
-		);
+		postRequest("/create_bot", {
+			chatBotName: "Untitled Chatbot " + (chatbotsList.length + 1),
+		}).then((res) => router.push(`/chatbot/${res.chatbot_id}`));
 	};
 
 	useEffect(() => {
@@ -26,13 +26,22 @@ export default function MyChatBots() {
 
 			<div className={styles.chatBotGrid}>
 				{chatbotsList.map((chatbot) => (
-					<Link
+					<a
 						key={chatbot.chatbot_id}
 						href={`/chatbot/${chatbot.chatbot_id}`} // Define the href for the link
-						className={styles.card}
+						className={styles.chatbotCard}
 					>
+						<Image
+							className={styles.charbotCardImg}
+							src="/assets/dialog_gpt_logo_icon_only.png"
+							alt={"Message"}
+							title={"Message"}
+							loading="eager"
+							height={64}
+							width={64}
+						></Image>
 						<p className={styles.cardName}>{chatbot.chatbot_name}</p>
-					</Link>
+					</a>
 				))}
 			</div>
 

@@ -32,8 +32,6 @@ export default function ChatBotSourceEditor({ botID }) {
 
 	return (
 		<div className={styles.chatBotEditorContainer}>
-			<h1 className={styles.chatbotEditorTitleHeading}>Data Sources</h1>
-
 			<SourceSelector selector={selector} setSelector={setSelector} />
 
 			{selector === SourceOptionsEnum.FILE && <div>Files View</div>}
