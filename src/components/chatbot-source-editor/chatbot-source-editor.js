@@ -17,7 +17,10 @@ const initialData = {
 	qna: { count: 0, charLength: 0 },
 };
 
-export default function ChatBotSourceEditor({ botID }) {
+export default function ChatBotSourceEditor({
+	chatbotInfoData,
+	setChatbotInfoData,
+}) {
 	const { showLoader, hideLoader } = useContext(LoaderContext);
 	const [data, setData] = useState([]);
 	const [trainingData, setTrainingData] = useState(initialData);
@@ -56,7 +59,8 @@ export default function ChatBotSourceEditor({ botID }) {
 
 	const trainChatBot = () => {
 		showLoader("Training Chatbot...");
-		postRequest("/train_chatbot", { botID: botID, data: data })
+		setChatbotInfoData({ ...chatbotInfoData, status: "training" });
+		postRequest("/train_chatbot", { botID: chatbotInfoData.id, data: data })
 			.then(() => {
 				hideLoader();
 			})
@@ -65,9 +69,9 @@ export default function ChatBotSourceEditor({ botID }) {
 			});
 	};
 	const loadChatBotData = () => {
-		if (botID) {
+		if (chatbotInfoData.id) {
 			showLoader("Loading Content");
-			postRequest("/load_chatbot_content", { botID: botID })
+			postRequest("/load_chatbot_content", { botID: chatbotInfoData.id })
 				.then((res) => {
 					hideLoader();
 					setData(res.result);
@@ -79,10 +83,10 @@ export default function ChatBotSourceEditor({ botID }) {
 	};
 
 	useEffect(() => {
-		if (botID) {
+		if (chatbotInfoData.id) {
 			loadChatBotData();
 		}
-	}, [botID]);
+	}, [chatbotInfoData.id]);
 
 	const [selector, setSelector] = useState(SourceOptionsEnum.TEXT);
 
@@ -92,10 +96,18 @@ export default function ChatBotSourceEditor({ botID }) {
 
 			{selector === SourceOptionsEnum.FILE && <div>Files View</div>}
 			{selector === SourceOptionsEnum.TEXT && (
-				<TextLoader bot_id={botID} data={data} setData={setData}></TextLoader>
+				<TextLoader
+					bot_id={chatbotInfoData.id}
+					data={data}
+					setData={setData}
+				></TextLoader>
 			)}
 			{selector === SourceOptionsEnum.URL && (
-				<WebisteLoader bot_id={botID} data={data} setData={setData} />
+				<WebisteLoader
+					bot_id={chatbotInfoData.id}
+					data={data}
+					setData={setData}
+				/>
 			)}
 			{selector === SourceOptionsEnum.QNA && <div>Q&A View</div>}
 

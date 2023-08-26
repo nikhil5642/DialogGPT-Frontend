@@ -16,16 +16,18 @@ export default function ChatBotEditor({ botID }) {
 	const [chatbotData, setChatbotData] = useState({
 		id: botID,
 		name: "",
-		status: "untrained",
+		status: "trained",
 		last_updated: "2023-08-22T14:00:18.796000",
 	});
 	useEffect(() => {
-		loadChatBotData();
+		loadChatBotData(false);
 	}, [botID]);
 
-	const loadChatBotData = () => {
+	const loadChatBotData = (refresh) => {
 		if (botID) {
-			showLoader("Loading Info...");
+			if (!refresh) {
+				showLoader("Loading Info...");
+			}
 			postRequest("/load_chatbot_info", { botID: botID })
 				.then((res) => {
 					hideLoader();
@@ -43,17 +45,53 @@ export default function ChatBotEditor({ botID }) {
 		}
 	};
 
+	useEffect(() => {
+		let interval;
+
+		if (chatbotData.status === "training") {
+			interval = setInterval(() => {
+				loadChatBotData(true);
+			}, 3000); // Check every 3 seconds
+		}
+
+		return () => {
+			clearInterval(interval); // Clear the interval when the component unmounts or status changes
+		};
+	}, [chatbotData.status]);
+
 	return (
 		<div className={styles.chatBotEditorContainer}>
 			<h1 className={styles.chatbotEditorTitleHeading}>{chatbotData.name}</h1>
 
 			<ChatBotOptionSelector selector={selector} setSelector={setSelector} />
 
-			{selector === ChatBotOptionsEnum.CHATBOT && (
-				<ChatBotComponent botID={botID} />
-			)}
+			{selector === ChatBotOptionsEnum.CHATBOT &&
+				chatbotData.status === "training" && (
+					<div className={styles.chatBotTrainingModelContainer}>
+						<h2>Please Wait...</h2>
+						<p>Training In Progress</p>
+						<progress className={styles.progressBar} max="100"></progress>
+						<p>Incase if it's taking too long, try to train chatbot again! </p>
+					</div>
+				)}
+
+			{selector === ChatBotOptionsEnum.CHATBOT &&
+				chatbotData.status === "untrained" && (
+					<div className={styles.chatBotUntrainedModelContainer}>
+						<img src="/assets/ic_error.png"></img>
+						<h2>Chatbot is not trained</h2>
+						<p>Please add the sources and train the ChatBot</p>
+					</div>
+				)}
+
+			{selector === ChatBotOptionsEnum.CHATBOT &&
+				chatbotData.status === "trained" && <ChatBotComponent botID={botID} />}
+
 			{selector === ChatBotOptionsEnum.SOURCES && (
-				<ChatBotSourceEditor botID={botID} />
+				<ChatBotSourceEditor
+					chatbotInfoData={chatbotData}
+					setChatbotInfoData={setChatbotData}
+				/>
 			)}
 			{selector === ChatBotOptionsEnum.SETTINGS && (
 				<ChatBotSettings data={chatbotData} setData={setChatbotData} />
