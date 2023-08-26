@@ -3,15 +3,23 @@ import { useState, useEffect } from "react";
 import EditBoxComponent from "../../editbox-component/editbox-component";
 import { postRequest } from "../../../helper/http-helper";
 import { generateRandomString } from "../chatbot-source-editor.utits";
+import LoadingButton from "src/components/loading-button/loading-button";
 
 export default function WebisteLoader({ bot_id, data, setData }) {
 	const [url, setUrl] = useState("");
+	const [loader, setLoader] = useState({
+		fetchLinks: false,
+	});
 	const fetchUrls = () => {
+		setLoader((val) => ({ ...val, fetchLinks: true }));
 		postRequest("/fetch_urls", { url: url, botID: bot_id }, {}, 10000000)
 			.then((res) => {
 				setData([...data, ...res.result]);
+				setLoader((val) => ({ ...val, fetchLinks: false }));
 			})
-			.catch(() => {});
+			.catch(() => {
+				setLoader((val) => ({ ...val, fetchLinks: false }));
+			});
 	};
 	const addURL = () => {
 		setData([
@@ -49,10 +57,11 @@ export default function WebisteLoader({ bot_id, data, setData }) {
 				value={url}
 				onChange={(value) => setUrl(value)}
 			/>
-			<button className={styles.buttonFetchLinks} onClick={fetchUrls}>
-				Fetch Links
-			</button>
-
+			<LoadingButton
+				title={"Fetch Links"}
+				onClick={fetchUrls}
+				isLoading={loader.fetchLinks}
+			/>
 			<ul>
 				{data
 					.filter((item) => item.source_type === "url")
@@ -81,9 +90,14 @@ export default function WebisteLoader({ bot_id, data, setData }) {
 					.reduce((acc, curr) => acc + curr.char_count, 0)}{" "}
 				Char Detected
 			</p>
-			<button className={styles.buttonAddURL} onClick={addURL}>
-				Add URL
-			</button>
+
+			<div className={styles.addURLContainer}>
+				<LoadingButton
+					title={"Add URL"}
+					onClick={addURL}
+					className={styles.buttonAddURL}
+				/>
+			</div>
 		</div>
 	);
 }

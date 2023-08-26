@@ -39,7 +39,7 @@ const SignInPage = () => {
 					.getIdToken()
 					.then((token) => {
 						hideLoader();
-						AuthService.login(token).then(() => router.push("/home"));
+						AuthService.login(token).then(() => router.push("/my-chatbots"));
 					})
 					.catch(() => {
 						hideLoader();

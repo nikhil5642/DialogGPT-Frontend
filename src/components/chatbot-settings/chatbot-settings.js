@@ -2,11 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import { postRequest } from "../../helper/http-helper";
 import styles from "./chatbot-settings.module.scss";
 import SettingsComponent from "../settings-component/settings-component";
+import { showErrorToast, showSuccessToast } from "../../helper/toast-helper";
 export default function ChatBotSettings({ data, setData }) {
+	const [loader, setLoader] = useState({
+		general: false,
+	});
 	return (
 		<div className={styles.settingsContainer}>
 			<SettingsComponent
 				title={"General"}
+				isLoading={loader.general}
 				content={
 					<div className={styles.generalContainer}>
 						<h5>Chatbot ID</h5>
@@ -26,12 +31,19 @@ export default function ChatBotSettings({ data, setData }) {
 					</div>
 				}
 				onSave={() => {
+					setLoader((val) => ({ ...val, general: true }));
 					postRequest("/update_chatbot_name", {
 						botID: data.id,
 						chatBotName: data.name,
 					})
-						.then(() => {})
-						.catch(() => {});
+						.then(() => {
+							setLoader((val) => ({ ...val, general: false }));
+							showSuccessToast("Information Updated Successfully");
+						})
+						.catch(() => {
+							setLoader((val) => ({ ...val, general: false }));
+							showErrorToast("Error Updating Information");
+						});
 				}}
 			/>
 		</div>

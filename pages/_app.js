@@ -5,7 +5,9 @@ import { initializeApp } from "firebase/app";
 import "firebase/auth";
 import LoaderProvider from "../src/components/loader/loader-provider";
 import Loader from "../src/components/loader/loader";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
 const firebaseConfig = {
 	apiKey: "AIzaSyCJ8u8nMGdqmaPeq9NBG5_wFJiKaTAozhA",
 	authDomain: "chatbot-37637.firebaseapp.com",
@@ -30,6 +32,7 @@ function MyApp({ Component, pageProps }) {
 			<LoaderProvider>
 				<Layout>
 					<Loader />
+					<ToastContainer />
 					<Component {...pageProps} />
 				</Layout>
 			</LoaderProvider>

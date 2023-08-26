@@ -30,18 +30,3 @@
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
 }
-
-.saveButton {
-	background-color: #000; /* Green */
-	color: white;
-	padding: 12px 20px;
-	border: none;
-	border-radius: 8px;
-	font-size: 20px;
-	cursor: pointer;
-	transition: background-color 0.3s;
-}
-
-.saveButton:hover {
-	background-color: #1f1f1f; /* Darker green on hover */
-}
