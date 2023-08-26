@@ -35,50 +35,10 @@
 		border: none;
 	}
 }
-.buttonFetchLinks {
+
+.buttonSaveText {
 	margin-top: 24px;
-	width: 100%;
-	padding: 8px;
-	background-color: #333;
-	color: #eaeaea;
-}
-
-.buttonAddURL {
-	background-color: #333;
-	color: #eaeaea;
-	align-self: flex-end;
-}
-.urlItem {
+	flex: 1;
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.urlItemP {
-	margin: 0;
-}
-
-.urlCharCount {
-	margin-left: 8px;
-	font-size: 18px;
-	width: 60px;
-}
-
-.charDetected {
-	margin-left: 16px;
-	font-size: 20px;
-	align-self: flex-end;
-}
-
-.urlItemButton {
-	background-color: transparent; // Make the button background transparent
-	border: none;
-	cursor: pointer;
-	padding: 0; // Remove padding if you want the image to fit the button exactly
-	img {
-		display: block;
-		width: 20px;
-		height: 20px;
-		margin-left: 16px;
-	}
+	flex-direction: column;
 }

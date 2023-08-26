@@ -11,7 +11,7 @@ import ChatBotSettings from "../chatbot-settings/chatbot-settings";
 import LoaderContext from "../loader/loader-context";
 
 export default function ChatBotEditor({ botID }) {
-	const [selector, setSelector] = useState(ChatBotOptionsEnum.SETTINGS);
+	const [selector, setSelector] = useState(ChatBotOptionsEnum.SOURCES);
 	const { showLoader, hideLoader } = useContext(LoaderContext);
 	const [chatbotData, setChatbotData] = useState({
 		id: botID,

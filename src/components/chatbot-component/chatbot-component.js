@@ -11,6 +11,12 @@ export default function ChatBotComponent({ botID }) {
 	const [sending, setSending] = useState(false);
 	const [rows, setRows] = useState(1);
 
+	const handleKeyPress = (e) => {
+		if (e.key === "Enter" && !e.shiftKey) {
+			e.preventDefault(); // Prevents the default action (newline) when pressing Enter
+			handleSend();
+		}
+	};
 	useEffect(() => {
 		const numOfLineBreaks = (newMessage.match(/\n/g) || []).length;
 		setRows(Math.min(numOfLineBreaks + 1, 5));
@@ -70,7 +76,15 @@ export default function ChatBotComponent({ botID }) {
 						</div>
 					</div>
 				))}
-				<div ref={messagesEndRef} />
+				{sending && (
+					<div className={styles.loaderBubble}>
+						<div className={styles.loader}>
+							<div className={styles.dot}></div>
+							<div className={styles.dot}></div>
+							<div className={styles.dot}></div>
+						</div>
+					</div>
+				)}
 			</div>
 			<div className={styles.inputContainer}>
 				<textarea
@@ -78,9 +92,9 @@ export default function ChatBotComponent({ botID }) {
 					placeholder="Type a message..."
 					value={newMessage}
 					onChange={(e) => setNewMessage(e.target.value)}
+					onKeyPress={handleKeyPress}
 					className={styles.inputTextArea}
 				></textarea>
-
 				<button onClick={handleSend} className={styles.sendButton}>
 					<Image
 						src="/assets/send_message.png"

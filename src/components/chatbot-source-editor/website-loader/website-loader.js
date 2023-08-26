@@ -87,16 +87,12 @@ export default function WebisteLoader({ bot_id, data, setData }) {
 			<p className={styles.charDetected}>
 				{data
 					.filter((item) => item.source_type === "url")
-					.reduce((acc, curr) => acc + curr.char_count, 0)}{" "}
+					.reduce((acc, curr) => acc + curr.char_count, 0)}
 				Char Detected
 			</p>
 
 			<div className={styles.addURLContainer}>
-				<LoadingButton
-					title={"Add URL"}
-					onClick={addURL}
-					className={styles.buttonAddURL}
-				/>
+				<LoadingButton title={"Add URL"} onClick={addURL} />
 			</div>
 		</div>
 	);
