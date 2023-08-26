@@ -13,16 +13,15 @@
 	margin-top: 0px;
 	padding-top: 8px;
 	padding-bottom: 8px;
-	color: rgba(0, 0, 0, 0.803);
+	color: #101828;
 	font-family: "Roboto", sans-serif;
 }
 
-.button {
-	margin-top: 24px;
-	width: 100%;
-	padding: 8px;
-	background-color: #333;
-	color: #eaeaea;
+.createButtonContainer {
+	margin-top: 32px;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
 }
 
 .chatBotGrid {
@@ -40,7 +39,7 @@
 	transition: transform 0.3s ease-in-out;
 	cursor: pointer;
 	text-decoration: none;
-	color: black;
+	color: #101828;
 	border: 1px solid #e5e7eb;
 }
 

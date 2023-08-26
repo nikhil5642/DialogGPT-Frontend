@@ -20,7 +20,7 @@
 }
 
 .spinner {
-	border: 4px solid black; /* Light gray */
+	border: 4px solid #101828; /* Light gray */
 	border-radius: 50%; /* Circular shape */
 	border-top: 4px solid white; /* White color on the top side */
 	width: 50px;
@@ -30,7 +30,7 @@
 
 .loaderMessage {
 	margin-top: 24px;
-	color: black;
+	color: #101828;
 	font-size: 20px;
 	text-align: center;
 	align-self: center;

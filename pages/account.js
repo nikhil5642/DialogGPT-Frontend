@@ -7,6 +7,7 @@ import AuthService from "../src/helper/AuthService";
 import { getAuth, signOut } from "firebase/auth";
 import { getRequest } from "../src/helper/http-helper";
 import LoaderContext from "../src/components/loader/loader-context";
+import LoadingButton from "src/components/loading-button/loading-button";
 
 export default function AccountScreen() {
 	const router = useRouter();
@@ -60,9 +61,9 @@ export default function AccountScreen() {
 					<p>{accountInfo.email}</p>
 				</div>
 
-				<button onClick={onLogout} className={styles.logoutButton}>
-					Sign Out
-				</button>
+				<div className={styles.logoutButton}>
+					<LoadingButton title={"Sign Out"} onClick={onLogout}></LoadingButton>
+				</div>
 			</div>
 		</>
 	);

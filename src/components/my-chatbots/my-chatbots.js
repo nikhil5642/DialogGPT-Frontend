@@ -4,6 +4,7 @@ import { getRequest, postRequest } from "../../helper/http-helper";
 import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import LoaderContext from "../loader/loader-context";
+import LoadingButton from "../loading-button/loading-button";
 
 export default function MyChatBots() {
 	const router = useRouter();
@@ -61,9 +62,12 @@ export default function MyChatBots() {
 				))}
 			</div>
 
-			<button className={styles.button} onClick={createNewChatBot}>
-				Create New ChatBot
-			</button>
+			<div className={styles.createButtonContainer}>
+				<LoadingButton
+					title={"Create New ChatBot"}
+					onClick={createNewChatBot}
+				/>
+			</div>
 		</div>
 	);
 }
