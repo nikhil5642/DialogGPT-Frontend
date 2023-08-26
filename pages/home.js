@@ -7,13 +7,14 @@ import AuthService from "../src/helper/AuthService";
 
 export default function HomeScreen() {
 	const router = useRouter();
-	useEffect(() => {
+	function onCreateChatbot() {
 		if (AuthService.isAuthenticated()) {
 			router.push("/my-chatbots");
 		} else {
 			router.push("/signin");
 		}
-	}, []);
+	}
+
 	return (
 		<>
 			<Head>
@@ -24,7 +25,21 @@ export default function HomeScreen() {
 				/>
 				<link rel="canonical" href="https://chessmeito.com/home" />
 			</Head>
-			<div className={styles.homeScreenContainer}></div>
+			<div className={styles.homeScreenContainer}>
+				<div className={styles.topOverviewContainer}>
+					<h1>
+						Chat<span>GPT</span>
+					</h1>
+					<h1>
+						for your <span>own data</span>
+					</h1>
+					<h3>
+						Turn Your Data into an Interactive Chatbot! Easily Add to Your
+						Website or Chat via Integrations/API.
+					</h3>
+					<button onClick={onCreateChatbot}>Create your Chatbot Now ➤</button>
+				</div>
+			</div>
 		</>
 	);
 }

@@ -46,7 +46,7 @@
 
 .profileLogoContainer {
 	display: flex;
-	justify-content: end;
+	justify-content: flex-end;
 	margin-left: 250px;
 	margin-right: 16px;
 }
@@ -72,6 +72,7 @@
 	left: 0;
 	width: 100vw;
 	height: 100vh;
+	z-index: 1000;
 	background-color: white; /* Semi-transparent black */
 	display: flex;
 	flex-direction: column;

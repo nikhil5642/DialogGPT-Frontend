@@ -2,6 +2,7 @@ import styles from "./header.module.scss";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import AuthService from "src/helper/AuthService";
 
 export default function Header() {
 	const router = useRouter();
@@ -76,7 +77,11 @@ export default function Header() {
 							<a href="/my-chatbots">My ChatBot's</a>
 						</li>
 						<li>
-							<a href="/account">Account</a>
+							{AuthService.isAuthenticated() ? (
+								<a href="/account">Account</a>
+							) : (
+								<a href="/signin">Log In</a>
+							)}
 						</li>
 					</ul>
 				</div>
