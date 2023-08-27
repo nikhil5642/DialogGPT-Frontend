@@ -4,7 +4,7 @@ import { initializeApp } from "firebase/app";
 import { getRemoteConfig, fetchAndActivate } from "firebase/remote-config";
 import { FirebaseFeatures } from "./feature-flags";
 
-const firebaseConfig = {
+export const firebaseConfig = {
 	apiKey: "AIzaSyCJ8u8nMGdqmaPeq9NBG5_wFJiKaTAozhA",
 	authDomain: "chatbot-37637.firebaseapp.com",
 	projectId: "chatbot-37637",
@@ -27,6 +27,9 @@ export const FirebaseProvider = ({ children }) => {
 		const app = initializeApp(firebaseConfig);
 		const remoteConfig = getRemoteConfig(app);
 		remoteConfig.defaultConfig = {
+			[FirebaseFeatures.SHOW_GOOGLE_LOGIN]: true,
+			[FirebaseFeatures.SHOW_APPLE_LOGIN]: false,
+			[FirebaseFeatures.SHOWEm]: false,
 			[FirebaseFeatures.SHOW_FILES_EDIT_VIEW]: false,
 			[FirebaseFeatures.SHOW_TEXT_EDIT_VIEW]: false,
 			[FirebaseFeatures.SHOW_WEBSITE_EDIT_VIEW]: false,

@@ -18,7 +18,13 @@ import {
 	removeCookie,
 	storeCookie,
 } from "../src/helper/cookie-helper";
+import { getValue } from "firebase/remote-config";
+import { FirebaseFeatures } from "../src/helper/feature-flags";
+import { useFirebase } from "../src/helper/firebase-provider";
+import { firebaseConfig } from "../src/helper/firebase-provider";
+import { initializeApp } from "firebase/app";
 
+const app = initializeApp(firebaseConfig);
 const SignInPage = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -26,6 +32,31 @@ const SignInPage = () => {
 	const auth = getAuth();
 	const provider = new GoogleAuthProvider();
 	const { showLoader, hideLoader } = useContext(LoaderContext);
+	const { isConfigLoaded, remoteConfig } = useFirebase();
+	const [featureVisibility, setFeatureVisibility] = useState({
+		google: true,
+		apple: false,
+		email: false,
+	});
+
+	useEffect(() => {
+		if (isConfigLoaded && remoteConfig) {
+			setFeatureVisibility({
+				google: getValue(
+					remoteConfig,
+					FirebaseFeatures.SHOW_GOOGLE_LOGIN,
+				).asBoolean(),
+				apple: getValue(
+					remoteConfig,
+					FirebaseFeatures.SHOW_APPLE_LOGIN,
+				).asBoolean(),
+				email: getValue(
+					remoteConfig,
+					FirebaseFeatures.SHOW_EMAIL_LOGIN,
+				).asBoolean(),
+			});
+		}
+	}, [isConfigLoaded, remoteConfig]);
 
 	useEffect(() => {
 		if (getCookie("authInProgress") === "true") {
@@ -92,57 +123,68 @@ const SignInPage = () => {
 		<div className={styles.container}>
 			<div className={styles.card}>
 				<h2>Sign In</h2>
-				<button
-					className={styles.googleButton}
-					onClick={handleSignInWithGoogle}
-				>
-					<Image
-						className={styles.googleIcon}
-						src="/assets/google_icon.png"
-						alt={"Google"}
-						title={"Google"}
-						loading="eager"
-						height={24}
-						width={24}
-					></Image>
-					<p className={styles.googleText}>Sign in with Google</p>
-				</button>
-				<button className={styles.appleButton} onClick={handleSignInWithApple}>
-					<Image
-						className={styles.appleIcon}
-						src="/assets/apple_logo.png"
-						alt={"Google"}
-						title={"Google"}
-						loading="eager"
-						height={24}
-						width={24}
-					></Image>
-					<p className={styles.googleText}>Sign in with Apple</p>
-				</button>
+				{featureVisibility.google && (
+					<button
+						className={styles.googleButton}
+						onClick={handleSignInWithGoogle}
+					>
+						<Image
+							className={styles.googleIcon}
+							src="/assets/google_icon.png"
+							alt={"Google"}
+							title={"Google"}
+							loading="eager"
+							height={24}
+							width={24}
+						></Image>
+						<p className={styles.googleText}>Sign in with Google</p>
+					</button>
+				)}
+				{featureVisibility.apple && (
+					<button
+						className={styles.appleButton}
+						onClick={handleSignInWithApple}
+					>
+						<Image
+							className={styles.appleIcon}
+							src="/assets/apple_logo.png"
+							alt={"Google"}
+							title={"Google"}
+							loading="eager"
+							height={24}
+							width={24}
+						></Image>
+						<p className={styles.googleText}>Sign in with Apple</p>
+					</button>
+				)}
 
 				<hr className="horizontalLine" />
 
-				<input
-					className={styles.input}
-					type="email"
-					placeholder="Email"
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
-				/>
-				<input
-					className={styles.input}
-					type="password"
-					placeholder="Password"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-				/>
+				{featureVisibility.email && (
+					<div>
+						<input
+							className={styles.input}
+							type="email"
+							placeholder="Email"
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+						/>
+						<input
+							className={styles.input}
+							type="password"
+							placeholder="Password"
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+						/>
 
-				<button
-					className={styles.button}
-					onClick={handleSignInWithEmailAndPassword}
-				>
-					Sign in
-				</button>
+						<button
+							className={styles.button}
+							onClick={handleSignInWithEmailAndPassword}
+						>
+							Sign in
+						</button>
+					</div>
+				)}
 			</div>
 		</div>
 	);

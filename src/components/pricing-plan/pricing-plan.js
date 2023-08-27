@@ -1,6 +1,7 @@
 import styles from "./pricing-plan.module.scss";
 import { PricingPlans } from "./pricing-plans.utils";
 import { useRouter } from "next/router";
+import AuthService from "src/helper/AuthService";
 
 function PricingPlan({ plan }) {
 	const router = useRouter();
