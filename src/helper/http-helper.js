@@ -4,7 +4,7 @@ import Router from "next/router";
 
 // Add your backend API base URL here
 // export const API_BASE_URL = "http://localhost:8000";
-export const baseUrl = "https://api.dialoggpt.io";
+export const API_BASE_URL = "https://api.dialoggpt.io";
 
 // Set up default Axios configurations
 const instance = axios.create({
