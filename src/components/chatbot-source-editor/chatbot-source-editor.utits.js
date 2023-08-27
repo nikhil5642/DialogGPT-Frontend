@@ -1,5 +1,8 @@
+import { useEffect, useState } from "react";
 import SelectionComponent from "../selection-component/selection-component";
-
+import { FirebaseFeatures } from "../../helper/feature-flags";
+import { useFirebase } from "../../helper/firebase-provider";
+import { getValue } from "firebase/remote-config";
 export const SourceOptionsEnum = {
 	FILE: "file",
 	TEXT: "text",
@@ -14,12 +17,43 @@ const SourceOptionLabels = {
 };
 
 export const SourceSelector = ({ selector, setSelector }) => {
-	const sourceOptions = [
-		SourceOptionsEnum.FILE,
-		SourceOptionsEnum.TEXT,
-		SourceOptionsEnum.URL,
-		SourceOptionsEnum.QNA,
-	];
+	const [sourceOptions, setSourceOptions] = useState([]);
+	const { isConfigLoaded, remoteConfig } = useFirebase();
+	useEffect(() => {
+		if (isConfigLoaded && remoteConfig) {
+			console.log(remoteConfig);
+			const sources = [];
+			if (
+				getValue(
+					remoteConfig,
+					FirebaseFeatures.SHOW_FILES_EDIT_VIEW,
+				).asBoolean()
+			) {
+				sources.push(SourceOptionsEnum.FILE);
+			}
+			if (
+				getValue(remoteConfig, FirebaseFeatures.SHOW_TEXT_EDIT_VIEW).asBoolean()
+			) {
+				sources.push(SourceOptionsEnum.TEXT);
+			}
+
+			if (
+				getValue(
+					remoteConfig,
+					FirebaseFeatures.SHOW_WEBSITE_EDIT_VIEW,
+				).asBoolean()
+			) {
+				sources.push(SourceOptionsEnum.URL);
+			}
+			if (
+				getValue(remoteConfig, FirebaseFeatures.SHOW_QNA_EDIT_VIEW).asBoolean()
+			) {
+				sources.push(SourceOptionsEnum.QNA);
+			}
+			setSourceOptions(sources);
+		}
+	}, [isConfigLoaded, remoteConfig]);
+
 	return (
 		<div>
 			{sourceOptions.map((item) => (
