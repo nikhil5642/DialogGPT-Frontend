@@ -2,17 +2,21 @@
 	display: flex;
 	flex: 1;
 	flex-direction: column;
+	max-width: 1080px;
+	width: 100%;
+	margin: 16px;
+	margin: 0 auto;
 }
 
 .pricingHeader {
 	font-size: 64px;
 	text-align: center;
 	margin: 0;
+	color: #101828;
 }
 
-@media only screen and (min-width: 720px) {
-	.pricingScreenContainer {
-		padding-left: calc(50vw - 360px);
-		padding-right: calc(50vw - 360px);
-	}
+.pricingPlansContainer {
+	display: flex;
+	flex-direction: row;
+	flex: 1;
 }

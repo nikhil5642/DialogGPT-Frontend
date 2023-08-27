@@ -1,0 +1,68 @@
+.planCard {
+	background-color: #f0f0f0;
+	margin: 32px 24px 16px 24px;
+	border-radius: 12px;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	justify-content: space-between;
+
+	h3 {
+		font-size: 28px;
+		color: #101828;
+		margin: 16px 0px 20px 8px;
+	}
+
+	.features {
+		flex: 1;
+		margin: 0;
+		margin-bottom: 20px;
+		list-style-type: none;
+		padding: 0;
+		li {
+			color: #101828;
+		}
+	}
+
+	.tickWrapper {
+		display: flex;
+		align-items: start; // Aligns items to the top
+
+		.tick {
+			color: green;
+			margin-right: 12px; // This ensures a gap between the tick and the text
+			font-size: 20px;
+			line-height: 32px;
+		}
+		.text {
+			color: #3f3f46;
+			font-size: 20px;
+			line-height: 32px;
+		}
+	}
+	.price {
+		font-size: 28px;
+		font-weight: bold;
+		margin: 20px 0;
+		color: #101828;
+		margin-left: 8px;
+	}
+
+	.subscribeBtn {
+		width: 100%;
+		background-color: #000;
+		color: white;
+		padding: 10px 20px;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		font-weight: bold;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+
+		&:hover {
+			background-color: #101828;
+		}
+	}
+}

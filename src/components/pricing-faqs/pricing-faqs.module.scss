@@ -1,0 +1,38 @@
+.container {
+	padding: 20px;
+	border-radius: 10px;
+	margin-top: 64px;
+	margin-bottom: 64px;
+	h2 {
+		font-size: 48px;
+		text-align: start;
+		margin: 0px;
+		margin-left: 20px;
+		margin-bottom: 16px;
+		color: #101828;
+	}
+}
+
+.faqSection {
+	column-count: 2;
+	column-gap: 40px;
+	padding: 20px;
+}
+
+.faqItem {
+	break-inside: avoid;
+	margin-bottom: 16px;
+
+	h3 {
+		margin: 0px;
+		font-weight: 500;
+		font-size: 24px;
+		color: #0f172a;
+		margin-bottom: 12px;
+	}
+
+	p {
+		font-size: 20px;
+		color: #334155;
+	}
+}
