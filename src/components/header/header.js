@@ -14,8 +14,8 @@ export default function Header() {
 				<Image
 					className={styles.headerLogo}
 					src="/assets/dialog_gpt_logo_with_text.png"
-					alt={"ChessMeito"}
-					title={"ChessMeito"}
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
 					loading="eager"
 					height={80}
 					width={300}
@@ -37,8 +37,8 @@ export default function Header() {
 				<Image
 					className={styles.profileLogo}
 					src="/assets/profile_user.png"
-					alt={"ChessMeito"}
-					title={"ChessMeito"}
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
 					loading="eager"
 					height={40}
 					width={40}
@@ -51,8 +51,8 @@ export default function Header() {
 				<Image
 					className={styles.hamburgerLogo}
 					src="/assets/hamburger.png"
-					alt={"ChessMeito"}
-					title={"ChessMeito"}
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
 					loading="eager"
 					height={40}
 					width={40}

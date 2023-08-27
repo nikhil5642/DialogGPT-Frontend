@@ -8,7 +8,7 @@ export default function HomeScreen() {
 			<Head>
 				<title>Home</title>
 				<meta name="My Chatbots" content="List of already trained chatbots" />
-				<link rel="canonical" href="https://chessmeito.com/my-chatbots" />
+				<link rel="canonical" href="https://dialoggpt.io/my-chatbots" />
 			</Head>
 			<div className={styles.container}>
 				<MyChatBots />

@@ -134,7 +134,7 @@ const EULAScreen = () => {
 									msoThemetint: 166,
 								}}
 							>
-								<bdt className="question">ChessMeito</bdt>
+								<bdt className="question">DialogGPT</bdt>
 								is licensed to You (End-User) by
 								<bdt className="question">
 									Appmeito Technologies Private Limited
@@ -472,7 +472,7 @@ const EULAScreen = () => {
 							data-custom-class="body_text"
 							style={{ lineHeight: "1.5" }}
 						>
-							<bdt className="question">ChessMeito</bdt>
+							<bdt className="question">DialogGPT</bdt>
 							<bdt data-type="conditional-block">
 								<span style={{ fontSize: 15 }}>
 									<bdt data-type="body">
@@ -489,7 +489,7 @@ const EULAScreen = () => {
 											<bdt className="else-block" />
 											Agreement. The Licensor reserves all rights not expressly
 											granted to You.
-											<bdt className="question">ChessMeito</bdt>
+											<bdt className="question">DialogGPT</bdt>
 											is to be used on devices that operate with
 											<bdt className="block-component" />
 											Apple's operating systems (
@@ -758,7 +758,7 @@ const EULAScreen = () => {
 										msoThemetint: 166,
 									}}
 								>
-									<bdt className="question">ChessMeito</bdt>
+									<bdt className="question">DialogGPT</bdt>
 								</span>
 								(
 								<bdt className="block-component" />'
@@ -3935,7 +3935,7 @@ const EULAScreen = () => {
 											msoThemetint: 166,
 										}}
 									>
-										<bdt className="question">nikhil@chessmeito.com</bdt>
+										<bdt className="question">nikhil@dialoggpt.io</bdt>
 									</span>
 								</div>
 							</bdt>

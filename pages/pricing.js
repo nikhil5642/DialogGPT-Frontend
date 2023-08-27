@@ -13,7 +13,7 @@ export default function PricingScreen() {
 			<Head>
 				<title>Account</title>
 				<meta name="description" content="Your Account" />
-				<link rel="canonical" href="https://chessmeito.com/home" />
+				<link rel="canonical" href="https://dialoggpt.io/home" />
 			</Head>
 			<div className={styles.pricingScreenContainer}>
 				<h1 className={styles.pricingHeader}>Pricing Plans</h1>

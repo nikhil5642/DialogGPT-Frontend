@@ -23,7 +23,7 @@ export default function HomeScreen() {
 					name="description"
 					content="Build a chatbot for your website, try now! "
 				/>
-				<link rel="canonical" href="https://chessmeito.com/home" />
+				<link rel="canonical" href="https://dialoggpt.io/home" />
 			</Head>
 			<div className={styles.homeScreenContainer}>
 				<div className={styles.topOverviewContainer}>

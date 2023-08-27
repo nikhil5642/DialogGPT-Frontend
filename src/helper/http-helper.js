@@ -3,8 +3,8 @@ import AuthService from "./AuthService";
 import Router from "next/router";
 
 // Add your backend API base URL here
-export const API_BASE_URL = "http://localhost:8000";
-// export const baseUrl = "https://api.chessmeito.com";
+// export const API_BASE_URL = "http://localhost:8000";
+export const baseUrl = "https://api.dialoggpt.io";
 
 // Set up default Axios configurations
 const instance = axios.create({
