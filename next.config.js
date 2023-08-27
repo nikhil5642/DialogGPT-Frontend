@@ -13,3 +13,9 @@ module.exports = withBundleAnalyzer({
 		];
 	},
 });
+
+const nextConfig = {
+	distDir: "build",
+};
+
+module.exports = nextConfig;
