@@ -12,10 +12,5 @@ module.exports = withBundleAnalyzer({
 			},
 		];
 	},
+	distDir: "build", // Specify distDir within the same object
 });
-
-const nextConfig = {
-	distDir: "build",
-};
-
-module.exports = nextConfig;

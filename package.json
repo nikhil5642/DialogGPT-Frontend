@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
-		"@next/bundle-analyzer": "^13.4.19",
+		"@next/bundle-analyzer": "^13.0.5",
 		"axios": "^1.4.0",
 		"firebase": "^10.1.0",
 		"js-cookie": "^3.0.5",
