@@ -88,6 +88,7 @@ export default function WebisteLoader({ bot_id, data, setData }) {
 				{data
 					.filter((item) => item.source_type === "url")
 					.reduce((acc, curr) => acc + curr.char_count, 0)}
+				{"  "}
 				Char Detected
 			</p>
 

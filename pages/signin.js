@@ -22,9 +22,17 @@ import { getValue } from "firebase/remote-config";
 import { FirebaseFeatures } from "../src/helper/feature-flags";
 import { useFirebase } from "../src/helper/firebase-provider";
 import { firebaseConfig } from "../src/helper/firebase-provider";
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps } from "firebase/app";
 
-const app = initializeApp(firebaseConfig);
+let app;
+
+try {
+	app = initializeApp(firebaseConfig);
+} catch (e) {
+	// If the app is already initialized, reuse the existing instance
+	app = getApps()[0];
+}
+
 const SignInPage = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");

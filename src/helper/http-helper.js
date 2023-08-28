@@ -1,10 +1,11 @@
 import axios from "axios";
 import AuthService from "./AuthService";
 import Router from "next/router";
+import { showErrorToast } from "./toast-helper";
 
 // Add your backend API base URL here
-// export const API_BASE_URL = "http://localhost:8000";
-export const API_BASE_URL = "https://api.dialoggpt.io";
+export const API_BASE_URL = "http://localhost:8000";
+// export const API_BASE_URL = "https://api.dialoggpt.io";
 
 // Set up default Axios configurations
 const instance = axios.create({
@@ -63,6 +64,8 @@ function handleHttpError(error) {
 	console.log("error", error);
 	if (error.response.status == 401) {
 		Router.push("/signin");
+	} else if (error.response.status == 501) {
+		showErrorToast(error.response.data.detail);
 	}
 }
 

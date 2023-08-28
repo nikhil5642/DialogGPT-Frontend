@@ -34,11 +34,11 @@ function invalidURLError(url) {
 	if (!url.trim()) {
 		return "";
 	} else {
-		isValidUrl(url) ? "" : "Invalid Url";
+		return isValidUrl(url) ? "" : "Invalid Url";
 	}
 }
 
 function isValidUrl(url) {
-	const pattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/;
+	const pattern = /^(https?:\/\/)([\da-z.-]+)\.([a-z]{2,6})([\/\w .-]*)*\/?$/;
 	return pattern.test(url);
 }
