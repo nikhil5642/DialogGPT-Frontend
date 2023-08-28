@@ -5,7 +5,7 @@ import ChatBotEditor from "../../src/components/chatbot-editor/chatbot-editor";
 import React, { useEffect } from "react";
 
 export default function ChatbotPage() {
-	const { chatbotID } = useRouter().query;
+	const { chatbotID, page } = useRouter().query;
 	useEffect(() => {
 		const handleBeforeUnload = (e) => {
 			e.preventDefault();
@@ -28,7 +28,7 @@ export default function ChatbotPage() {
 					<link rel="canonical" href="https://diaglogGPT.com/my-chatbots" />
 				</Head>
 				<div className={styles.container}>
-					<ChatBotEditor botID={chatbotID} />
+					<ChatBotEditor botID={chatbotID} page={page} />
 				</div>
 			</>
 		</>

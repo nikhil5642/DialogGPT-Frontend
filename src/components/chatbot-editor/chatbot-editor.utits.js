@@ -1,5 +1,5 @@
 import SelectionComponent from "../selection-component/selection-component";
-
+import { useRouter } from "next/router";
 export const ChatBotOptionsEnum = {
 	SOURCES: "sources",
 	SETTINGS: "settings",
@@ -12,11 +12,26 @@ const ChatBotOptionLabels = {
 };
 
 export const ChatBotOptionSelector = ({ selector, setSelector }) => {
+	const router = useRouter();
 	const sourceOptions = [
 		ChatBotOptionsEnum.CHATBOT,
 		ChatBotOptionsEnum.SOURCES,
 		ChatBotOptionsEnum.SETTINGS,
 	];
+	const handleSelection = (item) => {
+		// Update the internal state
+		setSelector(item);
+
+		// Update the URL's query parameter
+		router.push(
+			{
+				pathname: router.pathname,
+				query: { ...router.query, page: item },
+			},
+			undefined,
+			{ shallow: true },
+		); // Shallow routing: updates the URL without running data fetching methods again
+	};
 	return (
 		<div>
 			{sourceOptions.map((item) => (
@@ -24,7 +39,7 @@ export const ChatBotOptionSelector = ({ selector, setSelector }) => {
 					key={item}
 					text={getLabel(item)}
 					isSelected={item === selector}
-					onClick={() => setSelector(item)}
+					onClick={() => handleSelection(item)}
 				/>
 			))}
 		</div>

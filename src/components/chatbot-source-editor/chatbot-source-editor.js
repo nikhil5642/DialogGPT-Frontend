@@ -9,7 +9,8 @@ import { postRequest } from "../../helper/http-helper";
 import TextLoader from "./text-loader/text-loader";
 import LoaderContext from "../loader/loader-context";
 import LoadingButton from "../loading-button/loading-button";
-
+import { useRouter } from "next/router";
+import { ChatBotOptionsEnum } from "../chatbot-editor/chatbot-editor.utits";
 const initialData = {
 	texts: { charLength: 0 },
 	urls: { count: 0, charLength: 0 },
@@ -21,6 +22,7 @@ export default function ChatBotSourceEditor({
 	chatbotInfoData,
 	setChatbotInfoData,
 }) {
+	const router = useRouter();
 	const { showLoader, hideLoader } = useContext(LoaderContext);
 	const [data, setData] = useState([]);
 	const [trainingData, setTrainingData] = useState(initialData);
@@ -63,6 +65,14 @@ export default function ChatBotSourceEditor({
 		postRequest("/train_chatbot", { botID: chatbotInfoData.id, data: data })
 			.then(() => {
 				hideLoader();
+				router.push(
+					{
+						pathname: router.pathname,
+						query: { ...router.query, page: ChatBotOptionsEnum.CHATBOT },
+					},
+					undefined,
+					{ shallow: true },
+				);
 			})
 			.catch(() => {
 				hideLoader();

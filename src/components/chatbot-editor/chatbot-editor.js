@@ -10,8 +10,8 @@ import ChatBotComponent from "../chatbot-component/chatbot-component";
 import ChatBotSettings from "../chatbot-settings/chatbot-settings";
 import LoaderContext from "../loader/loader-context";
 
-export default function ChatBotEditor({ botID }) {
-	const [selector, setSelector] = useState(ChatBotOptionsEnum.SOURCES);
+export default function ChatBotEditor({ botID, page }) {
+	const [selector, setSelector] = useState(ChatBotOptionsEnum.CHATBOT);
 	const { showLoader, hideLoader } = useContext(LoaderContext);
 	const [chatbotData, setChatbotData] = useState({
 		id: botID,
@@ -19,6 +19,12 @@ export default function ChatBotEditor({ botID }) {
 		status: "trained",
 		last_updated: "2023-08-22T14:00:18.796000",
 	});
+	useEffect(() => {
+		setSelector(
+			(page && ChatBotOptionsEnum[page.toUpperCase()]) ||
+				ChatBotOptionsEnum.CHATBOT,
+		);
+	}, [page]);
 	useEffect(() => {
 		loadChatBotData(false);
 	}, [botID]);
