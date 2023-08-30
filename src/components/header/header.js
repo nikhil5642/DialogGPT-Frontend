@@ -5,8 +5,12 @@ import { useRouter } from "next/router";
 import AuthService from "src/helper/AuthService";
 
 export default function Header() {
-	const router = useRouter();
 	const [menuVisible, setMenuVisible] = useState(false);
+	const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
+
+	useEffect(() => {
+		setIsUserAuthenticated(AuthService.isAuthenticated());
+	}, []);
 
 	return (
 		<div bg="light" expand="lg" className={styles.headerContainer}>
@@ -33,17 +37,13 @@ export default function Header() {
 					My ChatBots
 				</a>
 			</div>
-			<a className={styles.profileLogoContainer} href="/account">
-				<Image
-					className={styles.profileLogo}
-					src="/assets/profile_user.png"
-					alt={"DialogGPT"}
-					title={"DialogGPT"}
-					loading="eager"
-					height={40}
-					width={40}
-				></Image>
-			</a>
+			<div className={styles.profileActionContainer}>
+				{isUserAuthenticated ? (
+					<a href="/account">{"Account ->"}</a>
+				) : (
+					<a href="/signin">{"Log In ->"}</a>
+				)}
+			</div>
 			<a
 				className={styles.hamburgerContainer}
 				onClick={() => setMenuVisible(true)}
@@ -77,7 +77,7 @@ export default function Header() {
 							<a href="/my-chatbots">My ChatBot's</a>
 						</li>
 						<li>
-							{AuthService.isAuthenticated() ? (
+							{isUserAuthenticated ? (
 								<a href="/account">Account</a>
 							) : (
 								<a href="/signin">Log In</a>

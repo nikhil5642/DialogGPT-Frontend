@@ -44,18 +44,31 @@
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.profileLogoContainer {
+.profileActionContainer {
 	display: flex;
 	justify-content: flex-end;
 	margin-left: 250px;
 	margin-right: 16px;
-}
-
-.profileLogo {
-	object-fit: contain;
-	height: 40px;
-	width: 40px;
-	margin-top: 32px;
+	align-items: center;
+	a {
+		display: inline-block;
+		padding: 8px 18px;
+		border: none;
+		border-radius: 12px;
+		color: #101828;
+		text-decoration: none;
+		font-weight: bold;
+		transition: background-color 0.3s, transform 0.3s;
+		cursor: pointer;
+	}
+	a:hover {
+		transform: translateY(-2px); /* Gives a slight lift effect on hover */
+		box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+	}
+	a:active {
+		transform: translateY(1px); /* Pushes the button down a bit when clicked */
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
 }
 
 .hamburgerContainer {
@@ -134,7 +147,7 @@
 	.linksContainer {
 		display: none;
 	}
-	.profileLogoContainer {
+	.profileActionContainer {
 		display: none;
 	}
 	.hamburgerContainer {
