@@ -2,64 +2,98 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	max-width: 1080px;
 	align-items: center;
 	margin: 0 auto;
-	padding-left: 1rem;
-	padding-right: 1rem;
+	padding: 0 1rem;
+	height: 60vh;
+	width: 100vw;
 }
 
 .topOverviewContainer {
 	flex: 1;
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	align-items: center;
-	margin-top: 2rem;
+	padding: 0 1rem; // Added padding for mobile responsiveness
 	h1 {
-		font-size: 3.75rem;
-		line-height: 1;
+		font-size: 3.5rem;
+		line-height: 1.2;
 		margin: 0px;
 		margin-top: 12px;
 		color: #101828;
-
+		font-weight: 800;
+		text-align: center;
 		span {
 			color: #428dff;
+			font-weight: 800;
 		}
 	}
 
 	h3 {
 		margin: 0px;
 		margin-top: 2rem;
-		font-size: 1.125rem;
+		font-size: 1.25rem;
 		text-align: center;
 		font-weight: 500;
-		color: #101828;
+		color: #333333;
+		max-width: 90%; // Increased width for better readability on mobile
+
+		span {
+			font-weight: 600;
+		}
 	}
 
 	button {
-		margin: 0px;
+		display: flex;
+		align-items: center; // Vertically center the image and text
 		margin-top: 2rem;
-		font-size: 0.8rem;
-		font-weight: 500;
+		font-size: 1.25rem;
+		font-weight: 600;
 		color: white;
 		background-color: #428dff;
 		border: none;
-		padding: 0.75rem 1rem;
+		padding: 0.85rem 1.2rem;
 		border-radius: 0.75rem;
+		box-shadow: 0px 4px 15px rgba(66, 141, 255, 0.2);
+		transition: all 0.3s ease;
+
+		&:hover {
+			cursor: pointer;
+			background-color: #2a6fd4;
+			transform: translateY(-2px);
+		}
+
+		&:active {
+			transform: translateY(0px);
+		}
+
+		img {
+			margin-right: 0.5rem; // Space between the image and the text
+			width: 36px; // Adjust as needed
+			height: 36px; // Adjust as needed
+		}
 	}
 }
 
 @media only screen and (max-width: 720px) {
+	.homeScreenContainer {
+		height: 50vh;
+		width: 100vw;
+	}
 	.topOverviewContainer {
+		margin-top: 1rem;
 		h1 {
-			font-size: 2.25rem;
+			font-size: 2.5rem;
 		}
 		h3 {
-			font-size: 1.125rem;
+			font-size: 1rem;
+			max-width: 95%; // Further increased width for mobile
 		}
 		button {
 			font-size: 0.8rem;
 			margin-top: 1.5rem;
+			padding: 0.75rem 1rem; // Adjusted padding for mobile
 		}
 	}
 }

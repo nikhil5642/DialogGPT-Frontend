@@ -1,41 +1,50 @@
 .aboutContainer {
 	display: flex;
 	flex-direction: column;
-	background-color: #f6f6f6;
-	padding-top: 16px;
-	padding-left: calc(50vw - 360px);
-	padding-right: calc(50vw - 360px);
-	align-self: center;
-	width: 100%;
-}
-.aboutHorizontalContainer {
-	flex: 1;
-	flex-direction: column;
-	align-self: center;
+	padding: 16px;
+	margin-top: 40vh;
+	align-items: center;
+	justify-content: center;
+	background: #f7f9fc; // A soft, neutral background color
+	border: 1px solid #e1e4e8; // A subtle border for definition
+	border-radius: 8px;
+	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05); // A softer shadow for subtlety
 }
 
 .aboutCopyright {
-	font-size: 16px;
+	font-size: 14px;
 	text-align: center;
+	margin-top: 8px;
+	color: #777;
 }
 
-.aboutContact {
-	font-size: 18px;
-	margin: 0px;
-	margin-bottom: 12px;
-}
 .aboutP {
-	font-size: 18px;
+	font-size: 16px;
 	padding: 0px;
 	margin: 0px;
 	text-align: center;
+
+	font-weight: 400;
+}
+
+.linksP {
+	margin-bottom: 16px; // Added space between the links and the contact info
+}
+
+.termsLink {
+	color: #101828;
+	text-decoration: none;
+	font-weight: 500; // Slightly bolder font
+	margin: 0 8px; // Space between the links
+
+	&:hover {
+		text-decoration: underline;
+	}
 }
 
 @media only screen and (max-width: 720px) {
 	.aboutContainer {
-		flex-direction: column;
-		padding-left: 8px;
-		padding-right: 8px;
-		margin-top: 12px;
+		padding: 8px;
+		margin-top: 10vh;
 	}
 }

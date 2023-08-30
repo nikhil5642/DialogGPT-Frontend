@@ -5,7 +5,6 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background-color: white;
 }
 
 .card {
@@ -19,12 +18,26 @@
 	display: flex;
 	width: 100%;
 	background-color: #fff;
-	border: 0.5px solid #ccc;
+	border: none; /* Remove the border to make it cleaner */
 	border-radius: 5px;
 	cursor: pointer;
 	margin-top: 16px;
 	align-items: center;
 	justify-content: center;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for elevation */
+	transition: all 0.3s ease; /* Smooth transitions for hover effects */
+}
+
+.googleButton:hover {
+	background-color: #f7f7f7; /* Slight color change on hover */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Increase shadow depth on hover */
+}
+
+/* If you have an icon inside the button, style it like this */
+.googleButton img {
+	margin-right: 8px; /* Space between the icon and the text */
+	height: 20px;
+	width: 20px;
 }
 
 .googleIcon {

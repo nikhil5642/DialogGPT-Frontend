@@ -29,15 +29,23 @@ export default function HomeScreen() {
 				<div className={styles.topOverviewContainer}>
 					<h1>
 						Chat<span>GPT</span>
-					</h1>
-					<h1>
-						for your <span>own data</span>
+						<br />
+						for your <span>own Website</span>
 					</h1>
 					<h3>
-						Turn Your Data into an Interactive Chatbot! Easily Add to Your
-						Website or Chat via Integrations/API.
+						Transform your data into a dynamic <span>Chatbot</span>. Seamlessly
+						integrate it with your <span>Website</span>. <br />
+						<br />
+						Connect effortlessly via <span>APIs</span> and other{" "}
+						<span>integrations</span>.
 					</h3>
-					<button onClick={onCreateChatbot}>Create your Chatbot Now ➤</button>
+					<button onClick={onCreateChatbot}>
+						<img
+							src="/assets/dialog_gpt_logo_icon_only.png"
+							alt="Description of Image"
+						/>
+						Create your Chatbot Now ➤
+					</button>
 				</div>
 			</div>
 		</>
