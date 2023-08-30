@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { postRequest } from "../../helper/http-helper";
 import styles from "./chatbot-component.module.scss";
 import Image from "next/image";
-
+import ReactMarkdown from "react-markdown";
 export default function ChatBotComponent({ botID }) {
 	const [messages, setMessages] = useState([]);
 	const [newMessage, setNewMessage] = useState("");
@@ -65,7 +65,7 @@ export default function ChatBotComponent({ botID }) {
 								: styles.outgoingBubble
 						}
 					>
-						<div
+						<ReactMarkdown
 							className={
 								message.type === "incoming"
 									? styles.incomingMessageContainer
@@ -73,7 +73,7 @@ export default function ChatBotComponent({ botID }) {
 							}
 						>
 							{message.text}
-						</div>
+						</ReactMarkdown>
 					</div>
 				))}
 				{sending && (
@@ -86,6 +86,7 @@ export default function ChatBotComponent({ botID }) {
 					</div>
 				)}
 			</div>
+
 			<div className={styles.inputContainer}>
 				<textarea
 					rows={rows}
