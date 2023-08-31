@@ -2,6 +2,7 @@
 	padding-top: 16px;
 	margin-left: 16px;
 	margin-right: 16px;
+	margin-top: 32px;
 	max-width: 720px;
 	width: calc(100vw - 64px);
 	border: 1px solid #ccc;
@@ -9,6 +10,7 @@
 	padding: 12px;
 	display: flex;
 	flex-direction: column;
+	border-radius: 8px;
 }
 
 .chatbotMessagesContainer {
