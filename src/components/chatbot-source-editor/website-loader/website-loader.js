@@ -35,7 +35,6 @@ export default function WebisteLoader({ bot_id, data, setData }) {
 		]);
 	};
 	const handleDeleteUrl = (id) => {
-		console.log(id);
 		const updatedData = data.filter((item) => item.content_id !== id);
 		setData(updatedData);
 	};
@@ -52,16 +51,28 @@ export default function WebisteLoader({ bot_id, data, setData }) {
 	return (
 		<div className={styles.container}>
 			<h4>Crawl</h4>
-			<EditBoxComponent
-				placeholder={"https://www.example.com"}
-				value={url}
-				onChange={(value) => setUrl(value)}
-			/>
-			<LoadingButton
-				title={"Fetch Links"}
-				onClick={fetchUrls}
-				isLoading={loader.fetchLinks}
-			/>
+
+			<div className={styles.urlCrawlerView}>
+				<div className={styles.fetchLinksInput}>
+					<EditBoxComponent
+						placeholder={"https://www.example.com"}
+						value={url}
+						onChange={(value) => setUrl(value)}
+					/>
+				</div>
+
+				<div className={styles.fetchLinksButton}>
+					<LoadingButton
+						title={"Fetch Links"}
+						onClick={fetchUrls}
+						isLoading={loader.fetchLinks}
+					/>
+				</div>
+			</div>
+			<p className={styles.urlCrawlerDesc}>
+				This will crawl all the links starting with the URL (not including files
+				on the website).
+			</p>
 			<ul>
 				{data
 					.filter((item) => item.source_type === "url")

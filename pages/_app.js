@@ -7,6 +7,7 @@ import Loader from "../src/components/loader/loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FirebaseProvider } from "src/helper/firebase-provider";
+import { BackgroundType } from "src/helper/background-helper";
 
 function MyApp({ Component, pageProps }) {
 	return (
