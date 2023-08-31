@@ -6,7 +6,7 @@
 	width: calc(100vw - 64px);
 	ul {
 		margin: 0;
-		margin-top: 16px;
+		margin-top: 32px;
 		padding: 0;
 		list-style-type: none; // This removes the default bullet points
 		li {
@@ -14,6 +14,26 @@
 			padding: 0;
 		}
 	}
+}
+
+.urlCrawlerView {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+.fetchLinksInput {
+	flex: 1;
+}
+.fetchLinksButton {
+	margin-left: 24px;
+}
+
+.urlCrawlerDesc {
+	color: #666;
+	font-size: 18px;
+	margin: 0px;
+	margin-top: 12px;
+	margin-left: 12px;
 }
 
 .addURLContainer {
@@ -33,26 +53,36 @@
 }
 
 .urlCharCount {
-	margin-left: 8px;
+	margin-left: 16px;
 	font-size: 18px;
 	width: 60px;
+	color: #666;
+	vertical-align: middle;
+}
+
+.urlItemButton {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 8px; // Giving some padding to make it a larger clickable area
+	transition: transform 0.2s; // A subtle effect for interaction
+
+	&:hover {
+		transform: scale(
+			1.05
+		); // Slightly scale the button to indicate it's clickable
+	}
+
+	img {
+		display: block;
+		width: 20px;
+		height: 20px;
+		margin: 0; // Removed margin-left for consistent spacing
+	}
 }
 
 .charDetected {
 	margin-left: 16px;
 	font-size: 20px;
 	align-self: flex-end;
-}
-
-.urlItemButton {
-	background-color: transparent; // Make the button background transparent
-	border: none;
-	cursor: pointer;
-	padding: 0; // Remove padding if you want the image to fit the button exactly
-	img {
-		display: block;
-		width: 20px;
-		height: 20px;
-		margin-left: 16px;
-	}
 }

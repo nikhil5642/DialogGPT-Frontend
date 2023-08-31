@@ -1,12 +1,15 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import { BackGroundSelector } from "src/helper/background-helper";
 
 class MyDocument extends Document {
 	static async getInitialProps(ctx) {
 		const initialProps = await Document.getInitialProps(ctx);
-		return { ...initialProps };
+		return { ...initialProps, pathname: ctx.pathname };
 	}
 
 	render() {
+		const background = BackGroundSelector(this.props.pathname);
+
 		return (
 			<Html lang="en">
 				<Head>
@@ -23,7 +26,7 @@ class MyDocument extends Document {
 						rel="stylesheet"
 					/>
 				</Head>
-				<body>
+				<body className={background}>
 					<Main />
 					<NextScript />
 				</body>

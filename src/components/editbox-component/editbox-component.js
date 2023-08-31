@@ -8,22 +8,20 @@ const EditBoxComponent = ({ placeholder, value, onChange }) => {
 		onChange(newValue);
 		setError(invalidURLError(newValue));
 	};
-	const inputStyles = {
-		borderColor: error ? "red" : "initial", // Change border color on error
-	};
-
+	const textareaClass = error
+		? `${styles.inputTextArea} ${styles.error}`
+		: styles.inputTextArea;
 	return (
 		<div className={styles.container}>
 			<textarea
 				rows="1"
-				className={styles.inputTextArea}
+				className={textareaClass}
 				type="text"
 				value={value}
 				onChange={handleInputChange}
-				style={inputStyles} // Apply inputStyles
 				placeholder={placeholder} // Add placeholder
 			/>
-			{error && <div style={{ color: "red" }}>{error}</div>}
+			{error && <div>{error}</div>}
 		</div>
 	);
 };

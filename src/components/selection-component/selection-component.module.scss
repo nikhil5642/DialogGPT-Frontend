@@ -1,20 +1,24 @@
-/* SelectionComponent.module.css */
-
 .selectionContainer {
 	display: inline-block;
-	padding: 8px;
-	margin: 4px;
+	padding: 0px 24px;
+	margin: 0;
 	cursor: pointer;
-	transition: background-color 0.3s, color 0.3s;
-	color: #333;
+	transition: color 0.3s, text-decoration 0.3s;
+	color: #888; /* Lighter shade of black for unselected state */
+	text-align: center;
+	font-weight: 500;
+	text-decoration: none;
+	font-size: 20px;
 }
 
 .selectionContainer:hover {
-	background-color: transparent;
-	color: #007bff;
+	color: #444; /* Darker than unselected but lighter than selected state */
 }
 
 .selected {
-	background-color: transparent;
-	color: #dc3545;
+	color: #000; /* Black for selected state */
+	text-decoration-line: underline;
+	text-decoration-color: #428dff; /* Distinct underline color */
+	text-decoration-thickness: 2px;
+	text-underline-offset: 8px;
 }

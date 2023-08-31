@@ -1,5 +1,6 @@
 import SelectionComponent from "../selection-component/selection-component";
 import { useRouter } from "next/router";
+
 export const ChatBotOptionsEnum = {
 	SOURCES: "sources",
 	SETTINGS: "settings",
@@ -33,7 +34,7 @@ export const ChatBotOptionSelector = ({ selector, setSelector }) => {
 		); // Shallow routing: updates the URL without running data fetching methods again
 	};
 	return (
-		<div>
+		<div style={{ marginTop: "24px", marginBottom: "24px" }}>
 			{sourceOptions.map((item) => (
 				<SelectionComponent
 					key={item}
