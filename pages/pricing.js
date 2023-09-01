@@ -1,13 +1,10 @@
 import styles from "./styles/pricing.module.scss";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import PricingFAQs from "src/components/pricing-faqs/pricing-faqs";
 import PricingPlan from "src/components/pricing-plan/pricing-plan";
 import { PricingPlans } from "src/components/pricing-plan/pricing-plans.utils";
 
 export default function PricingScreen() {
-	const router = useRouter();
-
 	return (
 		<>
 			<Head>
