@@ -16,7 +16,7 @@ export default function ChatBotEditor({ botID, page }) {
 	const [chatbotData, setChatbotData] = useState({
 		id: botID,
 		name: "",
-		status: "trained",
+		status: "untrained",
 		last_updated: "2023-08-22T14:00:18.796000",
 	});
 	useEffect(() => {
@@ -76,7 +76,7 @@ export default function ChatBotEditor({ botID, page }) {
 					<div className={styles.chatBotTrainingModelContainer}>
 						<h2>Please Wait...</h2>
 						<p>Training In Progress</p>
-						<progress className={styles.progressBar} max="100"></progress>
+						<progress max="100"></progress>
 						<p>Incase if it's taking too long, try to train chatbot again! </p>
 					</div>
 				)}

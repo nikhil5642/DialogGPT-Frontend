@@ -1,0 +1,45 @@
+.container {
+	padding: 16px;
+
+	h1 {
+		font-size: 2em;
+		color: #333;
+		margin-bottom: 20px;
+	}
+
+	h2 {
+		font-size: 1.2em;
+		color: #444;
+		margin-top: 20px;
+		margin-bottom: 10px;
+	}
+
+	p {
+		font-size: 0.8em;
+		color: #555;
+		line-height: 1.5;
+		margin-bottom: 15px;
+	}
+
+	ul {
+		font-size: 0.8em;
+		list-style-type: disc;
+		margin-left: 20px;
+		margin-bottom: 15px;
+	}
+
+	li {
+		font-size: 1em;
+		color: #555;
+		line-height: 1.5;
+		margin-bottom: 10px;
+		strong {
+			color: #444;
+		}
+	}
+
+	a {
+		color: #444;
+		font-weight: 500;
+	}
+}

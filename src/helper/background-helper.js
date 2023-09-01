@@ -6,6 +6,7 @@ export const BackgroundType = {
 export const BackGroundSelector = (path) => {
 	switch (path) {
 		case "/home":
+		case "/support":
 		case "/":
 			return BackgroundType.BLUE_GRADIENT;
 		default:
