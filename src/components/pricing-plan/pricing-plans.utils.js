@@ -14,6 +14,7 @@ const PricingFeatures = {
 export const PricingPlans = {
 	FREE: {
 		name: "Free",
+		id: "free",
 		features: [
 			PricingFeatures.CHATBOT_1,
 			PricingFeatures.MESSAGE_CREDITS_30,
@@ -24,6 +25,7 @@ export const PricingPlans = {
 	},
 	ESSENTIAL: {
 		name: "Essential",
+		id: "essential",
 		features: [
 			PricingFeatures.CHATBOT_2,
 			PricingFeatures.MESSAGE_CREDITS_2000,
@@ -34,6 +36,7 @@ export const PricingPlans = {
 	},
 	PRO: {
 		name: "Pro",
+		id: "pro",
 		features: [
 			PricingFeatures.CHATBOT_5,
 			PricingFeatures.MESSAGE_CREDITS_10000,

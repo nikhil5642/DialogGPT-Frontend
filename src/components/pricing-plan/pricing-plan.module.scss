@@ -27,7 +27,7 @@
 
 	.tickWrapper {
 		display: flex;
-		align-items: start; // Aligns items to the top
+		align-items: flex-start; // Aligns items to the top
 
 		.tick {
 			color: green;
@@ -63,6 +63,14 @@
 
 		&:hover {
 			background-color: #101828;
+		}
+	}
+
+	.alreadySubscribed {
+		background-color: #888; /* Grayed out background */
+		cursor: not-allowed; /* Indicate that the button is not clickable */
+		&:hover {
+			background-color: #888; /* Keep the same color on hover */
 		}
 	}
 }
