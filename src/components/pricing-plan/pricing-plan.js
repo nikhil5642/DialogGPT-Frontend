@@ -10,7 +10,8 @@ const stripePromise = loadStripe(
 );
 function PricingPlan({ plan, currentPlan }) {
 	const router = useRouter();
-	const alreadySubscribed = currentPlan == plan.id;
+	const alreadySubscribed =
+		currentPlan != PricingPlan.FREE && currentPlan == plan.id;
 	const redirectToCheckout = async (sessionId) => {
 		const stripe = await stripePromise;
 
