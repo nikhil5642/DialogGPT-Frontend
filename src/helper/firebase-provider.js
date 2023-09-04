@@ -40,9 +40,7 @@ export const FirebaseProvider = ({ children }) => {
 				setIsConfigLoaded(true);
 				setRemoteConfig(remoteConfig);
 			})
-			.catch((error) => {
-				console.error("Failed to fetch remote config:", error);
-			});
+			.catch(() => {});
 	}, []);
 
 	return (

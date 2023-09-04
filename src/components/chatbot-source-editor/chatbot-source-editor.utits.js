@@ -21,7 +21,6 @@ export const SourceSelector = ({ selector, setSelector }) => {
 	const { isConfigLoaded, remoteConfig } = useFirebase();
 	useEffect(() => {
 		if (isConfigLoaded && remoteConfig) {
-			console.log(remoteConfig);
 			const sources = [];
 			if (
 				getValue(

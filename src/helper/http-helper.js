@@ -61,8 +61,7 @@ export const postRequest = async (
 };
 
 function handleHttpError(error) {
-	console.log("error", error);
-	if (!error.response || error.response.status) {
+	if (!error.response || !error.response.status) {
 		showErrorToast("Something went wrong!");
 	} else if (error.response.status == 401) {
 		Router.push("/signin");

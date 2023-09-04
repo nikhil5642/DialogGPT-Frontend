@@ -6,12 +6,11 @@ import { useRouter } from "next/router";
 import AuthService from "../src/helper/AuthService";
 
 export default function HomeScreen() {
-	const router = useRouter();
 	function onCreateChatbot() {
 		if (AuthService.isAuthenticated()) {
-			router.push("/my-chatbots");
+			window.location.href = `/my-chatbots`;
 		} else {
-			router.push("/signin");
+			window.location.href = `/signin`;
 		}
 	}
 
