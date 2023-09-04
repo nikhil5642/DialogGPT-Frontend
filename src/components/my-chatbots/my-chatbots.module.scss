@@ -44,6 +44,8 @@
 }
 
 .chatbotCard {
+	display: flex;
+	flex-direction: column;
 	border-radius: 12px;
 	transition: transform 0.3s ease-in-out;
 	cursor: pointer;
@@ -60,10 +62,11 @@
 
 .charbotCardImg {
 	align-self: center;
-	width: 100%;
 	object-fit: contain;
 	padding-top: 32px;
 	padding-bottom: 32px;
+	height: auto;
+	width: auto;
 }
 
 .cardName {
