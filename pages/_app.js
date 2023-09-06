@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }) {
 				{!isIsolated && (
 					<script
 						src="https://www.dialoggpt.io/embed-chatbot.js"
-						id="f38342c0-15b9-49b0-9fa5-c0135cc9c45a"
+						id="fee95809-3b19-4390-9732-e62ff3aee2ec"
 						defer
 					></script>
 				)}
