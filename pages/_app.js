@@ -19,6 +19,13 @@ function MyApp({ Component, pageProps }) {
 					name="viewport"
 					content="width=device-width, initial-scale=1.0, maximum-scale=5"
 				/>
+				{!isIsolated && (
+					<script
+						src="https://www.dialoggpt.io/embed-chatbot.js"
+						id="f38342c0-15b9-49b0-9fa5-c0135cc9c45a"
+						defer
+					></script>
+				)}
 			</Head>
 			<IsolationContext.Provider value={isIsolated}>
 				<FirebaseProvider>

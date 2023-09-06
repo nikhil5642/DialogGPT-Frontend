@@ -1,0 +1,41 @@
+.settingsContainer {
+	padding-top: 16px;
+	margin-left: 16px;
+	margin-right: 16px;
+	max-width: 1080px;
+	width: calc(100vw - 64px);
+	height: 50vh;
+	padding: 12px;
+	display: flex;
+	flex-direction: column;
+	margin-top: 32px;
+}
+
+.generalContainer {
+	padding: 8px;
+	h5 {
+		font-size: 16px;
+		margin: 0px;
+		margin-bottom: 8px;
+		margin-left: 4px;
+		font-weight: 600;
+		color: #374151;
+	}
+	p {
+		font-size: 20px;
+		margin-top: 0px;
+		margin-left: 4px;
+		font-weight: 500;
+	}
+	textarea {
+		width: 100%;
+		resize: none;
+		overflow-y: auto;
+		box-sizing: border-box;
+		background-image: none;
+		border-radius: 8px;
+		padding: 16px;
+		font-size: 18px;
+		border: 1px solid #e5e7eb;
+	}
+}

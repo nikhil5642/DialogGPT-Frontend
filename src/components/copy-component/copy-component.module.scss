@@ -1,0 +1,54 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-width: 1080px;
+	width: 100%;
+	margin: 0 auto;
+	border: 1px solid #e5e7eb;
+	padding: 32px 32px;
+	border-radius: 12px;
+}
+.title {
+	color: #6b7280;
+	font-size: 24px;
+	text-align: center;
+	margin: 0px;
+}
+.content {
+	margin-top: 32px;
+	background-color: #f1f5f9;
+	border-radius: 12px;
+	width: 100%;
+	pre {
+		margin: 16px 32px;
+	}
+}
+
+.copyButton {
+	display: flex;
+	flex-direction: row;
+	border: none;
+	cursor: pointer;
+	padding: 8px 16px;
+	background-color: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 12px;
+	margin-top: 32px;
+
+	&:hover {
+		background-color: #f1f1f1; // Change this to your desired hover color
+	}
+
+	p {
+		margin: 0px;
+		font-size: 24px;
+		line-height: 24px;
+	}
+
+	img {
+		width: 24px;
+		height: 24px;
+		margin-left: 16px;
+	}
+}

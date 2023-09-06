@@ -9,6 +9,7 @@ import { postRequest } from "../../../src/helper/http-helper";
 import ChatBotComponent from "../chatbot-component/chatbot-component";
 import ChatBotSettings from "../chatbot-settings/chatbot-settings";
 import LoaderContext from "../loader/loader-context";
+import EmbedComponent from "../chatbot-embed/chatbot-embed";
 
 export default function ChatBotEditor({ botID, page }) {
 	const [selector, setSelector] = useState(ChatBotOptionsEnum.CHATBOT);
@@ -105,6 +106,9 @@ export default function ChatBotEditor({ botID, page }) {
 			)}
 			{selector === ChatBotOptionsEnum.SETTINGS && (
 				<ChatBotSettings data={chatbotData} setData={setChatbotData} />
+			)}
+			{selector === ChatBotOptionsEnum.EMBED && (
+				<EmbedComponent data={chatbotData} />
 			)}
 		</div>
 	);

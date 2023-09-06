@@ -6,18 +6,6 @@ import React, { useEffect } from "react";
 
 export default function ChatbotPage() {
 	const { chatbotID, page } = useRouter().query;
-	useEffect(() => {
-		const handleBeforeUnload = (e) => {
-			e.preventDefault();
-			e.returnValue = "Are you sure you want to leave or refresh this page?";
-		};
-
-		window.addEventListener("beforeunload", handleBeforeUnload);
-
-		return () => {
-			window.removeEventListener("beforeunload", handleBeforeUnload);
-		};
-	}, []);
 
 	return (
 		<>

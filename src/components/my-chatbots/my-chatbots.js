@@ -18,7 +18,7 @@ export default function MyChatBots() {
 		})
 			.then((res) => {
 				hideLoader();
-				window.location.href = `/chatbot/${res.chatbot_id}`;
+				window.location.href = `/chatbot/${res.chatbot_id}?page=sources`;
 			})
 			.catch(() => {
 				hideLoader();
