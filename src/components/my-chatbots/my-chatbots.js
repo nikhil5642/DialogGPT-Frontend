@@ -5,11 +5,11 @@ import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import LoaderContext from "../loader/loader-context";
 import LoadingButton from "../loading-button/loading-button";
+import { showErrorToast } from "src/helper/toast-helper";
 
 export default function MyChatBots() {
-	const router = useRouter();
 	const { showLoader, hideLoader } = useContext(LoaderContext);
-
+	const [chatbotLimit, setChatbotLimit] = useState(1);
 	const [chatbotsList, setChatBotsList] = useState([]);
 	const createNewChatBot = () => {
 		showLoader("Creating a bot...");
@@ -18,18 +18,31 @@ export default function MyChatBots() {
 		})
 			.then((res) => {
 				hideLoader();
-				router.push(`/chatbot/${res.chatbot_id}`);
+				window.location.href = `/chatbot/${res.chatbot_id}`;
 			})
 			.catch(() => {
 				hideLoader();
 			});
 	};
+	function handleChatbotClick(index, chatbotId) {
+		if (index >= chatbotLimit) {
+			showErrorToast(
+				"You are limited to accessing " +
+					chatbotLimit +
+					" chatbots under your current plan.",
+			);
+			return;
+		}
+		// If within limit, navigate to the chatbot page
+		window.location.href = `/chatbot/${chatbotId}`;
+	}
 
 	useEffect(() => {
 		showLoader("Loading Chatbot Data...");
 		getRequest("/my_chatbots")
 			.then((res) => {
 				setChatBotsList(res.chatbot_list);
+				setChatbotLimit(res.chatbot_limit);
 				hideLoader();
 			})
 			.catch(() => {
@@ -40,12 +53,14 @@ export default function MyChatBots() {
 	return (
 		<div className={styles.myChatBotContainer}>
 			<h1 className={styles.myChatBotTitleHeading}>My ChatBots</h1>
-
+			<p className={styles.myChatBotTitleSubHeading}>
+				({chatbotLimit} ChatBot Limit)
+			</p>
 			<div className={styles.chatBotGrid}>
-				{chatbotsList.map((chatbot) => (
+				{chatbotsList.map((chatbot, index) => (
 					<a
 						key={chatbot.chatbot_id}
-						href={`/chatbot/${chatbot.chatbot_id}`} // Define the href for the link
+						onClick={() => handleChatbotClick(index, chatbot.chatbot_id)} // Add the click handler
 						className={styles.chatbotCard}
 					>
 						<Image

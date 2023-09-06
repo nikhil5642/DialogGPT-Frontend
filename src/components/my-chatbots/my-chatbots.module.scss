@@ -16,6 +16,16 @@
 	color: #101828;
 	font-family: "Roboto", sans-serif;
 }
+.myChatBotTitleSubHeading {
+	font-size: 20px;
+	margin-bottom: 0px;
+	text-align: center;
+	margin-top: 0px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	color: #444;
+	font-family: "Roboto", sans-serif;
+}
 
 .createButtonContainer {
 	margin-top: 32px;
@@ -34,6 +44,8 @@
 }
 
 .chatbotCard {
+	display: flex;
+	flex-direction: column;
 	border-radius: 12px;
 	transition: transform 0.3s ease-in-out;
 	cursor: pointer;
@@ -50,10 +62,11 @@
 
 .charbotCardImg {
 	align-self: center;
-	width: 100%;
 	object-fit: contain;
 	padding-top: 32px;
 	padding-bottom: 32px;
+	height: auto;
+	width: auto;
 }
 
 .cardName {

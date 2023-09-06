@@ -23,6 +23,7 @@ import { FirebaseFeatures } from "../src/helper/feature-flags";
 import { useFirebase } from "../src/helper/firebase-provider";
 import { firebaseConfig } from "../src/helper/firebase-provider";
 import { initializeApp, getApps } from "firebase/app";
+import { showErrorToast, showSuccessToast } from "src/helper/toast-helper";
 
 let app;
 
@@ -85,7 +86,7 @@ const SignInPage = () => {
 					});
 			} else {
 				hideLoader();
-				console.log("User is signed out");
+				showSuccessToast("Signed out successfully!");
 			}
 		});
 
@@ -97,8 +98,8 @@ const SignInPage = () => {
 		storeCookie("authInProgress", "true");
 		try {
 			await signInWithRedirect(auth, provider);
-		} catch (error) {
-			console.error("Google sign-in error:", error);
+		} catch (e) {
+			showErrorToast("Error logging you in!");
 			hideLoader();
 			removeCookie("authInProgress");
 		}
@@ -111,8 +112,8 @@ const SignInPage = () => {
 			.then((userCredential) => {
 				const user = userCredential.user;
 			})
-			.catch((error) => {
-				console.error("Apple sign-in error:", error);
+			.catch(() => {
+				showErrorToast("Error logging you in!");
 			});
 	};
 
@@ -122,8 +123,8 @@ const SignInPage = () => {
 			.then((userCredential) => {
 				const user = userCredential.user;
 			})
-			.catch((error) => {
-				console.error("Email/password sign-in error:", error);
+			.catch(() => {
+				showErrorToast("Error logging you in!");
 			});
 	};
 
