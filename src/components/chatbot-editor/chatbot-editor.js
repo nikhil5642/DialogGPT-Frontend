@@ -91,7 +91,11 @@ export default function ChatBotEditor({ botID, page }) {
 				)}
 
 			{selector === ChatBotOptionsEnum.CHATBOT &&
-				chatbotData.status === "trained" && <ChatBotComponent botID={botID} />}
+				chatbotData.status === "trained" && (
+					<div className={styles.chatBottrainedModelContainer}>
+						<ChatBotComponent botID={botID} />
+					</div>
+				)}
 
 			{selector === ChatBotOptionsEnum.SOURCES && (
 				<ChatBotSourceEditor
