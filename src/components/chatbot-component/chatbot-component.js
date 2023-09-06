@@ -107,6 +107,18 @@ export default function ChatBotComponent({ botID }) {
 					></Image>
 				</button>
 			</div>
+			<div className={styles.poweredBy}>
+				<p>
+					Powered by{" "}
+					<a
+						href="https://www.dialoggpt.io"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						DialogGPT
+					</a>
+				</p>
+			</div>
 		</div>
 	);
 }

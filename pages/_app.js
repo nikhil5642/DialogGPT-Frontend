@@ -7,9 +7,11 @@ import Loader from "../src/components/loader/loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FirebaseProvider } from "src/helper/firebase-provider";
-import { BackgroundType } from "src/helper/background-helper";
+import IsolationContext from "src/scripts/isolation-context";
 
 function MyApp({ Component, pageProps }) {
+	const isIsolated = Component.isIsolatedComponent === true; // default to false if not specified
+
 	return (
 		<>
 			<Head>
@@ -18,15 +20,21 @@ function MyApp({ Component, pageProps }) {
 					content="width=device-width, initial-scale=1.0, maximum-scale=5"
 				/>
 			</Head>
-			<FirebaseProvider>
-				<LoaderProvider>
-					<Layout>
-						<Loader />
-						<ToastContainer />
-						<Component {...pageProps} />
-					</Layout>
-				</LoaderProvider>
-			</FirebaseProvider>
+			<IsolationContext.Provider value={isIsolated}>
+				<FirebaseProvider>
+					<LoaderProvider>
+						{isIsolated ? (
+							<Component {...pageProps} />
+						) : (
+							<Layout>
+								<Loader />
+								<ToastContainer />
+								<Component {...pageProps} />
+							</Layout>
+						)}
+					</LoaderProvider>
+				</FirebaseProvider>
+			</IsolationContext.Provider>
 		</>
 	);
 }

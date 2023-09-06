@@ -84,6 +84,15 @@
 	}
 }
 
+.chatBottrainedModelContainer {
+	max-width: 720px;
+	width: 100%;
+	height: 50vh;
+	display: flex;
+	position: relative;
+	margin-top: 32px;
+}
+
 @media only screen and (max-width: 720px) {
 	.chatBotEditorContainer {
 		justify-content: center;

@@ -1,11 +1,8 @@
 import styles from "./styles/home.module.scss";
-import { useEffect } from "react";
-// import ReactGA from "react-ga4";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import AuthService from "../src/helper/AuthService";
 
-export default function HomeScreen() {
+function HomeScreen() {
 	function onCreateChatbot() {
 		if (AuthService.isAuthenticated()) {
 			window.location.href = `/my-chatbots`;
@@ -46,7 +43,20 @@ export default function HomeScreen() {
 						Create your Chatbot Now ➤
 					</button>
 				</div>
+
+				<div className={styles.liveDemoContainer}>
+					<h2>Live Demo</h2>
+					<p>This chatbot was trained on a document explaining Chatbase.</p>
+					<p>You can embed a widget like this on any page on your website!</p>
+
+					<iframe
+						className={styles.liveDemoIframe}
+						src="http://localhost:3000/iframe/f38342c0-15b9-49b0-9fa5-c0135cc9c45a"
+						frameborder="0"
+					/>
+				</div>
 			</div>
 		</>
 	);
 }
+export default HomeScreen;
