@@ -5,11 +5,13 @@ export const ChatBotOptionsEnum = {
 	SOURCES: "sources",
 	SETTINGS: "settings",
 	CHATBOT: "chatbots",
+	EMBED: "embed",
 };
 const ChatBotOptionLabels = {
 	[ChatBotOptionsEnum.SOURCES]: "Sources",
 	[ChatBotOptionsEnum.SETTINGS]: "Settings",
 	[ChatBotOptionsEnum.CHATBOT]: "Chatbot",
+	[ChatBotOptionsEnum.EMBED]: "Embed on Site",
 };
 
 export const ChatBotOptionSelector = ({ selector, setSelector }) => {
@@ -18,6 +20,7 @@ export const ChatBotOptionSelector = ({ selector, setSelector }) => {
 		ChatBotOptionsEnum.CHATBOT,
 		ChatBotOptionsEnum.SOURCES,
 		ChatBotOptionsEnum.SETTINGS,
+		ChatBotOptionsEnum.EMBED,
 	];
 	const handleSelection = (item) => {
 		// Update the internal state

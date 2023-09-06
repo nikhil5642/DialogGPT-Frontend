@@ -64,7 +64,7 @@
 	// Create the iframe
 	var iframe = document.createElement("iframe");
 	iframe.id = "chatbotIframe";
-	iframe.src = "http://localhost:3000/iframe/" + chatbotID;
+	iframe.src = "https/dialoggpt.io/iframe/" + chatbotID;
 	document.body.appendChild(iframe);
 
 	// Toggle iframe visibility and chat bubble icon on chat bubble click

@@ -21,9 +21,9 @@ function MyApp({ Component, pageProps }) {
 				/>
 				{!isIsolated && (
 					<script
-						src="/embed-chatbot.js"
-						defer
+						src="https://www.dialoggpt.io/embed-chatbot.js"
 						id="f38342c0-15b9-49b0-9fa5-c0135cc9c45a"
+						defer
 					></script>
 				)}
 			</Head>
