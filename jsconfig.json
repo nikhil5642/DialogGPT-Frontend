@@ -14,5 +14,9 @@
 		}
 	},
 	"exclude": ["node_modules"],
-	"include": ["**/*.js", "**/*.jsx"]
+	"include": [
+		"**/*.js",
+		"**/*.jsx",
+		"src/components/chatbot-settings/chat-interface-settings"
+	]
 }
