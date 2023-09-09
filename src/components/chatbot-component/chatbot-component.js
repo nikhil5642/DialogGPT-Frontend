@@ -3,13 +3,56 @@ import { postRequest } from "../../helper/http-helper";
 import styles from "./chatbot-component.module.scss";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
-export default function ChatBotComponent({ botID }) {
+import { ChatBotSource } from "./chatbot-component.utils";
+
+export default function ChatBotComponent({ config }) {
+	const {
+		botID,
+		initialMessage = "",
+		source = ChatBotSource.CHATBOT,
+		quickPrompts = "",
+		theme = ChatTheme.LIGHT,
+		profilePicture = null,
+		userMsgColor = "#ff0000",
+		displayName = "",
+		chatIcon = null,
+		chatBubbleColor = "#000000",
+	} = config;
 	const [messages, setMessages] = useState([]);
 	const [newMessage, setNewMessage] = useState("");
 	const [history, setHistory] = useState([]);
 	const messagesEndRef = useRef(null);
 	const [sending, setSending] = useState(false);
 	const [rows, setRows] = useState(1);
+
+	const getSplittedMessages = (text) => {
+		const lines = text.split("\n").filter((line) => line.trim() !== "");
+		return lines;
+	};
+
+	const addMessage = (text, messageType) => {
+		const lines = getSplittedMessages(text);
+		// Add each line as a separate message with a delay
+		lines.forEach((line, index) => {
+			setTimeout(() => {
+				setMessages((prevMessages) => [
+					...prevMessages,
+					{ id: prevMessages.length + index, text: line, type: messageType },
+				]);
+			}, index * 500); // 0.5s delay between each message
+		});
+	};
+
+	useEffect(() => {
+		setMessages([]);
+		const lines = getSplittedMessages(initialMessage);
+		lines.forEach((line, index) => {
+			setMessages((prevMessages) => [
+				...prevMessages,
+				{ id: prevMessages.length + index, text: line, type: "incoming" },
+			]);
+		});
+	}, [initialMessage]);
 
 	const handleKeyPress = (e) => {
 		if (e.key === "Enter" && !e.shiftKey) {
@@ -23,10 +66,16 @@ export default function ChatBotComponent({ botID }) {
 	}, [newMessage]);
 
 	useEffect(() => {
-		messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+		messagesEndRef.current?.scrollIntoView({
+			behavior: "smooth",
+			block: "end",
+		});
 	}, [messages]);
 
 	const handleSend = () => {
+		if (source === ChatBotSource.SETTINGS) {
+			return;
+		}
 		if (newMessage.trim() !== "") {
 			if (!sending) {
 				setMessages([
@@ -42,11 +91,8 @@ export default function ChatBotComponent({ botID }) {
 				})
 					.then((res) => {
 						setHistory([...history, [res.result.query, res.result.query]]);
-						setMessages((messages) => [
-							...messages,
-							{ id: messages.length, text: res.result.reply, type: "incoming" },
-						]),
-							setSending(() => false);
+						addMessage(res.result.reply, "incoming");
+						setSending(() => false);
 					})
 					.catch(() => {});
 			}
@@ -55,6 +101,21 @@ export default function ChatBotComponent({ botID }) {
 
 	return (
 		<div className={styles.chatbotContainer}>
+			<div className={styles.chatbotHeaderContainer}>
+				{profilePicture && <img src={profilePicture} />}
+				{displayName && <h5>{displayName}</h5>}
+
+				<div className={styles.chatbotHeaderRightContainer}>
+					<button onClick={() => {}}>
+						<img src="/assets/refresh_grey.png"></img>
+					</button>
+					{source === ChatBotSource.SETTINGS && (
+						<button onClick={() => {}}>
+							<img src="/assets/close_grey.png"></img>
+						</button>
+					)}
+				</div>
+			</div>
 			<div className={styles.chatbotMessagesContainer}>
 				{messages.map((message) => (
 					<div
@@ -85,8 +146,22 @@ export default function ChatBotComponent({ botID }) {
 						</div>
 					</div>
 				)}
+				{source != ChatBotSource.SETTINGS && <div ref={messagesEndRef} />}
 			</div>
-
+			<div className={styles.chatbotPromtsContainer}>
+				{getSplittedMessages(quickPrompts).map((prompt) => (
+					<button
+						key={prompt}
+						className={styles.quickPrompt}
+						onClick={() => {
+							setNewMessage(prompt);
+							handleSend();
+						}}
+					>
+						{prompt}
+					</button>
+				))}
+			</div>
 			<div className={styles.inputContainer}>
 				<textarea
 					rows={rows}
@@ -107,18 +182,20 @@ export default function ChatBotComponent({ botID }) {
 					></Image>
 				</button>
 			</div>
-			<div className={styles.poweredBy}>
-				<p>
-					Powered by{" "}
-					<a
-						href="https://www.dialoggpt.io"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						DialogGPT
-					</a>
-				</p>
-			</div>
+			{source !== ChatBotSource.CHATBOT && (
+				<div className={styles.poweredBy}>
+					<p>
+						Powered by{" "}
+						<a
+							href="https://www.dialoggpt.io"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							DialogGPT
+						</a>
+					</p>
+				</div>
+			)}
 		</div>
 	);
 }

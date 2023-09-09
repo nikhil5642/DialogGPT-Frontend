@@ -4,11 +4,48 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	padding: 12px;
-	padding-bottom: 0px;
+	padding: 8px;
 	display: flex;
 	flex-direction: column;
 	z-index: 1000; // To ensure it's on top of other elements
+}
+.chatbotHeaderContainer {
+	display: flex;
+	flex-direction: row;
+	padding: 16px;
+	border-bottom: 1px solid #e5e7eb;
+	justify-content: space-between;
+	img {
+		height: 32px;
+		width: 32px;
+		object-fit: contain;
+		border-radius: 50%;
+		overflow: hidden;
+		border: none;
+	}
+
+	h5 {
+		flex: 1;
+		margin: 0px;
+		align-self: center;
+		text-align: start;
+		margin-left: 16px;
+	}
+}
+.chatbotHeaderRightContainer {
+	align-self: flex-end;
+	margin-left: auto;
+	button {
+		padding: 0px;
+		background: none;
+		border: none;
+		margin-left: 16px;
+		img {
+			height: 20px;
+			width: 24px;
+			border-radius: 0px;
+		}
+	}
 }
 
 .chatbotMessagesContainer {
@@ -89,11 +126,25 @@
 	margin-left: 8px;
 }
 
+.chatbotPromtsContainer {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+
+	button {
+		margin: 0 4px;
+		padding: 8px 16px;
+		border: none;
+		border-radius: 8px;
+		background-color: #f0f0f0;
+	}
+}
+
 .inputContainer {
 	position: relative;
 	display: flex;
-	border: 1px solid #ccc;
-	border-radius: 8px;
+	border: 1px solid #e5e7eb;
+	border-radius: 4px;
 	margin-top: 12px;
 	padding: 8px;
 	flex-shrink: 0;
@@ -192,16 +243,14 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding-top: 12px;
-	padding-bottom: 12px;
-
+	padding-top: 8px;
 	p {
-		font-size: 1rem;
+		font-size: 0.75rem;
 		line-height: 1rem;
 		margin: 0px;
 	}
 	a {
-		font-size: 1rem;
+		font-size: 0.75rem;
 		line-height: 1rem;
 		color: #101828;
 		font-weight: 500;

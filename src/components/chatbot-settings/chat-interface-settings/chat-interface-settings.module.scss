@@ -42,7 +42,10 @@
 		border: 1px solid #e5e7eb;
 	}
 }
-
+.square-picker {
+	width: 225px !important; /* Force width */
+	height: auto !important; /* Allow height to adjust automatically */
+}
 .selectStyles {
 	width: 100%;
 	box-sizing: border-box;
@@ -53,4 +56,16 @@
 	border: 1px solid #e5e7eb;
 	margin-bottom: 8px;
 	margin-top: 8px;
+}
+
+.imagePicker {
+	margin-top: 12px;
+	margin-left: 12px;
+}
+
+.colourPicker {
+	margin-top: 12px;
+	margin-left: 12px;
+	width: 24px;
+	border: 8px solid #e5e7eb;
 }

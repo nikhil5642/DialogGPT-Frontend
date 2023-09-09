@@ -86,7 +86,6 @@ const SignInPage = () => {
 					});
 			} else {
 				hideLoader();
-				showSuccessToast("Signed out successfully!");
 			}
 		});
 

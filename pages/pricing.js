@@ -3,14 +3,20 @@ import Head from "next/head";
 import PricingFAQs from "src/components/pricing-faqs/pricing-faqs";
 import PricingPlan from "src/components/pricing-plan/pricing-plan";
 import { PricingPlans } from "src/components/pricing-plan/pricing-plans.utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getRequest } from "src/helper/http-helper";
+import AuthService from "../src/helper/AuthService";
 
 export default function PricingScreen() {
 	const [currentPlan, setCurrentPlan] = useState(null);
-	getRequest("/current_subscription_plan").then((res) => {
-		setCurrentPlan(res?.result);
-	});
+	useEffect(() => {
+		if (AuthService.isAuthenticated()) {
+			getRequest("/current_subscription_plan").then((res) => {
+				setCurrentPlan(res?.result);
+			});
+		}
+	}, []);
+
 	return (
 		<>
 			<Head>

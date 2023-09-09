@@ -26,18 +26,18 @@ function PricingPlan({ plan, currentPlan }) {
 	const onButtonPress = () => {
 		if (alreadySubscribed) {
 			showSuccessToast("You are already Subscribed to this Plan!");
-		} else if (plan == PricingPlan.FREE) {
-			if (AuthService.isAuthenticated()) {
+		} else if (!AuthService.isAuthenticated()) {
+			router.push("/signin");
+		} else {
+			if (plan == PricingPlan.FREE) {
 				router.push("/my-chatbots");
 			} else {
-				router.push("/signin");
+				postRequest("/create_checkout_session", {
+					planId: plan.id,
+				}).then((res) => {
+					redirectToCheckout(res.result);
+				});
 			}
-		} else {
-			postRequest("/create_checkout_session", {
-				planId: plan.id,
-			}).then((res) => {
-				redirectToCheckout(res.result);
-			});
 		}
 	};
 	return (
