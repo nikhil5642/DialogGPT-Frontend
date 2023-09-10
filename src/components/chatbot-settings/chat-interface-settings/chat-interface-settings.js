@@ -37,7 +37,7 @@ export default function ChatInterfaceSettings({ botID }) {
 				})
 				.catch(() => {
 					setLoader(false);
-					showErrorToast("Error Updating Information");
+					showErrorToast("Error Loading Information");
 				});
 		}
 	}, [botID]);
