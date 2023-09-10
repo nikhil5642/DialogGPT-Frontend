@@ -6,6 +6,7 @@ function ImageChooseComponent({ onImageSelect }) {
 
 	const handleImageChange = (e) => {
 		const file = e.target.files[0];
+
 		if (file) {
 			const reader = new FileReader();
 			reader.onloadend = () => {
@@ -18,12 +19,12 @@ function ImageChooseComponent({ onImageSelect }) {
 
 	return (
 		<div className="image-chooser">
-			<input type="file" className="file-input" onChange={handleImageChange} />
-			{imagePreview && (
-				<div className="preview-container">
-					<img src={imagePreview} alt="Preview" className="image-preview" />
-				</div>
-			)}
+			<input
+				type="file"
+				className="file-input"
+				onChange={handleImageChange}
+				accept=".png, .jpg, .jpeg"
+			/>
 		</div>
 	);
 }

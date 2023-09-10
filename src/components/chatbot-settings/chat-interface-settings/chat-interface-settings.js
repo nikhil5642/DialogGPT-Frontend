@@ -3,26 +3,14 @@ import { postRequest } from "../../../helper/http-helper";
 import styles from "./chat-interface-settings.module.scss";
 import SettingsComponent from "../../settings-component/settings-component";
 import { showErrorToast, showSuccessToast } from "../../../helper/toast-helper";
-import { ChatTheme } from "./chat-interface-settings.utils";
+import { chatInit } from "./chat-interface-settings.utils";
 import ImageChooseComponent from "../../image-choose-component/image-choose-component";
 import ChatBotComponent from "../../chatbot-component/chatbot-component";
 import ColorPickerComponent from "../../colour-picker-component/colour-picker-component";
-import { ChatBotSource } from "../../chatbot-component/chatbot-component.utils";
 
 export default function ChatInterfaceSettings({ botID }) {
 	const [loader, setLoader] = useState(false);
-	const [data, setData] = useState({
-		botID: botID,
-		source: ChatBotSource.SETTINGS,
-		initialMessage: "",
-		quickPrompts: "",
-		theme: ChatTheme.LIGHT,
-		profilePicture: null,
-		userMsgColor: "#ff0000",
-		displayName: "",
-		chatIcon: null,
-		chatBubbleColor: "#000000",
-	});
+	const [data, setData] = useState(chatInit(botID));
 	return (
 		<SettingsComponent
 			title={"Chat Interface"}
@@ -53,6 +41,8 @@ export default function ChatInterfaceSettings({ botID }) {
 							placeholder={"What is example.com?"}
 						/>
 						<p>Enter each prompt in a new line.</p>
+
+						{/* TODO:Themes will be added later*/}
 						{/* <br></br>
 						<h5>Theme</h5>
 						<select
@@ -113,8 +103,27 @@ export default function ChatInterfaceSettings({ botID }) {
 							/>
 						</div>
 					</div>
-					<div className={styles.chatBotContainer}>
-						<ChatBotComponent config={data} />
+					<div>
+						<div className={styles.chatBotContainer}>
+							<ChatBotComponent config={data} />
+						</div>
+						<div
+							className={styles.chatBubble}
+							style={{
+								backgroundColor: data.chatIcon
+									? "transparent"
+									: data.chatBubbleColor,
+							}}
+						>
+							{data.chatIcon ? (
+								<img src={data.chatIcon} className={styles.chatImg} />
+							) : (
+								<img
+									src="/assets/chat_icon.png"
+									className={styles.chatImgDefault}
+								/>
+							)}
+						</div>
 					</div>
 				</div>
 			}

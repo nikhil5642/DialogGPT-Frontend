@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import ChatBotComponent from "../../src/components/chatbot-component/chatbot-component";
+import { chatInit } from "../../src/components/chatbot-settings/chat-interface-settings/chat-interface-settings.utils";
 
 function ChatbotPage({ chatbotID }) {
-	return <ChatBotComponent botID={chatbotID} />;
+	return <ChatBotComponent botID={chatbotID} config={chatInit(chatbotID)} />;
 }
 function initializeChatbotOnClient(chatbotID, containerId) {
 	const container = document.getElementById(containerId);

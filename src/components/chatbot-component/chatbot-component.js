@@ -15,8 +15,6 @@ export default function ChatBotComponent({ config }) {
 		profilePicture = null,
 		userMsgColor = "#ff0000",
 		displayName = "",
-		chatIcon = null,
-		chatBubbleColor = "#000000",
 	} = config;
 	const [messages, setMessages] = useState([]);
 	const [newMessage, setNewMessage] = useState("");
@@ -102,7 +100,9 @@ export default function ChatBotComponent({ config }) {
 	return (
 		<div className={styles.chatbotContainer}>
 			<div className={styles.chatbotHeaderContainer}>
-				{profilePicture && <img src={profilePicture} />}
+				{profilePicture && (
+					<img src={profilePicture} className={styles.headerImage} />
+				)}
 				{displayName && <h5>{displayName}</h5>}
 
 				<div className={styles.chatbotHeaderRightContainer}>
@@ -182,7 +182,8 @@ export default function ChatBotComponent({ config }) {
 					></Image>
 				</button>
 			</div>
-			{source !== ChatBotSource.CHATBOT && (
+			{/* TODO: This is to show powered by, will add this again after gaining some traction*/}
+			{/* {source === ChatBotSource.CHATBOT && (
 				<div className={styles.poweredBy}>
 					<p>
 						Powered by{" "}
@@ -195,7 +196,7 @@ export default function ChatBotComponent({ config }) {
 						</a>
 					</p>
 				</div>
-			)}
+			)} */}
 		</div>
 	);
 }
