@@ -1,19 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { postRequest } from "../../../helper/http-helper";
 import styles from "./model-settings.module.scss";
 import SettingsComponent from "../../settings-component/settings-component";
 import { showErrorToast, showSuccessToast } from "../../../helper/toast-helper";
 import { GPTModel } from "./model-settings.utils";
 
-export default function ModelSettings({ botID }) {
+export default function ModelSettings({ chatbotID }) {
 	const [loader, setLoader] = useState(false);
 	const [data, setData] = useState({
-		botID: botID,
+		botID: chatbotID,
 		prompt: "",
 		basePrompt: "",
 		model: GPTModel.GPT_3_5_turbo,
 		temperature: 0,
 	});
+	useEffect(() => {
+		if (chatbotID) {
+			setData({ ...data, botID: chatbotID });
+			postRequest("/fetch_chatbot_model", {
+				botID: chatbotID,
+			})
+				.then((res) => {
+					setLoader(false);
+					setData((prev) => {
+						return {
+							...prev,
+							prompt: res.result.prompt,
+							basePrompt: res.result.base_prompt,
+							model: res.result.model_version,
+							temperature: res.result.temperature,
+						};
+					});
+				})
+				.catch(() => {
+					setLoader(false);
+					showErrorToast("Error Updating Information");
+				});
+		}
+	}, [chatbotID]);
+
 	return (
 		<SettingsComponent
 			title={"Model"}
@@ -22,7 +47,7 @@ export default function ModelSettings({ botID }) {
 				<div className={styles.modelContainer}>
 					<h5>Base Prompt</h5>
 					<textarea
-						rows="4"
+						rows="8"
 						type="text"
 						value={data.prompt}
 						onChange={(e) => {
@@ -73,7 +98,12 @@ export default function ModelSettings({ botID }) {
 			}
 			onSave={() => {
 				setLoader(true);
-				postRequest("/update_chatbot_model_settings", data)
+				postRequest("/update_chatbot_model", {
+					botID: data.botID,
+					prompt: data.prompt,
+					modelVersion: data.model,
+					temperature: data.temperature,
+				})
 					.then(() => {
 						setLoader(false);
 						showSuccessToast("Information Updated Successfully");

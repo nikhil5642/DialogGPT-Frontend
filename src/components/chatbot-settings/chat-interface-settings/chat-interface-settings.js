@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { postRequest } from "../../../helper/http-helper";
 import styles from "./chat-interface-settings.module.scss";
 import SettingsComponent from "../../settings-component/settings-component";
@@ -7,10 +7,40 @@ import { chatInit } from "./chat-interface-settings.utils";
 import ImageChooseComponent from "../../image-choose-component/image-choose-component";
 import ChatBotComponent from "../../chatbot-component/chatbot-component";
 import ColorPickerComponent from "../../colour-picker-component/colour-picker-component";
+import { ChatBotSource } from "../../chatbot-component/chatbot-component.utils";
 
 export default function ChatInterfaceSettings({ botID }) {
 	const [loader, setLoader] = useState(false);
-	const [data, setData] = useState(chatInit(botID));
+	const [data, setData] = useState(chatInit(botID, ChatBotSource.SETTINGS));
+
+	useEffect(() => {
+		if (botID) {
+			setData({ ...data, botID: botID });
+			postRequest("/fetch_chatbot_interface", {
+				botID: botID,
+			})
+				.then((res) => {
+					setLoader(false);
+					setData((prev) => {
+						return {
+							...prev,
+							initialMessage: res.result.initial_message,
+							quickPrompts: res.result.quick_prompts,
+							theme: res.result.theme,
+							profilePicture: res.result.profile_picture,
+							userMsgColor: res.result.user_msg_color,
+							displayName: res.result.display_name,
+							chatIcon: res.result.chat_icon,
+							chatBubbleColor: res.result.chat_bubble_color,
+						};
+					});
+				})
+				.catch(() => {
+					setLoader(false);
+					showErrorToast("Error Updating Information");
+				});
+		}
+	}, [botID]);
 	return (
 		<SettingsComponent
 			title={"Chat Interface"}
@@ -60,11 +90,13 @@ export default function ChatInterfaceSettings({ botID }) {
 						<h5>ChatBot Profile Picture</h5>
 						<div className={styles.imagePicker}>
 							<ImageChooseComponent
+								currentImage={data.profilePicture}
 								onImageSelect={(img) =>
 									setData({ ...data, profilePicture: img })
 								}
 							/>
 						</div>
+
 						<br></br>
 						<h5>Dispaly Name</h5>
 						<textarea
@@ -89,6 +121,7 @@ export default function ChatInterfaceSettings({ botID }) {
 						<h5>Chat Icon</h5>
 						<div className={styles.imagePicker}>
 							<ImageChooseComponent
+								currentImage={data.chatIcon}
 								onImageSelect={(img) => setData({ ...data, chatIcon: img })}
 							/>
 						</div>
@@ -129,7 +162,7 @@ export default function ChatInterfaceSettings({ botID }) {
 			}
 			onSave={() => {
 				setLoader(true);
-				postRequest("/update_chatbot_model_settings", data)
+				postRequest("/update_chatbot_interface", data)
 					.then(() => {
 						setLoader(false);
 						showSuccessToast("Information Updated Successfully");

@@ -5,9 +5,9 @@ export const ChatTheme = {
 	DARK: "dark",
 };
 
-export const chatInit = (botID) => ({
+export const chatInit = (botID, source) => ({
 	botID: botID,
-	source: ChatBotSource.SETTINGS,
+	source: source,
 	initialMessage: "",
 	quickPrompts: "",
 	theme: ChatTheme.LIGHT,

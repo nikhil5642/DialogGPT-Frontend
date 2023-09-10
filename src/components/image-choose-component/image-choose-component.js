@@ -1,9 +1,12 @@
-import React, { useState } from "react";
-import "./image-choose-component.module.scss";
+import React, { useEffect, useState } from "react";
+import styles from "./image-choose-component.module.scss";
 
-function ImageChooseComponent({ onImageSelect }) {
-	const [imagePreview, setImagePreview] = useState(null);
+function ImageChooseComponent({ currentImage, onImageSelect }) {
+	const [imagePreview, setImagePreview] = useState(currentImage);
 
+	useEffect(() => {
+		setImagePreview(currentImage);
+	}, [currentImage]);
 	const handleImageChange = (e) => {
 		const file = e.target.files[0];
 
@@ -16,15 +19,32 @@ function ImageChooseComponent({ onImageSelect }) {
 			reader.readAsDataURL(file);
 		}
 	};
+	const handleClosePreview = () => {
+		setImagePreview(null);
+		onImageSelect(null);
+	};
 
 	return (
-		<div className="image-chooser">
+		<div className={styles.imageChooser}>
 			<input
 				type="file"
-				className="file-input"
+				className={styles.fileInput}
 				onChange={handleImageChange}
 				accept=".png, .jpg, .jpeg"
 			/>
+			{imagePreview && (
+				<div className={styles.imagePreviewContainer}>
+					<img
+						src={imagePreview}
+						alt="Preview"
+						className={styles.imagePreview}
+						style={{ width: "64px", height: "64px", objectFit: "cover" }}
+					></img>
+					<button onClick={handleClosePreview} className={styles.closePreview}>
+						X
+					</button>
+				</div>
+			)}
 		</div>
 	);
 }

@@ -50,6 +50,13 @@ export default function ChatBotComponent({ config }) {
 				{ id: prevMessages.length + index, text: line, type: "incoming" },
 			]);
 		});
+
+		if (source === ChatBotSource.SETTINGS) {
+			setMessages((prevMessages) => [
+				...prevMessages,
+				{ id: prevMessages.length + 1, text: "hi", type: "outgoing" },
+			]);
+		}
 	}, [initialMessage]);
 
 	const handleKeyPress = (e) => {
@@ -126,15 +133,19 @@ export default function ChatBotComponent({ config }) {
 								: styles.outgoingBubble
 						}
 					>
-						<ReactMarkdown
+						<div
 							className={
 								message.type === "incoming"
 									? styles.incomingMessageContainer
 									: styles.outgoingMessageContainer
 							}
+							style={{
+								backgroundColor:
+									message.type === "incoming" ? "f0f0f0" : userMsgColor,
+							}}
 						>
-							{message.text}
-						</ReactMarkdown>
+							<ReactMarkdown>{message.text}</ReactMarkdown>
+						</div>
 					</div>
 				))}
 				{sending && (
