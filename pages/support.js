@@ -6,10 +6,10 @@ export default function SupportPage() {
 	return (
 		<div>
 			<Head>
-				<title>Support - Appmeito Technologies Private Limited</title>
+				<title>Support - DialogGPT</title>
 				<meta
 					name="description"
-					content="Need help with Stripe India? Reach out to Appmeito Technologies Private Limited support!"
+					content="Need help? Reach out to us at support@dialoggpt.io"
 				/>
 			</Head>
 
