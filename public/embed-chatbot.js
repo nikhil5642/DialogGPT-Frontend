@@ -12,7 +12,7 @@
         #chatbotBubble {
             width: 60px;
             height: 60px;
-            background-color: #000000;
+			background: transparent;
             border-radius: 50%;
             position: fixed;
             bottom: 20px;
@@ -25,7 +25,6 @@
             font-size: 24px;
             z-index: 1000;
             user-select: none;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 15px 40px rgba(0, 0, 0, 0.25);
         }
 
         #chatbotIframe {
@@ -38,6 +37,7 @@
             border-radius: 12px;
             border: 1px solid #e5e7eb;
             display: none; /* Initially hidden */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 15px 40px rgba(0, 0, 0, 0.25);
         }
 
         /* Adjustments for smaller screens */
@@ -73,7 +73,7 @@
 
 	function setChatBubbleAppearance() {
 		if (window.chatbotSettings && window.chatbotSettings.chatIcon) {
-			chatBubble.style.backgroundColor = "transparent";
+			chatBubble.style.backgroundColor = "transparent"; // Ensure the background is transparent
 			chatBubble.innerHTML = `<img src="${window.chatbotSettings.chatIcon}" style="height: 64px; width: 64px; object-fit: fill; border-radius: 50%;">`;
 		} else {
 			// Check if window.chatbotSettings exists before trying to access chatBubbleColor
@@ -91,6 +91,12 @@
 		var iframe = document.getElementById("chatbotIframe");
 		if (iframe.style.display === "none" || iframe.style.display === "") {
 			iframe.style.display = "block";
+			var bgColor =
+				window.chatbotSettings && window.chatbotSettings.chatBubbleColor
+					? window.chatbotSettings.chatBubbleColor
+					: "#000000";
+			chatBubble.style.backgroundColor = bgColor;
+			chatBubble.style.backgroundColor = bgColor;
 			chatBubble.innerHTML = `<img src="https://dialoggpt.io/assets/down_arrow_white.png" style="height: 32px; width: 32px;">`; // Down arrow icon when iframe is visible
 		} else {
 			iframe.style.display = "none";
