@@ -110,7 +110,6 @@
 	})
 		.then((response) => response.json())
 		.then((data) => {
-			console.log(data);
 			// Store the fetched data in the window object for later use
 			window.chatbotSettings = {
 				chatIcon: data.result.chat_icon,

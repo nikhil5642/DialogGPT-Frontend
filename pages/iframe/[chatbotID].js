@@ -4,16 +4,23 @@ import ChatBotComponent from "../../src/components/chatbot-component/chatbot-com
 import { chatInit } from "../../src/components/chatbot-settings/chat-interface-settings/chat-interface-settings.utils";
 import { ChatBotSource } from "../../src/components/chatbot-component/chatbot-component.utils";
 import { useState, useEffect } from "react";
-import { postRequest } from "../../src/helper/http-helper";
+
 function ChatbotPage({ chatbotID, source }) {
 	const [data, setData] = useState(chatInit(chatbotID, source));
 
 	useEffect(() => {
 		if (chatbotID) {
 			setData({ ...data, botID: chatbotID });
-			postRequest("/fetch_chatbot_interface", {
-				botID: chatbotID,
+			fetch("https://api.dialoggpt.io/fetch_chatbot_interface", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					botID: chatbotID,
+				}),
 			})
+				.then((response) => response.json())
 				.then((res) => {
 					setData((prev) => {
 						return {
