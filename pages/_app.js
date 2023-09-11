@@ -21,26 +21,26 @@ function MyApp({ Component, pageProps }) {
 				/>
 				{!isIsolated && (
 					<script
-						src="https://www.dialoggpt.io/embed-chatbot.js"
+						src="http://localhost:3000/embed-chatbot.js"
 						id="fee95809-3b19-4390-9732-e62ff3aee2ec"
 						defer
 					></script>
 				)}
 			</Head>
 			<IsolationContext.Provider value={isIsolated}>
-				<FirebaseProvider>
-					<LoaderProvider>
-						{isIsolated ? (
-							<Component {...pageProps} />
-						) : (
+				<LoaderProvider>
+					{isIsolated ? (
+						<Component {...pageProps} />
+					) : (
+						<FirebaseProvider>
 							<Layout>
 								<Loader />
 								<ToastContainer />
 								<Component {...pageProps} />
 							</Layout>
-						)}
-					</LoaderProvider>
-				</FirebaseProvider>
+						</FirebaseProvider>
+					)}
+				</LoaderProvider>
 			</IsolationContext.Provider>
 		</>
 	);

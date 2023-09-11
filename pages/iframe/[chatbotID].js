@@ -4,7 +4,8 @@ import ChatBotComponent from "../../src/components/chatbot-component/chatbot-com
 import { chatInit } from "../../src/components/chatbot-settings/chat-interface-settings/chat-interface-settings.utils";
 import { ChatBotSource } from "../../src/components/chatbot-component/chatbot-component.utils";
 import { useState, useEffect } from "react";
-function ChatbotPage({ chatbotID, source = ChatBotSource.IFRAME }) {
+import { postRequest } from "../../src/helper/http-helper";
+function ChatbotPage({ chatbotID, source }) {
 	const [data, setData] = useState(chatInit(chatbotID, source));
 
 	useEffect(() => {
@@ -15,7 +16,6 @@ function ChatbotPage({ chatbotID, source = ChatBotSource.IFRAME }) {
 			})
 				.then((res) => {
 					setData((prev) => {
-						console.log(res);
 						return {
 							...prev,
 							initialMessage: res.result.initial_message,
@@ -44,5 +44,17 @@ function initializeChatbotOnClient(chatbotID, containerId) {
 if (typeof window !== "undefined") {
 	window.initializeChatbotPage = initializeChatbotOnClient;
 }
+
+export async function getServerSideProps(context) {
+	const chatbotID = context.params.chatbotID;
+	const source = context.query.source || ChatBotSource.IFRAME;
+	return {
+		props: {
+			chatbotID,
+			source,
+		},
+	};
+}
+
 ChatbotPage.isIsolatedComponent = true;
 export default ChatbotPage;
