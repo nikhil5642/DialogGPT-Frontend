@@ -71,10 +71,10 @@ export default function ChatBotComponent({ config }) {
 	}, [newMessage]);
 
 	useEffect(() => {
-		messagesEndRef.current?.scrollIntoView({
-			behavior: "smooth",
-			block: "end",
-		});
+		if (messagesEndRef.current) {
+			const container = messagesEndRef.current.parentElement;
+			container.scrollTop = container.scrollHeight;
+		}
 	}, [messages]);
 
 	const handleSend = () => {
