@@ -15,8 +15,6 @@ export default function ChatBotComponent({ config }) {
 		profilePicture = null,
 		userMsgColor = "#ff0000",
 		displayName = "",
-		chatIcon = null,
-		chatBubbleColor = "#000000",
 	} = config;
 	const [messages, setMessages] = useState([]);
 	const [newMessage, setNewMessage] = useState("");
@@ -52,6 +50,13 @@ export default function ChatBotComponent({ config }) {
 				{ id: prevMessages.length + index, text: line, type: "incoming" },
 			]);
 		});
+
+		if (source === ChatBotSource.SETTINGS) {
+			setMessages((prevMessages) => [
+				...prevMessages,
+				{ id: prevMessages.length + 1, text: "hi", type: "outgoing" },
+			]);
+		}
 	}, [initialMessage]);
 
 	const handleKeyPress = (e) => {
@@ -84,17 +89,24 @@ export default function ChatBotComponent({ config }) {
 				]);
 				setNewMessage("");
 				setSending(true);
-				postRequest("/reply", {
-					botID: botID,
-					query: newMessage,
-					history: history,
-				})
+				postRequest(
+					"/reply",
+					{
+						botID: botID,
+						query: newMessage,
+						history: history,
+					},
+					{},
+					100000,
+				)
 					.then((res) => {
 						setHistory([...history, [res.result.query, res.result.query]]);
 						addMessage(res.result.reply, "incoming");
 						setSending(() => false);
 					})
-					.catch(() => {});
+					.catch(() => {
+						setSending(() => false);
+					});
 			}
 		}
 	};
@@ -102,7 +114,9 @@ export default function ChatBotComponent({ config }) {
 	return (
 		<div className={styles.chatbotContainer}>
 			<div className={styles.chatbotHeaderContainer}>
-				{profilePicture && <img src={profilePicture} />}
+				{profilePicture && (
+					<img src={profilePicture} className={styles.headerImage} />
+				)}
 				{displayName && <h5>{displayName}</h5>}
 
 				<div className={styles.chatbotHeaderRightContainer}>
@@ -126,15 +140,19 @@ export default function ChatBotComponent({ config }) {
 								: styles.outgoingBubble
 						}
 					>
-						<ReactMarkdown
+						<div
 							className={
 								message.type === "incoming"
 									? styles.incomingMessageContainer
 									: styles.outgoingMessageContainer
 							}
+							style={{
+								backgroundColor:
+									message.type === "incoming" ? "f0f0f0" : userMsgColor,
+							}}
 						>
-							{message.text}
-						</ReactMarkdown>
+							<ReactMarkdown>{message.text}</ReactMarkdown>
+						</div>
 					</div>
 				))}
 				{sending && (
@@ -182,7 +200,8 @@ export default function ChatBotComponent({ config }) {
 					></Image>
 				</button>
 			</div>
-			{source !== ChatBotSource.CHATBOT && (
+			{/* TODO: This is to show powered by, will add this again after gaining some traction*/}
+			{/* {source === ChatBotSource.CHATBOT && (
 				<div className={styles.poweredBy}>
 					<p>
 						Powered by{" "}
@@ -195,7 +214,7 @@ export default function ChatBotComponent({ config }) {
 						</a>
 					</p>
 				</div>
-			)}
+			)} */}
 		</div>
 	);
 }

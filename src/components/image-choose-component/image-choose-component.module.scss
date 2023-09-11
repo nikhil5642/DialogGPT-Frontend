@@ -1,13 +1,9 @@
-.image-chooser {
+.imageChooser {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	gap: 1rem;
 
-	.file-input {
-		padding: 0.5rem 1rem;
+	.fileInput {
 		font-size: 1rem;
-		border: 1px solid #ccc;
 		border-radius: 4px;
 		cursor: pointer;
 
@@ -16,19 +12,29 @@
 		}
 	}
 
-	.preview-container {
-		margin-top: 1rem;
-		border: 1px solid #ddd;
-		padding: 1rem;
-		border-radius: 4px;
-		background-color: #f9f9f9;
+	.imagePreviewContainer {
+		margin-top: 16px;
+		position: relative;
+		width: auto; // or your preferred size
+		height: auto;
 
-		.image-preview {
-			max-width: 100%;
-			max-height: 200px;
+		.imagePreview {
+			width: 64px;
+			height: 64px;
 			display: block;
-			object-fit: cover;
-			margin: auto;
+			object-fit: cover; // Ensures that the image covers the area without distortion
+		}
+
+		.closePreview {
+			position: absolute;
+			top: 0;
+			right: 0;
+			background: rgba(0, 0, 0, 0.5);
+			color: #ffffff;
+			border: none;
+			border-radius: 50%;
+			padding: 5px 10px;
+			cursor: pointer;
 		}
 	}
 }

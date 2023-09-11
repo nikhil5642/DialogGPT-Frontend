@@ -10,7 +10,7 @@ export default function ChatBotSettings({ data, setData }) {
 			<GeneralSettings data={data} setData={setData} />
 			<br></br>
 			<br></br>
-			<ModelSettings botID={data.id} />
+			<ModelSettings chatbotID={data.id} />
 			<br></br>
 			<br></br>
 			<ChatInterfaceSettings botID={data.id} />
