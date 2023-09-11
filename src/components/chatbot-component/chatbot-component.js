@@ -89,17 +89,24 @@ export default function ChatBotComponent({ config }) {
 				]);
 				setNewMessage("");
 				setSending(true);
-				postRequest("/reply", {
-					botID: botID,
-					query: newMessage,
-					history: history,
-				})
+				postRequest(
+					"/reply",
+					{
+						botID: botID,
+						query: newMessage,
+						history: history,
+					},
+					{},
+					100000,
+				)
 					.then((res) => {
 						setHistory([...history, [res.result.query, res.result.query]]);
 						addMessage(res.result.reply, "incoming");
 						setSending(() => false);
 					})
-					.catch(() => {});
+					.catch(() => {
+						setSending(() => false);
+					});
 			}
 		}
 	};
