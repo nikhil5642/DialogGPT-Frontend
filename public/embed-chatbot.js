@@ -68,7 +68,7 @@
 	var iframe = document.createElement("iframe");
 	iframe.id = "chatbotIframe";
 	iframe.src =
-		"http://localhost:3000/iframe/" + chatbotID + "?source=chat-bubble";
+		"https://dialoggpt.io/iframe/" + chatbotID + "?source=chat-bubble";
 	document.body.appendChild(iframe);
 
 	function setChatBubbleAppearance() {
@@ -99,7 +99,7 @@
 	});
 
 	// Fetch chatbot settings from the server
-	fetch("http://localhost:8000/fetch_chatbot_interface", {
+	fetch("https://api.dialoggpt.io/fetch_chatbot_interface", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",

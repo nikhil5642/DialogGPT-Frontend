@@ -88,26 +88,25 @@ export default function ChatBotComponent({ config }) {
 					{ id: messages.length, text: newMessage, type: "outgoing" },
 				]);
 				setNewMessage("");
-				addMessage("dfadf;sl", "incoming");
-				// setSending(true);
-				// postRequest(
-				// 	"/reply",
-				// 	{
-				// 		botID: botID,
-				// 		query: newMessage,
-				// 		history: history,
-				// 	},
-				// 	{},
-				// 	100000,
-				// )
-				// 	.then((res) => {
-				// 		setHistory([...history, [res.result.query, res.result.query]]);
-				// 		addMessage(res.result.reply, "incoming");
-				// 		setSending(() => false);
-				// 	})
-				// 	.catch(() => {
-				// 		setSending(() => false);
-				// 	});
+				setSending(true);
+				postRequest(
+					"/reply",
+					{
+						botID: botID,
+						query: newMessage,
+						history: history,
+					},
+					{},
+					100000,
+				)
+					.then((res) => {
+						setHistory([...history, [res.result.query, res.result.query]]);
+						addMessage(res.result.reply, "incoming");
+						setSending(() => false);
+					})
+					.catch(() => {
+						setSending(() => false);
+					});
 			}
 		}
 	};
