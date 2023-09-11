@@ -6,7 +6,7 @@ export default function EmbedComponent({ data }) {
 src="https://www.dialoggpt.io/iframe/${data.id}"
 width="100%"
 style="height: 100%; min-height: 600px"
-frameborder="0">
+frameBorder="0">
 </iframe>
 `;
 	const scriptContent = `<script
