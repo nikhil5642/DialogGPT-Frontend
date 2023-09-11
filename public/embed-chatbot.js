@@ -99,7 +99,15 @@
 	});
 
 	// Fetch chatbot settings from the server
-	fetch(`http://localhost:3000/api/chatbotSettings/${chatbotID}`)
+	fetch("http://localhost:3000/fetch_chatbot_interface", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			botID: chatbotID,
+		}),
+	})
 		.then((response) => response.json())
 		.then((data) => {
 			console.log(data);
