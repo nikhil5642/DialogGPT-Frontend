@@ -71,10 +71,10 @@ export default function ChatBotComponent({ config }) {
 	}, [newMessage]);
 
 	useEffect(() => {
-		messagesEndRef.current?.scrollIntoView({
-			behavior: "smooth",
-			block: "end",
-		});
+		if (messagesEndRef.current) {
+			const container = messagesEndRef.current.parentElement;
+			container.scrollTop = container.scrollHeight;
+		}
 	}, [messages]);
 
 	const handleSend = () => {
@@ -88,25 +88,26 @@ export default function ChatBotComponent({ config }) {
 					{ id: messages.length, text: newMessage, type: "outgoing" },
 				]);
 				setNewMessage("");
-				setSending(true);
-				postRequest(
-					"/reply",
-					{
-						botID: botID,
-						query: newMessage,
-						history: history,
-					},
-					{},
-					100000,
-				)
-					.then((res) => {
-						setHistory([...history, [res.result.query, res.result.query]]);
-						addMessage(res.result.reply, "incoming");
-						setSending(() => false);
-					})
-					.catch(() => {
-						setSending(() => false);
-					});
+				addMessage("dfadf;sl", "incoming");
+				// setSending(true);
+				// postRequest(
+				// 	"/reply",
+				// 	{
+				// 		botID: botID,
+				// 		query: newMessage,
+				// 		history: history,
+				// 	},
+				// 	{},
+				// 	100000,
+				// )
+				// 	.then((res) => {
+				// 		setHistory([...history, [res.result.query, res.result.query]]);
+				// 		addMessage(res.result.reply, "incoming");
+				// 		setSending(() => false);
+				// 	})
+				// 	.catch(() => {
+				// 		setSending(() => false);
+				// 	});
 			}
 		}
 	};

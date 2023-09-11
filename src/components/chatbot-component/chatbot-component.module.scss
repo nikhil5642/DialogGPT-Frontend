@@ -53,9 +53,11 @@
 .chatbotMessagesContainer {
 	flex: 1;
 	display: flex;
-	overflow-y: scroll;
+	overflow-y: auto;
+	scroll-behavior: smooth;
 	flex-direction: column;
 	margin-top: 0.5rem;
+	background-color: #0084ff;
 }
 
 .incomingBubble {

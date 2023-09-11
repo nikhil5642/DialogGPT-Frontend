@@ -60,7 +60,7 @@
 	// Create the chat bubble
 	var chatBubble = document.createElement("div");
 	chatBubble.id = "chatbotBubble";
-	chatBubble.innerHTML = `<img src="http://localhost:3000/assets/chat_icon.png" style="height: 24px; width: 24px;">`;
+	chatBubble.innerHTML = `<img src="https://dialoggpt.io/assets/chat_icon.png" style="height: 24px; width: 24px;">`;
 
 	document.body.appendChild(chatBubble);
 
@@ -82,7 +82,7 @@
 					? window.chatbotSettings.chatBubbleColor
 					: "#000000";
 			chatBubble.style.backgroundColor = bgColor;
-			chatBubble.innerHTML = `<img src="http://localhost:3000/assets/chat_icon.png" style="height: 24px; width: 24px;">`;
+			chatBubble.innerHTML = `<img src="https://dialoggpt.io/assets/chat_icon.png" style="height: 24px; width: 24px;">`;
 		}
 	}
 
@@ -91,7 +91,7 @@
 		var iframe = document.getElementById("chatbotIframe");
 		if (iframe.style.display === "none" || iframe.style.display === "") {
 			iframe.style.display = "block";
-			chatBubble.innerHTML = `<img src="http://localhost:3000/assets/down_arrow_white.png" style="height: 32px; width: 32px;">`; // Down arrow icon when iframe is visible
+			chatBubble.innerHTML = `<img src="https://dialoggpt.io/assets/down_arrow_white.png" style="height: 32px; width: 32px;">`; // Down arrow icon when iframe is visible
 		} else {
 			iframe.style.display = "none";
 			setChatBubbleAppearance(); // Reset the chat bubble's appearance
@@ -99,7 +99,7 @@
 	});
 
 	// Fetch chatbot settings from the server
-	fetch("http://localhost:3000/fetch_chatbot_interface", {
+	fetch("http://localhost:8000/fetch_chatbot_interface", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -110,7 +110,6 @@
 	})
 		.then((response) => response.json())
 		.then((data) => {
-			console.log(data);
 			// Store the fetched data in the window object for later use
 			window.chatbotSettings = {
 				chatIcon: data.result.chat_icon,
