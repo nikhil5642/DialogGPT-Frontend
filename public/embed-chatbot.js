@@ -105,7 +105,7 @@
 	});
 
 	// Fetch chatbot settings from the server
-	fetch("https://api.dialoggpt.io/fetch_chatbot_interface", {
+	fetch("https://api.dialoggpt.io/public/fetch_chatbot_interface", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
