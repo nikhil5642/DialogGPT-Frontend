@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./editbox-component.module.scss";
+import validator from "validator";
 
 const EditBoxComponent = ({ placeholder, value, onChange }) => {
 	const [error, setError] = useState(invalidURLError(value));
@@ -37,6 +38,5 @@ function invalidURLError(url) {
 }
 
 function isValidUrl(url) {
-	const pattern = /^(https?:\/\/)([\da-z.-]+)\.([a-z]{2,6})([\/\w .-]*)*\/?$/;
-	return pattern.test(url);
+	return validator.isURL(url);
 }
