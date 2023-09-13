@@ -23,7 +23,7 @@ export default function ChatBotComponent({ config }) {
 	const [rows, setRows] = useState(1);
 
 	const renderers = {
-		link: ({ href, children }) => {
+		a: ({ href, children }) => {
 			return (
 				<a href={href} target="_blank" rel="noopener noreferrer">
 					{children}
@@ -158,7 +158,7 @@ export default function ChatBotComponent({ config }) {
 									message.type === "incoming" ? "f0f0f0" : userMsgColor,
 							}}
 						>
-							<ReactMarkdown renderers={renderers}>
+							<ReactMarkdown components={renderers}>
 								{message.text}
 							</ReactMarkdown>
 						</div>
