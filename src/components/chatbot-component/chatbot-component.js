@@ -23,7 +23,7 @@ export default function ChatBotComponent({ config }) {
 	const [rows, setRows] = useState(1);
 
 	const renderers = {
-		link: ({ href, children }) => {
+		a: ({ href, children }) => {
 			return (
 				<a href={href} target="_blank" rel="noopener noreferrer">
 					{children}
@@ -62,7 +62,7 @@ export default function ChatBotComponent({ config }) {
 		if (source === ChatBotSource.SETTINGS) {
 			setMessages((prevMessages) => [
 				...prevMessages,
-				{ id: prevMessages.length + 1, text: "hi", type: "outgoing" },
+				{ id: 1000, text: "hi", type: "outgoing" },
 			]);
 		}
 	}, [initialMessage]);
@@ -158,7 +158,9 @@ export default function ChatBotComponent({ config }) {
 									message.type === "incoming" ? "f0f0f0" : userMsgColor,
 							}}
 						>
-							<ReactMarkdown>{message.text}</ReactMarkdown>
+							<ReactMarkdown components={renderers}>
+								{message.text}
+							</ReactMarkdown>
 						</div>
 					</div>
 				))}
