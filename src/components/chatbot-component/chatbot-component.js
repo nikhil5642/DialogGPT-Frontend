@@ -158,7 +158,9 @@ export default function ChatBotComponent({ config }) {
 									message.type === "incoming" ? "f0f0f0" : userMsgColor,
 							}}
 						>
-							<ReactMarkdown>{message.text}</ReactMarkdown>
+							<ReactMarkdown renderers={renderers}>
+								{message.text}
+							</ReactMarkdown>
 						</div>
 					</div>
 				))}
