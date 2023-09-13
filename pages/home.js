@@ -43,6 +43,28 @@ function HomeScreen() {
 						Create your Chatbot Now ➤
 					</button>
 				</div>
+				<div className={styles.videoDemoContainer}>
+					<h2>Video Demo</h2>
+					<p>This chatbot was trained on a document explaining Chatbase.</p>
+					<p>You can embed a widget like this on any page on your website!</p>
+
+					<video
+						controls
+						width="90%"
+						height="auto"
+						className={styles.demoVideo}
+					>
+						<source
+							src="/videos/video_demo.mp4"
+							type="video/mp4"
+							autoPlay
+							loop
+							muted
+							onEnded={(e) => e.target.play()}
+						/>
+						Your browser does not support the video tag.
+					</video>
+				</div>
 
 				<div className={styles.liveDemoContainer}>
 					<h2>Live Demo</h2>
