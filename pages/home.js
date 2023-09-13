@@ -51,9 +51,9 @@ function HomeScreen() {
 
 					<iframe
 						className={styles.liveDemoIframe}
-						src="https://dialoggpt.io/iframe/fee95809-3b19-4390-9732-e62ff3aee2ec"
+						src="https://www.dialoggpt.io/iframe/23b3dc28-ae71-4cf2-a5b1-652f561c4641"
 						frameBorder="0"
-					/>
+					></iframe>
 				</div>
 			</div>
 		</>

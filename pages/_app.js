@@ -21,8 +21,8 @@ function MyApp({ Component, pageProps }) {
 				/>
 				{!isIsolated && (
 					<script
-						src="https://dialoggpt.io/embed-chatbot.js"
-						id="fee95809-3b19-4390-9732-e62ff3aee2ec"
+						src="https://www.dialoggpt.io/embed-chatbot.js"
+						id="23b3dc28-ae71-4cf2-a5b1-652f561c4641"
 						defer
 					></script>
 				)}
