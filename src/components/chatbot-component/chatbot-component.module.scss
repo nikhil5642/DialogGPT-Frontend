@@ -135,7 +135,8 @@
 	flex-direction: row;
 	width: 100%;
 	overflow-x: scroll;
-
+	padding-top: 16px;
+	background-color: #fff;
 	button {
 		flex-shrink: 0;
 		margin: 0 4px;
