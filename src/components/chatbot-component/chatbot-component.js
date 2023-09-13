@@ -18,11 +18,19 @@ export default function ChatBotComponent({ config }) {
 	} = config;
 	const [messages, setMessages] = useState([]);
 	const [newMessage, setNewMessage] = useState("");
-	const [history, setHistory] = useState([]);
 	const messagesEndRef = useRef(null);
 	const [sending, setSending] = useState(false);
 	const [rows, setRows] = useState(1);
 
+	const renderers = {
+		link: ({ href, children }) => {
+			return (
+				<a href={href} target="_blank" rel="noopener noreferrer">
+					{children}
+				</a>
+			);
+		},
+	};
 	const getSplittedMessages = (text) => {
 		const lines = text.split("\n").filter((line) => line.trim() !== "");
 		return lines;
@@ -94,17 +102,16 @@ export default function ChatBotComponent({ config }) {
 					{
 						botID: botID,
 						query: newMessage,
-						history: history,
+						history: messages,
 					},
 					{},
 					100000,
 				)
 					.then((res) => {
-						setHistory([...history, [res.result.query, res.result.query]]);
 						addMessage(res.result.reply, "incoming");
 						setSending(() => false);
 					})
-					.catch(() => {
+					.catch((e) => {
 						setSending(() => false);
 					});
 			}
