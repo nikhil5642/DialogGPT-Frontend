@@ -62,7 +62,7 @@ export default function ChatBotComponent({ config }) {
 		if (source === ChatBotSource.SETTINGS) {
 			setMessages((prevMessages) => [
 				...prevMessages,
-				{ id: prevMessages.length + 1, text: "hi", type: "outgoing" },
+				{ id: 1000, text: "hi", type: "outgoing" },
 			]);
 		}
 	}, [initialMessage]);
