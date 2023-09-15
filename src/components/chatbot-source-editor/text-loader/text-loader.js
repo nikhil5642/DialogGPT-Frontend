@@ -4,13 +4,13 @@ import { postRequest } from "../../../helper/http-helper";
 import LoaderContext from "../../loader/loader-context";
 import LoadingButton from "src/components/loading-button/loading-button";
 import { showErrorToast, showSuccessToast } from "src/helper/toast-helper";
+import { useTrackEvent } from "src/helper/event-tracker";
 
 export default function TextLoader({ bot_id, data, setData }) {
+	const trackEvent = useTrackEvent();
 	const [text, setText] = useState("");
 	const { showLoader, hideLoader } = useContext(LoaderContext);
-	const [loader, setLoader] = useState({
-		texts: false,
-	});
+	const [loader, setLoader] = useState(false);
 	useEffect(() => {
 		if (text == "") {
 			const item = data.find((item) => item.source_type == "text");
@@ -20,16 +20,18 @@ export default function TextLoader({ bot_id, data, setData }) {
 					.then((res) => {
 						hideLoader();
 						setText(res.result);
+						trackEvent("text_loaded", { botID: bot_id });
 					})
 					.catch(() => {
 						hideLoader();
+						trackEvent("text_load_failure", { botID: bot_id });
 					});
 			}
 		}
 	}, [data]);
 
 	const saveText = () => {
-		setLoader((val) => ({ ...val, texts: true }));
+		setLoader(true);
 		postRequest("/save_text", { text: text, botID: bot_id }, {}, 1000)
 			.then((res) => {
 				if (!data.find((item) => item.source_type === "text")) {
@@ -46,12 +48,14 @@ export default function TextLoader({ bot_id, data, setData }) {
 					});
 					setData(updatedData);
 				}
-				setLoader((val) => ({ ...val, texts: false }));
+				trackEvent("text_saved", { botID: bot_id, text: text });
+				setLoader(false);
 				showSuccessToast("Saved");
 			})
 			.catch(() => {
-				setLoader((val) => ({ ...val, texts: false }));
+				setLoader(false);
 				showErrorToast("Error Saving");
+				trackEvent("text_save_failure", { botID: bot_id });
 			});
 	};
 
@@ -69,7 +73,7 @@ export default function TextLoader({ bot_id, data, setData }) {
 				<LoadingButton
 					title={"Save Text"}
 					onClick={saveText}
-					isLoading={loader.texts}
+					isLoading={loader}
 				/>
 			</div>
 		</div>

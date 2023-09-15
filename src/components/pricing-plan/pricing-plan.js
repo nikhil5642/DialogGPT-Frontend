@@ -1,42 +1,59 @@
 import styles from "./pricing-plan.module.scss";
+
 import { useRouter } from "next/router";
 import AuthService from "src/helper/AuthService";
 import { postRequest } from "src/helper/http-helper";
 import { loadStripe } from "@stripe/stripe-js";
 import { PrivateKeys } from "../../helper/private-keys";
 import { showErrorToast, showSuccessToast } from "src/helper/toast-helper";
+import { useTrackEvent } from "../../helper/event-tracker";
 const stripePromise = loadStripe(
 	PrivateKeys.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
 );
 function PricingPlan({ plan, currentPlan }) {
+	const trackEvent = useTrackEvent();
 	const router = useRouter();
 	const alreadySubscribed =
 		currentPlan != PricingPlan.FREE && currentPlan == plan.id;
 	const redirectToCheckout = async (sessionId) => {
+		trackEvent("stripe-checkout-initiated", { sessionId: sessionId });
 		const stripe = await stripePromise;
-
 		const result = await stripe.redirectToCheckout({
 			sessionId: sessionId,
 		});
-
 		if (result.error) {
 			showErrorToast(result.error.message);
+			trackEvent("stripe-checkout-failure", {
+				error: result.error,
+				sessionId: sessionId,
+				plan: plan.id,
+			});
+		} else {
+			trackEvent("stripe-checkout-success", {
+				sessionId: sessionId,
+				plan: plan.id,
+			});
 		}
 	};
 	const onButtonPress = () => {
+		trackEvent("pricing-subscribe-click", { plan: plan.id });
 		if (alreadySubscribed) {
 			showSuccessToast("You are already Subscribed to this Plan!");
+			trackEvent("pricing-already-subscribed", { plan: plan.id });
 		} else if (!AuthService.isAuthenticated()) {
 			router.push("/signin");
+			trackEvent("pricing-not-authenticated", { plan: plan.id });
 		} else {
 			if (plan == PricingPlan.FREE) {
 				router.push("/my-chatbots");
+				trackEvent("pricing-free-subscribe", { plan: plan.id });
 			} else {
 				postRequest("/create_checkout_session", {
 					planId: plan.id,
 				}).then((res) => {
 					redirectToCheckout(res.result);
 				});
+				trackEvent("pricing-subscribe", { plan: plan.id });
 			}
 		}
 	};

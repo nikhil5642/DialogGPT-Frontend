@@ -147,6 +147,17 @@
     "@firebase/util" "1.9.3"
     tslib "^2.1.0"
 
+"@firebase/analytics@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@firebase/analytics/-/analytics-0.10.0.tgz#9c6986acd573c6c6189ffb52d0fd63c775db26d7"
+  integrity sha512-Locv8gAqx0e+GX/0SI3dzmBY5e9kjVDtD+3zCFLJ0tH2hJwuCAiL+5WkHuxKj92rqQj/rvkBUCfA1ewlX2hehg==
+  dependencies:
+    "@firebase/component" "0.6.4"
+    "@firebase/installations" "0.6.4"
+    "@firebase/logger" "0.4.0"
+    "@firebase/util" "1.9.3"
+    tslib "^2.1.0"
+
 "@firebase/app-check-compat@0.3.7":
   version "0.3.7"
   resolved "https://registry.npmjs.org/@firebase/app-check-compat/-/app-check-compat-0.3.7.tgz"

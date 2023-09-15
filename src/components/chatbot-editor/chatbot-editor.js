@@ -13,8 +13,11 @@ import EmbedComponent from "../chatbot-embed/chatbot-embed";
 import { chatInit } from "../chatbot-settings/chat-interface-settings/chat-interface-settings.utils";
 import { ChatBotSource } from "../chatbot-component/chatbot-component.utils";
 import { showErrorToast } from "../../helper/toast-helper";
+import { useTrackEvent } from "src/helper/event-tracker";
 
 export default function ChatBotEditor({ botID, page }) {
+	const trackEvent = useTrackEvent();
+
 	const [selector, setSelector] = useState(ChatBotOptionsEnum.CHATBOT);
 	const { showLoader, hideLoader } = useContext(LoaderContext);
 	const [chatbotData, setChatbotData] = useState({
@@ -30,6 +33,7 @@ export default function ChatBotEditor({ botID, page }) {
 			(page && ChatBotOptionsEnum[page.toUpperCase()]) ||
 				ChatBotOptionsEnum.CHATBOT,
 		);
+		trackEvent("chatbot_option_selected", { option: page });
 	}, [page]);
 	useEffect(() => {
 		if (botID) {
@@ -60,9 +64,15 @@ export default function ChatBotEditor({ botID, page }) {
 						last_updated: res.result.last_updated,
 					};
 				});
+				trackEvent("chatbot_info_loaded", {
+					success: true,
+					botID: botID,
+					status: res.result.chatbot_status,
+				});
 			})
 			.catch(() => {
 				hideLoader();
+				trackEvent("chatbot_info_loaded", { success: false, botID: botID });
 			});
 	};
 
@@ -71,6 +81,11 @@ export default function ChatBotEditor({ botID, page }) {
 			botID: botID,
 		})
 			.then((res) => {
+				trackEvent("chatbot_interface_loaded", {
+					success: true,
+					botID: botID,
+					source: "chatbot_editor",
+				});
 				setConfig((prev) => {
 					return {
 						...prev,
@@ -87,6 +102,11 @@ export default function ChatBotEditor({ botID, page }) {
 			})
 			.catch(() => {
 				showErrorToast("Error Loading Information");
+				trackEvent("chatbot_interface_loaded", {
+					success: false,
+					botID: botID,
+					source: "chatbot_editor",
+				});
 			});
 	};
 

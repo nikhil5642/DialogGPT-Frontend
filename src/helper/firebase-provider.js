@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import { getRemoteConfig, fetchAndActivate } from "firebase/remote-config";
+import { getAnalytics } from "firebase/analytics";
 import { FirebaseFeatures } from "./feature-flags";
 
 export const firebaseConfig = {
@@ -23,9 +24,14 @@ export const useFirebase = () => {
 export const FirebaseProvider = ({ children }) => {
 	const [isConfigLoaded, setIsConfigLoaded] = useState(false);
 	const [remoteConfig, setRemoteConfig] = useState(null);
+	const [analytics, setAnalytics] = useState(null); // Added this state
+
 	useEffect(() => {
 		const app = initializeApp(firebaseConfig);
 		const remoteConfig = getRemoteConfig(app);
+		// Initializing Firebase Analytics
+		setAnalytics(getAnalytics(app));
+
 		remoteConfig.defaultConfig = {
 			[FirebaseFeatures.SHOW_GOOGLE_LOGIN]: true,
 			[FirebaseFeatures.SHOW_APPLE_LOGIN]: false,
@@ -44,7 +50,9 @@ export const FirebaseProvider = ({ children }) => {
 	}, []);
 
 	return (
-		<FirebaseContext.Provider value={{ isConfigLoaded, remoteConfig }}>
+		<FirebaseContext.Provider
+			value={{ isConfigLoaded, remoteConfig, analytics }}
+		>
 			{children}
 		</FirebaseContext.Provider>
 	);

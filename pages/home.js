@@ -1,15 +1,31 @@
 import styles from "./styles/home.module.scss";
 import Head from "next/head";
 import AuthService from "../src/helper/AuthService";
+import { useTrackEvent } from "../src/helper/event-tracker";
 
 function HomeScreen() {
+	const trackEvent = useTrackEvent(); // Extract analytics instance from context
+
 	function onCreateChatbot() {
-		if (AuthService.isAuthenticated()) {
+		const isAuthenticated = AuthService.isAuthenticated();
+
+		// Log an event when the 'Create your Chatbot' button is clicked, including the user's authentication status
+
+		trackEvent("create_chatbot_click", {
+			user_authenticated: isAuthenticated ? "true" : "false",
+		});
+
+		if (isAuthenticated) {
 			window.location.href = `/my-chatbots`;
 		} else {
 			window.location.href = `/signin`;
 		}
 	}
+	// Log an event when the video ends
+	const handleVideoEnd = (e) => {
+		trackEvent("video_demo_ended");
+		e.target.play();
+	};
 
 	return (
 		<>
@@ -59,8 +75,7 @@ function HomeScreen() {
 							type="video/mp4"
 							autoPlay
 							loop
-							muted
-							onEnded={(e) => e.target.play()}
+							onEnded={handleVideoEnd}
 						/>
 						Your browser does not support the video tag.
 					</video>
