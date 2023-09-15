@@ -8,7 +8,7 @@ import LoadingButton from "../loading-button/loading-button";
 import { showErrorToast } from "src/helper/toast-helper";
 import { useTrackEvent } from "../../helper/event-tracker";
 export default function MyChatBots() {
-	const trackEvent = useTrackEvent();
+	const { trackEvent, trackScreenView } = useTrackEvent();
 	const { showLoader, hideLoader } = useContext(LoaderContext);
 	const [chatbotLimit, setChatbotLimit] = useState(1);
 	const [chatbotsList, setChatBotsList] = useState([]);
@@ -44,6 +44,7 @@ export default function MyChatBots() {
 	}
 
 	useEffect(() => {
+		trackScreenView("MyChatBots", "MyChatBots");
 		showLoader("Loading Chatbot Data...");
 		getRequest("/my_chatbots")
 			.then((res) => {

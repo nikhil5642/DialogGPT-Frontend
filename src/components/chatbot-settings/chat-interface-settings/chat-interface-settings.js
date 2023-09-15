@@ -11,7 +11,7 @@ import { ChatBotSource } from "../../chatbot-component/chatbot-component.utils";
 import { useTrackEvent } from "../../../helper/event-tracker";
 
 export default function ChatInterfaceSettings({ botID }) {
-	const trackEvent = useTrackEvent();
+	const { trackEvent } = useTrackEvent();
 	const [loader, setLoader] = useState(false);
 	const [data, setData] = useState(chatInit(botID, ChatBotSource.SETTINGS));
 

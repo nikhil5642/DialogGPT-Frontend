@@ -7,7 +7,7 @@ import LoadingButton from "src/components/loading-button/loading-button";
 import { useTrackEvent } from "src/helper/event-tracker";
 
 export default function WebisteLoader({ bot_id, data, setData }) {
-	const trackEvent = useTrackEvent();
+	const { trackEvent } = useTrackEvent();
 	const [url, setUrl] = useState("");
 	const [loader, setLoader] = useState({
 		fetchLinks: false,

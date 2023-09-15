@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, use } from "react";
 import styles from "./chatbot-editor.module.scss";
 import ChatBotSourceEditor from "../chatbot-source-editor/chatbot-source-editor";
 import {
@@ -16,7 +16,7 @@ import { showErrorToast } from "../../helper/toast-helper";
 import { useTrackEvent } from "src/helper/event-tracker";
 
 export default function ChatBotEditor({ botID, page }) {
-	const trackEvent = useTrackEvent();
+	const { trackEvent, trackScreenView } = useTrackEvent();
 
 	const [selector, setSelector] = useState(ChatBotOptionsEnum.CHATBOT);
 	const { showLoader, hideLoader } = useContext(LoaderContext);
@@ -28,6 +28,9 @@ export default function ChatBotEditor({ botID, page }) {
 	});
 	const [config, setConfig] = useState(chatInit(botID, ChatBotSource.CHATBOT));
 
+	useEffect(() => {
+		trackScreenView("ChatBotEditorScreen", "ChatBotEditorScreen");
+	}, []);
 	useEffect(() => {
 		setSelector(
 			(page && ChatBotOptionsEnum[page.toUpperCase()]) ||
@@ -132,41 +135,61 @@ export default function ChatBotEditor({ botID, page }) {
 
 			{selector === ChatBotOptionsEnum.CHATBOT &&
 				chatbotData.status === "training" && (
-					<div className={styles.chatBotTrainingModelContainer}>
-						<h2>Please Wait...</h2>
-						<p>Training In Progress</p>
-						<progress max="100"></progress>
-						<p>Incase if it's taking too long, try to train chatbot again! </p>
-					</div>
+					<>
+						{trackScreenView("ChatBotTrainingScreen", "ChatBotEditorScreen")}
+						<div className={styles.chatBotTrainingModelContainer}>
+							<h2>Please Wait...</h2>
+							<p>Training In Progress</p>
+							<progress max="100"></progress>
+							<p>
+								Incase if it's taking too long, try to train chatbot again!{" "}
+							</p>
+						</div>
+					</>
 				)}
 
 			{selector === ChatBotOptionsEnum.CHATBOT &&
 				chatbotData.status === "untrained" && (
-					<div className={styles.chatBotUntrainedModelContainer}>
-						<img src="/assets/ic_error.png"></img>
-						<h2>Chatbot is not trained</h2>
-						<p>Please add the sources and train the ChatBot</p>
-					</div>
+					<>
+						{trackScreenView("ChatbotUntrainedScreen", "ChatBotEditorScreen")}
+						<div className={styles.chatBotUntrainedModelContainer}>
+							<img src="/assets/ic_error.png"></img>
+							<h2>Chatbot is not trained</h2>
+							<p>Please add the sources and train the ChatBot</p>
+						</div>
+					</>
 				)}
 
 			{selector === ChatBotOptionsEnum.CHATBOT &&
 				chatbotData.status === "trained" && (
-					<div className={styles.chatBottrainedModelContainer}>
-						<ChatBotComponent botID={botID} config={config} />
-					</div>
+					<>
+						{trackScreenView("ChatBotTrainedScreen", "ChatBotEditorScreen")}
+						<div className={styles.chatBottrainedModelContainer}>
+							<ChatBotComponent botID={botID} config={config} />
+						</div>
+					</>
 				)}
 
 			{selector === ChatBotOptionsEnum.SOURCES && (
-				<ChatBotSourceEditor
-					chatbotInfoData={chatbotData}
-					setChatbotInfoData={setChatbotData}
-				/>
+				<>
+					{trackScreenView("ChatbotSourceScreen", "ChatBotEditorScreen")}
+					<ChatBotSourceEditor
+						chatbotInfoData={chatbotData}
+						setChatbotInfoData={setChatbotData}
+					/>
+				</>
 			)}
 			{selector === ChatBotOptionsEnum.SETTINGS && (
-				<ChatBotSettings data={chatbotData} setData={setChatbotData} />
+				<>
+					{trackScreenView("ChatbotSettingsScreen", "ChatBotEditorScreen")}
+					<ChatBotSettings data={chatbotData} setData={setChatbotData} />
+				</>
 			)}
 			{selector === ChatBotOptionsEnum.EMBED && (
-				<EmbedComponent data={chatbotData} />
+				<>
+					{trackScreenView("ChatbotEmbedScreen", "ChatBotEditorScreen")}
+					<EmbedComponent data={chatbotData} />
+				</>
 			)}
 		</div>
 	);

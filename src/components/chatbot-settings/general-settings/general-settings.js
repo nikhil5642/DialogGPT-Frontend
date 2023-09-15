@@ -7,7 +7,7 @@ import { useTrackEvent } from "../../../helper/event-tracker";
 
 export default function GeneralSettings({ data, setData }) {
 	const [loader, setLoader] = useState(false);
-	const trackEvent = useTrackEvent();
+	const { trackEvent } = useTrackEvent();
 	return (
 		<SettingsComponent
 			title={"General"}

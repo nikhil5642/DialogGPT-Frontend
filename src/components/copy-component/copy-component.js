@@ -3,7 +3,7 @@ import styles from "./copy-component.module.scss";
 import { useState } from "react";
 import { useTrackEvent } from "../../helper/event-tracker";
 function CopyComponent({ title, content, buttonText }) {
-	const trackEvent = useTrackEvent();
+	const { trackEvent } = useTrackEvent();
 	const [copied, setCopied] = useState(false);
 
 	const handleCopyClick = () => {

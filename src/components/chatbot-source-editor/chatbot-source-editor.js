@@ -29,7 +29,7 @@ export default function ChatBotSourceEditor({
 	const { showLoader, hideLoader } = useContext(LoaderContext);
 	const [data, setData] = useState([]);
 	const [trainingData, setTrainingData] = useState(initialData);
-	const trackEvent = useTrackEvent();
+	const { trackEvent, trackScreenView } = useTrackEvent();
 
 	useEffect(() => {
 		const handleBeforeUnload = (e) => {
@@ -127,22 +127,38 @@ export default function ChatBotSourceEditor({
 		<div className={styles.chatBotEditorContainer}>
 			<SourceSelector selector={selector} setSelector={setSelector} />
 
-			{selector === SourceOptionsEnum.FILE && <div>Files View</div>}
+			{selector === SourceOptionsEnum.FILE && (
+				<>
+					{trackScreenView("ChatbotFileEditorScreen", "ChatBotEditorScreen")}
+					<div>Files View</div>
+				</>
+			)}
 			{selector === SourceOptionsEnum.TEXT && (
-				<TextLoader
-					bot_id={chatbotInfoData.id}
-					data={data}
-					setData={setData}
-				></TextLoader>
+				<>
+					{trackScreenView("ChatbotTextEditorScreen", "ChatBotEditorScreen")}
+					<TextLoader
+						bot_id={chatbotInfoData.id}
+						data={data}
+						setData={setData}
+					></TextLoader>
+				</>
 			)}
 			{selector === SourceOptionsEnum.URL && (
-				<WebisteLoader
-					bot_id={chatbotInfoData.id}
-					data={data}
-					setData={setData}
-				/>
+				<>
+					{trackScreenView("ChatbotWebsiteEditorScreen", "ChatBotEditorScreen")}
+					<WebisteLoader
+						bot_id={chatbotInfoData.id}
+						data={data}
+						setData={setData}
+					/>
+				</>
 			)}
-			{selector === SourceOptionsEnum.QNA && <div>Q&A View</div>}
+			{selector === SourceOptionsEnum.QNA && (
+				<>
+					{trackScreenView("ChatbotQNAEditorScreen", "ChatBotEditorScreen")}
+					<div>Q&A View</div>
+				</>
+			)}
 
 			<div className={styles.trainingContainer}>
 				<h4>Included Sources:</h4>

@@ -6,7 +6,7 @@ import { showErrorToast, showSuccessToast } from "../../../helper/toast-helper";
 import { GPTModel } from "./model-settings.utils";
 import { useTrackEvent } from "../../../helper/event-tracker";
 export default function ModelSettings({ chatbotID }) {
-	const trackEvent = useTrackEvent();
+	const { trackEvent } = useTrackEvent();
 	const [loader, setLoader] = useState(false);
 	const [data, setData] = useState({
 		botID: chatbotID,

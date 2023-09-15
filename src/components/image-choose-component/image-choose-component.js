@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./image-choose-component.module.scss";
 import { useTrackEvent } from "../../helper/event-tracker";
 function ImageChooseComponent({ currentImage, onImageSelect }) {
-	const trackEvent = useTrackEvent();
+	const { trackEvent } = useTrackEvent();
 	const [imagePreview, setImagePreview] = useState(currentImage);
 
 	useEffect(() => {

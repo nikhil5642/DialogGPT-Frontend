@@ -11,7 +11,7 @@ const stripePromise = loadStripe(
 	PrivateKeys.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
 );
 function PricingPlan({ plan, currentPlan }) {
-	const trackEvent = useTrackEvent();
+	const { trackEvent } = useTrackEvent();
 	const router = useRouter();
 	const alreadySubscribed =
 		currentPlan != PricingPlan.FREE && currentPlan == plan.id;

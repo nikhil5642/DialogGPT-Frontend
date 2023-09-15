@@ -8,39 +8,47 @@ import { getAuth, signOut } from "firebase/auth";
 import { getRequest } from "../src/helper/http-helper";
 import LoaderContext from "../src/components/loader/loader-context";
 import LoadingButton from "src/components/loading-button/loading-button";
-
+import { useTrackEvent } from "../src/helper/event-tracker";
 export default function AccountScreen() {
+	const { trackEvent, trackScreenView } = useTrackEvent(); // Extract analytics instance from context
 	const router = useRouter();
 	const [accountInfo, setAccountInfo] = useState({});
 	const { showLoader, hideLoader } = useContext(LoaderContext);
 
 	useEffect(() => {
 		showLoader("Loading Info...");
+		trackScreenView("AccountScreen", "AccountScreen");
 		getRequest("/account_info", {})
 			.then((res) => {
 				hideLoader();
 				setAccountInfo(res.result);
+				trackEvent("account-info-loaded", { email: res.result.email });
 			})
 			.catch(() => {
 				hideLoader();
+				trackEvent("account-info-load-failed", {});
 			});
 	}, []);
 
 	const onLogout = () => {
 		showLoader("Logging Out...");
+		trackEvent("logout-clicked");
 		AuthService.logout()
 			.then(() => {
 				signOut(getAuth())
 					.then(() => {
 						router.push("/signin");
 						hideLoader();
+						trackEvent("logout-success");
 					})
 					.catch(() => {
 						hideLoader();
+						trackEvent("logout-failure");
 					});
 			})
 			.catch(() => {
 				hideLoader();
+				trackEvent("logout-failure");
 			});
 	};
 	return (

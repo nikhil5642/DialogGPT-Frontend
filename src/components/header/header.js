@@ -7,7 +7,7 @@ import { useTrackEvent } from "src/helper/event-tracker";
 export default function Header() {
 	const [menuVisible, setMenuVisible] = useState(false);
 	const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
-	const trackEvent = useTrackEvent();
+	const { trackEvent } = useTrackEvent();
 
 	useEffect(() => {
 		setIsUserAuthenticated(AuthService.isAuthenticated());

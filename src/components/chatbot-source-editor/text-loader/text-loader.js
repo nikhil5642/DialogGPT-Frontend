@@ -7,7 +7,7 @@ import { showErrorToast, showSuccessToast } from "src/helper/toast-helper";
 import { useTrackEvent } from "src/helper/event-tracker";
 
 export default function TextLoader({ bot_id, data, setData }) {
-	const trackEvent = useTrackEvent();
+	const { trackEvent } = useTrackEvent();
 	const [text, setText] = useState("");
 	const { showLoader, hideLoader } = useContext(LoaderContext);
 	const [loader, setLoader] = useState(false);

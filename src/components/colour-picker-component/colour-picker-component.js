@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import styles from "./color-picker-component.module.scss";
 import { useTrackEvent } from "../../helper/event-tracker";
 function ColorPickerComponent({ color, setColor }) {
-	const trackEvent = useTrackEvent();
+	const { trackEvent } = useTrackEvent();
 	const inputRef = useRef(null);
 
 	const handleBoxClick = () => {

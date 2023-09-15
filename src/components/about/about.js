@@ -2,7 +2,7 @@ import styles from "./about.module.scss";
 import { useTrackEvent } from "../../helper/event-tracker";
 
 export default function About() {
-	const trackEvent = useTrackEvent();
+	const { trackEvent } = useTrackEvent();
 
 	return (
 		<div className={styles.aboutContainer}>

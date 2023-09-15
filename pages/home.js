@@ -2,10 +2,14 @@ import styles from "./styles/home.module.scss";
 import Head from "next/head";
 import AuthService from "../src/helper/AuthService";
 import { useTrackEvent } from "../src/helper/event-tracker";
+import { useEffect } from "react";
 
 function HomeScreen() {
-	const trackEvent = useTrackEvent(); // Extract analytics instance from context
+	const { trackEvent, trackScreenView } = useTrackEvent(); // Extract analytics instance from context
 
+	useEffect(() => {
+		trackScreenView("HomeScreen", "HomeScreen");
+	}, []);
 	function onCreateChatbot() {
 		const isAuthenticated = AuthService.isAuthenticated();
 
