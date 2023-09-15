@@ -1,12 +1,13 @@
 import styles from "./header.module.scss";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import AuthService from "src/helper/AuthService";
+import { useTrackEvent } from "src/helper/event-tracker";
 
 export default function Header() {
 	const [menuVisible, setMenuVisible] = useState(false);
 	const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
+	const { trackEvent } = useTrackEvent();
 
 	useEffect(() => {
 		setIsUserAuthenticated(AuthService.isAuthenticated());
@@ -14,7 +15,15 @@ export default function Header() {
 
 	return (
 		<div bg="light" expand="lg" className={styles.headerContainer}>
-			<a className={styles.headerLogoContainer} href="/home">
+			<a
+				className={styles.headerLogoContainer}
+				href="/home"
+				onClick={() =>
+					trackEvent("home_logo_click", {
+						source: menuVisible ? "desktop" : "mobile",
+					})
+				}
+			>
 				<Image
 					className={styles.headerLogo}
 					src="/assets/dialog_gpt_logo_with_text.png"
@@ -28,26 +37,55 @@ export default function Header() {
 			</a>
 
 			<div className={styles.linksContainer}>
-				<a className={styles.selectionItem} href="/home">
+				<a
+					className={styles.selectionItem}
+					href="/home"
+					onClick={() => trackEvent("demo_link_click", { source: "header" })}
+				>
 					Demo
 				</a>
-				<a className={styles.selectionItem} href="/pricing">
+				<a
+					className={styles.selectionItem}
+					href="/pricing"
+					onClick={() => trackEvent("pricing_link_click", { source: "header" })}
+				>
 					Pricing
 				</a>
-				<a className={styles.selectionItem} href="/my-chatbots">
+				<a
+					className={styles.selectionItem}
+					href="/my-chatbots"
+					onClick={() =>
+						trackEvent("my_chatbots_link_click", { source: "header" })
+					}
+				>
 					My ChatBots
 				</a>
 			</div>
 			<div className={styles.profileActionContainer}>
 				{isUserAuthenticated ? (
-					<a href="/account">{"Account ->"}</a>
+					<a
+						href="/account"
+						onClick={() =>
+							trackEvent("account_link_click", { source: "hander" })
+						}
+					>
+						{"Account ->"}
+					</a>
 				) : (
-					<a href="/signin">{"Log In ->"}</a>
+					<a
+						href="/signin"
+						onClick={() => trackEvent("login_link_click", { source: "header" })}
+					>
+						{"Log In ->"}
+					</a>
 				)}
 			</div>
 			<a
 				className={styles.hamburgerContainer}
-				onClick={() => setMenuVisible(true)}
+				onClick={() => {
+					trackEvent("hamburger_click");
+					setMenuVisible(true);
+				}}
 			>
 				<Image
 					className={styles.hamburgerLogo}
@@ -69,19 +107,54 @@ export default function Header() {
 					</button>
 					<ul>
 						<li>
-							<a href="/home">Demo</a>
+							<a
+								href="/home"
+								onClick={() =>
+									trackEvent("demo_link_click", { source: "hamburger" })
+								}
+							>
+								Demo
+							</a>
 						</li>
 						<li>
-							<a href="/pricing">Pricing</a>
+							<a
+								href="/pricing"
+								onClick={() =>
+									trackEvent("pricing_link_click", { source: "hamburger" })
+								}
+							>
+								Pricing
+							</a>
 						</li>
 						<li>
-							<a href="/my-chatbots">My ChatBot's</a>
+							<a
+								href="/my-chatbots"
+								onClick={() =>
+									trackEvent("my_chatbots_link_click", { source: "hamburger" })
+								}
+							>
+								My ChatBot's
+							</a>
 						</li>
 						<li>
 							{isUserAuthenticated ? (
-								<a href="/account">Account</a>
+								<a
+									href="/account"
+									onClick={() =>
+										trackEvent("account_link_click", { source: "hamburger" })
+									}
+								>
+									Account
+								</a>
 							) : (
-								<a href="/signin">Log In</a>
+								<a
+									href="/signin"
+									onClick={() =>
+										trackEvent("login_link_click", { source: "hamburger" })
+									}
+								>
+									Log In
+								</a>
 							)}
 						</li>
 					</ul>

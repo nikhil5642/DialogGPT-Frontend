@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FirebaseProvider } from "src/helper/firebase-provider";
 import IsolationContext from "src/scripts/isolation-context";
+import Script from "next/script";
 
 function MyApp({ Component, pageProps }) {
 	const isIsolated = Component.isIsolatedComponent === true; // default to false if not specified
@@ -20,27 +21,26 @@ function MyApp({ Component, pageProps }) {
 					content="width=device-width, initial-scale=1.0, maximum-scale=5"
 				/>
 				{!isIsolated && (
-					<script
+					<Script
 						src="https://www.dialoggpt.io/embed-chatbot.js"
 						id="23b3dc28-ae71-4cf2-a5b1-652f561c4641"
 						defer
-					></script>
+					/>
 				)}
 
-				<script
+				<Script
 					async
 					src="https://www.googletagmanager.com/gtag/js?id=AW-880583637"
-				></script>
-				<script
-					dangerouslySetInnerHTML={{
-						__html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'AW-880583637');
-              `,
-					}}
 				/>
+
+				<Script>
+					{`
+						window.dataLayer = window.dataLayer || [];
+						function gtag(){dataLayer.push(arguments);}
+						gtag('js', new Date());
+						gtag('config', 'AW-880583637');
+					`}
+				</Script>
 			</Head>
 			<IsolationContext.Provider value={isIsolated}>
 				<LoaderProvider>

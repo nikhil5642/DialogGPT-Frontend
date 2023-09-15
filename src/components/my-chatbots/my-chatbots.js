@@ -6,8 +6,9 @@ import Image from "next/image";
 import LoaderContext from "../loader/loader-context";
 import LoadingButton from "../loading-button/loading-button";
 import { showErrorToast } from "src/helper/toast-helper";
-
+import { useTrackEvent } from "../../helper/event-tracker";
 export default function MyChatBots() {
+	const { trackEvent, trackScreenView } = useTrackEvent();
 	const { showLoader, hideLoader } = useContext(LoaderContext);
 	const [chatbotLimit, setChatbotLimit] = useState(1);
 	const [chatbotsList, setChatBotsList] = useState([]);
@@ -19,9 +20,11 @@ export default function MyChatBots() {
 			.then((res) => {
 				hideLoader();
 				window.location.href = `/chatbot/${res.chatbot_id}?page=sources`;
+				trackEvent("create-new-chatbot-success", { name: res.chatbot_name });
 			})
 			.catch(() => {
 				hideLoader();
+				trackEvent("create-new-chatbot-failure");
 			});
 	};
 	function handleChatbotClick(index, chatbotId) {
@@ -31,21 +34,27 @@ export default function MyChatBots() {
 					chatbotLimit +
 					" chatbots under your current plan.",
 			);
+			trackEvent("chatbot-click-limit-reached", { index: index });
 			return;
+		} else {
+			trackEvent("chatbot-click-openened", { index: index });
 		}
 		// If within limit, navigate to the chatbot page
 		window.location.href = `/chatbot/${chatbotId}`;
 	}
 
 	useEffect(() => {
+		trackScreenView("MyChatBots", "MyChatBots");
 		showLoader("Loading Chatbot Data...");
 		getRequest("/my_chatbots")
 			.then((res) => {
 				setChatBotsList(res.chatbot_list);
 				setChatbotLimit(res.chatbot_limit);
 				hideLoader();
+				trackEvent("my-chatbot-fetch-success");
 			})
 			.catch(() => {
+				trackEvent("my-chatbot-fetch-failure");
 				hideLoader();
 			});
 	}, []);

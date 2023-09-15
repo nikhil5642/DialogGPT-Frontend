@@ -3,9 +3,11 @@ import { postRequest } from "../../../helper/http-helper";
 import styles from "./general-settings.module.scss";
 import SettingsComponent from "../../settings-component/settings-component";
 import { showErrorToast, showSuccessToast } from "../../../helper/toast-helper";
+import { useTrackEvent } from "../../../helper/event-tracker";
 
 export default function GeneralSettings({ data, setData }) {
 	const [loader, setLoader] = useState(false);
+	const { trackEvent } = useTrackEvent();
 	return (
 		<SettingsComponent
 			title={"General"}
@@ -37,10 +39,15 @@ export default function GeneralSettings({ data, setData }) {
 					.then(() => {
 						setLoader(false);
 						showSuccessToast("Information Updated Successfully");
+						trackEvent("chatbot_name_update_success", {
+							botID: data.id,
+							name: data.name,
+						});
 					})
 					.catch(() => {
 						setLoader(false);
 						showErrorToast("Error Updating Information");
+						trackEvent("chatbot_name_update_failure", { botID: data.id });
 					});
 			}}
 		/>

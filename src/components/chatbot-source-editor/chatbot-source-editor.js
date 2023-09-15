@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+
 import styles from "./chatbot-source-editor.module.scss";
 import {
 	SourceOptionsEnum,
@@ -11,6 +12,8 @@ import LoaderContext from "../loader/loader-context";
 import LoadingButton from "../loading-button/loading-button";
 import { useRouter } from "next/router";
 import { ChatBotOptionsEnum } from "../chatbot-editor/chatbot-editor.utits";
+import { useTrackEvent } from "../../helper/event-tracker";
+
 const initialData = {
 	texts: { charLength: 0 },
 	urls: { count: 0, charLength: 0 },
@@ -26,11 +29,13 @@ export default function ChatBotSourceEditor({
 	const { showLoader, hideLoader } = useContext(LoaderContext);
 	const [data, setData] = useState([]);
 	const [trainingData, setTrainingData] = useState(initialData);
+	const { trackEvent, trackScreenView } = useTrackEvent();
 
 	useEffect(() => {
 		const handleBeforeUnload = (e) => {
 			e.preventDefault();
 			e.returnValue = "Are you sure you want to leave or refresh this page?";
+			trackEvent("chatbot-editor-before-unload");
 		};
 
 		window.addEventListener("beforeunload", handleBeforeUnload);
@@ -76,6 +81,7 @@ export default function ChatBotSourceEditor({
 		setChatbotInfoData({ ...chatbotInfoData, status: "training" });
 		postRequest("/train_chatbot", { botID: chatbotInfoData.id, data: data })
 			.then(() => {
+				trackEvent("chatbot-editor-train", { botID: chatbotInfoData.id });
 				hideLoader();
 				router.push(
 					{
@@ -87,6 +93,9 @@ export default function ChatBotSourceEditor({
 				);
 			})
 			.catch(() => {
+				trackEvent("chatbot-editor-train-failed", {
+					botID: chatbotInfoData.id,
+				});
 				hideLoader();
 			});
 	};
@@ -96,9 +105,11 @@ export default function ChatBotSourceEditor({
 			postRequest("/load_chatbot_content", { botID: chatbotInfoData.id })
 				.then((res) => {
 					hideLoader();
+					trackEvent("chatbot-editor-load-content-success");
 					setData(res.result);
 				})
 				.catch(() => {
+					trackEvent("chatbot-editor-load-content-failed");
 					hideLoader();
 				});
 		}
@@ -116,22 +127,38 @@ export default function ChatBotSourceEditor({
 		<div className={styles.chatBotEditorContainer}>
 			<SourceSelector selector={selector} setSelector={setSelector} />
 
-			{selector === SourceOptionsEnum.FILE && <div>Files View</div>}
+			{selector === SourceOptionsEnum.FILE && (
+				<>
+					{trackScreenView("ChatbotFileEditorScreen", "ChatBotEditorScreen")}
+					<div>Files View</div>
+				</>
+			)}
 			{selector === SourceOptionsEnum.TEXT && (
-				<TextLoader
-					bot_id={chatbotInfoData.id}
-					data={data}
-					setData={setData}
-				></TextLoader>
+				<>
+					{trackScreenView("ChatbotTextEditorScreen", "ChatBotEditorScreen")}
+					<TextLoader
+						bot_id={chatbotInfoData.id}
+						data={data}
+						setData={setData}
+					></TextLoader>
+				</>
 			)}
 			{selector === SourceOptionsEnum.URL && (
-				<WebisteLoader
-					bot_id={chatbotInfoData.id}
-					data={data}
-					setData={setData}
-				/>
+				<>
+					{trackScreenView("ChatbotWebsiteEditorScreen", "ChatBotEditorScreen")}
+					<WebisteLoader
+						bot_id={chatbotInfoData.id}
+						data={data}
+						setData={setData}
+					/>
+				</>
 			)}
-			{selector === SourceOptionsEnum.QNA && <div>Q&A View</div>}
+			{selector === SourceOptionsEnum.QNA && (
+				<>
+					{trackScreenView("ChatbotQNAEditorScreen", "ChatBotEditorScreen")}
+					<div>Q&A View</div>
+				</>
+			)}
 
 			<div className={styles.trainingContainer}>
 				<h4>Included Sources:</h4>

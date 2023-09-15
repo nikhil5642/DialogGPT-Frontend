@@ -6,14 +6,21 @@ import { PricingPlans } from "src/components/pricing-plan/pricing-plans.utils";
 import { useEffect, useState } from "react";
 import { getRequest } from "src/helper/http-helper";
 import AuthService from "../src/helper/AuthService";
-
+import { useTrackEvent } from "../src/helper/event-tracker";
 export default function PricingScreen() {
+	const { trackEvent, trackScreenView } = useTrackEvent(); // Extract analytics instance from context
 	const [currentPlan, setCurrentPlan] = useState(null);
 	useEffect(() => {
+		trackScreenView("PricingScreen", "PricingScreen");
 		if (AuthService.isAuthenticated()) {
-			getRequest("/current_subscription_plan").then((res) => {
-				setCurrentPlan(res?.result);
-			});
+			getRequest("/current_subscription_plan")
+				.then((res) => {
+					setCurrentPlan(res?.result);
+					trackEvent("current_subscription_plan_loaded", { plan: res?.result });
+				})
+				.catch(() => {
+					trackEvent("current_subscription_plan_load_failed", {});
+				});
 		}
 	}, []);
 

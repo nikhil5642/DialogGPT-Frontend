@@ -8,8 +8,10 @@ import ImageChooseComponent from "../../image-choose-component/image-choose-comp
 import ChatBotComponent from "../../chatbot-component/chatbot-component";
 import ColorPickerComponent from "../../colour-picker-component/colour-picker-component";
 import { ChatBotSource } from "../../chatbot-component/chatbot-component.utils";
+import { useTrackEvent } from "../../../helper/event-tracker";
 
 export default function ChatInterfaceSettings({ botID }) {
+	const { trackEvent } = useTrackEvent();
 	const [loader, setLoader] = useState(false);
 	const [data, setData] = useState(chatInit(botID, ChatBotSource.SETTINGS));
 
@@ -34,10 +36,20 @@ export default function ChatInterfaceSettings({ botID }) {
 							chatBubbleColor: res.result.chat_bubble_color,
 						};
 					});
+					trackEvent("chatbot_interface_loaded", {
+						success: true,
+						botID: botID,
+						source: "settings",
+					});
 				})
 				.catch(() => {
 					setLoader(false);
 					showErrorToast("Error Loading Information");
+					trackEvent("chatbot_interface_loaded", {
+						success: false,
+						botID: botID,
+						source: "settings",
+					});
 				});
 		}
 	}, [botID]);
@@ -166,10 +178,12 @@ export default function ChatInterfaceSettings({ botID }) {
 					.then(() => {
 						setLoader(false);
 						showSuccessToast("Information Updated Successfully");
+						trackEvent("update_chatbot_interface_success", data);
 					})
 					.catch(() => {
 						setLoader(false);
 						showErrorToast("Error Updating Information");
+						trackEvent("update_chatbot_interface_failure");
 					});
 			}}
 		/>

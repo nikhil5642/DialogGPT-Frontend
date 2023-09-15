@@ -4,8 +4,10 @@ import EditBoxComponent from "../../editbox-component/editbox-component";
 import { postRequest } from "../../../helper/http-helper";
 import { generateRandomString } from "../chatbot-source-editor.utits";
 import LoadingButton from "src/components/loading-button/loading-button";
+import { useTrackEvent } from "src/helper/event-tracker";
 
 export default function WebisteLoader({ bot_id, data, setData }) {
+	const { trackEvent } = useTrackEvent();
 	const [url, setUrl] = useState("");
 	const [loader, setLoader] = useState({
 		fetchLinks: false,
@@ -16,9 +18,11 @@ export default function WebisteLoader({ bot_id, data, setData }) {
 			.then((res) => {
 				setData([...data, ...res.result]);
 				setLoader((val) => ({ ...val, fetchLinks: false }));
+				trackEvent("urls_fetched", { botID: bot_id, url: url });
 			})
 			.catch(() => {
 				setLoader((val) => ({ ...val, fetchLinks: false }));
+				trackEvent("urls_fetch_failure", { botID: bot_id, url: url });
 			});
 	};
 	const addURL = () => {
@@ -33,6 +37,7 @@ export default function WebisteLoader({ bot_id, data, setData }) {
 				status: "newlyAdded",
 			},
 		]);
+		trackEvent("url_added", { botID: bot_id });
 	};
 	const handleDeleteUrl = (id) => {
 		const updatedData = data.filter((item) => item.content_id !== id);

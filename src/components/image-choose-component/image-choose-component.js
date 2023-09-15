@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./image-choose-component.module.scss";
-
+import { useTrackEvent } from "../../helper/event-tracker";
 function ImageChooseComponent({ currentImage, onImageSelect }) {
+	const { trackEvent } = useTrackEvent();
 	const [imagePreview, setImagePreview] = useState(currentImage);
 
 	useEffect(() => {
@@ -9,7 +10,7 @@ function ImageChooseComponent({ currentImage, onImageSelect }) {
 	}, [currentImage]);
 	const handleImageChange = (e) => {
 		const file = e.target.files[0];
-
+		trackEvent("image-choose-component-change");
 		if (file) {
 			const reader = new FileReader();
 			reader.onloadend = () => {
@@ -20,6 +21,7 @@ function ImageChooseComponent({ currentImage, onImageSelect }) {
 		}
 	};
 	const handleClosePreview = () => {
+		trackEvent("image-choose-component-removed");
 		setImagePreview(null);
 		onImageSelect(null);
 	};

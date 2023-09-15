@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import styles from "./selection-component.module.scss"; // Import your CSS module
 
 const SelectionComponent = ({ text, isSelected, onClick }) => {
