@@ -3,7 +3,6 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
-		"@firebase/analytics": "^0.10.0",
 		"@next/bundle-analyzer": "^13.0.5",
 		"@stripe/stripe-js": "^2.1.1",
 		"axios": "^1.4.0",
