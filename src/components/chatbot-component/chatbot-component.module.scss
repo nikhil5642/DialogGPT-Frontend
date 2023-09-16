@@ -13,6 +13,7 @@
 	flex-direction: row;
 	border-bottom: 1px solid #e5e7eb;
 	justify-content: space-between;
+	padding: 0.5rem 0rem;
 	img {
 		height: 2rem;
 		width: 2rem;
@@ -282,7 +283,7 @@
 		flex-direction: column;
 	}
 	.chatbotHeaderContainer {
-		padding: 1rem;
+		padding: 0.75rem 0;
 		img {
 			height: 2.5rem;
 			width: 2.5rem;
@@ -347,7 +348,7 @@
 	.inputContainer {
 		border-radius: 0.5rem;
 		margin-top: 0.5rem;
-		padding: 0.5rem;
+		padding: 0.25rem;
 	}
 
 	.inputTextArea {
@@ -360,7 +361,6 @@
 		img {
 			width: 1.5rem;
 			height: 1.5rem;
-			top: 1rem;
 		}
 	}
 }
