@@ -72,16 +72,16 @@ function HomeScreen() {
 					</p>
 
 					<video
+						preload="metadata"
 						controls
 						width="90%"
 						height="auto"
 						className={styles.demoVideo}
-						autoPlay
 						muted
 						loop
 						onEnded={handleVideoEnd}
 					>
-						<source src="/videos/video_demo.mp4" type="video/mp4" />
+						<source src="/videos/video_demo.mp4#t=0.1" type="video/mp4" />
 						Your browser does not support the video tag.
 					</video>
 				</div>
