@@ -1,6 +1,5 @@
-html,
-body {
-	overflow-x: hidden;
+html {
+	padding: 0px;
 	&.blue-gradient {
 		background: radial-gradient(circle at 10% 20%, #e0e7ff, transparent 40%),
 			radial-gradient(circle at 85% 75%, #f5f7fa, transparent 40%),
@@ -17,6 +16,9 @@ body {
 	&.simple-white {
 		background-color: #fefdfc;
 	}
+}
+body {
+	margin: 0px;
 }
 
 h1,

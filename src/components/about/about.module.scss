@@ -1,51 +1,64 @@
 .aboutContainer {
 	display: flex;
 	flex-direction: column;
-	padding: 16px;
+	padding: 1rem;
 	margin-top: 40vh;
+	width: 100%;
 	align-items: center;
 	justify-content: center;
 	background: #f7f9fc; // A soft, neutral background color
 	border: 1px solid #e1e4e8; // A subtle border for definition
-	border-radius: 8px;
-	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05); // A softer shadow for subtlety
 }
 
 .aboutCopyright {
-	font-size: 14px;
+	font-size: 1rem;
 	text-align: center;
-	margin-top: 8px;
+	margin-top: 0.5rem;
 	color: #777;
 }
 
 .aboutP {
-	font-size: 20px;
+	font-size: 1rem;
 	padding: 0px;
 	margin: 0px;
 	text-align: center;
 	font-weight: 500;
-	margin-top: 16px;
-	margin-bottom: 16px;
 }
 
 .linksP {
-	margin-bottom: 16px; // Added space between the links and the contact info
+	margin-bottom: 1rem; // Added space between the links and the contact info
 }
 
 .termsLink {
 	color: #101828;
 	text-decoration: none;
 	font-weight: 500; // Slightly bolder font
-	margin: 0 8px; // Space between the links
+	margin: 0 0.5rem; // Space between the links
 
 	&:hover {
 		text-decoration: underline;
 	}
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 1080px) {
 	.aboutContainer {
-		padding: 8px;
+		padding: 0px;
 		margin-top: 10vh;
+		flex-direction: column;
+		align-items: center;
+		span {
+			display: none;
+		}
+	}
+	.termsLink {
+		display: block; // this will stack them vertically on mobile
+		margin-bottom: 8px; // some space between the links
+		text-align: start;
+		font-size: 20px;
+		text-align: center;
+		text-decoration: underline;
+	}
+	.aboutP {
+		display: none;
 	}
 }

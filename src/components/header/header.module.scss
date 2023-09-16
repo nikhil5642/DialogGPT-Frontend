@@ -96,16 +96,20 @@
 .closeButton {
 	position: absolute;
 	top: 32px;
-	right: 16px;
+	right: 20px;
 	border: none;
-	border-radius: 50%;
 	background-color: white; /* Semi-transparent black */
-	width: 30px;
-	height: 30px;
+	width: 32px;
+	height: 32px;
 	font-weight: bold;
 	cursor: pointer;
 }
 
+.closeImg {
+	object-fit: contain;
+	height: 20px;
+	width: 20px;
+}
 .menu ul {
 	list-style-type: none;
 	padding: 0;
@@ -137,7 +141,6 @@
 	.headerContainer {
 		padding-top: 8px;
 		padding-bottom: 8px;
-		// align-items: center;
 	}
 	.headerLogo {
 		object-fit: contain;
@@ -152,9 +155,9 @@
 	}
 	.hamburgerContainer {
 		display: flex;
-		position: absolute;
-		right: 16px;
-		top: 32px;
+		margin-right: 16px;
+		margin-top: 16px;
+		z-index: 1000;
 	}
 	.hamburgerLogo {
 		object-fit: contain;

@@ -2,9 +2,12 @@
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
+	overflow-y: hidden; // this will remove the vertical scrollbar
 }
 .contentContainer {
 	flex: 1;
-	flex-grow: 1;
-	position: relative; /* Add this */
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	overflow-y: hidden; // this will remove the vertical scrollbar
 }

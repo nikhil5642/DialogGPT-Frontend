@@ -65,34 +65,35 @@ function HomeScreen() {
 				</div>
 				<div className={styles.videoDemoContainer}>
 					<h2>Video Demo</h2>
-					<p>This chatbot was trained on a document explaining Chatbase.</p>
-					<p>You can embed a widget like this on any page on your website!</p>
+					<p>
+						Creating a chatbot for <span>Product Hunt</span> by crawling the
+						website and training the AI on its content. I can then embed the
+						chatbot on the website!
+					</p>
 
 					<video
 						controls
 						width="90%"
 						height="auto"
 						className={styles.demoVideo}
+						autoPlay
+						muted
+						loop
+						onEnded={handleVideoEnd}
 					>
-						<source
-							src="/videos/video_demo.mp4"
-							type="video/mp4"
-							autoPlay
-							loop
-							onEnded={handleVideoEnd}
-						/>
+						<source src="/videos/video_demo.mp4" type="video/mp4" />
 						Your browser does not support the video tag.
 					</video>
 				</div>
 
 				<div className={styles.liveDemoContainer}>
 					<h2>Live Demo</h2>
-					<p>This chatbot was trained on a document explaining Chatbase.</p>
+					<p>This chatbot was trained on a document explaining DialogGPT.</p>
 					<p>You can embed a widget like this on any page on your website!</p>
 
 					<iframe
 						className={styles.liveDemoIframe}
-						src="https://www.dialoggpt.io/iframe/23b3dc28-ae71-4cf2-a5b1-652f561c4641"
+						src="https://dialoggpt.io/iframe/23b3dc28-ae71-4cf2-a5b1-652f561c4641"
 						frameBorder="0"
 					></iframe>
 				</div>

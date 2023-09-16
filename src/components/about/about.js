@@ -13,16 +13,16 @@ export default function About() {
 					onClick={() => trackEvent("contact_us_link_click")}
 				>
 					Contact Us
-				</a>{" "}
-				|
+				</a>
+				<span>|</span>
 				<a
 					href="/terms"
 					className={styles.termsLink}
 					onClick={() => trackEvent("terms_of_service_link_click")}
 				>
 					Terms of Service
-				</a>{" "}
-				|
+				</a>
+				<span>|</span>
 				<a
 					href="/privacy"
 					className={styles.termsLink}

@@ -1,7 +1,10 @@
 .homeScreenContainer {
+	flex: 1;
 	display: flex;
 	min-height: 100vh;
+	max-width: 1280px;
 	flex-direction: column;
+	align-self: center;
 
 	h1 {
 		font-size: 3.5rem;
@@ -9,6 +12,8 @@
 		margin: 0px;
 		color: #101828;
 		font-weight: 800;
+		margin-left: 4px;
+		margin-right: 4px;
 	}
 	h2 {
 		font-size: 2rem;
@@ -23,10 +28,15 @@
 		color: #333333;
 	}
 	p {
-		font-size: 1rem;
+		font-size: 1.2rem;
 		line-height: 1.5rem;
+		color: #444;
 		font-weight: 400;
 		margin: 0px;
+		font-weight: 400;
+		span {
+			font-weight: 600;
+		}
 	}
 }
 
@@ -96,9 +106,11 @@
 	justify-content: flex-start; // This will align the child elements to the top
 	margin-top: 5rem;
 	padding-bottom: 3rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
 	text-align: center;
 	p {
-		margin-top: 0.5rem;
+		margin-top: 1rem;
 	}
 }
 .demoVideo {
@@ -114,11 +126,13 @@
 	flex-direction: column;
 	align-items: center; // This will center the child elements horizontally
 	justify-content: flex-start; // This will align the child elements to the top
-
+	padding-left: 1rem;
+	padding-right: 1rem;
+	padding-bottom: 1rem;
 	margin-top: 5rem;
 	text-align: center;
 	p {
-		margin-top: 0.5rem;
+		margin-top: 1rem;
 	}
 }
 
@@ -133,24 +147,10 @@
 @media only screen and (max-width: 720px) {
 	.homeScreenContainer {
 		height: calc(50vh - 60px); // Adjusted for mobile
-		width: 100vw;
 	}
 	.topOverviewContainer {
 		margin-top: 1rem;
 		padding-top: 5vh;
 		padding-bottom: 10vh;
-
-		h1 {
-			font-size: 2.5rem;
-		}
-		h3 {
-			font-size: 1rem;
-			max-width: 95%; // Further increased width for mobile
-		}
-		button {
-			font-size: 0.8rem;
-			margin-top: 1.5rem;
-			padding: 0.75rem 1rem; // Adjusted padding for mobile
-		}
 	}
 }

@@ -23,7 +23,8 @@ import { FirebaseFeatures } from "../src/helper/feature-flags";
 import { useFirebase } from "../src/helper/firebase-provider";
 import { firebaseConfig } from "../src/helper/firebase-provider";
 import { initializeApp, getApps } from "firebase/app";
-import { showErrorToast, showSuccessToast } from "src/helper/toast-helper";
+import { showErrorToast } from "src/helper/toast-helper";
+import { useTrackEvent } from "/src/helper//event-tracker";
 
 let app;
 
@@ -35,6 +36,8 @@ try {
 }
 
 const SignInPage = () => {
+	const { trackEvent, trackScreenView } = useTrackEvent(); // Extract analytics instance from context
+
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const router = useRouter();
@@ -71,17 +74,19 @@ const SignInPage = () => {
 		if (getCookie("authInProgress") === "true") {
 			showLoader("Logging you in...");
 		}
-
+		trackScreenView("login-screen");
 		const unsubscribe = onAuthStateChanged(auth, async (user) => {
 			if (user) {
 				showLoader("Logging you in...");
 				await user
 					.getIdToken()
 					.then((token) => {
+						trackEvent("login-success");
 						hideLoader();
 						AuthService.login(token).then(() => router.push("/my-chatbots"));
 					})
 					.catch(() => {
+						trackEvent("login-failure");
 						hideLoader();
 					});
 			} else {
@@ -95,9 +100,12 @@ const SignInPage = () => {
 	const handleSignInWithGoogle = async () => {
 		showLoader("Logging you in...");
 		storeCookie("authInProgress", "true");
+		trackEvent("login-google-initated");
 		try {
 			await signInWithRedirect(auth, provider);
+			trackEvent("login-google-success");
 		} catch (e) {
+			trackEvent("login-google-failure");
 			showErrorToast("Error logging you in!");
 			hideLoader();
 			removeCookie("authInProgress");
@@ -107,23 +115,29 @@ const SignInPage = () => {
 	const handleSignInWithApple = async () => {
 		const provider = new OAuthProvider("apple.com");
 		showLoader("Logging you in...");
+		trackEvent("login-apple-initated");
 		signInWithPopup(auth, provider)
 			.then((userCredential) => {
 				const user = userCredential.user;
+				trackEvent("login-apple-success");
 			})
 			.catch(() => {
 				showErrorToast("Error logging you in!");
+				trackEvent("login-apple-failure");
 			});
 	};
 
 	const handleSignInWithEmailAndPassword = async () => {
 		showLoader("Logging you in...");
+		trackEvent("login-email-initated");
 		signInWithEmailAndPassword(auth, email, password)
 			.then((userCredential) => {
 				const user = userCredential.user;
+				trackEvent("login-email-success");
 			})
 			.catch(() => {
 				showErrorToast("Error logging you in!");
+				trackEvent("login-email-failure");
 			});
 	};
 
