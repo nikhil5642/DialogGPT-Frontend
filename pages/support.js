@@ -35,6 +35,8 @@ export default function SupportPage() {
 					max-width: 800px;
 					margin: 0 auto;
 					font-family: Arial, sans-serif;
+					display: flex;
+					flex-direction: column;
 				}
 
 				h1 {
@@ -70,6 +72,15 @@ export default function SupportPage() {
 				a {
 					color: #333;
 					font-weight: 500;
+				}
+
+				@media (max-width: 1280px) {
+					h1,
+					h2,
+					h4,
+					p {
+						text-align: center;
+					}
 				}
 			`}</style>
 		</div>

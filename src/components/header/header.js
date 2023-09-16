@@ -103,7 +103,15 @@ export default function Header() {
 						className={styles.closeButton}
 						onClick={() => setMenuVisible(false)}
 					>
-						X
+						<Image
+							className={styles.closeImg}
+							src="/assets/close_grey.png"
+							alt={"DialogGPT"}
+							title={"DialogGPT"}
+							loading="eager"
+							height={24}
+							width={24}
+						></Image>
 					</button>
 					<ul>
 						<li>

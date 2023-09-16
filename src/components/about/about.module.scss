@@ -43,9 +43,26 @@
 	}
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 1080px) {
 	.aboutContainer {
-		padding: 8px;
+		padding: 0px;
+		margin: 8px;
 		margin-top: 10vh;
+		flex-direction: column;
+		align-items: center;
+
+		span {
+			display: none;
+		}
+	}
+	.termsLink {
+		display: block; // this will stack them vertically on mobile
+		margin-bottom: 8px; // some space between the links
+		text-align: start;
+		font-size: 20px;
+		text-align: center;
+	}
+	.aboutP {
+		display: none;
 	}
 }
