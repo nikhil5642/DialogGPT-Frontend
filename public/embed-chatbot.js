@@ -65,7 +65,7 @@
 
 	const screenWidth = window.innerWidth;
 	const largeIconSize = screenWidth >= 768 ? "2.5rem" : "3rem";
-	const smallIconSize = screenWidth >= 768 ? "1rem" : "1.5rem"; // Use 2rem for screens larger than 768px
+	const smallIconSize = screenWidth >= 768 ? "1rem" : "1.25rem"; // Use 2rem for screens larger than 768px
 
 	// Create the chat bubble
 	var chatBubble = document.createElement("div");
