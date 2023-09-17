@@ -28,8 +28,8 @@
         }
 
         #chatbotIframe {
-            width: 400px;
-            height: 600px;
+            width: 450px;
+            height: 700px;
             position: fixed;
             bottom: 4rem;
             right: 1rem;
