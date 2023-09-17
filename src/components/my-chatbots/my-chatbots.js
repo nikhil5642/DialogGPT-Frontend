@@ -77,7 +77,7 @@ export default function MyChatBots() {
 							src="/assets/dialog_gpt_logo_icon_only.png"
 							alt={"Message"}
 							title={"Message"}
-							loading="eager"
+							loading="lazy"
 							height={64}
 							width={64}
 						></Image>

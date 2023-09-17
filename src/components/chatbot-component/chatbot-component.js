@@ -49,7 +49,7 @@ export default function ChatBotComponent({ config }) {
 		});
 	};
 
-	useEffect(() => {
+	const initialView = () => {
 		setMessages([]);
 		const lines = getSplittedMessages(initialMessage);
 		lines.forEach((line, index) => {
@@ -65,6 +65,10 @@ export default function ChatBotComponent({ config }) {
 				{ id: 1000, text: "hi", type: "outgoing" },
 			]);
 		}
+	};
+
+	useEffect(() => {
+		initialView();
 	}, [initialMessage]);
 
 	const handleKeyPress = (e) => {
@@ -118,6 +122,10 @@ export default function ChatBotComponent({ config }) {
 		}
 	};
 
+	const refresh = () => {
+		initialView();
+	};
+
 	return (
 		<div className={styles.chatbotContainer}>
 			<div className={styles.chatbotHeaderContainer}>
@@ -127,7 +135,7 @@ export default function ChatBotComponent({ config }) {
 				{displayName && <h5>{displayName}</h5>}
 
 				<div className={styles.chatbotHeaderRightContainer}>
-					<button onClick={() => {}}>
+					<button onClick={refresh}>
 						<img src="/assets/refresh_grey.png"></img>
 					</button>
 					{source === ChatBotSource.SETTINGS && (
@@ -203,7 +211,7 @@ export default function ChatBotComponent({ config }) {
 						src="/assets/send_message.png"
 						alt={"Send"}
 						title={"Send"}
-						loading="eager"
+						loading="lazy"
 						height={24}
 						width={24}
 					></Image>

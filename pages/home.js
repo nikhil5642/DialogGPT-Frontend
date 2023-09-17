@@ -2,10 +2,12 @@ import styles from "./styles/home.module.scss";
 import Head from "next/head";
 import AuthService from "../src/helper/AuthService";
 import { useTrackEvent } from "../src/helper/event-tracker";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
+import Image from "next/image";
 function HomeScreen() {
 	const { trackEvent, trackScreenView } = useTrackEvent(); // Extract analytics instance from context
+	const [iframeLoading, setIframeLoading] = useState(true);
 
 	useEffect(() => {
 		trackScreenView("HomeScreen", "HomeScreen");
@@ -56,9 +58,13 @@ function HomeScreen() {
 						<span>integrations</span>.
 					</h3>
 					<button onClick={onCreateChatbot}>
-						<img
+						<Image
 							src="/assets/dialog_gpt_logo_icon_only.png"
-							alt="Description of Image"
+							alt={"DialogGPT"}
+							title={"DialogGPT"}
+							loading="lazy"
+							height={64}
+							width={64}
 						/>
 						Create your Chatbot Now ➤
 					</button>
@@ -72,16 +78,19 @@ function HomeScreen() {
 					</p>
 
 					<video
-						preload="metadata"
+						preload="none"
+						controlsList="nodownload"
+						loading="lazy"
 						controls
 						width="90%"
 						height="auto"
 						className={styles.demoVideo}
+						poster="/videos/video_demo_poster.png"
 						muted
 						loop
 						onEnded={handleVideoEnd}
 					>
-						<source src="/videos/video_demo.mp4#t=0.1" type="video/mp4" />
+						<source src="/videos/video_demo.mp4" type="video/mp4" />
 						Your browser does not support the video tag.
 					</video>
 				</div>
@@ -91,11 +100,17 @@ function HomeScreen() {
 					<p>This chatbot was trained on a document explaining DialogGPT.</p>
 					<p>You can embed a widget like this on any page on your website!</p>
 
-					<iframe
-						className={styles.liveDemoIframe}
-						src="https://dialoggpt.io/iframe/23b3dc28-ae71-4cf2-a5b1-652f561c4641"
-						frameBorder="0"
-					></iframe>
+					<div className={styles.liveDemoIframeContainer}>
+						{iframeLoading && <div className={styles.roundLoader}></div>}
+
+						<iframe
+							loading="lazy"
+							className={styles.liveDemoIframe}
+							src="https://dialoggpt.io/iframe/23b3dc28-ae71-4cf2-a5b1-652f561c4641"
+							frameBorder="0"
+							onLoad={() => setIframeLoading(false)}
+						></iframe>
+					</div>
 				</div>
 			</div>
 		</>
