@@ -106,7 +106,7 @@
 	var iframe = document.createElement("iframe");
 	iframe.id = "chatbotIframe";
 	iframe.src =
-		"http://192.168.1.2:3000/iframe/" + chatbotID + "?source=chat-bubble";
+		"https://dialoggpt.io/iframe/" + chatbotID + "?source=chat-bubble";
 	iframe.loading = "lazy";
 	iframe.onload = function () {
 		loader.style.display = "none";

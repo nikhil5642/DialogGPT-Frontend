@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }) {
 			{!isIsolated && (
 				<>
 					<Script
-						src="http://192.168.1.2:3000/embed-chatbot.js"
+						src="https://dialoggpt.io/embed-chatbot.js"
 						id="23b3dc28-ae71-4cf2-a5b1-652f561c4641"
 						defer
 						strategy="lazyOnload"
