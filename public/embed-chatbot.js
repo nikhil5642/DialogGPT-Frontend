@@ -10,19 +10,19 @@
 	// Styles for the chat bubble and iframe
 	var styles = `
         #chatbotBubble {
-            width: 60px;
-            height: 60px;
+            width: 2.5rem;
+            height: 2.5rem;
 			background: transparent;
             border-radius: 50%;
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 1rem;
+            right: 1rem;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
             color: #fff;
-            font-size: 24px;
+            font-size: 1rem;
             z-index: 1000;
             user-select: none;
         }
@@ -31,10 +31,10 @@
             width: 400px;
             height: 600px;
             position: fixed;
-            bottom: 90px;
-            right: 20px;
+            bottom: 4rem;
+            right: 1rem;
             z-index: 999;
-            border-radius: 12px;
+            border-radius: 0.75rem;
             border: 1px solid #e5e7eb;
             display: none; /* Initially hidden */
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 15px 40px rgba(0, 0, 0, 0.25);
@@ -42,10 +42,16 @@
 
         /* Adjustments for smaller screens */
         @media (max-width: 768px) {
+			#chatbotBubble {
+				width: 3rem;
+				height: 3rem;
+				bottom: 0.5rem;
+				right: 0.5rem;
+			}
             #chatbotIframe {
                 width: 90%;
                 height: 70%;
-                bottom: 80px;
+                bottom: 4rem;
                 right: 5%;
             }
         }
@@ -57,10 +63,14 @@
 	styleSheet.innerText = styles;
 	document.head.appendChild(styleSheet);
 
+	const screenWidth = window.innerWidth;
+	const largeIconSize = screenWidth >= 768 ? "2.5rem" : "3rem";
+	const smallIconSize = screenWidth >= 768 ? "1rem" : "1.5rem"; // Use 2rem for screens larger than 768px
+
 	// Create the chat bubble
 	var chatBubble = document.createElement("div");
 	chatBubble.id = "chatbotBubble";
-	chatBubble.innerHTML = `<img src="https://dialoggpt.io/assets/chat_icon.png" style="height: 24px; width: 24px;">`;
+	chatBubble.innerHTML = `<img src="https://dialoggpt.io/assets/chat_icon.png" style="height: ${smallIconSize}; width: ${smallIconSize};">`;
 
 	document.body.appendChild(chatBubble);
 
@@ -74,7 +84,7 @@
 	function setChatBubbleAppearance() {
 		if (window.chatbotSettings && window.chatbotSettings.chatIcon) {
 			chatBubble.style.backgroundColor = "transparent"; // Ensure the background is transparent
-			chatBubble.innerHTML = `<img src="${window.chatbotSettings.chatIcon}" style="height: 64px; width: 64px; object-fit: fill; border-radius: 50%;">`;
+			chatBubble.innerHTML = `<img src="${window.chatbotSettings.chatIcon}" style="height: ${largeIconSize}; width: ${largeIconSize}; object-fit: fill; border-radius: 50%;">`;
 		} else {
 			// Check if window.chatbotSettings exists before trying to access chatBubbleColor
 			var bgColor =
@@ -82,7 +92,7 @@
 					? window.chatbotSettings.chatBubbleColor
 					: "#000000";
 			chatBubble.style.backgroundColor = bgColor;
-			chatBubble.innerHTML = `<img src="https://dialoggpt.io/assets/chat_icon.png" style="height: 24px; width: 24px;">`;
+			chatBubble.innerHTML = `<img src="https://dialoggpt.io/assets/chat_icon.png" style="height: ${smallIconSize}; width: ${smallIconSize};">`;
 		}
 	}
 
