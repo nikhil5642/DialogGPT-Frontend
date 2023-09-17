@@ -29,8 +29,7 @@ export default function Header() {
 					src="/assets/dialog_gpt_logo_with_text.png"
 					alt={"DialogGPT"}
 					title={"DialogGPT"}
-					loading="eager"
-					priority={true}
+					loading="lazy"
 					height={80}
 					width={300}
 				></Image>
@@ -92,7 +91,7 @@ export default function Header() {
 					src="/assets/hamburger.png"
 					alt={"DialogGPT"}
 					title={"DialogGPT"}
-					loading="eager"
+					loading="lazy"
 					height={40}
 					width={40}
 				></Image>
@@ -108,7 +107,7 @@ export default function Header() {
 							src="/assets/close_grey.png"
 							alt={"DialogGPT"}
 							title={"DialogGPT"}
-							loading="eager"
+							loading="lazy"
 							height={24}
 							width={24}
 						></Image>

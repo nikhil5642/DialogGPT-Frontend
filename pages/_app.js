@@ -20,12 +20,14 @@ function MyApp({ Component, pageProps }) {
 						src="http://192.168.1.2:3000/embed-chatbot.js"
 						id="23b3dc28-ae71-4cf2-a5b1-652f561c4641"
 						defer
+						strategy="lazyOnload"
 					/>
 					<Script
 						async
+						strategy="lazyOnload"
 						src="https://www.googletagmanager.com/gtag/js?id=AW-880583637"
 					/>
-					<Script>
+					<Script strategy="lazyOnload">
 						{`
 							window.dataLayer = window.dataLayer || [];
 							function gtag(){dataLayer.push(arguments);}
@@ -33,7 +35,7 @@ function MyApp({ Component, pageProps }) {
 							gtag('config', 'AW-880583637');
 						`}
 					</Script>
-					<Script>
+					<Script strategy="lazyOnload">
 						{`
 							(function(c,l,a,r,i,t,y){
 								c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};

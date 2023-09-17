@@ -35,10 +35,33 @@
             right: 1rem;
             z-index: 999;
             border-radius: 0.75rem;
+			background-color: #fefdfc;
             border: 1px solid #e5e7eb;
             display: none; /* Initially hidden */
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 15px 40px rgba(0, 0, 0, 0.25);
         }
+		.roundLoader {
+			border: 0.15rem solid transparent;
+			border-top: 0.15rem solid #666;
+			border-radius: 50%;
+			width: 2rem;
+			height: 2rem;
+			animation: spin 2s linear infinite;
+			position: fixed;
+			right: 200px; 
+			bottom: 350px; 
+			z-index: 10000;
+			display: none;
+		}
+
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
+			100% {
+				transform: rotate(360deg);
+			}
+		}
 
         /* Adjustments for smaller screens */
         @media (max-width: 768px) {
@@ -70,21 +93,32 @@
 	// Create the chat bubble
 	var chatBubble = document.createElement("div");
 	chatBubble.id = "chatbotBubble";
-	chatBubble.innerHTML = `<img src="https://dialoggpt.io/assets/chat_icon.png" style="height: ${smallIconSize}; width: ${smallIconSize};">`;
+	chatBubble.innerHTML = `<img src="https://dialoggpt.io/assets/chat_icon.png" loading="lazy" style="height: ${smallIconSize}; width: ${smallIconSize};">`;
 
 	document.body.appendChild(chatBubble);
 
+	var loader = document.createElement("div");
+	loader.className = "roundLoader";
+	document.body.appendChild(loader);
+
 	// Create the iframe
+	var isIframeLoaded = false;
 	var iframe = document.createElement("iframe");
 	iframe.id = "chatbotIframe";
 	iframe.src =
-		"https://dialoggpt.io/iframe/" + chatbotID + "?source=chat-bubble";
+		"http://192.168.1.2:3000/iframe/" + chatbotID + "?source=chat-bubble";
+	iframe.loading = "lazy";
+	iframe.onload = function () {
+		loader.style.display = "none";
+		isIframeLoaded = true;
+	};
+
 	document.body.appendChild(iframe);
 
 	function setChatBubbleAppearance() {
 		if (window.chatbotSettings && window.chatbotSettings.chatIcon) {
 			chatBubble.style.backgroundColor = "transparent"; // Ensure the background is transparent
-			chatBubble.innerHTML = `<img src="${window.chatbotSettings.chatIcon}" style="height: ${largeIconSize}; width: ${largeIconSize}; object-fit: fill; border-radius: 50%;">`;
+			chatBubble.innerHTML = `<img src="${window.chatbotSettings.chatIcon}" loading="lazy" style="height: ${largeIconSize}; width: ${largeIconSize}; object-fit: fill; border-radius: 50%;">`;
 		} else {
 			// Check if window.chatbotSettings exists before trying to access chatBubbleColor
 			var bgColor =
@@ -92,7 +126,7 @@
 					? window.chatbotSettings.chatBubbleColor
 					: "#000000";
 			chatBubble.style.backgroundColor = bgColor;
-			chatBubble.innerHTML = `<img src="https://dialoggpt.io/assets/chat_icon.png" style="height: ${smallIconSize}; width: ${smallIconSize};">`;
+			chatBubble.innerHTML = `<img src="https://dialoggpt.io/assets/chat_icon.png" loading="lazy" style="height: ${smallIconSize}; width: ${smallIconSize};">`;
 		}
 	}
 	function cleanupEventListeners() {
@@ -100,17 +134,23 @@
 	}
 	function handleChatBubbleClick() {
 		var iframe = document.getElementById("chatbotIframe");
+		loader.style.display = "block"; // Hide the loader
+
 		if (iframe.style.display === "none" || iframe.style.display === "") {
 			iframe.style.display = "block";
+			if (isIframeLoaded) {
+				loader.style.display = "none";
+			}
 			var bgColor =
 				window.chatbotSettings && window.chatbotSettings.chatBubbleColor
 					? window.chatbotSettings.chatBubbleColor
 					: "#000000";
 			chatBubble.style.backgroundColor = bgColor;
 			chatBubble.style.backgroundColor = bgColor;
-			chatBubble.innerHTML = `<img src="https://dialoggpt.io/assets/down_arrow_white.png" style="height: 32px; width: 32px;">`; // Down arrow icon when iframe is visible
+			chatBubble.innerHTML = `<img src="https://dialoggpt.io/assets/down_arrow_white.png" loading="lazy" style="height: 32px; width: 32px;">`; // Down arrow icon when iframe is visible
 		} else {
 			iframe.style.display = "none";
+			loader.style.display = "none"; // Hide the loader
 			setChatBubbleAppearance(); // Reset the chat bubble's appearance
 		}
 	}

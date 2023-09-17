@@ -155,7 +155,7 @@ const SignInPage = () => {
 							src="/assets/google_icon.png"
 							alt={"Google"}
 							title={"Google"}
-							loading="eager"
+							loading="lazy"
 							height={24}
 							width={24}
 						></Image>
@@ -172,7 +172,7 @@ const SignInPage = () => {
 							src="/assets/apple_logo.png"
 							alt={"Google"}
 							title={"Google"}
-							loading="eager"
+							loading="lazy"
 							height={24}
 							width={24}
 						></Image>
