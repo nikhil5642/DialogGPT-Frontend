@@ -95,9 +95,10 @@
 			chatBubble.innerHTML = `<img src="https://dialoggpt.io/assets/chat_icon.png" style="height: ${smallIconSize}; width: ${smallIconSize};">`;
 		}
 	}
-
-	// Toggle iframe visibility and chat bubble icon on chat bubble click
-	chatBubble.addEventListener("click", function () {
+	function cleanupEventListeners() {
+		chatBubble.removeEventListener("click", handleChatBubbleClick);
+	}
+	function handleChatBubbleClick() {
 		var iframe = document.getElementById("chatbotIframe");
 		if (iframe.style.display === "none" || iframe.style.display === "") {
 			iframe.style.display = "block";
@@ -112,8 +113,11 @@
 			iframe.style.display = "none";
 			setChatBubbleAppearance(); // Reset the chat bubble's appearance
 		}
-	});
-
+	}
+	// Toggle iframe visibility and chat bubble icon on chat bubble click
+	cleanupEventListeners();
+	chatBubble.addEventListener("click", handleChatBubbleClick);
+	window.addEventListener("pagehide", cleanupEventListeners); // Example
 	// Fetch chatbot settings from the server
 	fetch("https://api.dialoggpt.io/public/fetch_chatbot_interface", {
 		method: "POST",

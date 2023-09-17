@@ -56,7 +56,7 @@ export default function AccountScreen() {
 			<Head>
 				<title>Account</title>
 				<meta name="description" content="Your Account" />
-				<link rel="canonical" href="https://dialoggpt.io/home" />
+				<link rel="canonical" href="https://dialoggpt.io/account" />
 			</Head>
 			<div className={styles.accountScreenContainer}>
 				<h1 className={styles.accountHeader}>Account</h1>
