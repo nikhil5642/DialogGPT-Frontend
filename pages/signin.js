@@ -254,8 +254,8 @@ const SignInPage = () => {
 						<Image
 							className={styles.googleIcon}
 							src="/assets/github_icon.png"
-							alt={"Twitter"}
-							title={"Twitter"}
+							alt={"Github"}
+							title={"Github"}
 							loading="lazy"
 							height={24}
 							width={24}
