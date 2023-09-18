@@ -117,9 +117,10 @@ export default function Header() {
 						<li>
 							<a
 								href="/home#Demo"
-								onClick={() =>
-									trackEvent("demo_link_click", { source: "hamburger" })
-								}
+								onClick={() => {
+									setMenuVisible(false);
+									trackEvent("demo_link_click", { source: "hamburger" });
+								}}
 							>
 								Demo
 							</a>
@@ -127,9 +128,10 @@ export default function Header() {
 						<li>
 							<a
 								href="/pricing"
-								onClick={() =>
-									trackEvent("pricing_link_click", { source: "hamburger" })
-								}
+								onClick={() => {
+									setMenuVisible(false);
+									trackEvent("pricing_link_click", { source: "hamburger" });
+								}}
 							>
 								Pricing
 							</a>
@@ -137,9 +139,10 @@ export default function Header() {
 						<li>
 							<a
 								href="/my-chatbots"
-								onClick={() =>
-									trackEvent("my_chatbots_link_click", { source: "hamburger" })
-								}
+								onClick={() => {
+									setMenuVisible(false);
+									trackEvent("my_chatbots_link_click", { source: "hamburger" });
+								}}
 							>
 								My ChatBot's
 							</a>
@@ -148,18 +151,20 @@ export default function Header() {
 							{isUserAuthenticated ? (
 								<a
 									href="/account"
-									onClick={() =>
-										trackEvent("account_link_click", { source: "hamburger" })
-									}
+									onClick={() => {
+										setMenuVisible(false);
+										trackEvent("account_link_click", { source: "hamburger" });
+									}}
 								>
 									Account
 								</a>
 							) : (
 								<a
 									href="/signin"
-									onClick={() =>
-										trackEvent("login_link_click", { source: "hamburger" })
-									}
+									onClick={() => {
+										setMenuVisible(false);
+										trackEvent("login_link_click", { source: "hamburger" });
+									}}
 								>
 									Log In
 								</a>
