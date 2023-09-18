@@ -7,7 +7,7 @@ import { FirebaseFeatures } from "./feature-flags";
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyCJ8u8nMGdqmaPeq9NBG5_wFJiKaTAozhA",
-	authDomain: "chatbot-37637.firebaseapp.com",
+	authDomain: "auth.dialoggpt.io",
 	projectId: "chatbot-37637",
 	storageBucket: "chatbot-37637.appspot.com",
 	messagingSenderId: "570891403073",
