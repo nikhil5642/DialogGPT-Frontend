@@ -25,3 +25,22 @@
 		outline: none;
 	}
 }
+.inputTextArea.error {
+	border-color: #e53935;
+}
+
+/* Error styling */
+.container > div {
+	color: #e53935;
+	padding-top: 5px;
+	font-size: 14px;
+	font-weight: 500; /* Slightly bolder to emphasize the error */
+}
+
+/* Optional: Add a small icon or indicator for the error message */
+.container > div::before {
+	content: "⚠";
+	margin-right: 5px;
+	font-weight: bold;
+	vertical-align: middle;
+}
