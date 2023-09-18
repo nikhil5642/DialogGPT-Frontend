@@ -7,6 +7,8 @@ import {
 	OAuthProvider,
 	onAuthStateChanged,
 	signInWithEmailAndPassword,
+	TwitterAuthProvider,
+	GithubAuthProvider,
 } from "firebase/auth";
 import styles from "./styles/signin.module.scss"; // Import the SCSS module
 import Image from "next/image";
@@ -42,18 +44,20 @@ const SignInPage = () => {
 	const [password, setPassword] = useState("");
 	const router = useRouter();
 	const auth = getAuth();
-	const provider = new GoogleAuthProvider();
 	const { showLoader, hideLoader } = useContext(LoaderContext);
 	const { isConfigLoaded, remoteConfig } = useFirebase();
 	const [featureVisibility, setFeatureVisibility] = useState({
 		google: true,
 		apple: false,
 		email: false,
+		twitter: false,
+		github: false,
 	});
 
 	useEffect(() => {
 		if (isConfigLoaded && remoteConfig) {
 			setFeatureVisibility({
+				...featureVisibility,
 				google: getValue(
 					remoteConfig,
 					FirebaseFeatures.SHOW_GOOGLE_LOGIN,
@@ -65,6 +69,14 @@ const SignInPage = () => {
 				email: getValue(
 					remoteConfig,
 					FirebaseFeatures.SHOW_EMAIL_LOGIN,
+				).asBoolean(),
+				twitter: getValue(
+					remoteConfig,
+					FirebaseFeatures.SHOW_TWITTER_LOGIN,
+				).asBoolean(),
+				github: getValue(
+					remoteConfig,
+					FirebaseFeatures.SHOW_GITHUB_LOGIN,
 				).asBoolean(),
 			});
 		}
@@ -101,6 +113,8 @@ const SignInPage = () => {
 		showLoader("Logging you in...");
 		storeCookie("authInProgress", "true");
 		trackEvent("login-google-initated");
+		const provider = new GoogleAuthProvider();
+
 		try {
 			await signInWithRedirect(auth, provider);
 			trackEvent("login-google-success");
@@ -124,6 +138,42 @@ const SignInPage = () => {
 			.catch(() => {
 				showErrorToast("Error logging you in!");
 				trackEvent("login-apple-failure");
+				hideLoader();
+				removeCookie("authInProgress");
+			});
+	};
+	const handleSignInWithTwitter = async () => {
+		const provider = new TwitterAuthProvider();
+		showLoader("Logging you in...");
+		trackEvent("login-twitter-initated");
+		signInWithPopup(auth, provider)
+			.then((userCredential) => {
+				const user = userCredential.user;
+				trackEvent("login-twitter-success");
+			})
+			.catch((e) => {
+				showErrorToast("Error logging you in!");
+				console.log("Error logging you in!", e);
+				trackEvent("login-twitter-failure");
+				hideLoader();
+				removeCookie("authInProgress");
+			});
+	};
+	const handleSignInWithGithub = async () => {
+		const provider = new GithubAuthProvider();
+		showLoader("Logging you in...");
+		trackEvent("login-github-initated");
+		signInWithPopup(auth, provider)
+			.then((userCredential) => {
+				const user = userCredential.user;
+				trackEvent("login-github-success");
+			})
+			.catch((e) => {
+				showErrorToast("Error logging you in!");
+				console.log("Error logging you in!", e.code);
+				trackEvent("login-github-failure");
+				hideLoader();
+				removeCookie("authInProgress");
 			});
 	};
 
@@ -170,13 +220,47 @@ const SignInPage = () => {
 						<Image
 							className={styles.appleIcon}
 							src="/assets/apple_logo.png"
-							alt={"Google"}
-							title={"Google"}
+							alt={"Apple"}
+							title={"Apple"}
 							loading="lazy"
 							height={24}
 							width={24}
 						></Image>
 						<p className={styles.googleText}>Sign in with Apple</p>
+					</button>
+				)}
+				{featureVisibility.twitter && (
+					<button
+						className={styles.googleButton}
+						onClick={handleSignInWithTwitter}
+					>
+						<Image
+							className={styles.googleIcon}
+							src="/assets/twitter_icon.png"
+							alt={"Twitter"}
+							title={"Twitter"}
+							loading="lazy"
+							height={24}
+							width={24}
+						></Image>
+						<p className={styles.googleText}>Sign in with Twitter</p>
+					</button>
+				)}
+				{featureVisibility.github && (
+					<button
+						className={styles.googleButton}
+						onClick={handleSignInWithGithub}
+					>
+						<Image
+							className={styles.googleIcon}
+							src="/assets/github_icon.png"
+							alt={"Twitter"}
+							title={"Twitter"}
+							loading="lazy"
+							height={24}
+							width={24}
+						></Image>
+						<p className={styles.googleText}>Sign in with Github</p>
 					</button>
 				)}
 

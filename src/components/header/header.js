@@ -29,7 +29,8 @@ export default function Header() {
 					src="/assets/dialog_gpt_logo_with_text.png"
 					alt={"DialogGPT"}
 					title={"DialogGPT"}
-					loading="lazy"
+					loading="eager"
+					priority={true}
 					height={80}
 					width={300}
 				></Image>
