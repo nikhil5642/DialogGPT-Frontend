@@ -39,7 +39,7 @@ export default function Header() {
 			<div className={styles.linksContainer}>
 				<a
 					className={styles.selectionItem}
-					href="/home"
+					href="/home#Demo"
 					onClick={() => trackEvent("demo_link_click", { source: "header" })}
 				>
 					Demo
@@ -116,7 +116,7 @@ export default function Header() {
 					<ul>
 						<li>
 							<a
-								href="/home"
+								href="/home#Demo"
 								onClick={() =>
 									trackEvent("demo_link_click", { source: "hamburger" })
 								}

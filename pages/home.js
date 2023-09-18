@@ -11,6 +11,14 @@ function HomeScreen() {
 
 	useEffect(() => {
 		trackScreenView("HomeScreen", "HomeScreen");
+		if (window.location.hash === "#Demo") {
+			const videoDemoElement = document.getElementById("Demo");
+			videoDemoElement &&
+				videoDemoElement.scrollIntoView({
+					behavior: "smooth",
+					block: "start",
+				});
+		}
 	}, []);
 	function onCreateChatbot() {
 		const isAuthenticated = AuthService.isAuthenticated();
@@ -69,7 +77,7 @@ function HomeScreen() {
 						Create your Chatbot Now ➤
 					</button>
 				</div>
-				<div className={styles.videoDemoContainer}>
+				<div className={styles.videoDemoContainer} id="Demo">
 					<h2>Video Demo</h2>
 					<p>
 						Creating a chatbot for <span>Product Hunt</span> by crawling the
