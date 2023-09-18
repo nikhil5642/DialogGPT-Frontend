@@ -3,22 +3,14 @@ import Head from "next/head";
 import AuthService from "../src/helper/AuthService";
 import { useTrackEvent } from "../src/helper/event-tracker";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 import Image from "next/image";
 function HomeScreen() {
 	const { trackEvent, trackScreenView } = useTrackEvent(); // Extract analytics instance from context
 	const [iframeLoading, setIframeLoading] = useState(true);
-
 	useEffect(() => {
 		trackScreenView("HomeScreen", "HomeScreen");
-		if (window.location.hash === "#Demo") {
-			const videoDemoElement = document.getElementById("Demo");
-			videoDemoElement &&
-				videoDemoElement.scrollIntoView({
-					behavior: "smooth",
-					block: "start",
-				});
-		}
 	}, []);
 	function onCreateChatbot() {
 		const isAuthenticated = AuthService.isAuthenticated();
