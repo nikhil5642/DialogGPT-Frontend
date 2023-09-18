@@ -106,7 +106,7 @@
 	justify-content: flex-start; // This will align the child elements to the top
 	margin-top: 5rem;
 	padding-top: 5vh;
-	padding-bottom: 3rem;
+	padding-bottom: 25vh;
 	padding-left: 1rem;
 	padding-right: 1rem;
 	text-align: center;
@@ -130,7 +130,7 @@
 	padding-left: 1rem;
 	padding-right: 1rem;
 	padding-bottom: 1rem;
-	margin-top: 5rem;
+	padding-top: 5vh;
 	text-align: center;
 	p {
 		margin-top: 1rem;
@@ -176,6 +176,11 @@
 		height: calc(50vh - 60px); // Adjusted for mobile
 	}
 	.topOverviewContainer {
+		margin-top: 1rem;
+		padding-top: 0;
+		padding-bottom: 5vh;
+	}
+	.videoDemoContainer {
 		margin-top: 1rem;
 		padding-top: 0;
 		padding-bottom: 5vh;
