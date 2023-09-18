@@ -1,6 +1,6 @@
 import styles from "./website-loader.module.scss";
 import { useState, useEffect } from "react";
-import EditBoxComponent from "../../editbox-component/editbox-component";
+import URLEditBoxComponent from "../../url-editbox-component/url-editbox-component";
 import { postRequest } from "../../../helper/http-helper";
 import { generateRandomString } from "../chatbot-source-editor.utits";
 import LoadingButton from "src/components/loading-button/loading-button";
@@ -59,7 +59,7 @@ export default function WebisteLoader({ bot_id, data, setData }) {
 
 			<div className={styles.urlCrawlerView}>
 				<div className={styles.fetchLinksInput}>
-					<EditBoxComponent
+					<URLEditBoxComponent
 						placeholder={"https://www.example.com"}
 						value={url}
 						onChange={(value) => setUrl(value)}
@@ -83,7 +83,7 @@ export default function WebisteLoader({ bot_id, data, setData }) {
 					.filter((item) => item.source_type === "url")
 					.map((item) => (
 						<li key={item.url} className={styles.urlItem}>
-							<EditBoxComponent
+							<URLEditBoxComponent
 								placeholder={"https://www.example.com"}
 								value={item.source}
 								onChange={(value) => handleEditUrl(item.content_id, value)}

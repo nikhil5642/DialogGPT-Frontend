@@ -12,14 +12,17 @@ import LoaderContext from "../loader/loader-context";
 import EmbedComponent from "../chatbot-embed/chatbot-embed";
 import { chatInit } from "../chatbot-settings/chat-interface-settings/chat-interface-settings.utils";
 import { ChatBotSource } from "../chatbot-component/chatbot-component.utils";
-import { showErrorToast } from "../../helper/toast-helper";
+import { showErrorToast, showSuccessToast } from "../../helper/toast-helper";
 import { useTrackEvent } from "src/helper/event-tracker";
+import URLEditBoxComponent from "../url-editbox-component/url-editbox-component";
+import EditBoxComponent from "../editbox-component/editbox-component";
+import LoadingButton from "../loading-button/loading-button";
 
 export default function ChatBotEditor({ botID, page }) {
 	const { trackEvent, trackScreenView } = useTrackEvent();
-
 	const [selector, setSelector] = useState(ChatBotOptionsEnum.CHATBOT);
 	const { showLoader, hideLoader } = useContext(LoaderContext);
+	const [nameEditing, setNameEditing] = useState(false);
 	const [chatbotData, setChatbotData] = useState({
 		id: botID,
 		name: "",
@@ -129,7 +132,47 @@ export default function ChatBotEditor({ botID, page }) {
 
 	return (
 		<div className={styles.chatBotEditorContainer}>
-			<h1 className={styles.chatbotEditorTitleHeading}>{chatbotData.name}</h1>
+			{nameEditing ? (
+				<div className={styles.chatbotEditorTitleEditContainer}>
+					<EditBoxComponent
+						value={chatbotData.name}
+						onChange={(val) => setChatbotData({ ...chatbotData, name: val })}
+					/>
+					<img
+						src="/assets/save_icon.png"
+						loading="lazy"
+						onClick={() => {
+							postRequest("/update_chatbot_name", {
+								botID: chatbotData.id,
+								chatBotName: chatbotData.name,
+							})
+								.then(() => {
+									showSuccessToast("Name Updated");
+									trackEvent("chatbot_name_update_success", {
+										botID: chatbotData.id,
+										name: chatbotData.name,
+									});
+									setNameEditing(false);
+								})
+								.catch(() => {
+									showErrorToast("Error Updating Information");
+									trackEvent("chatbot_name_update_failure", {
+										botID: chatbotData.id,
+									});
+								});
+						}}
+					/>
+				</div>
+			) : (
+				<div className={styles.chatbotEditorTitleContainer}>
+					<h1>{chatbotData.name}</h1>
+					<img
+						src="/assets/edit_icon.png"
+						loading="lazy"
+						onClick={() => setNameEditing(true)}
+					/>
+				</div>
+			)}
 
 			<ChatBotOptionSelector selector={selector} setSelector={setSelector} />
 
