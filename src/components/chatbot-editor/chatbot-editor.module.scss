@@ -82,20 +82,24 @@
 	margin-top: 32px;
 	padding: 40px 64px;
 	border-radius: 12px;
+	max-width: 480px;
 	text-align: center;
+	align-content: center;
+	justify-content: center;
 	background-color: #f7f9fc; // light background color to offset from the general background
 
 	h2 {
 		font-size: 28px;
 		color: #2e3d50; // Darker color for emphasis
 		font-weight: 600; // Slightly bold
-		margin-bottom: 16px; // Spacing
+		margin-bottom: 32px; // Spacing
 	}
 
 	p {
+		text-align: start;
 		font-size: 20px;
 		color: #5a6b7d; // A subtle grey-blue
-		margin-top: 8px;
+		margin-top: 16px;
 		margin-bottom: 24px; // More spacing to distance it from progress bar
 		&:last-child {
 			margin-top: 24px; // Extra spacing for the last instruction
@@ -105,6 +109,28 @@
 		align-items: center;
 		align-self: center;
 		justify-content: center;
+	}
+	ol {
+		text-align: center;
+		padding-left: 1em;
+		list-style-type: decimal;
+
+		li {
+			text-align: start;
+			margin-bottom: 0.5em;
+			font-size: 20px;
+			color: #5a6b7d; // A subtle grey-blue
+
+			ul {
+				li {
+					margin-top: 8px;
+					text-align: start;
+					margin-bottom: 0.5em;
+					font-size: 18px;
+					color: #5a6b7d; // A subtle grey-blue
+				}
+			}
+		}
 	}
 }
 
@@ -117,6 +143,10 @@
 	position: relative;
 	margin-top: 32px;
 	border: 1px solid #e5e7eb;
+}
+.last_trained {
+	font-size: 20px;
+	color: #5a6b7d; // A subtle grey-blue
 }
 
 @media only screen and (max-width: 720px) {

@@ -14,9 +14,8 @@ import { chatInit } from "../chatbot-settings/chat-interface-settings/chat-inter
 import { ChatBotSource } from "../chatbot-component/chatbot-component.utils";
 import { showErrorToast, showSuccessToast } from "../../helper/toast-helper";
 import { useTrackEvent } from "src/helper/event-tracker";
-import URLEditBoxComponent from "../url-editbox-component/url-editbox-component";
 import EditBoxComponent from "../editbox-component/editbox-component";
-import LoadingButton from "../loading-button/loading-button";
+import { formatTimestamp } from "../../helper/utils";
 
 export default function ChatBotEditor({ botID, page }) {
 	const { trackEvent, trackScreenView } = useTrackEvent();
@@ -198,7 +197,23 @@ export default function ChatBotEditor({ botID, page }) {
 						<div className={styles.chatBotUntrainedModelContainer}>
 							<img src="/assets/ic_error.png"></img>
 							<h2>Chatbot is not trained</h2>
-							<p>Please add the sources and train the ChatBot</p>
+							<p>Follow the below steps to train your first chatbot.</p>
+							<ol>
+								<li>
+									Navigate to the <strong>Sources</strong> section.
+								</li>
+								<li>
+									Add your desired content:
+									<ul>
+										<li>Enter plain text or sentences.</li>
+										<li>Provide a website URL for content extraction.</li>
+									</ul>
+								</li>
+								<li>
+									Click the <strong>Train</strong> button to train the ChatBot
+									on the provided data.
+								</li>
+							</ol>
 						</div>
 					</>
 				)}
@@ -207,6 +222,9 @@ export default function ChatBotEditor({ botID, page }) {
 				chatbotData.status === "trained" && (
 					<>
 						{trackScreenView("ChatBotTrainedScreen", "ChatBotEditorScreen")}
+						<p className={styles.last_trained}>
+							Last Trained: {formatTimestamp(chatbotData.last_updated)}
+						</p>
 						<div className={styles.chatBottrainedModelContainer}>
 							<ChatBotComponent botID={botID} config={config} />
 						</div>
