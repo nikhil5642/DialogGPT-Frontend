@@ -4,6 +4,7 @@ import styles from "./general-settings.module.scss";
 import SettingsComponent from "../../settings-component/settings-component";
 import { showErrorToast, showSuccessToast } from "../../../helper/toast-helper";
 import { useTrackEvent } from "../../../helper/event-tracker";
+import { formatTimestamp } from "../../../helper/utils";
 
 export default function GeneralSettings({ data, setData }) {
 	const [loader, setLoader] = useState(false);
@@ -52,24 +53,4 @@ export default function GeneralSettings({ data, setData }) {
 			}}
 		/>
 	);
-}
-
-function formatTimestamp(timestamp) {
-	const date = new Date(timestamp);
-
-	// Extracting date components
-	const options = {
-		month: "short",
-		day: "numeric",
-		year: "numeric",
-		hour: "2-digit",
-		minute: "2-digit",
-		timeZoneName: "short",
-	};
-	const formattedDate = new Intl.DateTimeFormat("en-US", options).format(date);
-
-	// Extracting the timezone offset
-	const offset = date.getTimezoneOffset();
-	const absoluteOffset = Math.abs(offset);
-	return formattedDate;
 }

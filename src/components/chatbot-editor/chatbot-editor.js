@@ -5,7 +5,7 @@ import {
 	ChatBotOptionSelector,
 	ChatBotOptionsEnum,
 } from "./chatbot-editor.utits";
-import { postRequest } from "../../../src/helper/http-helper";
+import { getRequest, postRequest } from "../../../src/helper/http-helper";
 import ChatBotComponent from "../chatbot-component/chatbot-component";
 import ChatBotSettings from "../chatbot-settings/chatbot-settings";
 import LoaderContext from "../loader/loader-context";
@@ -14,15 +14,15 @@ import { chatInit } from "../chatbot-settings/chat-interface-settings/chat-inter
 import { ChatBotSource } from "../chatbot-component/chatbot-component.utils";
 import { showErrorToast, showSuccessToast } from "../../helper/toast-helper";
 import { useTrackEvent } from "src/helper/event-tracker";
-import URLEditBoxComponent from "../url-editbox-component/url-editbox-component";
 import EditBoxComponent from "../editbox-component/editbox-component";
-import LoadingButton from "../loading-button/loading-button";
+import { formatTimestamp } from "../../helper/utils";
 
 export default function ChatBotEditor({ botID, page }) {
 	const { trackEvent, trackScreenView } = useTrackEvent();
 	const [selector, setSelector] = useState(ChatBotOptionsEnum.CHATBOT);
 	const { showLoader, hideLoader } = useContext(LoaderContext);
 	const [nameEditing, setNameEditing] = useState(false);
+	const [messageCredits, setMessageCredits] = useState(0);
 	const [chatbotData, setChatbotData] = useState({
 		id: botID,
 		name: "",
@@ -130,6 +130,25 @@ export default function ChatBotEditor({ botID, page }) {
 		};
 	}, [chatbotData.status]);
 
+	useEffect(() => {
+		async function fetchCredits() {
+			getRequest("/message_credits")
+				.then((res) => {
+					setMessageCredits(res.result.message_credits);
+				})
+				.catch(() => {});
+		}
+
+		// Fetch once immediately
+		fetchCredits();
+
+		// Set up interval to fetch every 5 seconds
+		const intervalId = setInterval(fetchCredits, 3000);
+
+		// Clear the interval when the component is unmounted
+		return () => clearInterval(intervalId);
+	}, []);
+
 	return (
 		<div className={styles.chatBotEditorContainer}>
 			{nameEditing ? (
@@ -198,7 +217,23 @@ export default function ChatBotEditor({ botID, page }) {
 						<div className={styles.chatBotUntrainedModelContainer}>
 							<img src="/assets/ic_error.png"></img>
 							<h2>Chatbot is not trained</h2>
-							<p>Please add the sources and train the ChatBot</p>
+							<p>Follow the below steps to train your first chatbot.</p>
+							<ol>
+								<li>
+									Navigate to the <strong>Sources</strong> section.
+								</li>
+								<li>
+									Add your desired content:
+									<ul>
+										<li>Enter plain text or sentences.</li>
+										<li>Provide a website URL for content extraction.</li>
+									</ul>
+								</li>
+								<li>
+									Click the <strong>Train</strong> button to train the ChatBot
+									on the provided data.
+								</li>
+							</ol>
 						</div>
 					</>
 				)}
@@ -207,8 +242,17 @@ export default function ChatBotEditor({ botID, page }) {
 				chatbotData.status === "trained" && (
 					<>
 						{trackScreenView("ChatBotTrainedScreen", "ChatBotEditorScreen")}
+
 						<div className={styles.chatBottrainedModelContainer}>
-							<ChatBotComponent botID={botID} config={config} />
+							<p className={styles.last_trained}>
+								Last Trained: {formatTimestamp(chatbotData.last_updated)}
+							</p>
+							<div className={styles.chatBotComponentContainer}>
+								<ChatBotComponent botID={botID} config={config} />
+							</div>
+							<p className={styles.message_credits}>
+								{messageCredits} {"Message Credits remaining."}
+							</p>
 						</div>
 					</>
 				)}

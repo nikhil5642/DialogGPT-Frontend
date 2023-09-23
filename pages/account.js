@@ -60,12 +60,19 @@ export default function AccountScreen() {
 			</Head>
 			<div className={styles.accountScreenContainer}>
 				<h1 className={styles.accountHeader}>Account</h1>
-				<div className={styles.emailContainer}>
-					<h3>Usage</h3>
-					<p>{"Messages Consumed"}</p>
+				<div className={styles.itemContainer}>
+					<h5>Usage</h5>
+					<p>
+						{"Messages Consumed: "}
+						<strong>
+							{accountInfo.message_used}
+							{"/"}
+							{accountInfo.message_limit}
+						</strong>
+					</p>
 				</div>
-				<div className={styles.emailContainer}>
-					<h3>Your Email</h3>
+				<div className={styles.itemContainer}>
+					<h5>Your Email</h5>
 					<p>{accountInfo.email}</p>
 				</div>
 
