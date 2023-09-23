@@ -222,11 +222,14 @@ export default function ChatBotEditor({ botID, page }) {
 				chatbotData.status === "trained" && (
 					<>
 						{trackScreenView("ChatBotTrainedScreen", "ChatBotEditorScreen")}
-						<p className={styles.last_trained}>
-							Last Trained: {formatTimestamp(chatbotData.last_updated)}
-						</p>
+
 						<div className={styles.chatBottrainedModelContainer}>
-							<ChatBotComponent botID={botID} config={config} />
+							<p className={styles.last_trained}>
+								Last Trained: {formatTimestamp(chatbotData.last_updated)}
+							</p>
+							<div className={styles.chatBotComponentContainer}>
+								<ChatBotComponent botID={botID} config={config} />
+							</div>
 						</div>
 					</>
 				)}
