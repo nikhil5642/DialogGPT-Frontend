@@ -5,7 +5,7 @@ import {
 	ChatBotOptionSelector,
 	ChatBotOptionsEnum,
 } from "./chatbot-editor.utits";
-import { postRequest } from "../../../src/helper/http-helper";
+import { getRequest, postRequest } from "../../../src/helper/http-helper";
 import ChatBotComponent from "../chatbot-component/chatbot-component";
 import ChatBotSettings from "../chatbot-settings/chatbot-settings";
 import LoaderContext from "../loader/loader-context";
@@ -22,6 +22,7 @@ export default function ChatBotEditor({ botID, page }) {
 	const [selector, setSelector] = useState(ChatBotOptionsEnum.CHATBOT);
 	const { showLoader, hideLoader } = useContext(LoaderContext);
 	const [nameEditing, setNameEditing] = useState(false);
+	const [messageCredits, setMessageCredits] = useState(0);
 	const [chatbotData, setChatbotData] = useState({
 		id: botID,
 		name: "",
@@ -129,6 +130,25 @@ export default function ChatBotEditor({ botID, page }) {
 		};
 	}, [chatbotData.status]);
 
+	useEffect(() => {
+		async function fetchCredits() {
+			getRequest("/message_credits")
+				.then((res) => {
+					setMessageCredits(res.result.message_credits);
+				})
+				.catch(() => {});
+		}
+
+		// Fetch once immediately
+		fetchCredits();
+
+		// Set up interval to fetch every 5 seconds
+		const intervalId = setInterval(fetchCredits, 3000);
+
+		// Clear the interval when the component is unmounted
+		return () => clearInterval(intervalId);
+	}, []);
+
 	return (
 		<div className={styles.chatBotEditorContainer}>
 			{nameEditing ? (
@@ -230,6 +250,9 @@ export default function ChatBotEditor({ botID, page }) {
 							<div className={styles.chatBotComponentContainer}>
 								<ChatBotComponent botID={botID} config={config} />
 							</div>
+							<p className={styles.message_credits}>
+								{messageCredits} {"Message Credits remaining."}
+							</p>
 						</div>
 					</>
 				)}
