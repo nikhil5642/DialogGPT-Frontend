@@ -31,19 +31,29 @@ export default function ChatBotComponent({ config }) {
 			);
 		},
 	};
+	const getSplittedParagraphs = (text) => {
+		const lines = text
+			.split("\n\n")
+			.map((line) => line.replace(/^\n+|\n+$/g, "").trim())
+			.filter((line) => line.trim() !== "");
+		return lines;
+	};
 	const getSplittedMessages = (text) => {
-		const lines = text.split("\n").filter((line) => line.trim() !== "");
+		const lines = text
+			.split("\n")
+			.map((line) => line.replace(/^\n+|\n+$/g, "").trim())
+			.filter((line) => line.trim() !== "");
 		return lines;
 	};
 
 	const addMessage = (text, messageType) => {
-		const lines = getSplittedMessages(text);
+		const lines = getSplittedParagraphs(text);
 		// Add each line as a separate message with a delay
 		lines.forEach((line, index) => {
 			setTimeout(() => {
 				setMessages((prevMessages) => [
 					...prevMessages,
-					{ id: prevMessages.length + index, text: line, type: messageType },
+					{ id: prevMessages.length + 1, text: line, type: messageType },
 				]);
 			}, index * 500); // 0.5s delay between each message
 		});
@@ -52,10 +62,10 @@ export default function ChatBotComponent({ config }) {
 	const initialView = () => {
 		setMessages([]);
 		const lines = getSplittedMessages(initialMessage);
-		lines.forEach((line, index) => {
+		lines.forEach((line, _) => {
 			setMessages((prevMessages) => [
 				...prevMessages,
-				{ id: prevMessages.length + index, text: line, type: "incoming" },
+				{ id: prevMessages.length + 1, text: line, type: "incoming" },
 			]);
 		});
 
@@ -95,9 +105,9 @@ export default function ChatBotComponent({ config }) {
 		}
 		if (newMessage.trim() !== "") {
 			if (!sending) {
-				setMessages([
-					...messages,
-					{ id: messages.length, text: newMessage, type: "outgoing" },
+				setMessages((prevMessages) => [
+					...prevMessages,
+					{ id: prevMessages.length + 1, text: newMessage, type: "outgoing" },
 				]);
 				setNewMessage("");
 				setSending(true);
