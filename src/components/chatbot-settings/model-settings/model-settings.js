@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { postRequest } from "../../../helper/http-helper";
+import { getRequest, postRequest } from "../../../helper/http-helper";
 import styles from "./model-settings.module.scss";
 import SettingsComponent from "../../settings-component/settings-component";
 import { showErrorToast, showSuccessToast } from "../../../helper/toast-helper";
 import { GPTModel } from "./model-settings.utils";
 import { useTrackEvent } from "../../../helper/event-tracker";
+import { PricingPlans } from "src/components/pricing-plan/pricing-plans.utils";
+
 export default function ModelSettings({ chatbotID }) {
 	const { trackEvent } = useTrackEvent();
 	const [loader, setLoader] = useState(false);
@@ -15,6 +17,17 @@ export default function ModelSettings({ chatbotID }) {
 		model: GPTModel.GPT_3_5_turbo,
 		temperature: 0,
 	});
+	const [currentPlan, setCurrentPlan] = useState(null);
+	useEffect(() => {
+		getRequest("/current_subscription_plan")
+			.then((res) => {
+				setCurrentPlan(res?.result);
+				trackEvent("current_subscription_plan_loaded", { plan: res?.result });
+			})
+			.catch(() => {
+				trackEvent("current_subscription_plan_load_failed", {});
+			});
+	}, []);
 	useEffect(() => {
 		if (chatbotID) {
 			setData({ ...data, botID: chatbotID });
@@ -74,7 +87,12 @@ export default function ModelSettings({ chatbotID }) {
 						<option value={GPTModel.GPT_3_5_turbo}>
 							{GPTModel.GPT_3_5_turbo}
 						</option>
-						<option value={GPTModel.GPT_4}>{GPTModel.GPT_4}</option>
+						<option
+							value={GPTModel.GPT_4}
+							disabled={currentPlan !== PricingPlans.PRO}
+						>
+							{GPTModel.GPT_4}
+						</option>
 					</select>
 					<p>
 						GPT-4 is more accurate but slower and 20x costlier than

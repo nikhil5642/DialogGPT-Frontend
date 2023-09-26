@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, use } from "react";
 
 import styles from "./chatbot-source-editor.module.scss";
 import {
@@ -26,15 +26,50 @@ export default function ChatBotSourceEditor({
 	setChatbotInfoData,
 }) {
 	const router = useRouter();
+	const [selector, setSelector] = useState(SourceOptionsEnum.TEXT);
 	const { showLoader, hideLoader } = useContext(LoaderContext);
 	const [data, setData] = useState([]);
 	const [trainingData, setTrainingData] = useState(initialData);
+	const [totalChars, setTotalChars] = useState(0);
+	const [trainingError, setTrainingError] = useState("");
 	const { trackEvent, trackScreenView } = useTrackEvent();
+
+	useEffect(() => {
+		const pathWithoutQuery = router.asPath.split("?")[0];
+
+		// Split the path to get the segments
+		const segments = pathWithoutQuery.split("/");
+		const lastSegment = segments[segments.length - 1];
+		const secondLastSegment = segments[segments.length - 2];
+
+		let result;
+
+		if (
+			Object.values(SourceOptionsEnum).includes(lastSegment) &&
+			secondLastSegment === "sources"
+		) {
+			result = lastSegment;
+		} else if (
+			lastSegment === "sources" ||
+			!Object.values(SourceOptionsEnum).includes(lastSegment)
+		) {
+			result = SourceOptionsEnum.TEXT; // default value
+		}
+		setSelector(result);
+	}, []);
+
+	const handleSelection = (item) => {
+		setSelector(item); // Update internal state
+
+		const newPath = `/chatbot/${chatbotInfoData.id}/sources/${item}`;
+		router.push(newPath); // Update the URL
+	};
 
 	useEffect(() => {
 		const handleBeforeUnload = (e) => {
 			e.preventDefault();
-			e.returnValue = "Are you sure you want to leave or refresh this page?";
+			e.returnValue =
+				"Are you sure you want to leave this page? Any unsaved changes will be lost.";
 			trackEvent("chatbot-editor-before-unload");
 		};
 
@@ -77,8 +112,24 @@ export default function ChatBotSourceEditor({
 		setTrainingData(updatedTrainingData);
 	}, [data]);
 
+	useEffect(() => {
+		const charCount =
+			trainingData.texts.charLength +
+			trainingData.urls.charLength +
+			trainingData.qna.charLength +
+			trainingData.files.charLength;
+		setTotalChars(charCount);
+		if (charCount > 1000) {
+			setTrainingError("");
+		}
+	}, [trainingData]);
+
 	const trainChatBot = () => {
-		// showLoader("Training Chatbot...");
+		if (totalChars < 1000) {
+			setTrainingError("***Minimum 1000 characters required to train");
+			return;
+		}
+		showLoader("Training Chatbot...");
 		setChatbotInfoData({ ...chatbotInfoData, status: "training" });
 		postRequest("/train_chatbot", { botID: chatbotInfoData.id, data: data })
 			.then(() => {
@@ -122,11 +173,9 @@ export default function ChatBotSourceEditor({
 		}
 	}, [chatbotInfoData.id]);
 
-	const [selector, setSelector] = useState(SourceOptionsEnum.TEXT);
-
 	return (
 		<div className={styles.chatBotEditorContainer}>
-			<SourceSelector selector={selector} setSelector={setSelector} />
+			<SourceSelector selector={selector} handleSelection={handleSelection} />
 
 			{selector === SourceOptionsEnum.FILE && (
 				<>
@@ -189,13 +238,7 @@ export default function ChatBotSourceEditor({
 					</p>
 				)}
 				<h5>
-					Total Detected Characters:{" "}
-					<span>
-						{trainingData.texts.charLength +
-							trainingData.urls.charLength +
-							trainingData.qna.charLength +
-							trainingData.files.charLength}
-					</span>
+					Total Detected Characters: <span>{totalChars}</span>
 				</h5>
 				<div className={styles.trainButtonContainer}>
 					<LoadingButton
@@ -203,6 +246,9 @@ export default function ChatBotSourceEditor({
 						onClick={trainChatBot}
 					></LoadingButton>
 				</div>
+				{trainingError && (
+					<p className={styles.trainingError}>{trainingError}</p>
+				)}
 			</div>
 		</div>
 	);

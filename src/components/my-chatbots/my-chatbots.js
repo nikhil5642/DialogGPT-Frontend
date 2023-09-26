@@ -19,7 +19,7 @@ export default function MyChatBots() {
 		})
 			.then((res) => {
 				hideLoader();
-				window.location.href = `/chatbot/${res.chatbot_id}?page=sources`;
+				window.location.href = `/chatbot/${res.chatbot_id}/sources`;
 				trackEvent("create-new-chatbot-success", { name: res.chatbot_name });
 			})
 			.catch(() => {
@@ -40,7 +40,7 @@ export default function MyChatBots() {
 			trackEvent("chatbot-click-openened", { index: index });
 		}
 		// If within limit, navigate to the chatbot page
-		window.location.href = `/chatbot/${chatbotId}`;
+		window.location.href = `/chatbot/${chatbotId}/chatbots`;
 	}
 
 	useEffect(() => {

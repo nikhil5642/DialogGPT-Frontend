@@ -16,7 +16,7 @@ const SourceOptionLabels = {
 	[SourceOptionsEnum.QNA]: "Q&A",
 };
 
-export const SourceSelector = ({ selector, setSelector }) => {
+export const SourceSelector = ({ selector, handleSelection }) => {
 	const [sourceOptions, setSourceOptions] = useState([]);
 	const { isConfigLoaded, remoteConfig } = useFirebase();
 	useEffect(() => {
@@ -60,7 +60,7 @@ export const SourceSelector = ({ selector, setSelector }) => {
 					key={item}
 					text={getSourceLabel(item)}
 					isSelected={item === selector}
-					onClick={() => setSelector(item)}
+					onClick={() => handleSelection(item)}
 				/>
 			))}
 		</div>
