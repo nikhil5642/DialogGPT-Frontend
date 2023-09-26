@@ -198,7 +198,11 @@ export default function ChatBotEditor({ botID, page }) {
 				</div>
 			)}
 
-			<ChatBotOptionSelector selector={selector} setSelector={setSelector} />
+			<ChatBotOptionSelector
+				botID={chatbotData.id}
+				selector={selector}
+				setSelector={setSelector}
+			/>
 
 			{selector === ChatBotOptionsEnum.CHATBOT &&
 				chatbotData.status === "training" && (

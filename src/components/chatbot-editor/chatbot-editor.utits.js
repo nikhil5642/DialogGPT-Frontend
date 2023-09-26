@@ -14,7 +14,7 @@ const ChatBotOptionLabels = {
 	[ChatBotOptionsEnum.EMBED]: "Embed on Site",
 };
 
-export const ChatBotOptionSelector = ({ selector, setSelector }) => {
+export const ChatBotOptionSelector = ({ botID, selector, setSelector }) => {
 	const router = useRouter();
 	const sourceOptions = [
 		ChatBotOptionsEnum.CHATBOT,
@@ -23,19 +23,21 @@ export const ChatBotOptionSelector = ({ selector, setSelector }) => {
 		ChatBotOptionsEnum.EMBED,
 	];
 	const handleSelection = (item) => {
+		if (selector === ChatBotOptionsEnum.SOURCES) {
+			const isConfirmed = window.confirm(
+				"Are you sure you want to leave this page? Your changes will be lost.",
+			);
+			if (!isConfirmed) return;
+		}
 		// Update the internal state
 		setSelector(item);
 
-		// Update the URL's query parameter
-		router.push(
-			{
-				pathname: router.pathname,
-				query: { ...router.query, page: item },
-			},
-			undefined,
-			{ shallow: true },
-		); // Shallow routing: updates the URL without running data fetching methods again
+		// Construct the new pathname using the botID and the selected option
+		const newPathname = `/chatbot/${botID}/${item.toLowerCase()}`;
+
+		router.push(newPathname, undefined, { shallow: true });
 	};
+
 	return (
 		<div style={{ marginTop: "24px", marginBottom: "24px" }}>
 			{sourceOptions.map((item) => (
