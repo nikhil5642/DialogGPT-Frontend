@@ -5,6 +5,7 @@ import { postRequest } from "../../../helper/http-helper";
 import { generateRandomString } from "../chatbot-source-editor.utits";
 import LoadingButton from "src/components/loading-button/loading-button";
 import { useTrackEvent } from "src/helper/event-tracker";
+import { URLStatus, URLStatusText } from "./website-loader.utils";
 
 export default function WebisteLoader({ bot_id, data, setData }) {
 	const { trackEvent } = useTrackEvent();
@@ -34,20 +35,32 @@ export default function WebisteLoader({ bot_id, data, setData }) {
 				source_type: "url",
 				char_count: 0,
 				last_updated: "",
-				status: "newlyAdded",
+				status: URLStatus.NewlyAdded,
 			},
 		]);
 		trackEvent("url_added", { botID: bot_id });
 	};
+	const handleDeleteCancel = (id) => {
+		const updatedData = data.map((item) =>
+			item.content_id === id
+				? { ...item, status: URLStatus.NewlyAdded }
+				: { ...item },
+		);
+		setData(updatedData);
+	};
 	const handleDeleteUrl = (id) => {
-		const updatedData = data.filter((item) => item.content_id !== id);
+		const updatedData = data.map((item) =>
+			item.content_id === id
+				? { ...item, status: URLStatus.Removing }
+				: { ...item },
+		);
 		setData(updatedData);
 	};
 
 	const handleEditUrl = (id, newSource) => {
 		const updatedData = data.map((item) =>
 			item.content_id === id
-				? { ...item, source: newSource, status: "newlyAdded" }
+				? { ...item, source: newSource, status: URLStatus.NewlyAdded }
 				: { ...item },
 		);
 		setData(updatedData);
@@ -82,7 +95,8 @@ export default function WebisteLoader({ bot_id, data, setData }) {
 				{data
 					.filter((item) => item.source_type === "url")
 					.map((item) => (
-						<li key={item.url} className={styles.urlItem}>
+						<li key={item.content_id} className={styles.urlItem}>
+							<StatusItem item={item} />
 							<URLEditBoxComponent
 								placeholder={"https://www.example.com"}
 								value={item.source}
@@ -92,10 +106,26 @@ export default function WebisteLoader({ bot_id, data, setData }) {
 								<p className={styles.urlCharCount}>{item.char_count}</p>
 							)}
 							<button
-								onClick={() => handleDeleteUrl(item.content_id)}
+								onClick={() => {
+									item.status == URLStatus.Removing
+										? handleDeleteCancel(item.content_id)
+										: handleDeleteUrl(item.content_id);
+								}}
 								className={styles.urlItemButton}
 							>
-								<img src="/assets/bin.png" alt="Delete" />
+								{item.status == URLStatus.Removing ? (
+									<img
+										className={styles.closeURLItem}
+										src="/assets/close.png"
+										alt="Close"
+									/>
+								) : (
+									<img
+										className={styles.deleteURLItem}
+										src="/assets/bin.png"
+										alt="Delete"
+									/>
+								)}
 							</button>
 						</li>
 					))}
@@ -112,5 +142,16 @@ export default function WebisteLoader({ bot_id, data, setData }) {
 				<LoadingButton title={"Add URL"} onClick={addURL} />
 			</div>
 		</div>
+	);
+}
+
+function StatusItem({ item }) {
+	return (
+		(item.status === URLStatus.Trained ||
+			item.status === URLStatus.Removing) && (
+			<p className={`${styles.statusLabel} ${styles[item.status]}`}>
+				{URLStatusText[item.status]}
+			</p>
+		)
 	);
 }
