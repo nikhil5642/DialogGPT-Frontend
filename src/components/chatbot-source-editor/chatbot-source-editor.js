@@ -13,7 +13,7 @@ import LoadingButton from "../loading-button/loading-button";
 import { useRouter } from "next/router";
 import { ChatBotOptionsEnum } from "../chatbot-editor/chatbot-editor.utits";
 import { useTrackEvent } from "../../helper/event-tracker";
-
+import { URLStatus } from "./website-loader/website-loader.utils";
 const initialData = {
 	texts: { charLength: 0 },
 	urls: { count: 0, charLength: 0 },
@@ -57,6 +57,7 @@ export default function ChatBotSourceEditor({
 					acc.texts.charLength += curr.char_count;
 					break;
 				case "url":
+					if (curr.status === URLStatus.Removing) break;
 					acc.urls.count += 1;
 					acc.urls.charLength += curr.char_count;
 					break;
@@ -77,7 +78,7 @@ export default function ChatBotSourceEditor({
 	}, [data]);
 
 	const trainChatBot = () => {
-		showLoader("Training Chatbot...");
+		// showLoader("Training Chatbot...");
 		setChatbotInfoData({ ...chatbotInfoData, status: "training" });
 		postRequest("/train_chatbot", { botID: chatbotInfoData.id, data: data })
 			.then(() => {

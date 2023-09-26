@@ -132,11 +132,16 @@ export default function ChatBotEditor({ botID, page }) {
 
 	useEffect(() => {
 		async function fetchCredits() {
-			getRequest("/message_credits")
-				.then((res) => {
-					setMessageCredits(res.result.message_credits);
-				})
-				.catch(() => {});
+			if (
+				selector !== ChatBotOptionsEnum.CHATBOT &&
+				chatbotData.status !== "trained"
+			) {
+				getRequest("/message_credits")
+					.then((res) => {
+						setMessageCredits(res.result.message_credits);
+					})
+					.catch(() => {});
+			}
 		}
 
 		// Fetch once immediately
