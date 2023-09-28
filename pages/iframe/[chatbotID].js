@@ -41,7 +41,15 @@ function ChatbotPage({ chatbotID, source }) {
 				});
 		}
 	}, [chatbotID]);
-	return <ChatBotComponent botID={chatbotID} config={data} />;
+	return (
+		<>
+			<Head>
+				<title>DialogGPT</title>
+				<meta name="description" content="DialogGPT Embed" />
+			</Head>
+			<ChatBotComponent botID={chatbotID} config={data} />
+		</>
+	);
 }
 function initializeChatbotOnClient(chatbotID, containerId) {
 	const container = document.getElementById(containerId);
