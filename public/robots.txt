@@ -1,4 +1,9 @@
-# https://www.robotstxt.org/robotstxt.html
+# *
 User-agent: *
-Disallow: 
+Allow: /
 
+# Host
+Host: https://dialoggpt.io/
+
+# Sitemaps
+Sitemap: https://dialoggpt.io/sitemap.xml
