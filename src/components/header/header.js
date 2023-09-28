@@ -80,7 +80,7 @@ export default function Header() {
 					</a>
 				)}
 			</div>
-			<a
+			<div
 				className={styles.hamburgerContainer}
 				onClick={() => {
 					trackEvent("hamburger_click");
@@ -96,7 +96,7 @@ export default function Header() {
 					height={40}
 					width={40}
 				></Image>
-			</a>
+			</div>
 			{menuVisible && (
 				<div className={styles.menu}>
 					<button

@@ -93,7 +93,7 @@
 	// Create the chat bubble
 	var chatBubble = document.createElement("div");
 	chatBubble.id = "chatbotBubble";
-	chatBubble.innerHTML = `<img src="https://dialoggpt.io/assets/chat_icon.png" loading="lazy" style="height: ${smallIconSize}; width: ${smallIconSize};">`;
+	chatBubble.innerHTML = `<img src="https://dialoggpt.io/assets/chat_icon.png" alt="Chat" loading="lazy" style="height: ${smallIconSize}; width: ${smallIconSize};">`;
 
 	document.body.appendChild(chatBubble);
 
@@ -118,7 +118,7 @@
 	function setChatBubbleAppearance() {
 		if (window.chatbotSettings && window.chatbotSettings.chatIcon) {
 			chatBubble.style.backgroundColor = "transparent"; // Ensure the background is transparent
-			chatBubble.innerHTML = `<img src="${window.chatbotSettings.chatIcon}" loading="lazy" style="height: ${largeIconSize}; width: ${largeIconSize}; object-fit: fill; border-radius: 50%;">`;
+			chatBubble.innerHTML = `<img src="${window.chatbotSettings.chatIcon}" alt="Chat" loading="lazy" style="height: ${largeIconSize}; width: ${largeIconSize}; object-fit: fill; border-radius: 50%;">`;
 		} else {
 			// Check if window.chatbotSettings exists before trying to access chatBubbleColor
 			var bgColor =
@@ -126,7 +126,7 @@
 					? window.chatbotSettings.chatBubbleColor
 					: "#000000";
 			chatBubble.style.backgroundColor = bgColor;
-			chatBubble.innerHTML = `<img src="https://dialoggpt.io/assets/chat_icon.png" loading="lazy" style="height: ${smallIconSize}; width: ${smallIconSize};">`;
+			chatBubble.innerHTML = `<img src="https://dialoggpt.io/assets/chat_icon.png" alt="Chat" loading="lazy" style="height: ${smallIconSize}; width: ${smallIconSize};">`;
 		}
 	}
 	function cleanupEventListeners() {
@@ -147,7 +147,7 @@
 					: "#000000";
 			chatBubble.style.backgroundColor = bgColor;
 			chatBubble.style.backgroundColor = bgColor;
-			chatBubble.innerHTML = `<img src="https://dialoggpt.io/assets/down_arrow_white.png" loading="lazy" style="height: 32px; width: 32px;">`; // Down arrow icon when iframe is visible
+			chatBubble.innerHTML = `<img src="https://dialoggpt.io/assets/down_arrow_white.png" alt="Down" loading="lazy" style="height: 32px; width: 32px;">`; // Down arrow icon when iframe is visible
 		} else {
 			iframe.style.display = "none";
 			loader.style.display = "none"; // Hide the loader
