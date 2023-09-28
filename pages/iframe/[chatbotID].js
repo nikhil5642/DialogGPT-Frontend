@@ -4,7 +4,7 @@ import ChatBotComponent from "../../src/components/chatbot-component/chatbot-com
 import { chatInit } from "../../src/components/chatbot-settings/chat-interface-settings/chat-interface-settings.utils";
 import { ChatBotSource } from "../../src/components/chatbot-component/chatbot-component.utils";
 import { useState, useEffect } from "react";
-
+import { showErrorToast } from "../../src/helper/toast-helper";
 function ChatbotPage({ chatbotID, source }) {
 	const [data, setData] = useState(chatInit(chatbotID, source));
 

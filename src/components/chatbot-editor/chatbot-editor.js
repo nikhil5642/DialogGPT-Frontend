@@ -16,6 +16,7 @@ import { showErrorToast, showSuccessToast } from "../../helper/toast-helper";
 import { useTrackEvent } from "src/helper/event-tracker";
 import EditBoxComponent from "../editbox-component/editbox-component";
 import { formatTimestamp } from "../../helper/utils";
+import { URLStatus } from "../chatbot-source-editor/website-loader/website-loader.utils";
 
 export default function ChatBotEditor({ botID, page }) {
 	const { trackEvent, trackScreenView } = useTrackEvent();
@@ -133,8 +134,8 @@ export default function ChatBotEditor({ botID, page }) {
 	useEffect(() => {
 		async function fetchCredits() {
 			if (
-				selector !== ChatBotOptionsEnum.CHATBOT &&
-				chatbotData.status !== "trained"
+				selector == ChatBotOptionsEnum.CHATBOT &&
+				chatbotData.status == URLStatus.Trained
 			) {
 				getRequest("/message_credits")
 					.then((res) => {
@@ -152,7 +153,7 @@ export default function ChatBotEditor({ botID, page }) {
 
 		// Clear the interval when the component is unmounted
 		return () => clearInterval(intervalId);
-	}, []);
+	}, [selector, chatbotData.status]);
 
 	return (
 		<div className={styles.chatBotEditorContainer}>

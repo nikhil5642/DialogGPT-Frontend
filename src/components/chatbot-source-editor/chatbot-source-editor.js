@@ -129,20 +129,32 @@ export default function ChatBotSourceEditor({
 			setTrainingError("***Minimum 1000 characters required to train");
 			return;
 		}
+		router.push(
+			{
+				pathname: router.pathname,
+				query: { ...router.query, page: ChatBotOptionsEnum.CHATBOT },
+			},
+			undefined,
+			{ shallow: true },
+		);
 		showLoader("Training Chatbot...");
 		setChatbotInfoData({ ...chatbotInfoData, status: "training" });
 		postRequest("/train_chatbot", { botID: chatbotInfoData.id, data: data })
 			.then(() => {
 				trackEvent("chatbot-editor-train", { botID: chatbotInfoData.id });
 				hideLoader();
-				router.push(
-					{
-						pathname: router.pathname,
-						query: { ...router.query, page: ChatBotOptionsEnum.CHATBOT },
-					},
-					undefined,
-					{ shallow: true },
-				);
+				router
+					.push(
+						{
+							pathname: router.pathname,
+							query: { ...router.query, page: ChatBotOptionsEnum.CHATBOT },
+						},
+						undefined,
+						{ shallow: true },
+					)
+					.then(() => {
+						window.scrollTo(0, 0);
+					});
 			})
 			.catch(() => {
 				trackEvent("chatbot-editor-train-failed", {
