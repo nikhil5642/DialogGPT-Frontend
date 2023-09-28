@@ -118,6 +118,7 @@ function HomeScreen() {
 							className={styles.liveDemoIframe}
 							src="https://dialoggpt.io/iframe/23b3dc28-ae71-4cf2-a5b1-652f561c4641"
 							frameBorder="0"
+							title="DialogGPT Chatbot Demo"
 							onLoad={() => setIframeLoading(false)}
 						></iframe>
 					</div>
