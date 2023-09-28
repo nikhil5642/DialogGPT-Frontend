@@ -31,17 +31,28 @@ function HomeScreen() {
 		trackEvent("video_demo_ended");
 		e.target.play();
 	};
+	const structuredData = {
+		"@context": "http://schema.org",
+		"@type": "WebSite",
+		name: "DialogGPT",
+		url: "https://dialoggpt.io/home",
+		description: "Build a chatbot for your website, try now!",
+	};
 
 	return (
 		<>
 			<Head>
-				<title>Home</title>
+				<title>DialogGPT</title>
 				<meta
 					name="description"
 					content="Build a chatbot for your website, try now! "
 				/>
 				<link rel="canonical" href="https://dialoggpt.io/home" />
+				<script type="application/ld+json">
+					{JSON.stringify(structuredData)}
+				</script>
 			</Head>
+
 			<div className={styles.homeScreenContainer}>
 				<div className={styles.topOverviewContainer}>
 					<h1>
