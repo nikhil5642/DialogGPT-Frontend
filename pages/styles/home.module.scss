@@ -5,35 +5,35 @@
 	max-width: 1280px;
 	flex-direction: column;
 	align-self: center;
+	padding-left: 1rem;
+	padding-right: 1rem;
 
 	h1 {
+		text-align: center;
 		font-size: 4rem;
 		line-height: 1.2;
 		margin: 0px;
 		color: #101828;
 		font-weight: 800;
-		margin-left: 0.25rem;
-		margin-right: 0.25rem;
+		span {
+			color: #428dff;
+			font-weight: 800;
+		}
 	}
 	h2 {
 		font-size: 3rem;
 		line-height: 1;
-		margin: 0px;
 		color: #101828;
 		font-weight: 800;
 	}
-	h3 {
-		font-size: 1.25rem;
-		font-weight: 500;
-		color: #333333;
-	}
+
 	p {
-		font-size: 1.2rem;
+		margin-top: 3rem;
+		text-align: center;
+		font-size: 1.25rem;
 		line-height: 1.5rem;
-		color: #444;
-		font-weight: 400;
-		margin: 0px;
-		font-weight: 400;
+		color: #101828;
+		font-weight: 500;
 		span {
 			font-weight: 600;
 		}
@@ -50,22 +50,6 @@
 	display: flex;
 	padding-top: 10vh;
 	padding-bottom: 15vh;
-	h1 {
-		text-align: center;
-		span {
-			color: #428dff;
-			font-weight: 800;
-		}
-	}
-
-	h3 {
-		margin: 0px;
-		margin-top: 2rem;
-		text-align: center;
-		span {
-			font-weight: 600;
-		}
-	}
 
 	button {
 		display: flex;
@@ -107,12 +91,7 @@
 	margin-top: 5rem;
 	padding-top: 5vh;
 	padding-bottom: 25vh;
-	padding-left: 1rem;
-	padding-right: 1rem;
 	text-align: center;
-	p {
-		margin-top: 1rem;
-	}
 }
 .demoVideo {
 	margin-top: 32px;
@@ -127,8 +106,6 @@
 	flex-direction: column;
 	align-items: center; // This will center the child elements horizontally
 	justify-content: flex-start; // This will align the child elements to the top
-	padding-left: 1rem;
-	padding-right: 1rem;
 	padding-bottom: 1rem;
 	padding-top: 5vh;
 	text-align: center;
@@ -174,11 +151,30 @@
 @media only screen and (max-width: 720px) {
 	.homeScreenContainer {
 		height: calc(50vh - 60px); // Adjusted for mobile
+		h1 {
+			font-size: 3rem;
+		}
+		h2 {
+			font-size: 2rem;
+			margin-bottom: 0px;
+		}
+		p {
+			font-size: 1rem;
+			line-height: 1.5rem;
+			margin-top: 2rem;
+		}
 	}
 	.topOverviewContainer {
 		margin-top: 1rem;
 		padding-top: 0;
 		padding-bottom: 5vh;
+		button {
+			margin-top: 2rem;
+
+			img {
+				display: none;
+			}
+		}
 	}
 	.videoDemoContainer {
 		margin-top: 1rem;
