@@ -60,13 +60,13 @@ function HomeScreen() {
 						<br />
 						for your <span>own Website</span>
 					</h1>
-					<h3>
+					<p>
 						Transform your data into a dynamic <span>Chatbot</span>. Seamlessly
 						integrate it with your <span>Website</span>. <br />
 						<br />
 						Connect effortlessly via <span>APIs</span> and other{" "}
 						<span>integrations</span>.
-					</h3>
+					</p>
 					<button onClick={onCreateChatbot}>
 						<Image
 							src="/assets/dialog_gpt_logo_icon_only.png"
@@ -83,8 +83,7 @@ function HomeScreen() {
 					<h2>Video Demo</h2>
 					<p>
 						Creating a chatbot for <span>Product Hunt</span> by crawling the
-						website and training the AI on its content. I can then embed the
-						chatbot on the website!
+						website and training the AI on its content.
 					</p>
 
 					<video
@@ -103,12 +102,17 @@ function HomeScreen() {
 						<source src="/videos/video_demo.mp4" type="video/mp4" />
 						Your browser does not support the video tag.
 					</video>
+					<p>I can then embed the chatbot on the website!</p>
 				</div>
 
 				<div className={styles.liveDemoContainer}>
 					<h2>Live Demo</h2>
-					<p>This chatbot was trained on a document explaining DialogGPT.</p>
-					<p>You can embed a widget like this on any page on your website!</p>
+					<p>
+						This chatbot was trained on a document explaining DialogGPT.
+						<br />
+						<br />
+						You can embed a widget like this on any page on your website!
+					</p>
 
 					<div className={styles.liveDemoIframeContainer}>
 						{iframeLoading && <div className={styles.roundLoader}></div>}

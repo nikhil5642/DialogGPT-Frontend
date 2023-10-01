@@ -3,11 +3,18 @@
 	flex-direction: row;
 	justify-content: space-between;
 }
+
 .headerLogoContainer {
 	display: flex;
 	padding-top: 12px;
 	padding-bottom: 12px;
 	margin-left: 16px;
+
+	&:active,
+	&:focus {
+		outline: none;
+		-webkit-tap-highlight-color: transparent; // For mobile web views
+	}
 }
 
 .headerLogo {
