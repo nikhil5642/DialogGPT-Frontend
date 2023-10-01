@@ -95,7 +95,7 @@ const SignInPage = () => {
 					.then((token) => {
 						trackEvent("login-success");
 						hideLoader();
-						AuthService.login(token).then(() => router.push("/my-chatbots"));
+						AuthService.login(token).then(() => router.push("/pricing"));
 					})
 					.catch(() => {
 						trackEvent("login-failure");
