@@ -111,7 +111,7 @@ function HomeScreen() {
 					<p>You can embed a widget like this on any page on your website!</p>
 
 					<div className={styles.liveDemoIframeContainer}>
-						{iframeLoading && <div className={styles.roundLoader}></div>}
+						{/* {iframeLoading && <div className={styles.roundLoader}></div>} */}
 
 						<iframe
 							loading="lazy"
