@@ -17,6 +17,7 @@ import { useTrackEvent } from "src/helper/event-tracker";
 import EditBoxComponent from "../editbox-component/editbox-component";
 import { formatTimestamp } from "../../helper/utils";
 import { URLStatus } from "../chatbot-source-editor/website-loader/website-loader.utils";
+import LoadingButton from "../loading-button/loading-button";
 
 export default function ChatBotEditor({ botID, page }) {
 	const { trackEvent, trackScreenView } = useTrackEvent();
@@ -155,6 +156,11 @@ export default function ChatBotEditor({ botID, page }) {
 		return () => clearInterval(intervalId);
 	}, [selector, chatbotData.status]);
 
+	function handleUpgradeClick() {
+		// Redirect to upgrade page or any other action
+		window.location.href = "/pricing";
+	}
+
 	return (
 		<div className={styles.chatBotEditorContainer}>
 			{nameEditing ? (
@@ -263,6 +269,24 @@ export default function ChatBotEditor({ botID, page }) {
 							<p className={styles.message_credits}>
 								{messageCredits} {"Message Credits remaining."}
 							</p>
+							{messageCredits < 1 && (
+								<div className={styles.upgradeContainer}>
+									<div className={styles.upgradeMessage}>
+										<img
+											src="/assets/ic_error.png"
+											alt="Warning"
+											className={styles.warningIcon}
+										/>
+										You've run out of message credits!
+									</div>
+									<button
+										className={styles.upgradeButton}
+										onClick={handleUpgradeClick}
+									>
+										Upgrade Now
+									</button>
+								</div>
+							)}
 						</div>
 					</>
 				)}

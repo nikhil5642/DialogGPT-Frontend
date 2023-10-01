@@ -157,6 +157,54 @@
 	text-align: right;
 	color: #5a6b7d; // A subtle grey-blue
 }
+.upgradeContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid #ffa500; /* Orange border for warning */
+	padding: 32px;
+	border-radius: 12px;
+	background-color: #fff8e1; /* Light yellow background for warning */
+	margin-top: 32px;
+	text-align: center;
+	align-self: center;
+}
+
+.upgradeMessage {
+	font-size: 24px;
+	color: #ff4500; /* Darker orange for text */
+	margin-bottom: 16px;
+	display: flex;
+	align-items: center;
+}
+
+.warningIcon {
+	margin-right: 8px; /* Space between icon and text */
+	height: 24px;
+	width: 24px;
+}
+.upgradeButton {
+	padding: 12px 24px;
+	background-color: #ff7f50; /* Coral color that complements the warning theme */
+	color: #ffffff;
+	border: 2px solid #ff7f50; /* Border color matching the background */
+	border-radius: 12px;
+	font-size: 18px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background-color 0.3s ease, transform 0.3s ease;
+	box-shadow: 0px 4px 15px rgba(255, 127, 80, 0.2); /* Shadow using the coral color */
+
+	&:hover {
+		background-color: #ff6347; /* Slightly darker shade of coral for hover */
+		transform: translateY(-2px);
+	}
+
+	&:active {
+		transform: translateY(0px);
+	}
+}
 
 @media only screen and (max-width: 720px) {
 	.chatBotEditorContainer {
