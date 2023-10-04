@@ -31,13 +31,25 @@ function HomeScreen() {
 		trackEvent("video_demo_ended");
 		e.target.play();
 	};
-	const structuredData = {
-		"@context": "http://schema.org",
-		"@type": "WebSite",
-		name: "DialogGPT",
-		url: "https://dialoggpt.io/home",
-		description: "Build a chatbot for your website, try now!",
-	};
+	const structuredData = [
+		{
+			"@context": "http://schema.org",
+			"@type": "WebSite",
+			name: "DialogGPT",
+			url: "https://dialoggpt.io/home",
+			description: "Build a chatbot for your website, try now!",
+		},
+		{
+			"@context": "http://schema.org",
+			"@type": "VideoObject",
+			name: "DialogGPT Video Demo",
+			description: "Creating a chatbot for Product Hunt",
+			thumbnailUrl: "https://dialoggpt.io/videos/video_demo_poster.png",
+			uploadDate: "2023-01-01T08:00:00+08:00",
+			duration: "PT51S",
+			contentUrl: "https://dialoggpt.io/videos/video_demo.mp4",
+		},
+	];
 
 	return (
 		<>
