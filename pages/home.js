@@ -35,7 +35,7 @@ function HomeScreen() {
 		{
 			"@context": "http://schema.org",
 			"@type": "WebSite",
-			name: "DialogGPT",
+			name: "DialogGPT.io",
 			url: "https://dialoggpt.io/home",
 			description: "Build a chatbot for your website, try now!",
 		},

@@ -54,10 +54,20 @@ export default function AccountScreen() {
 	return (
 		<>
 			<Head>
-				<title>Account</title>
-				<meta name="description" content="Your Account" />
+				<title>DialogGPT Account</title>
 				<link rel="canonical" href="https://dialoggpt.io/account" />
+				<meta name="description" content="DialogGPT Account Page" />
+				<script type="application/ld+json">
+					{JSON.stringify({
+						"@context": "http://schema.org",
+						"@type": "WebSite",
+						name: "DialogGPT.io",
+						url: "https://dialoggpt.io/account",
+						description: "DialogGPT Account Page",
+					})}
+				</script>
 			</Head>
+
 			<div className={styles.accountScreenContainer}>
 				<h1 className={styles.accountHeader}>Account</h1>
 				<div className={styles.itemContainer}>
