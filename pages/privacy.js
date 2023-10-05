@@ -91,7 +91,7 @@ export default function Privacy() {
 					the Data Subject whose Personal Data is processed.
 				</li>
 				<li>
-					<strong>Website:</strong> Refers to web pages located at dialoggpt.io.
+					<strong>Website:</strong> Refers to web pages located at DialogGPT.io.
 				</li>
 				<li>
 					<strong>Widget:</strong> A DialogGPT widget that can be integrated
@@ -161,7 +161,7 @@ export default function Privacy() {
 
 			<h2>6. Use of Data</h2>
 			<p>
-				dialoggpt.io utilizes the gathered Personal Data for several objectives:
+				DialogGPT.io utilizes the gathered Personal Data for several objectives:
 			</p>
 			<ul>
 				<li>

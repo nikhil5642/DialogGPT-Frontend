@@ -31,7 +31,7 @@ export default function About() {
 					Privacy Policy
 				</a>
 			</p>
-			<p className={styles.aboutP}>support@dialoggpt.io</p>
+			<p className={styles.aboutP}>support@dialogGPT.io</p>
 		</div>
 	);
 }
