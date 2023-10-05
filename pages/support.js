@@ -7,10 +7,20 @@ export default function SupportPage() {
 		<div>
 			<Head>
 				<title>Support - DialogGPT</title>
+				<link rel="canonical" href="https://dialoggpt.io/support" />
 				<meta
 					name="description"
 					content="Need help? Reach out to us at support@dialoggpt.io"
 				/>
+				<script type="application/ld+json">
+					{JSON.stringify({
+						"@context": "http://schema.org",
+						"@type": "WebSite",
+						name: "DialogGPT.io",
+						url: "https://dialoggpt.io/support",
+						description: "Need help? Reach out to us at support@dialoggpt.i",
+					})}
+				</script>
 			</Head>
 
 			<main>

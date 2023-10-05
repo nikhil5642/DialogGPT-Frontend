@@ -27,7 +27,7 @@ import { firebaseConfig } from "../src/helper/firebase-provider";
 import { initializeApp, getApps } from "firebase/app";
 import { showErrorToast } from "src/helper/toast-helper";
 import { useTrackEvent } from "/src/helper//event-tracker";
-
+import Head from "next/head";
 let app;
 
 try {
@@ -192,107 +192,123 @@ const SignInPage = () => {
 	};
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.card}>
-				<h2>Sign In</h2>
-				{featureVisibility.google && (
-					<button
-						className={styles.googleButton}
-						onClick={handleSignInWithGoogle}
-					>
-						<Image
-							className={styles.googleIcon}
-							src="/assets/google_icon.png"
-							alt={"Google"}
-							title={"Google"}
-							loading="lazy"
-							height={24}
-							width={24}
-						></Image>
-						<p className={styles.googleText}>Sign in with Google</p>
-					</button>
-				)}
-				{featureVisibility.apple && (
-					<button
-						className={styles.appleButton}
-						onClick={handleSignInWithApple}
-					>
-						<Image
-							className={styles.appleIcon}
-							src="/assets/apple_logo.png"
-							alt={"Apple"}
-							title={"Apple"}
-							loading="lazy"
-							height={24}
-							width={24}
-						></Image>
-						<p className={styles.googleText}>Sign in with Apple</p>
-					</button>
-				)}
-				{featureVisibility.twitter && (
-					<button
-						className={styles.googleButton}
-						onClick={handleSignInWithTwitter}
-					>
-						<Image
-							className={styles.googleIcon}
-							src="/assets/twitter_icon.png"
-							alt={"Twitter"}
-							title={"Twitter"}
-							loading="lazy"
-							height={24}
-							width={24}
-						></Image>
-						<p className={styles.googleText}>Sign in with Twitter</p>
-					</button>
-				)}
-				{featureVisibility.github && (
-					<button
-						className={styles.googleButton}
-						onClick={handleSignInWithGithub}
-					>
-						<Image
-							className={styles.googleIcon}
-							src="/assets/github_icon.png"
-							alt={"Github"}
-							title={"Github"}
-							loading="lazy"
-							height={24}
-							width={24}
-						></Image>
-						<p className={styles.googleText}>Sign in with Github</p>
-					</button>
-				)}
-
-				<hr className="horizontalLine" />
-
-				{featureVisibility.email && (
-					<div>
-						<input
-							className={styles.input}
-							type="email"
-							placeholder="Email"
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-						/>
-						<input
-							className={styles.input}
-							type="password"
-							placeholder="Password"
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-						/>
-
+		<>
+			<Head>
+				<title>DialogGPT Login</title>
+				<link rel="canonical" href="https://dialoggpt.io/signin" />
+				<meta name="description" content="Sign in to DialogGPT.io" />
+				<script type="application/ld+json">
+					{JSON.stringify({
+						"@context": "http://schema.org",
+						"@type": "WebSite",
+						name: "DialogGPT.io",
+						url: "https://dialoggpt.io/signin",
+						description: "Sign in to DialogGPT.io",
+					})}
+				</script>
+			</Head>
+			<div className={styles.container}>
+				<div className={styles.card}>
+					<h2>Sign In</h2>
+					{featureVisibility.google && (
 						<button
-							className={styles.button}
-							onClick={handleSignInWithEmailAndPassword}
+							className={styles.googleButton}
+							onClick={handleSignInWithGoogle}
 						>
-							Sign in
+							<Image
+								className={styles.googleIcon}
+								src="/assets/google_icon.png"
+								alt={"Google"}
+								title={"Google"}
+								loading="lazy"
+								height={24}
+								width={24}
+							></Image>
+							<p className={styles.googleText}>Sign in with Google</p>
 						</button>
-					</div>
-				)}
+					)}
+					{featureVisibility.apple && (
+						<button
+							className={styles.appleButton}
+							onClick={handleSignInWithApple}
+						>
+							<Image
+								className={styles.appleIcon}
+								src="/assets/apple_logo.png"
+								alt={"Apple"}
+								title={"Apple"}
+								loading="lazy"
+								height={24}
+								width={24}
+							></Image>
+							<p className={styles.googleText}>Sign in with Apple</p>
+						</button>
+					)}
+					{featureVisibility.twitter && (
+						<button
+							className={styles.googleButton}
+							onClick={handleSignInWithTwitter}
+						>
+							<Image
+								className={styles.googleIcon}
+								src="/assets/twitter_icon.png"
+								alt={"Twitter"}
+								title={"Twitter"}
+								loading="lazy"
+								height={24}
+								width={24}
+							></Image>
+							<p className={styles.googleText}>Sign in with Twitter</p>
+						</button>
+					)}
+					{featureVisibility.github && (
+						<button
+							className={styles.googleButton}
+							onClick={handleSignInWithGithub}
+						>
+							<Image
+								className={styles.googleIcon}
+								src="/assets/github_icon.png"
+								alt={"Github"}
+								title={"Github"}
+								loading="lazy"
+								height={24}
+								width={24}
+							></Image>
+							<p className={styles.googleText}>Sign in with Github</p>
+						</button>
+					)}
+
+					<hr className="horizontalLine" />
+
+					{featureVisibility.email && (
+						<div>
+							<input
+								className={styles.input}
+								type="email"
+								placeholder="Email"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+							/>
+							<input
+								className={styles.input}
+								type="password"
+								placeholder="Password"
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+
+							<button
+								className={styles.button}
+								onClick={handleSignInWithEmailAndPassword}
+							>
+								Sign in
+							</button>
+						</div>
+					)}
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

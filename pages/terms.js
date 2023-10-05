@@ -5,6 +5,17 @@ export default function Terms() {
 		<div className={styles.container}>
 			<Head>
 				<title>Terms of Service</title>
+				<link rel="canonical" href="https://dialoggpt.io/terms" />
+				<meta name="description" content="Terms of Service for DialogGPT.io" />
+				<script type="application/ld+json">
+					{JSON.stringify({
+						"@context": "http://schema.org",
+						"@type": "WebSite",
+						name: "DialogGPT.io",
+						url: "https://dialoggpt.io/terms",
+						description: "Terms of Service for DialogGPT.io",
+					})}
+				</script>
 			</Head>
 
 			<h1>Terms of Service</h1>

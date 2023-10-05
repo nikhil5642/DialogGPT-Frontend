@@ -27,9 +27,18 @@ export default function PricingScreen() {
 	return (
 		<>
 			<Head>
-				<title>Account</title>
-				<meta name="description" content="Your Account" />
-				<link rel="canonical" href="https://dialoggpt.io/home" />
+				<title>Pricing Plans</title>
+				<meta name="description" content="Pricing Plans for DialogGPT.io" />
+				<link rel="canonical" href="https://dialoggpt.io/pricing" />
+				<script type="application/ld+json">
+					{JSON.stringify({
+						"@context": "http://schema.org",
+						"@type": "WebSite",
+						name: "DialogGPT.io",
+						url: "https://dialoggpt.io/privacy",
+						description: "Pricing Plans for DialogGPT.io",
+					})}
+				</script>
 			</Head>
 			<div className={styles.pricingScreenContainer}>
 				<h1 className={styles.pricingHeader}>Pricing Plans</h1>
