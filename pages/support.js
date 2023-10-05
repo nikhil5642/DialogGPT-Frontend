@@ -34,7 +34,7 @@ export default function SupportPage() {
 					You can contact{" "}
 					<a href="https://www.linkedin.com/in/nikhil5642/">Nikhil Agrawal</a>,
 					the founder of DialogGPT, directly at{" "}
-					<a href="mailto:support@dialoggpt.io">nikhil@dialoggpt.io</a>. You
+					<a href="mailto:support@dialoggpt.io">nikhil@dialogGPT.io</a>. You
 					will get a response as soon as possible.
 				</p>
 			</main>
