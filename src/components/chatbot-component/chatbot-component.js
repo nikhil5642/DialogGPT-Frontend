@@ -193,7 +193,7 @@ export default function ChatBotComponent({ config }) {
 				)}
 				{source != ChatBotSource.SETTINGS && <div ref={messagesEndRef} />}
 			</div>
-			<div className={styles.chatbotPromtsContainer}>
+			<div className={styles.chatbotPromptsContainer}>
 				{getSplittedMessages(quickPrompts).map((prompt) => (
 					<button
 						key={prompt}

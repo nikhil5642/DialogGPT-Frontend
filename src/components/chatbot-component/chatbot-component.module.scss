@@ -133,7 +133,7 @@
 	margin-left: 0.5rem;
 }
 
-.chatbotPromtsContainer {
+.chatbotPromptsContainer {
 	display: flex;
 	flex-direction: row;
 	width: 100%;
@@ -153,7 +153,7 @@
 	}
 }
 /* For Chrome, Safari, and Opera */
-.chatbotPromtsContainer::-webkit-scrollbar {
+.chatbotPromptsContainer::-webkit-scrollbar {
 	width: 0;
 	height: 0;
 	display: none; /* for good measure */
@@ -345,7 +345,7 @@
 		margin-left: 0.5rem;
 	}
 
-	.chatbotPromtsContainer {
+	.chatbotPromptsContainer {
 		padding-top: 1.25rem;
 
 		button {

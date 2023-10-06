@@ -72,7 +72,7 @@ export default function ChatInterfaceSettings({ botID }) {
 						/>
 						<p>Enter each message in a new line.</p>
 						<br></br>
-						<h5>Quick Promts</h5>
+						<h5>Quick Prompts</h5>
 						<textarea
 							rows="2"
 							type="text"

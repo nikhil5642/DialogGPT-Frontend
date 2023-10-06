@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { postRequest } from "../../../helper/http-helper";
-import styles from "./danzer-settings.module.scss";
+import styles from "./danger-settings.module.scss";
 import { showErrorToast, showSuccessToast } from "../../../helper/toast-helper";
 import LoadingButton from "src/components/loading-button/loading-button";
 
-export default function DanzerSettings({ botID }) {
+export default function DangerSettings({ botID }) {
 	const onDeleteChatbot = () => {
 		if (window.confirm("Are you sure you want to delete this chatbot?")) {
 			setLoader((prev) => {
@@ -33,11 +33,11 @@ export default function DanzerSettings({ botID }) {
 	});
 	return (
 		<div className={styles.settingsContainer}>
-			<div className={styles.settingsTitle}>Danzer Zone</div>
+			<div className={styles.settingsTitle}>Danger Zone</div>
 			<div className={styles.settingsContent}>
-				<div className={styles.danzerItemContainer}>
+				<div className={styles.dangerItemContainer}>
 					<p>Delete this Chatbot? </p>
-					<div className={styles.danzerButton}>
+					<div className={styles.dangerButton}>
 						<LoadingButton
 							title={"Delete Chatbot"}
 							onClick={onDeleteChatbot}
