@@ -1,5 +1,5 @@
 import styles from "./pricing-plan.module.scss";
-
+import { useState } from "react";
 import { useRouter } from "next/router";
 import AuthService from "src/helper/AuthService";
 import { postRequest } from "src/helper/http-helper";
@@ -7,12 +7,14 @@ import { loadStripe } from "@stripe/stripe-js";
 import { PrivateKeys } from "../../helper/private-keys";
 import { showErrorToast, showSuccessToast } from "src/helper/toast-helper";
 import { useTrackEvent } from "../../helper/event-tracker";
+import LoadingButton from "../loading-button/loading-button";
 const stripePromise = loadStripe(
 	PrivateKeys.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
 );
 function PricingPlan({ plan, currentPlan }) {
 	const { trackEvent } = useTrackEvent();
 	const router = useRouter();
+	const [loading, setLoading] = useState(false);
 	const alreadySubscribed =
 		currentPlan != PricingPlan.FREE && currentPlan == plan.id;
 	const redirectToCheckout = async (sessionId) => {
@@ -44,17 +46,18 @@ function PricingPlan({ plan, currentPlan }) {
 			router.push("/signin");
 			trackEvent("pricing-not-authenticated", { plan: plan.id });
 		} else {
-			if (plan == PricingPlan.FREE) {
-				router.push("/my-chatbots");
-				trackEvent("pricing-free-subscribe", { plan: plan.id });
-			} else {
-				postRequest("/create_checkout_session", {
-					planId: plan.id,
-				}).then((res) => {
+			setLoading(true);
+			postRequest("/create_checkout_session", {
+				planId: plan.id,
+			})
+				.then((res) => {
+					setLoading(false);
 					redirectToCheckout(res.result);
+				})
+				.catch((err) => {
+					setLoading(false);
 				});
-				trackEvent("pricing-subscribe", { plan: plan.id });
-			}
+			trackEvent("pricing-subscribe", { plan: plan.id });
 		}
 	};
 	return (
@@ -70,15 +73,14 @@ function PricingPlan({ plan, currentPlan }) {
 			</ul>
 			<div className={styles.price}>{plan.price}</div>
 
-			<button
+			<LoadingButton
 				className={`${styles.subscribeBtn} ${
 					alreadySubscribed ? styles.alreadySubscribed : ""
 				}`}
 				onClick={onButtonPress}
-				disabled={alreadySubscribed}
-			>
-				{alreadySubscribed ? "Subscribed" : plan.buttonText}
-			</button>
+				isLoading={loading}
+				title={alreadySubscribed ? "Subscribed" : plan.buttonText}
+			/>
 		</div>
 	);
 }

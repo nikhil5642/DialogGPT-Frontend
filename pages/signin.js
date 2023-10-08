@@ -153,7 +153,6 @@ const SignInPage = () => {
 			})
 			.catch((e) => {
 				showErrorToast("Error logging you in!");
-				console.log("Error logging you in!", e);
 				trackEvent("login-twitter-failure");
 				hideLoader();
 				removeCookie("authInProgress");
@@ -170,7 +169,6 @@ const SignInPage = () => {
 			})
 			.catch((e) => {
 				showErrorToast("Error logging you in!");
-				console.log("Error logging you in!", e.code);
 				trackEvent("login-github-failure");
 				hideLoader();
 				removeCookie("authInProgress");
