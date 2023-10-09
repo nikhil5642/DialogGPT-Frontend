@@ -4,9 +4,9 @@ import styles from "./pricing-faqs.module.scss";
 function PricingFAQs() {
 	const faqs = [
 		{
-			question: "Is there a free plan?",
+			question: "Is there a free Trial?",
 			answer:
-				"Yes, just by signing up you get 30 message credits and 1 chatbot (400k characters). You can use these to test out chatbase and see if it works for you.",
+				"Yes, we provide 7 days free trial with our Basic Plan. You can use these to test out chatbase and see if it works for you.",
 		},
 		{
 			question: "How do message credits work?",

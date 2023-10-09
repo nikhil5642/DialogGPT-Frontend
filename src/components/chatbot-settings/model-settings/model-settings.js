@@ -89,7 +89,7 @@ export default function ModelSettings({ chatbotID }) {
 						</option>
 						<option
 							value={GPTModel.GPT_4}
-							disabled={currentPlan !== PricingPlans.PRO}
+							disabled={currentPlan !== PricingPlans.PRO.id}
 						>
 							{GPTModel.GPT_4}
 						</option>
