@@ -27,7 +27,7 @@ export const PricingPlans = {
 			PricingFeatures.MESSAGE_CREDITS_GPT3_2000,
 		],
 		buttonText: "Start Trial",
-		price: "$29",
+		price: "$29/month",
 	},
 	ESSENTIAL: {
 		name: "Essential",
