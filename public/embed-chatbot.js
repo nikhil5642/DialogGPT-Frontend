@@ -178,6 +178,6 @@
 			setChatBubbleAppearance();
 		})
 		.catch((error) => {
-			console.error("Error fetching chatbot settings:", error);
+			// console.error("Error fetching chatbot settings:", error);
 		});
 })();

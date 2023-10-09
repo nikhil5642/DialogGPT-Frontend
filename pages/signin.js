@@ -7,6 +7,8 @@ import {
 	OAuthProvider,
 	onAuthStateChanged,
 	signInWithEmailAndPassword,
+	createUserWithEmailAndPassword,
+	sendPasswordResetEmail,
 	TwitterAuthProvider,
 	GithubAuthProvider,
 } from "firebase/auth";
@@ -25,7 +27,7 @@ import { FirebaseFeatures } from "../src/helper/feature-flags";
 import { useFirebase } from "../src/helper/firebase-provider";
 import { firebaseConfig } from "../src/helper/firebase-provider";
 import { initializeApp, getApps } from "firebase/app";
-import { showErrorToast } from "src/helper/toast-helper";
+import { showSuccessToast, showErrorToast } from "src/helper/toast-helper";
 import { useTrackEvent } from "/src/helper//event-tracker";
 import Head from "next/head";
 let app;
@@ -42,6 +44,7 @@ const SignInPage = () => {
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [isSignUp, setIsSignUp] = useState(false);
 	const router = useRouter();
 	const auth = getAuth();
 	const { showLoader, hideLoader } = useContext(LoaderContext);
@@ -153,7 +156,6 @@ const SignInPage = () => {
 			})
 			.catch((e) => {
 				showErrorToast("Error logging you in!");
-				console.log("Error logging you in!", e);
 				trackEvent("login-twitter-failure");
 				hideLoader();
 				removeCookie("authInProgress");
@@ -170,7 +172,6 @@ const SignInPage = () => {
 			})
 			.catch((e) => {
 				showErrorToast("Error logging you in!");
-				console.log("Error logging you in!", e.code);
 				trackEvent("login-github-failure");
 				hideLoader();
 				removeCookie("authInProgress");
@@ -184,10 +185,45 @@ const SignInPage = () => {
 			.then((userCredential) => {
 				const user = userCredential.user;
 				trackEvent("login-email-success");
+				hideLoader();
 			})
 			.catch(() => {
 				showErrorToast("Error logging you in!");
 				trackEvent("login-email-failure");
+				hideLoader();
+			});
+	};
+	const handleSignUpWithEmailAndPassword = async () => {
+		showLoader("Signing you up...");
+		trackEvent("signup-email-initated");
+		createUserWithEmailAndPassword(auth, email, password)
+			.then((userCredential) => {
+				const user = userCredential.user;
+				trackEvent("signup-email-success");
+				hideLoader();
+			})
+			.catch(() => {
+				showErrorToast("Error signing you up!");
+				trackEvent("signup-email-failure");
+				hideLoader();
+			});
+	};
+	const handleForgotPassword = () => {
+		if (!email) {
+			showErrorToast("Please enter your email!");
+			return;
+		}
+
+		showLoader("Sending reset link...");
+
+		sendPasswordResetEmail(auth, email)
+			.then(() => {
+				showSuccessToast("Password reset link sent to your email!");
+				hideLoader();
+			})
+			.catch((e) => {
+				showErrorToast("Error sending reset link!");
+				hideLoader();
 			});
 	};
 
@@ -209,7 +245,7 @@ const SignInPage = () => {
 			</Head>
 			<div className={styles.container}>
 				<div className={styles.card}>
-					<h2>Sign In</h2>
+					<h2>{isSignUp ? "Sign Up" : "Sign In"}</h2>
 					{featureVisibility.google && (
 						<button
 							className={styles.googleButton}
@@ -224,7 +260,7 @@ const SignInPage = () => {
 								height={24}
 								width={24}
 							></Image>
-							<p className={styles.googleText}>Sign in with Google</p>
+							<p className={styles.googleText}>Continue with Google</p>
 						</button>
 					)}
 					{featureVisibility.apple && (
@@ -241,7 +277,7 @@ const SignInPage = () => {
 								height={24}
 								width={24}
 							></Image>
-							<p className={styles.googleText}>Sign in with Apple</p>
+							<p className={styles.googleText}>Continue with Apple</p>
 						</button>
 					)}
 					{featureVisibility.twitter && (
@@ -258,7 +294,7 @@ const SignInPage = () => {
 								height={24}
 								width={24}
 							></Image>
-							<p className={styles.googleText}>Sign in with Twitter</p>
+							<p className={styles.googleText}>Continue with Twitter</p>
 						</button>
 					)}
 					{featureVisibility.github && (
@@ -275,14 +311,14 @@ const SignInPage = () => {
 								height={24}
 								width={24}
 							></Image>
-							<p className={styles.googleText}>Sign in with Github</p>
+							<p className={styles.googleText}>Continue with Github</p>
 						</button>
 					)}
 
-					<hr className="horizontalLine" />
+					<hr className={styles.horizontalLine} />
 
 					{featureVisibility.email && (
-						<div>
+						<div className={styles.emailPasswordContainer}>
 							<input
 								className={styles.input}
 								type="email"
@@ -300,10 +336,37 @@ const SignInPage = () => {
 
 							<button
 								className={styles.button}
-								onClick={handleSignInWithEmailAndPassword}
+								onClick={
+									isSignUp
+										? handleSignUpWithEmailAndPassword
+										: handleSignInWithEmailAndPassword
+								}
 							>
-								Sign in
+								{isSignUp ? "Sign Up" : "Sign In"}
 							</button>
+							<div className={styles.switchLink}>
+								{isSignUp ? (
+									<span>
+										Already have an account?{" "}
+										<a href="#" onClick={() => setIsSignUp(false)}>
+											Sign In
+										</a>
+									</span>
+								) : (
+									<span>
+										<br />
+										Don't have an account?{" "}
+										<a href="#" onClick={() => setIsSignUp(true)}>
+											Sign Up
+										</a>
+										<br />
+										<br />
+										<a href="#" onClick={handleForgotPassword}>
+											Forgot Password?
+										</a>
+									</span>
+								)}
+							</div>
 						</div>
 					)}
 				</div>
