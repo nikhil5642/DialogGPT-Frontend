@@ -6,12 +6,14 @@ import { generateRandomString } from "../chatbot-source-editor.utits";
 import LoadingButton from "src/components/loading-button/loading-button";
 import { useTrackEvent } from "src/helper/event-tracker";
 import { URLStatus, URLStatusText } from "./website-loader.utils";
+import { showSuccessToast } from "src/helper/toast-helper";
 
 export default function WebisteLoader({ bot_id, data, setData }) {
 	const { trackEvent } = useTrackEvent();
 	const [url, setUrl] = useState("");
 	const [loader, setLoader] = useState({
 		fetchLinks: false,
+		updateURL: false,
 	});
 	const fetchUrls = () => {
 		setLoader((val) => ({ ...val, fetchLinks: true }));
@@ -39,6 +41,18 @@ export default function WebisteLoader({ bot_id, data, setData }) {
 			},
 		]);
 		trackEvent("url_added", { botID: bot_id });
+	};
+	const updateURL = () => {
+		setLoader((val) => ({ ...val, updateURL: true }));
+		postRequest("/update_url_data", { botID: bot_id, data: data })
+			.then((res) => {
+				showSuccessToast("URL's updated successfully");
+				setLoader((val) => ({ ...val, updateURL: false }));
+				setData(res.result);
+			})
+			.catch(() => {
+				setLoader((val) => ({ ...val, updateURL: false }));
+			});
 	};
 	const handleDeleteCancel = (id) => {
 		const updatedData = data.map((item) =>
@@ -140,6 +154,13 @@ export default function WebisteLoader({ bot_id, data, setData }) {
 
 			<div className={styles.addURLContainer}>
 				<LoadingButton title={"Add URL"} onClick={addURL} />
+			</div>
+			<div className={styles.updateURLContainer}>
+				<LoadingButton
+					title={"Save URL's Changes"}
+					onClick={updateURL}
+					isLoading={loader.updateURL}
+				/>
 			</div>
 		</div>
 	);
