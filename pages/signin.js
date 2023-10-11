@@ -98,6 +98,7 @@ const SignInPage = () => {
 					.then((token) => {
 						trackEvent("login-success");
 						AuthService.login(token).then(() => router.push("/pricing"));
+						hideLoader();
 					})
 					.catch(() => {
 						trackEvent("login-failure");
