@@ -98,22 +98,12 @@ function HomeScreen() {
 						website and training the AI on its content.
 					</p>
 
-					<video
-						preload="none"
-						controlsList="nodownload"
-						loading="lazy"
-						controls
-						width="90%"
-						height="auto"
+					<img
 						className={styles.demoVideo}
-						poster="/videos/video_demo_poster.png"
-						muted
-						loop
-						onEnded={handleVideoEnd}
-					>
-						<source src="/videos/video_demo.mp4" type="video/mp4" />
-						Your browser does not support the video tag.
-					</video>
+						src="/videos/video_demo.gif"
+						loading="lazy"
+					/>
+
 					<p>I can then embed the chatbot on the website!</p>
 				</div>
 
