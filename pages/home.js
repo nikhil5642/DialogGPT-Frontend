@@ -106,7 +106,7 @@ const VideoDemoComponent = () => {
 };
 
 const LiveDemoComponent = () => {
-	const [iframeLoading, setIframeLoading] = useState(true);
+	const [iframeLoading, setIframeLoading] = useState(false);
 	return (
 		<div className={styles.liveDemoContainer}>
 			<h2>Live Demo</h2>
