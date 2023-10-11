@@ -92,15 +92,16 @@
 	padding-top: 5vh;
 	padding-bottom: 25vh;
 	text-align: center;
+	.demoVideo {
+		margin-top: 32px;
+		max-width: 1280px;
+		width: 100%;
+		height: auto;
+		box-shadow: 0px 4px 15px rgba(66, 141, 255, 0.2);
+		border-radius: 8px;
+	}
 }
-.demoVideo {
-	margin-top: 32px;
-	max-width: 1280px;
-	width: 100%;
-	height: auto;
-	box-shadow: 0px 4px 15px rgba(66, 141, 255, 0.2);
-	border-radius: 8px;
-}
+
 .liveDemoContainer {
 	display: flex;
 	flex-direction: column;
@@ -122,21 +123,23 @@
 	height: 600px;
 	box-shadow: 0px 4px 15px rgba(66, 141, 255, 0.2);
 	justify-content: center;
-}
-.liveDemoIframe {
-	width: 100%;
-	height: 100%;
-}
-.roundLoader {
-	border: 0.15rem solid transparent; // Transparent color for the loader's track
-	border-top: 0.15rem solid #666; // Light grey color for the loader's active part
-	border-radius: 50%; // This makes it round
-	width: 3rem;
-	height: 3rem;
-	animation: spin 2s linear infinite;
-	transform: translate(-50%, -50%);
-	position: absolute;
-	align-self: center;
+
+	.liveDemoIframe {
+		width: 100%;
+		height: 100%;
+	}
+
+	.roundLoader {
+		border: 0.15rem solid transparent; // Transparent color for the loader's track
+		border-top: 0.15rem solid #666; // Light grey color for the loader's active part
+		border-radius: 50%; // This makes it round
+		width: 3rem;
+		height: 3rem;
+		animation: spin 2s linear infinite;
+		transform: translate(-50%, -50%);
+		position: absolute;
+		align-self: center;
+	}
 }
 
 @keyframes spin {
