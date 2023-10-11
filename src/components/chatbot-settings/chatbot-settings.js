@@ -1,22 +1,38 @@
 import React, { useState } from "react";
-import styles from "./chatbot-settings.module.scss";
 import GeneralSettings from "./general-settings/general-settings";
 import ModelSettings from "./model-settings/model-settings";
 import ChatInterfaceSettings from "./chat-interface-settings/chat-interface-settings";
 import DangerSettings from "./danger-settings/danger-settings";
+import { ChatbotSettingsOptions } from "./chatbot-settings.utils";
+import { IntegratedSidebarComponent } from "../integrated-sidebar-component/integrated-sidebar-component";
+
 export default function ChatBotSettings({ data, setData }) {
+	const optionsList = {
+		GENERAL_SETTINGS: {
+			details: ChatbotSettingsOptions.GENERAL_SETTINGS,
+			view: <GeneralSettings data={data} setData={setData} />,
+		},
+		MODEL_SETTINGS: {
+			details: ChatbotSettingsOptions.MODEL_SETTINGS,
+			view: <ModelSettings chatbotID={data.id} />,
+		},
+		CHAT_INTERFACE_SETTINGS: {
+			details: ChatbotSettingsOptions.CHAT_INTERFACE_SETTINGS,
+			view: <ChatInterfaceSettings botID={data.id} />,
+		},
+		DANGER_SETTINGS: {
+			details: ChatbotSettingsOptions.DANGER_SETTINGS,
+			view: <DangerSettings botID={data.id} />,
+		},
+	};
+	const [selectedKey, setSelectedKey] = useState(
+		ChatbotSettingsOptions.GENERAL_SETTINGS.id,
+	);
 	return (
-		<div className={styles.settingsContainer}>
-			<GeneralSettings data={data} setData={setData} />
-			<br></br>
-			<br></br>
-			<ModelSettings chatbotID={data.id} />
-			<br></br>
-			<br></br>
-			<ChatInterfaceSettings botID={data.id} />
-			<br></br>
-			<br></br>
-			<DangerSettings botID={data.id} />
-		</div>
+		<IntegratedSidebarComponent
+			sideBarItems={optionsList}
+			selectedKey={selectedKey}
+			setSelectedKey={setSelectedKey}
+		/>
 	);
 }

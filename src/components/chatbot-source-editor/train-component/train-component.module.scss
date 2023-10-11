@@ -1,0 +1,47 @@
+.trainingContainer {
+	max-width: 720px;
+	margin-left: 16px;
+	margin-right: 16px;
+	margin-top: 32px;
+	border: 1px solid #e5e7eb;
+	padding: 1rem;
+	border-radius: 12px;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	h4 {
+		margin: 0px;
+		margin-bottom: 16px;
+		font-size: 24px;
+		color: #101828;
+	}
+
+	p {
+		margin: 0px;
+		font-size: 20px;
+		margin-bottom: 16px;
+		color: #3f3f46;
+	}
+	h5 {
+		margin: 0px;
+		margin-top: 4px;
+		margin-bottom: 20px;
+		font-size: 20px;
+		font-weight: 500;
+		color: #101828;
+		span {
+			font-weight: 600;
+		}
+	}
+	.trainingError {
+		color: red;
+		font-size: 16px;
+		margin-top: 8px;
+		margin-bottom: 8px;
+	}
+}
+.trainButtonContainer {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}

@@ -1,6 +1,7 @@
 .container {
 	flex: 1;
 	display: flex;
+	text-align: left;
 	flex-direction: column;
 	max-width: 1080px;
 	width: calc(100vw - 64px);
@@ -13,6 +14,9 @@
 			margin: 0;
 			padding: 0;
 		}
+	}
+	h4 {
+		margin-top: 8px;
 	}
 }
 
@@ -120,4 +124,11 @@
 	background: #ffcdd2; // Light pastel red
 	border-color: #ef9a9a; // Light red border
 	color: #c62828; // Dark red text for contrast
+}
+
+.trainComponentContainer {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin-top: 1rem;
 }

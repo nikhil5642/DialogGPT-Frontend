@@ -1,14 +1,20 @@
 import styles from "./website-loader.module.scss";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import URLEditBoxComponent from "../../url-editbox-component/url-editbox-component";
 import { postRequest } from "../../../helper/http-helper";
-import { generateRandomString } from "../chatbot-source-editor.utits";
+import { generateRandomString } from "../chatbot-source-editor.utils";
 import LoadingButton from "src/components/loading-button/loading-button";
 import { useTrackEvent } from "src/helper/event-tracker";
 import { URLStatus, URLStatusText } from "./website-loader.utils";
 import { showSuccessToast } from "src/helper/toast-helper";
-
-export default function WebisteLoader({ bot_id, data, setData }) {
+import TrainComponent from "../train-component/train-component";
+export default function WebisteLoader({
+	bot_id,
+	data,
+	setData,
+	chatbotInfoData,
+	setChatbotInfoData,
+}) {
 	const { trackEvent } = useTrackEvent();
 	const [url, setUrl] = useState("");
 	const [loader, setLoader] = useState({
@@ -19,7 +25,7 @@ export default function WebisteLoader({ bot_id, data, setData }) {
 		setLoader((val) => ({ ...val, fetchLinks: true }));
 		postRequest("/fetch_urls", { url: url, botID: bot_id }, {}, 10000000)
 			.then((res) => {
-				setData([...data, ...res.result]);
+				setData((prevData) => [...prevData, ...res.result]);
 				setLoader((val) => ({ ...val, fetchLinks: false }));
 				trackEvent("urls_fetched", { botID: bot_id, url: url });
 			})
@@ -83,7 +89,6 @@ export default function WebisteLoader({ bot_id, data, setData }) {
 	return (
 		<div className={styles.container}>
 			<h4>Crawl</h4>
-
 			<div className={styles.urlCrawlerView}>
 				<div className={styles.fetchLinksInput}>
 					<URLEditBoxComponent
@@ -160,6 +165,13 @@ export default function WebisteLoader({ bot_id, data, setData }) {
 					title={"Save URL's Changes"}
 					onClick={updateURL}
 					isLoading={loader.updateURL}
+				/>
+			</div>
+			<div className={styles.trainComponentContainer}>
+				<TrainComponent
+					data={data}
+					chatbotInfoData={chatbotInfoData}
+					setChatbotInfoData={setChatbotInfoData}
 				/>
 			</div>
 		</div>

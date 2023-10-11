@@ -5,8 +5,14 @@ import LoaderContext from "../../loader/loader-context";
 import LoadingButton from "src/components/loading-button/loading-button";
 import { showErrorToast, showSuccessToast } from "src/helper/toast-helper";
 import { useTrackEvent } from "src/helper/event-tracker";
-
-export default function TextLoader({ bot_id, data, setData }) {
+import TrainComponent from "../train-component/train-component";
+export default function TextLoader({
+	bot_id,
+	data,
+	setData,
+	chatbotInfoData,
+	setChatbotInfoData,
+}) {
 	const { trackEvent } = useTrackEvent();
 	const [text, setText] = useState("");
 	const { showLoader, hideLoader } = useContext(LoaderContext);
@@ -74,6 +80,13 @@ export default function TextLoader({ bot_id, data, setData }) {
 					title={"Save Text"}
 					onClick={saveText}
 					isLoading={loader}
+				/>
+			</div>
+			<div className={styles.trainComponentContainer}>
+				<TrainComponent
+					data={data}
+					chatbotInfoData={chatbotInfoData}
+					setChatbotInfoData={setChatbotInfoData}
 				/>
 			</div>
 		</div>

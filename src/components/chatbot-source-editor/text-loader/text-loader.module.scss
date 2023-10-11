@@ -2,8 +2,9 @@
 	flex: 1;
 	display: flex;
 	flex-direction: column;
-	max-width: 720px;
-	width: calc(100vw - 64px);
+	width: calc(100% - 64px);
+	margin-left: auto;
+	margin-right: auto;
 	ul {
 		margin: 0;
 		margin-top: 16px;
@@ -20,7 +21,6 @@
 	flex: 1;
 	border: none;
 	padding: 8px;
-	margin-right: 16px;
 	margin-top: 16px;
 	overflow-y: auto;
 	box-sizing: border-box;
@@ -38,7 +38,12 @@
 
 .buttonSaveText {
 	margin-top: 24px;
-	flex: 1;
+
+	align-self: center;
+}
+.trainComponentContainer {
 	display: flex;
-	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	margin-top: 1rem;
 }
