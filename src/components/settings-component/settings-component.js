@@ -11,7 +11,6 @@ export default function SettingsComponent({
 	return (
 		<div className={styles.settingsContainer}>
 			<div className={styles.settingsTitle}>{title}</div>
-
 			<div className={styles.settingsContent}>{content}</div>
 			<div className={styles.settingsFooter}>
 				<LoadingButton title={"Save"} onClick={onSave} isLoading={isLoading} />
