@@ -2,15 +2,20 @@ import React from "react";
 import styles from "./chat-history.module.scss";
 import { useState, useEffect } from "react";
 import { postRequest } from "../../../helper/http-helper";
-import { formatTimestamp } from "../../../helper/utils";
+import { timeAgo } from "../../../helper/utils";
 import ReactMarkdown from "react-markdown";
 export default function ChatHistory({ botID }) {
 	const [history, setHistory] = useState([]);
 	const [selectedIndex, setSelectedIndex] = useState(0);
 	useEffect(() => {
 		if (botID) {
-			postRequest("/fetch_chatbot_history", { botID: botID }).then((response) =>
-				setHistory(response.result),
+			postRequest("/fetch_chatbot_history", { botID: botID }).then(
+				(response) => {
+					const sortedHistory = response.result.sort((a, b) => {
+						return new Date(b.last_updated) - new Date(a.last_updated);
+					});
+					setHistory(sortedHistory);
+				},
 			);
 		}
 	}, [botID]);
@@ -35,9 +40,14 @@ export default function ChatHistory({ botID }) {
 							}`}
 							onClick={() => setSelectedIndex(index)}
 						>
-							<p>
-								<strong>Last Updated:</strong>{" "}
-								{formatTimestamp(item.last_updated)}
+							<p className={styles.chatHistoryItemCust}>
+								Customer: {item.history[item.history.length - 2].text}
+							</p>
+							<p className={styles.chatHistoryItemBot}>
+								Bot: {item.history[item.history.length - 1].text}
+							</p>
+							<p className={styles.chatHistoryLastUpdated}>
+								{timeAgo(item.last_updated)}
 							</p>
 						</div>
 					))
