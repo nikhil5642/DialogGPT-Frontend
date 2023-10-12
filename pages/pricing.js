@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { getRequest } from "src/helper/http-helper";
 import AuthService from "../src/helper/AuthService";
 import { useTrackEvent } from "../src/helper/event-tracker";
-export default function PricingScreen() {
+function PricingScreen() {
 	const { trackEvent, trackScreenView } = useTrackEvent(); // Extract analytics instance from context
 	const [currentPlan, setCurrentPlan] = useState(null);
 	useEffect(() => {
@@ -55,3 +55,6 @@ export default function PricingScreen() {
 		</>
 	);
 }
+
+PricingScreen.showHeaderFooter = true;
+export default PricingScreen;

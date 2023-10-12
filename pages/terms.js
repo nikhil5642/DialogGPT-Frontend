@@ -1,6 +1,6 @@
 import Head from "next/head";
 import styles from "./styles/terms.module.scss";
-export default function Terms() {
+function Terms() {
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -607,3 +607,5 @@ export default function Terms() {
 		</div>
 	);
 }
+Terms.showHeaderFooter = true;
+export default Terms;

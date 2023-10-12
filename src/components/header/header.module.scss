@@ -2,13 +2,14 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	padding-left: 2rem;
+	padding-right: 2rem;
 }
 
 .headerLogoContainer {
 	display: flex;
-	padding-top: 12px;
-	padding-bottom: 12px;
-	margin-left: 16px;
+	padding-top: 0.75rem;
+	padding-bottom: 0.75rem;
 
 	&:active,
 	&:focus {
@@ -27,9 +28,18 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	a:hover {
+		transform: translateY(-2px); /* Gives a slight lift effect on hover */
+		box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+	}
+	a:active {
+		transform: translateY(1px); /* Pushes the button down a bit when clicked */
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
 }
+
 .selectionItem {
-	margin: 0 10px;
+	margin: 0 15px; // Increased spacing a bit
 	display: inline-block;
 	padding: 8px 18px;
 	border: none;
@@ -38,23 +48,14 @@
 	font-size: 1.25rem;
 	text-decoration: none;
 	font-weight: bold;
-	transition: background-color 0.3s, transform 0.3s;
+	transition: background-color 0.3s, transform 0.3s, color 0.3s;
 	cursor: pointer;
-}
-
-.selectionItem:hover {
-	transform: translateY(-2px); /* Gives a slight lift effect on hover */
-	box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
-}
-
-.selectionItem:active {
-	transform: translateY(1px); /* Pushes the button down a bit when clicked */
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .profileActionContainer {
 	display: flex;
 	justify-content: flex-end;
+	align-items: center;
 	margin-left: 250px;
 	margin-right: 16px;
 	align-items: center;

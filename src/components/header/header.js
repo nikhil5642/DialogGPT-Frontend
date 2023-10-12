@@ -69,14 +69,14 @@ export default function Header() {
 							trackEvent("account_link_click", { source: "hander" })
 						}
 					>
-						{"Account ->"}
+						{"Account"}
 					</a>
 				) : (
 					<a
 						href="/signin"
 						onClick={() => trackEvent("login_link_click", { source: "header" })}
 					>
-						{"Log In ->"}
+						{"Log In"}
 					</a>
 				)}
 			</div>
