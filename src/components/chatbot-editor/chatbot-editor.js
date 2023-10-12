@@ -17,6 +17,7 @@ import { useTrackEvent } from "src/helper/event-tracker";
 import EditBoxComponent from "../editbox-component/editbox-component";
 import { formatTimestamp } from "../../helper/utils";
 import { URLStatus } from "../chatbot-source-editor/website-loader/website-loader.utils";
+import ChatbotDashboard from "../chatbot-dashboard/chatbot-dashboard";
 
 export default function ChatBotEditor({ botID, page }) {
 	const { trackEvent, trackScreenView } = useTrackEvent();
@@ -252,6 +253,12 @@ export default function ChatBotEditor({ botID, page }) {
 						</div>
 					</>
 				)}
+			{selector === ChatBotOptionsEnum.DASHBOARD && (
+				<>
+					{trackScreenView("ChatbotDashboardScreen", "ChatBotEditorScreen")}
+					<ChatbotDashboard botID={botID} />
+				</>
+			)}
 
 			{selector === ChatBotOptionsEnum.CHATBOT &&
 				chatbotData.status === "trained" && (

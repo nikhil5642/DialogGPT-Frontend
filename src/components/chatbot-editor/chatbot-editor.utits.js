@@ -5,18 +5,21 @@ export const ChatBotOptionsEnum = {
 	SOURCES: "sources",
 	SETTINGS: "settings",
 	CHATBOT: "chatbots",
+	DASHBOARD: "dashboard",
 	EMBED: "embed",
 };
 const ChatBotOptionLabels = {
 	[ChatBotOptionsEnum.SOURCES]: "Sources",
 	[ChatBotOptionsEnum.SETTINGS]: "Settings",
 	[ChatBotOptionsEnum.CHATBOT]: "Chatbot",
+	[ChatBotOptionsEnum.DASHBOARD]: "Dashboard",
 	[ChatBotOptionsEnum.EMBED]: "Embed on Site",
 };
 
 export const ChatBotOptionSelector = ({ botID, selector, setSelector }) => {
 	const router = useRouter();
 	const sourceOptions = [
+		ChatBotOptionsEnum.DASHBOARD,
 		ChatBotOptionsEnum.CHATBOT,
 		ChatBotOptionsEnum.SOURCES,
 		ChatBotOptionsEnum.SETTINGS,
