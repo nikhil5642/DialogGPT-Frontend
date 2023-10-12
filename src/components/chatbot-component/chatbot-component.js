@@ -4,6 +4,7 @@ import styles from "./chatbot-component.module.scss";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import { ChatBotSource } from "./chatbot-component.utils";
+import ChatHistoryService from "../../helper/ChatHistoryService";
 
 export default function ChatBotComponent({ config }) {
 	const {
@@ -17,10 +18,29 @@ export default function ChatBotComponent({ config }) {
 		displayName = "",
 	} = config;
 	const [messages, setMessages] = useState([]);
+	const [chatId, setChatId] = useState(null);
 	const [newMessage, setNewMessage] = useState("");
 	const messagesEndRef = useRef(null);
 	const [sending, setSending] = useState(false);
 	const [rows, setRows] = useState(1);
+
+	useEffect(() => {
+		if (initialMessage != "") {
+			ChatHistoryService.getChatHistory(botID)
+				.then((res) => {
+					if (res) {
+						setChatId(res.chatId);
+						setMessages(res.history);
+						if (res.history.length == 0) {
+							initialView();
+						}
+					}
+				})
+				.catch((e) => {
+					initialView();
+				});
+		}
+	}, [initialMessage]);
 
 	const renderers = {
 		a: ({ href, children }) => {
@@ -77,10 +97,6 @@ export default function ChatBotComponent({ config }) {
 		}
 	};
 
-	useEffect(() => {
-		initialView();
-	}, [initialMessage]);
-
 	const handleKeyPress = (e) => {
 		if (e.key === "Enter" && !e.shiftKey) {
 			e.preventDefault(); // Prevents the default action (newline) when pressing Enter
@@ -97,7 +113,10 @@ export default function ChatBotComponent({ config }) {
 			const container = messagesEndRef.current.parentElement;
 			container.scrollTop = container.scrollHeight;
 		}
-	}, [messages]);
+		if (chatId != null) {
+			ChatHistoryService.storeChatHistory(chatId, messages);
+		}
+	}, [messages, chatId]);
 
 	const handleSend = () => {
 		if (source === ChatBotSource.SETTINGS) {
@@ -115,6 +134,7 @@ export default function ChatBotComponent({ config }) {
 					"/reply",
 					{
 						botID: botID,
+						chatId: chatId,
 						query: newMessage,
 						history: messages,
 					},
@@ -133,7 +153,21 @@ export default function ChatBotComponent({ config }) {
 	};
 
 	const refresh = () => {
-		initialView();
+		ChatHistoryService.clearChatHistory().then(() => {
+			ChatHistoryService.getChatHistory(botID)
+				.then((res) => {
+					if (res) {
+						setChatId(res.chatId);
+						setMessages(res.history);
+						if (res.result.length == 0) {
+							initialView();
+						}
+					}
+				})
+				.catch((e) => {
+					initialView();
+				});
+		});
 	};
 
 	return (
