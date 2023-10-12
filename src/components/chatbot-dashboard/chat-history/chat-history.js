@@ -26,7 +26,7 @@ export default function ChatHistory({ botID }) {
 	return (
 		<div className={styles.chatHistoryContainer}>
 			<div className={styles.chatHistoryList}>
-				{history.length > 0 &&
+				{history.length > 0 ? (
 					history.map((item, index) => (
 						<div
 							key={item.chat_id}
@@ -40,7 +40,10 @@ export default function ChatHistory({ botID }) {
 								{formatTimestamp(item.last_updated)}
 							</p>
 						</div>
-					))}
+					))
+				) : (
+					<div className="emptyChatView">No chat history available.</div>
+				)}
 			</div>
 			{history.length > 0 && (
 				<div className={styles.selectedChat}>
