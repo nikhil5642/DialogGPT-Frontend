@@ -2,7 +2,7 @@ import MyChatBots from "../src/components/my-chatbots/my-chatbots";
 import styles from "./styles/defaults.module.scss";
 import Head from "next/head";
 
-export default function HomeScreen() {
+function MyChatBots() {
 	return (
 		<>
 			<Head>
@@ -25,3 +25,5 @@ export default function HomeScreen() {
 		</>
 	);
 }
+MyChatBots.showHeaderFooter = true;
+export default MyChatBots;

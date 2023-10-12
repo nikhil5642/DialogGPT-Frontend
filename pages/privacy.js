@@ -1,6 +1,6 @@
 import Head from "next/head";
 import styles from "./styles/terms.module.scss";
-export default function Privacy() {
+function Privacy() {
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -591,3 +591,6 @@ export default function Privacy() {
 		</div>
 	);
 }
+
+Privacy.showHeaderFooter = true;
+export default Privacy;

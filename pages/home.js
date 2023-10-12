@@ -3,10 +3,12 @@ import Head from "next/head";
 import AuthService from "../src/helper/AuthService";
 import { useTrackEvent } from "../src/helper/event-tracker";
 import { useEffect, useState } from "react";
-
+import Header from "../src/components/header/header";
+import Footer from "../src/components/about/about";
 import Image from "next/image";
+import About from "../src/components/about/about";
 function HomeScreen() {
-	const { trackEvent, trackScreenView } = useTrackEvent(); // Extract analytics instance from context
+	const { trackScreenView } = useTrackEvent(); // Extract analytics instance from context
 	useEffect(() => {
 		trackScreenView("HomeScreen", "HomeScreen");
 	}, []);
@@ -34,9 +36,11 @@ function HomeScreen() {
 				</script>
 			</Head>
 			<div className={styles.homeScreenContainer}>
+				<Header></Header>
 				<TopOverviewComponent />
 				<VideoDemoComponent />
 				<LiveDemoComponent />
+				<About />
 			</div>
 		</>
 	);
@@ -132,5 +136,5 @@ const LiveDemoComponent = () => {
 		</div>
 	);
 };
-
+HomeScreen.showHeaderFooter = false;
 export default HomeScreen;

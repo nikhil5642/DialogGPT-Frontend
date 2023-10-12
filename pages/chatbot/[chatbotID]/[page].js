@@ -4,7 +4,7 @@ import styles from "../../styles/defaults.module.scss";
 import ChatBotEditor from "../../../src/components/chatbot-editor/chatbot-editor";
 import React, { useEffect } from "react";
 
-export default function ChatbotPage() {
+function ChatbotPage() {
 	const { chatbotID, page } = useRouter().query;
 
 	return (
@@ -22,3 +22,5 @@ export default function ChatbotPage() {
 		</>
 	);
 }
+ChatbotPage.showHeaderFooter = true;
+export default ChatbotPage;

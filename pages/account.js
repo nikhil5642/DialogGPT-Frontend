@@ -9,7 +9,7 @@ import { getRequest } from "../src/helper/http-helper";
 import LoaderContext from "../src/components/loader/loader-context";
 import LoadingButton from "src/components/loading-button/loading-button";
 import { useTrackEvent } from "../src/helper/event-tracker";
-export default function AccountScreen() {
+function AccountScreen() {
 	const { trackEvent, trackScreenView } = useTrackEvent(); // Extract analytics instance from context
 	const router = useRouter();
 	const [accountInfo, setAccountInfo] = useState({});
@@ -93,3 +93,6 @@ export default function AccountScreen() {
 		</>
 	);
 }
+
+AccountScreen.showHeaderFooter = true;
+export default AccountScreen;

@@ -11,6 +11,7 @@ import IsolationContext from "src/scripts/isolation-context";
 import Script from "next/script";
 function MyApp({ Component, pageProps }) {
 	const isIsolated = Component.isIsolatedComponent === true; // default to false if not specified
+	const showHeaderFooter = Component.showHeaderFooter === true; // default to false if not specified
 
 	return (
 		<>
@@ -58,11 +59,19 @@ function MyApp({ Component, pageProps }) {
 				) : (
 					<LoaderProvider>
 						<FirebaseProvider>
-							<Layout>
-								<Loader />
-								<ToastContainer />
-								<Component {...pageProps} />
-							</Layout>
+							{showHeaderFooter ? (
+								<Layout>
+									<Loader />
+									<ToastContainer />
+									<Component {...pageProps} />
+								</Layout>
+							) : (
+								<>
+									<Loader />
+									<ToastContainer />
+									<Component {...pageProps} />
+								</>
+							)}
 						</FirebaseProvider>
 					</LoaderProvider>
 				)}

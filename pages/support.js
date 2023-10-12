@@ -2,7 +2,7 @@
 
 import Head from "next/head";
 
-export default function SupportPage() {
+function SupportPage() {
 	return (
 		<div>
 			<Head>
@@ -96,3 +96,5 @@ export default function SupportPage() {
 		</div>
 	);
 }
+SupportPage.showHeaderFooter = true;
+export default SupportPage;

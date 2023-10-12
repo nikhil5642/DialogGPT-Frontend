@@ -375,4 +375,5 @@ const SignInPage = () => {
 	);
 };
 
+SignInPage.showHeaderFooter = true;
 export default SignInPage;
