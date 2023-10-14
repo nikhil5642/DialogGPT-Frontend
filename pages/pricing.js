@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { getRequest } from "src/helper/http-helper";
 import AuthService from "../src/helper/AuthService";
 import { useTrackEvent } from "../src/helper/event-tracker";
+import BottomTryNowComponent from "../src/components/bottom-try-now-component/bottom-try-now-component";
 function PricingScreen() {
 	const { trackEvent, trackScreenView } = useTrackEvent(); // Extract analytics instance from context
 	const [currentPlan, setCurrentPlan] = useState(null);
@@ -51,6 +52,7 @@ function PricingScreen() {
 					<PricingPlan plan={PricingPlans.PRO} currentPlan={currentPlan} />
 				</div>
 				<PricingFAQs />
+				<BottomTryNowComponent />
 			</div>
 		</>
 	);
