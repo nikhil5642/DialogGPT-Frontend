@@ -50,7 +50,7 @@ function MyApp({ Component, pageProps }) {
 			<Head>
 				<meta
 					name="viewport"
-					content="width=device-width, initial-scale=1.0, maximum-scale=5"
+					content="width=device-width, initial-scale=1.0, maximum-scale=5, viewport-fit=cover"
 				/>
 			</Head>
 			<IsolationContext.Provider value={isIsolated}>

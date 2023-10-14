@@ -7,6 +7,7 @@ import Header from "../src/components/header/header";
 import Footer from "../src/components/about/about";
 import Image from "next/image";
 import About from "../src/components/about/about";
+import { symbol } from "prop-types";
 function HomeScreen() {
 	const { trackScreenView } = useTrackEvent(); // Extract analytics instance from context
 	useEffect(() => {
@@ -35,12 +36,12 @@ function HomeScreen() {
 					{JSON.stringify(structuredData)}
 				</script>
 			</Head>
+
 			<div className={styles.homeScreenContainer}>
-				<Header></Header>
 				<TopOverviewComponent />
+				<FeaturesOverviewComponent />
 				<VideoDemoComponent />
 				<LiveDemoComponent />
-				<About />
 			</div>
 		</>
 	);
@@ -75,17 +76,59 @@ const TopOverviewComponent = () => {
 				Connect effortlessly via <span>APIs</span> and other{" "}
 				<span>integrations</span>.
 			</p>
-			<button onClick={onCreateChatbot}>
-				<Image
-					src="/assets/dialog_gpt_logo_icon_only.png"
-					alt={"DialogGPT"}
-					title={"DialogGPT"}
-					loading="lazy"
-					height={64}
-					width={64}
-				/>
-				Create your Chatbot Now ➤
-			</button>
+			<button onClick={onCreateChatbot}>Create your Chatbot Now →</button>
+		</div>
+	);
+};
+
+const FeaturesOverviewComponent = () => {
+	const features = [
+		{
+			key: "1",
+			title: "Customized Behavior",
+			desc: "Ensure that your chatbot aligns with the brand's persona through personalized guidelines.",
+			icon: "/assets/demo_model.png",
+		},
+		{
+			key: "2",
+			title: "Customized Appearance",
+			desc: "Integrate our chatbot seamlessly into your website by tailoring its appearance for a cohesive user experience.",
+			icon: "/assets/demo_chat_interface.png",
+		},
+		{
+			key: "3",
+			title: "Chat History",
+			desc: " A snapshot of every conversation for quick reference and analysis.",
+			icon: "/assets/demo_chat_history.png",
+		},
+	];
+	const [selected, setSelected] = useState(features[0]);
+	return (
+		<div className={styles.featureOverviewContainer}>
+			<h2>Everything you need for your AI Chatbot</h2>
+			<div className={styles.featureListContainer}>
+				<div className={styles.featureList}>
+					{features.map((feature) => (
+						<div
+							key={feature.key}
+							onClick={() => setSelected(feature)}
+							className={
+								feature.key === selected.key
+									? `${styles.sideMenuItem} ${styles.selected}`
+									: styles.sideMenuItem
+							}
+						>
+							<h3>{feature.title}</h3>
+
+							<p>{feature.desc}</p>
+						</div>
+					))}
+				</div>
+				<p className={styles.selectedDesc}>{selected.desc}</p>
+				<div className={styles.featureImgContainer}>
+					<img src={selected.icon} loading="lazy" />
+				</div>
+			</div>
 		</div>
 	);
 };
@@ -103,7 +146,7 @@ const VideoDemoComponent = () => {
 				src="/videos/video_demo.gif"
 				loading="lazy"
 			/>
-
+			<br />
 			<p>I can then embed the chatbot on the website!</p>
 		</div>
 	);
@@ -136,5 +179,5 @@ const LiveDemoComponent = () => {
 		</div>
 	);
 };
-HomeScreen.showHeaderFooter = false;
+HomeScreen.showHeaderFooter = true;
 export default HomeScreen;

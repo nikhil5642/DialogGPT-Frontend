@@ -26,13 +26,13 @@ export default function Header() {
 			>
 				<Image
 					className={styles.headerLogo}
-					src="/assets/dialog_gpt_logo_with_text.png"
+					src="/assets/dialog_gpt_logo_icon_with_text.png"
 					alt={"DialogGPT"}
 					title={"DialogGPT"}
 					loading="eager"
 					priority={true}
-					height={80}
-					width={300}
+					height={50}
+					width={250}
 				></Image>
 			</a>
 

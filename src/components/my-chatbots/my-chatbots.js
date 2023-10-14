@@ -74,7 +74,7 @@ export default function MyChatBots() {
 					>
 						<Image
 							className={styles.charbotCardImg}
-							src="/assets/dialog_gpt_logo_icon_only.png"
+							src="/assets/ic_bot.png"
 							alt={"Message"}
 							title={"Message"}
 							loading="lazy"
