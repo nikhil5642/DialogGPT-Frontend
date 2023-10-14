@@ -13,13 +13,14 @@
 	padding-left: 3rem;
 	padding-right: 3rem;
 
-	h2 {
+	.bottomTryNowComponentHeader {
 		color: white;
+		font-weight: 800;
 		text-align: center;
 		line-height: 3.5rem;
 		font-size: 3rem;
 	}
-	button {
+	.bottomTryNowComponentButton {
 		display: flex;
 		align-items: center; // Vertically center the image and text
 		margin-top: 3rem;
