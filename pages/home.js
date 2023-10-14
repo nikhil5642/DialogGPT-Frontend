@@ -42,6 +42,7 @@ function HomeScreen() {
 				<FeaturesOverviewComponent />
 				<VideoDemoComponent />
 				<LiveDemoComponent />
+				<BottomOverviewComponent />
 			</div>
 		</>
 	);
@@ -147,6 +148,7 @@ const VideoDemoComponent = () => {
 				loading="lazy"
 			/>
 			<br />
+			<br />
 			<p>I can then embed the chatbot on the website!</p>
 		</div>
 	);
@@ -176,6 +178,28 @@ const LiveDemoComponent = () => {
 					onLoad={() => setIframeLoading(false)}
 				></iframe>
 			</div>
+		</div>
+	);
+};
+const BottomOverviewComponent = () => {
+	const { trackEvent } = useTrackEvent();
+	function onCreateChatbot() {
+		const isAuthenticated = AuthService.isAuthenticated();
+
+		trackEvent("create_try_now_clicked", {
+			user_authenticated: isAuthenticated ? "true" : "false",
+		});
+
+		if (isAuthenticated) {
+			window.location.href = `/my-chatbots`;
+		} else {
+			window.location.href = `/signin`;
+		}
+	}
+	return (
+		<div className={styles.bottomOverViewContainer}>
+			<h2>Join the future of AI Chatbots Today</h2>
+			<button onClick={onCreateChatbot}>Try Now →</button>
 		</div>
 	);
 };
