@@ -8,6 +8,7 @@ import Footer from "../src/components/about/about";
 import Image from "next/image";
 import About from "../src/components/about/about";
 import { symbol } from "prop-types";
+import BottomTryNowComponent from "../src/components/bottom-try-now-component/bottom-try-now-component";
 function HomeScreen() {
 	const { trackScreenView } = useTrackEvent(); // Extract analytics instance from context
 	useEffect(() => {
@@ -42,7 +43,7 @@ function HomeScreen() {
 				<FeaturesOverviewComponent />
 				<VideoDemoComponent />
 				<LiveDemoComponent />
-				<BottomOverviewComponent />
+				<BottomTryNowComponent />
 			</div>
 		</>
 	);
@@ -181,27 +182,6 @@ const LiveDemoComponent = () => {
 		</div>
 	);
 };
-const BottomOverviewComponent = () => {
-	const { trackEvent } = useTrackEvent();
-	function onCreateChatbot() {
-		const isAuthenticated = AuthService.isAuthenticated();
 
-		trackEvent("create_try_now_clicked", {
-			user_authenticated: isAuthenticated ? "true" : "false",
-		});
-
-		if (isAuthenticated) {
-			window.location.href = `/my-chatbots`;
-		} else {
-			window.location.href = `/signin`;
-		}
-	}
-	return (
-		<div className={styles.bottomOverViewContainer}>
-			<h2>Join the future of AI Chatbots Today</h2>
-			<button onClick={onCreateChatbot}>Try Now →</button>
-		</div>
-	);
-};
 HomeScreen.showHeaderFooter = true;
 export default HomeScreen;
