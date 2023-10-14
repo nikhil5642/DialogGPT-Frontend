@@ -19,8 +19,15 @@ export default function BottomTryNowComponent() {
 	}
 	return (
 		<div className={styles.bottomTryNowComponent}>
-			<h2>Join the future of AI Chatbots Today</h2>
-			<button onClick={onCreateChatbot}>Try Now →</button>
+			<h2 className={styles.bottomTryNowComponentHeader}>
+				Join the future of AI Chatbots Today
+			</h2>
+			<button
+				onClick={onCreateChatbot}
+				className={styles.bottomTryNowComponentButton}
+			>
+				Try Now →
+			</button>
 		</div>
 	);
 }
