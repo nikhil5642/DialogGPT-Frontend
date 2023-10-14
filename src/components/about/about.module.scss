@@ -1,7 +1,7 @@
 .aboutContainer {
 	display: flex;
 	flex-direction: column;
-	padding: 1rem;
+	padding: 2rem;
 	margin-top: 40vh;
 	width: 100%;
 	align-items: center;
@@ -10,39 +10,51 @@
 	border: 1px solid #e1e4e8; // A subtle border for definition
 }
 
-.aboutCopyright {
-	font-size: 1rem;
-	text-align: center;
-	margin-top: 0.5rem;
-	color: #777;
-}
-
 .aboutP {
+	color: #000;
 	font-size: 1rem;
 	padding: 0px;
 	margin: 0px;
 	text-align: center;
 	font-weight: 500;
+	margin-top: 1rem;
 }
 
 .linksP {
 	margin-bottom: 1rem; // Added space between the links and the contact info
+	margin-top: 2rem;
 }
 
 .termsLink {
-	color: #101828;
+	color: #000;
 	text-decoration: none;
 	font-weight: 500; // Slightly bolder font
 	margin: 0 0.5rem; // Space between the links
-
 	&:hover {
 		text-decoration: underline;
 	}
+}
+.headerLogoContainer {
+	display: flex;
+	padding-top: 0.75rem;
+	padding-bottom: 0.75rem;
+	&:active,
+	&:focus {
+		outline: none;
+		-webkit-tap-highlight-color: transparent; // For mobile web views
+	}
+}
+
+.headerLogo {
+	object-fit: contain;
+	height: 50px;
+	width: 250px;
 }
 
 @media only screen and (max-width: 1080px) {
 	.aboutContainer {
 		padding: 0px;
+		padding-top: 1rem;
 		margin-top: 10vh;
 		flex-direction: column;
 		align-items: center;
@@ -50,11 +62,21 @@
 			display: none;
 		}
 	}
+	.headerLogoContainer {
+		padding-top: 0rem;
+		padding-bottom: 0.75rem;
+	}
+	.headerLogo {
+		object-fit: contain;
+		margin-top: 1rem;
+		height: 40px;
+		width: 160px;
+	}
 	.termsLink {
 		display: block; // this will stack them vertically on mobile
-		margin-bottom: 8px; // some space between the links
+		margin-bottom: 1rem; // some space between the links
 		text-align: start;
-		font-size: 20px;
+		font-size: 1rem;
 		text-align: center;
 		text-decoration: underline;
 	}

@@ -7,9 +7,12 @@ import { useEffect, useState } from "react";
 import { getRequest } from "src/helper/http-helper";
 import AuthService from "../src/helper/AuthService";
 import { useTrackEvent } from "../src/helper/event-tracker";
+import BottomTryNowComponent from "../src/components/bottom-try-now-component/bottom-try-now-component";
+import ConfettiExplosion from "react-confetti-explosion";
 function PricingScreen() {
 	const { trackEvent, trackScreenView } = useTrackEvent(); // Extract analytics instance from context
 	const [currentPlan, setCurrentPlan] = useState(null);
+
 	useEffect(() => {
 		trackScreenView("PricingScreen", "PricingScreen");
 		if (AuthService.isAuthenticated()) {
@@ -48,9 +51,17 @@ function PricingScreen() {
 						plan={PricingPlans.ESSENTIAL}
 						currentPlan={currentPlan}
 					/>
+					<ConfettiExplosion
+						force={1.5}
+						duration={5000}
+						particleCount={250}
+						width={3000}
+					/>
 					<PricingPlan plan={PricingPlans.PRO} currentPlan={currentPlan} />
 				</div>
+
 				<PricingFAQs />
+				<BottomTryNowComponent />
 			</div>
 		</>
 	);

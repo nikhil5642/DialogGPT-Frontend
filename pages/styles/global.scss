@@ -21,19 +21,21 @@ body {
 	}
 
 	&.simple-white {
-		background-color: #fefdfc;
+		background-color: #f5f5f5;
 	}
 }
 
 h1,
 h2 {
-	font-family: "Roboto", sans-serif;
+	font-family: "Lato", sans-serif;
 	font-weight: 600; // Semi-Bold
 }
 
 h3,
-h4 {
-	font-family: "Roboto", sans-serif;
+h4,
+h5,
+h6 {
+	font-family: "Lato", sans-serif;
 	font-weight: 400; // Regular
 }
 
@@ -42,7 +44,7 @@ p,
 li,
 a,
 span {
-	font-family: "Roboto", sans-serif;
+	font-family: "Lato", sans-serif;
 	font-weight: 400; // Regular
 }
 
