@@ -30,19 +30,24 @@ function PricingScreen() {
 	return (
 		<>
 			<Head>
-				<title>Pricing Plans</title>
-				<meta name="description" content="Pricing Plans for DialogGPT.io" />
+				<title>DialogGPT.io Pricing Plans - Affordable Chatbot Solutions</title>
+				<meta
+					name="description"
+					content="Explore affordable pricing plans for DialogGPT.io. Choose the best chatbot solution tailored to your business needs."
+				/>
 				<link rel="canonical" href="https://dialoggpt.io/pricing" />
 				<script type="application/ld+json">
 					{JSON.stringify({
 						"@context": "http://schema.org",
 						"@type": "WebSite",
 						name: "DialogGPT.io",
-						url: "https://dialoggpt.io/privacy",
-						description: "Pricing Plans for DialogGPT.io",
+						url: "https://dialoggpt.io/pricing", // Corrected the URL to match the canonical link
+						description:
+							"Explore affordable pricing plans for DialogGPT.io. Choose the best chatbot solution tailored to your business needs.",
 					})}
 				</script>
 			</Head>
+
 			<div className={styles.pricingScreenContainer}>
 				<h1 className={styles.pricingHeader}>Pricing Plans</h1>
 				<div className={styles.pricingPlansContainer}>
