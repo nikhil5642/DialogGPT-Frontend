@@ -43,6 +43,7 @@ function HomeScreen() {
 				<FeaturesOverviewComponent />
 				<VideoDemoComponent />
 				<LiveDemoComponent />
+				<AvailableIntegrations />
 				<FAQComponent />
 				<BottomTryNowComponent />
 			</div>
@@ -179,6 +180,108 @@ const LiveDemoComponent = () => {
 					title="DialogGPT Chatbot Demo"
 					onLoad={() => setIframeLoading(false)}
 				></iframe>
+			</div>
+		</div>
+	);
+};
+const AvailableIntegrations = () => {
+	return (
+		<div className={styles.availableIntegrationsContainer}>
+			<h2>Seamlessly Integrate with Your Preferred Website Builder</h2>
+			<div className={styles.availableIntegrationsRow}>
+				<Image
+					className={styles.integrationItem}
+					src="/assets/ic_webflow.png"
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
+					loading="eager"
+					priority={true}
+					width={512} // default width
+					height={150} // default height
+				></Image>
+				<Image
+					className={styles.integrationItem}
+					src="/assets/ic_wix.png"
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
+					loading="eager"
+					priority={true}
+					width={626} // default width
+					height={150} // default height
+				></Image>
+				<Image
+					className={styles.integrationItem}
+					src="/assets/ic_shopify.png"
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
+					loading="eager"
+					priority={true}
+					width={200} // default width
+					height={150} // default height
+				></Image>
+
+				<Image
+					className={styles.integrationItem}
+					src="/assets/ic_wordpress.png"
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
+					loading="eager"
+					priority={true}
+					width={500} // default width
+					height={200} // default height
+				></Image>
+
+				<Image
+					className={styles.integrationItem}
+					src="/assets/ic_hubspot.png"
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
+					loading="eager"
+					priority={true}
+					width={500} // default width
+					height={200} // default height
+				></Image>
+				<Image
+					className={styles.integrationItem}
+					src="/assets/ic_hostinger.png"
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
+					loading="eager"
+					priority={true}
+					width={250} // default width
+					height={200} // default height
+				></Image>
+
+				<Image
+					className={styles.integrationItem}
+					src="/assets/ic_bigcommerce.png"
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
+					loading="eager"
+					priority={true}
+					width={250} // default width
+					height={200} // default height
+				></Image>
+				<Image
+					className={styles.integrationItem}
+					src="/assets/ic_woo_commerce.png"
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
+					loading="eager"
+					priority={true}
+					width={250} // default width
+					height={200} // default height
+				></Image>
+				<Image
+					className={styles.integrationItem}
+					src="/assets/ic_godaddy.png"
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
+					loading="eager"
+					priority={true}
+					width={250} // default width
+					height={200} // default height
+				></Image>
 			</div>
 		</div>
 	);

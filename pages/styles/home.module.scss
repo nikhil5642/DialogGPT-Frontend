@@ -227,6 +227,35 @@
 		transform: translate(-50%, -50%) rotate(360deg);
 	}
 }
+.availableIntegrationsContainer {
+	margin-top: 10rem;
+	max-width: 1080px;
+	align-self: center;
+	flex-direction: column;
+	width: 100%;
+	h2 {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+
+	.availableIntegrationsRow {
+		margin-top: 4rem;
+		display: grid;
+		justify-content: center;
+		grid-template-columns: repeat(3, auto);
+		column-gap: 4rem;
+		row-gap: 2rem;
+		width: 100%;
+		.integrationItem {
+			flex: 1;
+			max-width: 250px;
+			max-height: 150px;
+			object-fit: contain;
+			margin-left: 1rem;
+			margin-right: 1rem;
+		}
+	}
+}
 
 .faqContainer {
 	display: flex;
@@ -360,6 +389,20 @@
 	.liveDemoContainer {
 		margin-top: 5rem;
 		padding-top: 0;
+	}
+	.availableIntegrationsContainer {
+		margin-top: 5rem;
+
+		.availableIntegrationsRow {
+			margin-top: 3rem;
+			grid-template-columns: repeat(2, auto);
+			column-gap: 2rem;
+			row-gap: 0rem;
+			.integrationItem {
+				max-width: 150px;
+				max-height: 120px;
+			}
+		}
 	}
 	.faqContainer {
 		margin-top: 5rem;
