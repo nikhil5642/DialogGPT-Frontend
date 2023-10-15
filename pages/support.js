@@ -10,7 +10,7 @@ function SupportPage() {
 				<link rel="canonical" href="https://dialoggpt.io/support" />
 				<meta
 					name="description"
-					content="Need help? Reach out to us at support@dialoggpt.io"
+					content="Get assistance with DialogGPT. For queries, issues, or feedback, reach out to us at support@dialoggpt.io."
 				/>
 				<script type="application/ld+json">
 					{JSON.stringify({
@@ -18,7 +18,8 @@ function SupportPage() {
 						"@type": "WebSite",
 						name: "DialogGPT.io",
 						url: "https://dialoggpt.io/support",
-						description: "Need help? Reach out to us at support@dialoggpt.i",
+						description:
+							"Get assistance with DialogGPT. For queries, issues, or feedback, reach out to us at support@dialoggpt.io.",
 					})}
 				</script>
 			</Head>

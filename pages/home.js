@@ -27,10 +27,10 @@ function HomeScreen() {
 	return (
 		<>
 			<Head>
-				<title>DialogGPT</title>
+				<title>DialogGPT: Advanced Chatbot Solutions for Your Website</title>
 				<meta
 					name="description"
-					content="Build a chatbot for your website, try now! "
+					content="Empower your website with DialogGPT, the next-generation chatbot solution. Enhance user engagement, answer queries in real-time, and drive conversions. Try it today!"
 				/>
 				<link rel="canonical" href="https://dialoggpt.io/home" />
 				<script type="application/ld+json">
@@ -74,11 +74,11 @@ const TopOverviewComponent = () => {
 				for your <span>own Website</span>
 			</h1>
 			<p>
-				Transform your data into a dynamic <span>Chatbot</span>. Seamlessly
-				integrate it with your <span>Website</span>. <br />
+				Transform your data into a dynamic <strong>Chatbot</strong>. Seamlessly
+				integrate it with your <strong>Website</strong>. <br />
 				<br />
-				Connect effortlessly via <span>APIs</span> and other{" "}
-				<span>integrations</span>.
+				Connect effortlessly via <strong>APIs</strong> and other{" "}
+				<strong>integrations</strong>.
 			</p>
 			<button onClick={onCreateChatbot}>Create your Chatbot Now →</button>
 		</div>
@@ -130,7 +130,7 @@ const FeaturesOverviewComponent = () => {
 				</div>
 				<p className={styles.selectedDesc}>{selected.desc}</p>
 				<div className={styles.featureImgContainer}>
-					<img src={selected.icon} loading="lazy" />
+					<img src={selected.icon} loading="lazy" alt={selected.title} />
 				</div>
 			</div>
 		</div>
@@ -141,11 +141,12 @@ const VideoDemoComponent = () => {
 		<div className={styles.videoDemoContainer} id="Demo">
 			<h2>Video Demo</h2>
 			<p>
-				Creating a chatbot for <span>Product Hunt</span> by crawling the website
-				and training the AI on its content.
+				Creating a chatbot for <strong>Product Hunt</strong> by crawling the
+				website and training the AI on its content.
 			</p>
 
 			<img
+				alt="DialogGPT Demo Video"
 				className={styles.demoVideo}
 				src="/videos/video_demo.gif"
 				loading="lazy"
@@ -192,96 +193,93 @@ const AvailableIntegrations = () => {
 				<Image
 					className={styles.integrationItem}
 					src="/assets/ic_webflow.png"
-					alt={"DialogGPT"}
-					title={"DialogGPT"}
+					alt="Webflow Logo"
+					title="DialogGPT integration with Webflow"
 					loading="eager"
 					priority={true}
-					width={512} // default width
-					height={150} // default height
-				></Image>
+					width={512}
+					height={150}
+				/>
 				<Image
 					className={styles.integrationItem}
 					src="/assets/ic_wix.png"
-					alt={"DialogGPT"}
-					title={"DialogGPT"}
+					alt="Wix Logo"
+					title="DialogGPT integration with Wix"
 					loading="eager"
 					priority={true}
-					width={626} // default width
-					height={150} // default height
-				></Image>
+					width={626}
+					height={150}
+				/>
 				<Image
 					className={styles.integrationItem}
 					src="/assets/ic_shopify.png"
-					alt={"DialogGPT"}
-					title={"DialogGPT"}
+					alt="Shopify Logo"
+					title="DialogGPT integration with Shopify"
 					loading="eager"
 					priority={true}
-					width={200} // default width
-					height={150} // default height
-				></Image>
-
+					width={200}
+					height={150}
+				/>
 				<Image
 					className={styles.integrationItem}
 					src="/assets/ic_wordpress.png"
-					alt={"DialogGPT"}
-					title={"DialogGPT"}
+					alt="WordPress Logo"
+					title="DialogGPT integration with WordPress"
 					loading="eager"
 					priority={true}
-					width={500} // default width
-					height={200} // default height
-				></Image>
-
+					width={500}
+					height={200}
+				/>
 				<Image
 					className={styles.integrationItem}
 					src="/assets/ic_hubspot.png"
-					alt={"DialogGPT"}
-					title={"DialogGPT"}
+					alt="HubSpot Logo"
+					title="DialogGPT integration with HubSpot"
 					loading="eager"
 					priority={true}
-					width={500} // default width
-					height={200} // default height
-				></Image>
+					width={500}
+					height={200}
+				/>
 				<Image
 					className={styles.integrationItem}
 					src="/assets/ic_hostinger.png"
-					alt={"DialogGPT"}
-					title={"DialogGPT"}
+					alt="Hostinger Logo"
+					title="DialogGPT integration with Hostinger"
 					loading="eager"
 					priority={true}
-					width={250} // default width
-					height={200} // default height
-				></Image>
-
+					width={250}
+					height={200}
+				/>
 				<Image
 					className={styles.integrationItem}
 					src="/assets/ic_bigcommerce.png"
-					alt={"DialogGPT"}
-					title={"DialogGPT"}
+					alt="BigCommerce Logo"
+					title="DialogGPT integration with BigCommerce"
 					loading="eager"
 					priority={true}
-					width={250} // default width
-					height={200} // default height
-				></Image>
+					width={250}
+					height={200}
+				/>
 				<Image
 					className={styles.integrationItem}
 					src="/assets/ic_woo_commerce.png"
-					alt={"DialogGPT"}
-					title={"DialogGPT"}
+					alt="WooCommerce Logo"
+					title="DialogGPT integration with WooCommerce"
 					loading="eager"
 					priority={true}
-					width={250} // default width
-					height={200} // default height
-				></Image>
+					width={250}
+					height={200}
+				/>
 				<Image
 					className={styles.integrationItem}
 					src="/assets/ic_godaddy.png"
-					alt={"DialogGPT"}
-					title={"DialogGPT"}
+					alt="GoDaddy Logo"
+					title="DialogGPT integration with GoDaddy"
 					loading="eager"
 					priority={true}
-					width={250} // default width
-					height={200} // default height
-				></Image>
+					width={250}
+					height={200}
+				/>
 			</div>
 		</div>
 	);
