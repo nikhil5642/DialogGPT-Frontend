@@ -1,0 +1,164 @@
+.chatBotTrainingModelContainer {
+	align-self: center;
+	border: 2px solid #e5e7eb;
+	margin-top: 32px;
+	padding: 40px 64px;
+	border-radius: 12px;
+	text-align: center;
+	background-color: #f7f9fc; // light background color to offset from the general background
+
+	h2 {
+		font-size: 28px;
+		color: #2e3d50; // Darker color for emphasis
+		font-weight: 600; // Slightly bold
+		margin-bottom: 16px; // Spacing
+	}
+
+	p {
+		font-size: 20px;
+		color: #5a6b7d; // A subtle grey-blue
+		margin-top: 8px;
+		margin-bottom: 24px; // More spacing to distance it from progress bar
+		&:last-child {
+			margin-top: 24px; // Extra spacing for the last instruction
+		}
+	}
+
+	progress {
+		margin-top: 16px;
+		margin-bottom: 16px;
+		width: 80%;
+		height: 32px;
+	}
+}
+
+.chatBotUntrainedModelContainer {
+	align-self: center;
+	border: 2px solid #e5e7eb;
+	margin-top: 32px;
+	padding: 40px 64px;
+	border-radius: 12px;
+	max-width: 480px;
+	text-align: center;
+	align-content: center;
+	justify-content: center;
+	background-color: #f7f9fc; // light background color to offset from the general background
+
+	h2 {
+		font-size: 28px;
+		color: #2e3d50; // Darker color for emphasis
+		font-weight: 600; // Slightly bold
+		margin-bottom: 32px; // Spacing
+	}
+
+	p {
+		text-align: start;
+		font-size: 20px;
+		color: #5a6b7d; // A subtle grey-blue
+		margin-top: 16px;
+		margin-bottom: 24px; // More spacing to distance it from progress bar
+		&:last-child {
+			margin-top: 24px; // Extra spacing for the last instruction
+		}
+	}
+	img {
+		align-items: center;
+		align-self: center;
+		justify-content: center;
+	}
+	ol {
+		text-align: center;
+		padding-left: 1em;
+		list-style-type: decimal;
+
+		li {
+			text-align: start;
+			margin-bottom: 0.5em;
+			font-size: 20px;
+			color: #5a6b7d; // A subtle grey-blue
+
+			ul {
+				li {
+					margin-top: 8px;
+					text-align: start;
+					margin-bottom: 0.5em;
+					font-size: 18px;
+					color: #5a6b7d; // A subtle grey-blue
+				}
+			}
+		}
+	}
+}
+
+.chatBottrainedModelContainer {
+	max-width: 720px;
+	width: 100%;
+}
+
+.chatBotComponentContainer {
+	max-width: 720px;
+	width: 100%;
+	height: 50vh;
+	min-height: 600px;
+	display: flex;
+	position: relative;
+	margin-top: 32px;
+	border: 1px solid #e5e7eb;
+}
+.last_trained {
+	font-size: 20px;
+	color: #5a6b7d; // A subtle grey-blue
+}
+.message_credits {
+	font-size: 20px;
+	text-align: right;
+	color: #5a6b7d; // A subtle grey-blue
+}
+.upgradeContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid #ffa500; /* Orange border for warning */
+	padding: 32px;
+	border-radius: 12px;
+	background-color: #fff8e1; /* Light yellow background for warning */
+	margin-top: 32px;
+	text-align: center;
+	align-self: center;
+}
+
+.upgradeMessage {
+	font-size: 24px;
+	color: #ff4500; /* Darker orange for text */
+	margin-bottom: 16px;
+	display: flex;
+	align-items: center;
+}
+
+.warningIcon {
+	margin-right: 8px; /* Space between icon and text */
+	height: 24px;
+	width: 24px;
+}
+.upgradeButton {
+	padding: 12px 24px;
+	background-color: #ff7f50; /* Coral color that complements the warning theme */
+	color: #ffffff;
+	border: 2px solid #ff7f50; /* Border color matching the background */
+	border-radius: 12px;
+	font-size: 18px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background-color 0.3s ease, transform 0.3s ease;
+	box-shadow: 0px 4px 15px rgba(255, 127, 80, 0.2); /* Shadow using the coral color */
+
+	&:hover {
+		background-color: #ff6347; /* Slightly darker shade of coral for hover */
+		transform: translateY(-2px);
+	}
+
+	&:active {
+		transform: translateY(0px);
+	}
+}

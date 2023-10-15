@@ -81,6 +81,7 @@
 	max-width: 70%;
 	white-space: pre-wrap;
 	word-break: break-word;
+
 	p {
 		line-height: 1rem;
 		padding: 0;
@@ -140,12 +141,13 @@
 	overflow-x: scroll;
 	padding-top: 1rem;
 	background-color: #fff;
-	scrollbar-width: none;
+	scrollbar-width: thin; // For Firefox
+	scrollbar-color: rgba(0, 0, 0, 0.5) rgba(255, 255, 255, 0.5); // For Firefox
 	button {
 		color: #000;
 		font-size: 1rem;
 		flex-shrink: 0;
-		margin: 0 0.5rem 0 0;
+		margin: 0 0.5rem 0.5rem 0;
 		padding: 0.25rem 0.5rem;
 		border: none;
 		border-radius: 0.25rem;
@@ -154,17 +156,24 @@
 }
 /* For Chrome, Safari, and Opera */
 .chatbotPromptsContainer::-webkit-scrollbar {
-	width: 0;
-	height: 0;
-	display: none; /* for good measure */
+	height: 3px;
+	background-color: rgba(
+		200,
+		200,
+		200,
+		0.5
+	); // Background color of the scrollbar track
 }
 
+.chatbotPromptsContainer::-webkit-scrollbar-thumb {
+	background-color: rgba(0, 0, 0, 0.5); // Color of the scrollbar thumb
+	border-radius: 8px; // Rounded corners for the scrollbar thumb
+}
 .inputContainer {
 	position: relative;
 	display: flex;
 	border: 1px solid #e5e7eb;
 	border-radius: 0.25rem;
-	margin-top: 0.5rem;
 	padding: 0.25rem;
 	flex-shrink: 0;
 }
