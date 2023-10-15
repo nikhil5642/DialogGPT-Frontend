@@ -15,16 +15,15 @@ import { ChatBotSource } from "../chatbot-component/chatbot-component.utils";
 import { showErrorToast, showSuccessToast } from "../../helper/toast-helper";
 import { useTrackEvent } from "src/helper/event-tracker";
 import EditBoxComponent from "../editbox-component/editbox-component";
-import { formatTimestamp } from "../../helper/utils";
 import { URLStatus } from "../chatbot-source-editor/website-loader/website-loader.utils";
 import ChatbotDashboard from "../chatbot-dashboard/chatbot-dashboard";
+import ChatBotEditorChatBot from "../chatbot-editor-chatbot/chatbot-editor-chatbot";
 
 export default function ChatBotEditor({ botID, page }) {
 	const { trackEvent, trackScreenView } = useTrackEvent();
 	const [selector, setSelector] = useState(ChatBotOptionsEnum.CHATBOT);
 	const { showLoader, hideLoader } = useContext(LoaderContext);
 	const [nameEditing, setNameEditing] = useState(false);
-	const [messageCredits, setMessageCredits] = useState(0);
 	const [chatbotData, setChatbotData] = useState({
 		id: botID,
 		name: "",
@@ -132,35 +131,6 @@ export default function ChatBotEditor({ botID, page }) {
 		};
 	}, [chatbotData.status]);
 
-	useEffect(() => {
-		async function fetchCredits() {
-			if (
-				selector == ChatBotOptionsEnum.CHATBOT &&
-				chatbotData.status == URLStatus.Trained
-			) {
-				getRequest("/message_credits")
-					.then((res) => {
-						setMessageCredits(res.result.message_credits);
-					})
-					.catch(() => {});
-			}
-		}
-
-		// Fetch once immediately
-		fetchCredits();
-
-		// Set up interval to fetch every 5 seconds
-		const intervalId = setInterval(fetchCredits, 3000);
-
-		// Clear the interval when the component is unmounted
-		return () => clearInterval(intervalId);
-	}, [selector, chatbotData.status]);
-
-	function handleUpgradeClick() {
-		// Redirect to upgrade page or any other action
-		window.location.href = "/pricing";
-	}
-
 	return (
 		<div className={styles.chatBotEditorContainer}>
 			{nameEditing ? (
@@ -210,93 +180,15 @@ export default function ChatBotEditor({ botID, page }) {
 				selector={selector}
 				setSelector={setSelector}
 			/>
-
-			{selector === ChatBotOptionsEnum.CHATBOT &&
-				chatbotData.status === "training" && (
-					<>
-						{trackScreenView("ChatBotTrainingScreen", "ChatBotEditorScreen")}
-						<div className={styles.chatBotTrainingModelContainer}>
-							<h2>Please Wait...</h2>
-							<p>Training In Progress</p>
-							<progress max="100"></progress>
-							<p>
-								Incase if it's taking too long, try to train chatbot again!{" "}
-							</p>
-						</div>
-					</>
-				)}
-
-			{selector === ChatBotOptionsEnum.CHATBOT &&
-				chatbotData.status === "untrained" && (
-					<>
-						{trackScreenView("ChatbotUntrainedScreen", "ChatBotEditorScreen")}
-						<div className={styles.chatBotUntrainedModelContainer}>
-							<img src="/assets/ic_error.png"></img>
-							<h2>Chatbot is not trained</h2>
-							<p>Follow the below steps to train your first chatbot.</p>
-							<ol>
-								<li>
-									Navigate to the <strong>Sources</strong> section.
-								</li>
-								<li>
-									Add your desired content:
-									<ul>
-										<li>Enter plain text or sentences.</li>
-										<li>Provide a website URL for content extraction.</li>
-									</ul>
-								</li>
-								<li>
-									Click the <strong>Train</strong> button to train the ChatBot
-									on the provided data.
-								</li>
-							</ol>
-						</div>
-					</>
-				)}
+			{selector === ChatBotOptionsEnum.CHATBOT && (
+				<ChatBotEditorChatBot chatbotData={chatbotData} config={config} />
+			)}
 			{selector === ChatBotOptionsEnum.DASHBOARD && (
 				<>
 					{trackScreenView("ChatbotDashboardScreen", "ChatBotEditorScreen")}
 					<ChatbotDashboard botID={botID} />
 				</>
 			)}
-
-			{selector === ChatBotOptionsEnum.CHATBOT &&
-				chatbotData.status === "trained" && (
-					<>
-						{trackScreenView("ChatBotTrainedScreen", "ChatBotEditorScreen")}
-
-						<div className={styles.chatBottrainedModelContainer}>
-							<p className={styles.last_trained}>
-								Last Trained: {formatTimestamp(chatbotData.last_updated)}
-							</p>
-							<div className={styles.chatBotComponentContainer}>
-								<ChatBotComponent botID={botID} config={config} />
-							</div>
-							<p className={styles.message_credits}>
-								{messageCredits} {"Message Credits remaining."}
-							</p>
-							{messageCredits < 1 && (
-								<div className={styles.upgradeContainer}>
-									<div className={styles.upgradeMessage}>
-										<img
-											src="/assets/ic_error.png"
-											alt="Warning"
-											className={styles.warningIcon}
-										/>
-										You've run out of message credits!
-									</div>
-									<button
-										className={styles.upgradeButton}
-										onClick={handleUpgradeClick}
-									>
-										Upgrade Now
-									</button>
-								</div>
-							)}
-						</div>
-					</>
-				)}
-
 			{selector === ChatBotOptionsEnum.SOURCES && (
 				<>
 					{trackScreenView("ChatbotSourceScreen", "ChatBotEditorScreen")}

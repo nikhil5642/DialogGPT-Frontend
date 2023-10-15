@@ -43,6 +43,8 @@ function HomeScreen() {
 				<FeaturesOverviewComponent />
 				<VideoDemoComponent />
 				<LiveDemoComponent />
+				<AvailableIntegrations />
+				<FAQComponent />
 				<BottomTryNowComponent />
 			</div>
 		</>
@@ -179,6 +181,177 @@ const LiveDemoComponent = () => {
 					onLoad={() => setIframeLoading(false)}
 				></iframe>
 			</div>
+		</div>
+	);
+};
+const AvailableIntegrations = () => {
+	return (
+		<div className={styles.availableIntegrationsContainer}>
+			<h2>Seamlessly Integrate with Your Preferred Website Builder</h2>
+			<div className={styles.availableIntegrationsRow}>
+				<Image
+					className={styles.integrationItem}
+					src="/assets/ic_webflow.png"
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
+					loading="eager"
+					priority={true}
+					width={512} // default width
+					height={150} // default height
+				></Image>
+				<Image
+					className={styles.integrationItem}
+					src="/assets/ic_wix.png"
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
+					loading="eager"
+					priority={true}
+					width={626} // default width
+					height={150} // default height
+				></Image>
+				<Image
+					className={styles.integrationItem}
+					src="/assets/ic_shopify.png"
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
+					loading="eager"
+					priority={true}
+					width={200} // default width
+					height={150} // default height
+				></Image>
+
+				<Image
+					className={styles.integrationItem}
+					src="/assets/ic_wordpress.png"
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
+					loading="eager"
+					priority={true}
+					width={500} // default width
+					height={200} // default height
+				></Image>
+
+				<Image
+					className={styles.integrationItem}
+					src="/assets/ic_hubspot.png"
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
+					loading="eager"
+					priority={true}
+					width={500} // default width
+					height={200} // default height
+				></Image>
+				<Image
+					className={styles.integrationItem}
+					src="/assets/ic_hostinger.png"
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
+					loading="eager"
+					priority={true}
+					width={250} // default width
+					height={200} // default height
+				></Image>
+
+				<Image
+					className={styles.integrationItem}
+					src="/assets/ic_bigcommerce.png"
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
+					loading="eager"
+					priority={true}
+					width={250} // default width
+					height={200} // default height
+				></Image>
+				<Image
+					className={styles.integrationItem}
+					src="/assets/ic_woo_commerce.png"
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
+					loading="eager"
+					priority={true}
+					width={250} // default width
+					height={200} // default height
+				></Image>
+				<Image
+					className={styles.integrationItem}
+					src="/assets/ic_godaddy.png"
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
+					loading="eager"
+					priority={true}
+					width={250} // default width
+					height={200} // default height
+				></Image>
+			</div>
+		</div>
+	);
+};
+
+const FAQItem = ({ question, answer }) => {
+	const [isOpen, setIsOpen] = useState(false);
+
+	return (
+		<div className={styles.faqItem}>
+			<h3 onClick={() => setIsOpen(!isOpen)}>
+				{question}
+				<span className={styles.toggleSign}>{isOpen ? "-" : "+"}</span>
+			</h3>
+			{isOpen && <p>{answer}</p>}
+		</div>
+	);
+};
+const FAQComponent = () => {
+	const faqData = [
+		{
+			question: "What is DialogGPT.io?",
+			answer:
+				"DialogGPT.io is a cutting-edge conversational AI platform designed to provide seamless interactions and solutions for users. Our platform leverages advanced machine learning techniques to understand and respond to user queries effectively.",
+		},
+		{
+			question: "How does DialogGPT.io differ from other chatbot platforms?",
+			answer:
+				"Our platform is built on state-of-the-art GPT architecture, ensuring more natural and human-like conversations. We prioritize user experience and continuously update our models for optimal performance.",
+		},
+		{
+			question: "Can I customize the DialogGPT.io bot for my specific needs?",
+			answer:
+				"Absolutely! DialogGPT.io offers a range of customization options, allowing you to tailor the bot's responses, appearance, and behavior to align with your brand and requirements.",
+		},
+		{
+			question: "Is my data secure with DialogGPT.io?",
+			answer:
+				"Data security is our top priority. We implement robust encryption and security protocols to ensure that your data remains confidential and protected at all times.",
+		},
+		{
+			question: "Which GPT version does DialogGPT.io use?",
+			answer:
+				"We by default use GPT-3.5 Turbo, but we offer the GPT-4 option for users on our Pro plan.",
+		},
+		{
+			question:
+				"How can I integrate DialogGPT.io into my website or application?",
+			answer:
+				"You can easily integrate DialogGPT.io into your website or application by using an iframe or embedding our provided JS code.",
+		},
+		{
+			question: "Does DialogGPT.io support multiple languages?",
+			answer:
+				"Yes, our platform is designed to understand and respond in multiple languages, making it versatile for a global audience.",
+		},
+		{
+			question:
+				"Can I share feedback or suggest improvements for DialogGPT.io?",
+			answer:
+				"Absolutely! We value feedback and suggestions from our users. Please reach out to us with your insights at nikhil@dialoggpt.io. Our team is committed to continuous improvement, and your input plays a crucial role in our development process.",
+		},
+	];
+
+	return (
+		<div className={styles.faqContainer}>
+			<h2>Frequently Asked Questions</h2>
+			{faqData.map((faq, index) => (
+				<FAQItem key={index} question={faq.question} answer={faq.answer} />
+			))}
 		</div>
 	);
 };

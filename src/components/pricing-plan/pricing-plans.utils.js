@@ -12,6 +12,7 @@ const PricingFeatures = {
 	CHARACTERS_400K: "400,000 Characters/Chatbot",
 	CHARACTERS_11M: "11,000,000 Characters/chatbot",
 	GPT4_OPTION: "Access to GPT-4",
+	SUPPORT_24_7: "24/7 Support",
 	PRIORITY_SUPPORT: "Priority Support",
 };
 
@@ -25,6 +26,7 @@ export const PricingPlans = {
 			PricingFeatures.EMBED_UNLIMITED_WEBSITES,
 			PricingFeatures.GPT35_OPTION,
 			PricingFeatures.MESSAGE_CREDITS_GPT3_2000,
+			PricingFeatures.SUPPORT_24_7,
 		],
 		buttonText: "Start Trial",
 		price: "$29/month",
@@ -38,6 +40,7 @@ export const PricingPlans = {
 			PricingFeatures.EMBED_UNLIMITED_WEBSITES,
 			PricingFeatures.GPT35_OPTION,
 			PricingFeatures.MESSAGE_CREDITS_GPT3_5000,
+			PricingFeatures.SUPPORT_24_7,
 		],
 		buttonText: "Subscribe",
 		price: "$49/month",
