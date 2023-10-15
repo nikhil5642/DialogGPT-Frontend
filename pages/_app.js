@@ -26,16 +26,17 @@ function MyApp({ Component, pageProps }) {
 					<Script
 						async
 						strategy="lazyOnload"
-						src="https://www.googletagmanager.com/gtag/js?id=AW-880583637"
+						src="https://www.googletagmanager.com/gtag/js?id=AW-11376133083"
 					/>
 					<Script strategy="lazyOnload">
 						{`
 							window.dataLayer = window.dataLayer || [];
 							function gtag(){dataLayer.push(arguments);}
 							gtag('js', new Date());
-							gtag('config', 'AW-880583637');
+							gtag('config', 'AW-11376133083');
 						`}
 					</Script>
+
 					<Script strategy="lazyOnload">
 						{`
 							(function(c,l,a,r,i,t,y){
