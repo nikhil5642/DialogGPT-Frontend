@@ -33,6 +33,7 @@ function ChatbotPage({ chatbotID, source }) {
 							displayName: res.result.display_name,
 							chatIcon: res.result.chat_icon,
 							chatBubbleColor: res.result.chat_bubble_color,
+							leadsCollection: res.result.leads_collection,
 						};
 					});
 				})

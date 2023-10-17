@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, use } from "react";
 import { postRequest } from "../../helper/http-helper";
 import styles from "./chatbot-component.module.scss";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import { ChatBotSource } from "./chatbot-component.utils";
 import ChatHistoryService from "../../helper/ChatHistoryService";
+import LoadingButton from "../loading-button/loading-button";
 
 export default function ChatBotComponent({ config }) {
 	const {
@@ -16,10 +17,12 @@ export default function ChatBotComponent({ config }) {
 		profilePicture = null,
 		userMsgColor = "#ff0000",
 		displayName = "",
+		leadsCollection = [],
 	} = config;
 	const [messages, setMessages] = useState([]);
 	const [chatId, setChatId] = useState(null);
 	const [newMessage, setNewMessage] = useState("");
+	const [leadsSubmitted, setLeadsSubmitted] = useState(true);
 	const messagesEndRef = useRef(null);
 	const [sending, setSending] = useState(false);
 	const [rows, setRows] = useState(1);
@@ -31,6 +34,7 @@ export default function ChatBotComponent({ config }) {
 					if (res) {
 						setChatId(res.chatId);
 						setMessages(res.history);
+						setLeadsSubmitted(res.leadsSubmitted);
 						if (res.history.length == 0) {
 							initialView();
 						}
@@ -114,9 +118,16 @@ export default function ChatBotComponent({ config }) {
 			container.scrollTop = container.scrollHeight;
 		}
 		if (chatId != null) {
-			ChatHistoryService.storeChatHistory(chatId, messages);
+			ChatHistoryService.storeChatHistory(chatId, leadsSubmitted, messages);
 		}
 	}, [messages, chatId]);
+
+	const handleLeadSubmit = () => {
+		setLeadsSubmitted(true);
+		if (chatId != null) {
+			ChatHistoryService.storeChatHistory(chatId, true, messages);
+		}
+	};
 
 	const handleSend = () => {
 		if (source === ChatBotSource.SETTINGS) {
@@ -159,6 +170,7 @@ export default function ChatBotComponent({ config }) {
 					if (res) {
 						setChatId(res.chatId);
 						setMessages(res.history);
+						setLeadsSubmitted(res.leadsSubmitted);
 						if (res.result.length == 0) {
 							initialView();
 						}
@@ -225,6 +237,17 @@ export default function ChatBotComponent({ config }) {
 						</div>
 					</div>
 				)}
+				{!sending &&
+					leadsSubmitted == false &&
+					messages.filter((message) => message.type === "outgoing").length > 0 && (
+						<LeadCollectionView
+							botID={botID}
+							chatId={chatId}
+							leadsCollection={leadsCollection}
+							onLeadSubmit={handleLeadSubmit}
+							onLeadCancelled={handleLeadSubmit}
+						/>,
+					)}
 				{source != ChatBotSource.SETTINGS && <div ref={messagesEndRef} />}
 			</div>
 			<div className={styles.chatbotPromptsContainer}>
@@ -279,3 +302,76 @@ export default function ChatBotComponent({ config }) {
 		</div>
 	);
 }
+
+const LeadCollectionView = ({
+	botID,
+	chatId,
+	leadsCollection,
+	onLeadSubmit,
+}) => {
+	const [email, setEmail] = useState("");
+	const [phone, setPhone] = useState("");
+	const [name, setName] = useState("");
+	const [saving, setSaving] = useState(false);
+	const submitLead = () => {
+		setSaving(true);
+		postRequest("/store_lead_info", {
+			botID: botID,
+			chatId: chatId,
+			email: email,
+			phone: phone,
+			name: name,
+		})
+			.then(() => {
+				setSaving(false);
+				onLeadSubmit();
+			})
+			.catch((e) => {
+				setSaving(false);
+			});
+	};
+	return (
+		<div className={styles.leadCollectionContainer}>
+			<p> Help us with your details:</p>
+			<img src="/assets/close_grey.png" onClick={onLeadSubmit} />
+			{leadsCollection.includes("lead_name") && (
+				<div className={styles.leadInput}>
+					<p>Name:</p>
+					<textarea
+						rows="1"
+						value={name}
+						onChange={(e) => setName(e.target.value)}
+					/>
+				</div>
+			)}
+			{leadsCollection.includes("lead_email") && (
+				<div className={styles.leadInput}>
+					<p>Email:</p>
+					<textarea
+						rows="1"
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+					/>
+				</div>
+			)}
+			{leadsCollection.includes("lead_phone") && (
+				<div className={styles.leadInput}>
+					<p>Phone</p>
+					<textarea
+						rows="1"
+						value={phone}
+						onChange={(e) => setPhone(e.target.value)}
+					/>
+				</div>
+			)}
+
+			<div className={styles.submitButton}>
+				<LoadingButton
+					title={"Submit"}
+					onClick={submitLead}
+					isLoading={saving}
+				></LoadingButton>
+			</div>
+		</div>
+	);
+};

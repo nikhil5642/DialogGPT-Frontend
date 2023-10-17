@@ -12,6 +12,7 @@ export const ChatHistoryService = {
 				const newChatData = {
 					chatId: generateNewChatId(), // Assuming you have a function to generate a new chat ID
 					history: [],
+					leadsSubmitted: false,
 				};
 				storeCookie("chatData", JSON.stringify(newChatData));
 				return newChatData;
@@ -21,11 +22,12 @@ export const ChatHistoryService = {
 		}
 	},
 	// Store the chat history in a cookie
-	storeChatHistory: async (chatId, history) => {
+	storeChatHistory: async (chatId, leadsSubmitted, history) => {
 		try {
 			const chatData = {
 				chatId: chatId,
 				history: history,
+				leadsSubmitted: leadsSubmitted,
 			};
 			await storeCookie("chatData", JSON.stringify(chatData));
 		} catch (error) {

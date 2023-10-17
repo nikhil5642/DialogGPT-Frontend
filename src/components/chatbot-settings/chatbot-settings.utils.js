@@ -14,6 +14,11 @@ export const ChatbotSettingsOptions = {
 		icon: "/assets/ic_interface_settings.png",
 		text: "Chat Interface",
 	},
+	LEADS_COLLECTION: {
+		id: "LEADS_COLLECTION",
+		icon: "/assets/ic_leads.png",
+		text: "Collect Leads",
+	},
 	DANGER_SETTINGS: {
 		id: "DANGER_SETTINGS",
 		icon: "/assets/ic_danger_settings.png",

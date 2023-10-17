@@ -70,15 +70,6 @@
 		margin: 0.5rem 0;
 	}
 }
-.selectedChatContainer {
-	flex: 1;
-	padding: 1rem;
-	margin-right: 1rem;
-	margin-top: 1rem;
-	margin-bottom: 2rem;
-	border-radius: 4px;
-}
-
 .selectedChat {
 	flex: 1;
 	padding: 1rem;
@@ -88,7 +79,7 @@
 	border-radius: 4px;
 	border: 1px solid #e5e7eb;
 	overflow-y: auto; // Enables vertical scrolling when content overflows
-	max-height: 80%;
+	max-height: calc(100% - 20px);
 	.message {
 		margin: 0;
 		margin-bottom: 1rem;
