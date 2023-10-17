@@ -1,0 +1,40 @@
+.leadsContainer {
+	padding: 20px;
+
+	h5 {
+		font-size: 20px;
+		margin: 0px;
+		margin-bottom: 8px;
+		margin-left: 4px;
+		font-weight: 600;
+		color: #374151;
+	}
+	p {
+		font-size: 20px;
+		margin-top: 16px;
+		margin-left: 4px;
+		font-weight: 500;
+		color: #71717a;
+	}
+	textarea {
+		width: 100%;
+		resize: none;
+		overflow-y: auto;
+		box-sizing: border-box;
+		background-image: none;
+		border-radius: 8px;
+		padding: 16px;
+		font-size: 18px;
+		border: 1px solid #e5e7eb;
+	}
+	input[type="checkbox"] {
+		margin-right: 1rem;
+	}
+	/* YourStyles.module.css */
+	.masterToggle {
+		margin-bottom: 20px;
+		display: flex;
+		align-items: center;
+		font-weight: bold;
+	}
+}
