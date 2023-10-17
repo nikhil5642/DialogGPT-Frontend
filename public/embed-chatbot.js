@@ -23,7 +23,7 @@
             align-items: center;
             color: #fff;
             font-size: 1rem;
-            z-index: 1000;
+            z-index: 100000;
             user-select: none;
         }
 

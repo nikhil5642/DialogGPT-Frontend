@@ -40,9 +40,9 @@ function HomeScreen() {
 
 			<div className={styles.homeScreenContainer}>
 				<TopOverviewComponent />
-				<FeaturesOverviewComponent />
-				<VideoDemoComponent />
 				<LiveDemoComponent />
+				<VideoDemoComponent />
+				<FeaturesOverviewComponent />
 				<AvailableIntegrations />
 				<FAQComponent />
 				<BottomTryNowComponent />
@@ -69,16 +69,18 @@ const TopOverviewComponent = () => {
 	return (
 		<div className={styles.topOverviewContainer}>
 			<h1>
-				Chat<span>GPT</span>
+				<span>AI-Driven</span> Support
 				<br />
-				for your <span>own Website</span>
+				Tailored for Your <span>Website</span>
 			</h1>
+
 			<p>
-				Transform your data into a dynamic <strong>Chatbot</strong>. Seamlessly
-				integrate it with your <strong>Website</strong>. <br />
-				<br />
-				Connect effortlessly via <strong>APIs</strong> and other{" "}
-				<strong>integrations</strong>.
+				Enhance your website with our smart <strong>AI Chatbot</strong>.
+				<br></br>
+				<br></br>
+				Offer instant responses to visitor queries and improve user engagement.
+				<br></br>
+				<br></br> No technical expertise required.
 			</p>
 			<button onClick={onCreateChatbot}>Create your Chatbot Now →</button>
 		</div>
@@ -137,12 +139,27 @@ const FeaturesOverviewComponent = () => {
 	);
 };
 const VideoDemoComponent = () => {
+	const { trackEvent } = useTrackEvent();
+
+	function onCreateChatbot() {
+		const isAuthenticated = AuthService.isAuthenticated();
+
+		trackEvent("create_chatbot_click", {
+			user_authenticated: isAuthenticated ? "true" : "false",
+		});
+
+		if (isAuthenticated) {
+			window.location.href = `/my-chatbots`;
+		} else {
+			window.location.href = `/signin`;
+		}
+	}
 	return (
 		<div className={styles.videoDemoContainer} id="Demo">
-			<h2>Video Demo</h2>
+			<h2>Create Your AI Chatbot in Just 2 Minutes</h2>
 			<p>
-				Creating a chatbot for <strong>Product Hunt</strong> by crawling the
-				website and training the AI on its content.
+				Watch our demo where we trained a chatbot on the{" "}
+				<strong>Product Hunt</strong> launch page.
 			</p>
 
 			<img
@@ -153,7 +170,8 @@ const VideoDemoComponent = () => {
 			/>
 			<br />
 			<br />
-			<p>I can then embed the chatbot on the website!</p>
+			<p>Now, you can easily embed this chatbot on your website!</p>
+			<button onClick={onCreateChatbot}>Start Building →</button>
 		</div>
 	);
 };
@@ -163,12 +181,7 @@ const LiveDemoComponent = () => {
 	return (
 		<div className={styles.liveDemoContainer}>
 			<h2>Live Demo</h2>
-			<p>
-				This chatbot was trained on a document explaining DialogGPT.
-				<br />
-				<br />
-				You can embed a widget like this on any page on your website!
-			</p>
+			<p>This chatbot was trained on a document explaining DialogGPT.</p>
 
 			<div className={styles.liveDemoIframeContainer}>
 				{iframeLoading && <div className={styles.roundLoader}></div>}
@@ -182,6 +195,7 @@ const LiveDemoComponent = () => {
 					onLoad={() => setIframeLoading(false)}
 				></iframe>
 			</div>
+			<p>You can embed a widget like this on any page on your website!</p>
 		</div>
 	);
 };
