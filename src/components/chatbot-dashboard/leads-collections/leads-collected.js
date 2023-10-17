@@ -44,6 +44,9 @@ export default function LeadsCollected({ botID }) {
 								}`}
 								onClick={() => setSelectedIndex(index)}
 							>
+								<p className={styles.chatHistoryLastUpdated}>
+									{timeAgo(item.last_updated)}
+								</p>
 								{item.lead_name && "Name: " + item.lead_name}
 								<br />
 								{item.lead_email && "Email: " + item.lead_email}
