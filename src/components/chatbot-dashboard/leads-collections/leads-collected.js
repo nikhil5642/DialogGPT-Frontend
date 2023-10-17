@@ -32,25 +32,25 @@ export default function LeadsCollected({ botID }) {
 		<div className={styles.chatHistoryContainer}>
 			<div className={styles.chatHistoryList}>
 				{history.length > 0 ? (
-					history.map((item, index) => (
-						<div
-							key={item.chat_id}
-							className={`${styles.chatHistoryItem} ${
-								index === selectedIndex ? styles.selected : ""
-							}`}
-							onClick={() => setSelectedIndex(index)}
-						>
-							<p className={styles.chatHistoryItemCust}>
-								Customer: {item.history[item.history.length - 2].text}
-							</p>
-							<p className={styles.chatHistoryItemBot}>
-								Bot: {item.history[item.history.length - 1].text}
-							</p>
-							<p className={styles.chatHistoryLastUpdated}>
-								{timeAgo(item.last_updated)}
-							</p>
-						</div>
-					))
+					history
+						.filter(
+							(item) => item.lead_name || item.lead_email || item.lead_phone,
+						)
+						.map((item, index) => (
+							<div
+								key={item.chat_id}
+								className={`${styles.chatHistoryItem} ${
+									index === selectedIndex ? styles.selected : ""
+								}`}
+								onClick={() => setSelectedIndex(index)}
+							>
+								{item.lead_name && "Name: " + item.lead_name}
+								<br />
+								{item.lead_email && "Email: " + item.lead_email}
+								<br />
+								{item.lead_phone && "Phone: " + item.lead_email}
+							</div>
+						))
 				) : (
 					<div className="emptyChatView">No chat history available.</div>
 				)}

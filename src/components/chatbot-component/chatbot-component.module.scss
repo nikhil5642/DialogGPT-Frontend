@@ -293,6 +293,58 @@
 	}
 }
 
+/* YourStyles.module.css */
+.leadCollectionContainer {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	padding-bottom: 0.5rem;
+	max-width: 70%;
+	background-color: #f1f1f1;
+	border-radius: 8px;
+	p {
+		text-align: center;
+		margin: 0;
+		margin-top: 1rem;
+	}
+	img {
+		position: absolute;
+		top: 0.5rem;
+		right: 0.5rem;
+		height: 0.75rem;
+		width: 0.75rem;
+	}
+}
+
+.leadInput {
+	display: flex;
+	flex-direction: row;
+	margin-top: 1rem;
+	p {
+		font-weight: 600;
+		font-size: 1rem;
+		margin-top: 0.5rem;
+		margin-left: 0;
+	}
+	textarea {
+		flex: 1;
+		margin-left: 1rem;
+		border: 1px solid #e5e7eb;
+		border-radius: 8px;
+		margin-top: 0.25rem;
+		font-size: 1rem;
+		resize: none;
+		padding: 8px;
+	}
+}
+
+.submitButton {
+	margin-top: 1rem;
+	align-self: center;
+}
+
 @media only screen and (max-width: 720px) {
 	.chatbotContainer {
 		padding: 0 0.75rem 0.75rem 0.75rem;

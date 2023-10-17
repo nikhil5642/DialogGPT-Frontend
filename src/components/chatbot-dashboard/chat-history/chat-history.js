@@ -56,21 +56,37 @@ export default function ChatHistory({ botID }) {
 				)}
 			</div>
 			{history.length > 0 && (
-				<div className={styles.selectedChat}>
-					{history[selectedIndex].history.map((message, index) => (
-						<div
-							key={index}
-							className={`${styles.message} ${
-								message.type === "incoming"
-									? styles.incomingMessage
-									: styles.outgoingMessage
-							}`}
-						>
-							<ReactMarkdown components={renderers}>
-								{message.text}
-							</ReactMarkdown>
+				<div className={styles.selectedChatContainer}>
+					{(history[selectedIndex].lead_name ||
+						history[selectedIndex].lead_email ||
+						history[selectedIndex].lead_phone) && (
+						<div style={styles.leadInfo}>
+							{history[selectedIndex].lead_name &&
+								"Name: " + history[selectedIndex].lead_name}
+							<br />
+							{history[selectedIndex].lead_email &&
+								"Email: " + history[selectedIndex].lead_email}
+							<br />
+							{history[selectedIndex].lead_phone &&
+								"Phone: " + history[selectedIndex].lead_phone}
 						</div>
-					))}
+					)}
+					<div className={styles.selectedChat}>
+						{history[selectedIndex].history.map((message, index) => (
+							<div
+								key={index}
+								className={`${styles.message} ${
+									message.type === "incoming"
+										? styles.incomingMessage
+										: styles.outgoingMessage
+								}`}
+							>
+								<ReactMarkdown components={renderers}>
+									{message.text}
+								</ReactMarkdown>
+							</div>
+						))}
+					</div>
 				</div>
 			)}
 		</div>
