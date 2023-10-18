@@ -3,11 +3,7 @@ import Head from "next/head";
 import AuthService from "../src/helper/AuthService";
 import { useTrackEvent } from "../src/helper/event-tracker";
 import { useEffect, useState } from "react";
-import Header from "../src/components/header/header";
-import Footer from "../src/components/about/about";
 import Image from "next/image";
-import About from "../src/components/about/about";
-import { symbol } from "prop-types";
 import BottomTryNowComponent from "../src/components/bottom-try-now-component/bottom-try-now-component";
 function HomeScreen() {
 	const { trackScreenView } = useTrackEvent(); // Extract analytics instance from context
@@ -103,6 +99,12 @@ const FeaturesOverviewComponent = () => {
 		},
 		{
 			key: "3",
+			title: "Leads Collection",
+			desc: "A comprehensive record of all potential leads for efficient tracking and follow-up.",
+			icon: "/assets/demo_leads_collection.png",
+		},
+		{
+			key: "4",
 			title: "Chat History",
 			desc: " A snapshot of every conversation for quick reference and analysis.",
 			icon: "/assets/demo_chat_history.png",
@@ -215,7 +217,10 @@ const AvailableIntegrations = () => {
 					height={150}
 				/>
 				<Image
-					className={styles.integrationItem}
+					onClick={() => {
+						window.location.href = `/docs/wix`;
+					}}
+					className={styles.integrationItemWithDoc}
 					src="/assets/ic_wix.png"
 					alt="Wix Logo"
 					title="DialogGPT integration with Wix"

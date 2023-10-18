@@ -53,6 +53,13 @@ export default function Header() {
 				</a>
 				<a
 					className={styles.selectionItem}
+					href="/docs"
+					onClick={() => trackEvent("guide_link_click", { source: "header" })}
+				>
+					Docs
+				</a>
+				<a
+					className={styles.selectionItem}
 					href="/my-chatbots"
 					onClick={() =>
 						trackEvent("my_chatbots_link_click", { source: "header" })
@@ -134,6 +141,17 @@ export default function Header() {
 								}}
 							>
 								Pricing
+							</a>
+						</li>
+						<li>
+							<a
+								href="/docs"
+								onClick={() => {
+									setMenuVisible(false);
+									trackEvent("guide_link_click", { source: "hamburger" });
+								}}
+							>
+								Docs
 							</a>
 						</li>
 						<li>

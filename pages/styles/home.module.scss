@@ -12,10 +12,10 @@
 		line-height: 1.2;
 		margin: 0px;
 		color: #101828;
-		font-weight: 900;
+		font-weight: 800;
 		span {
 			color: #428dff;
-			font-weight: 800;
+			font-weight: 900;
 		}
 	}
 	h2 {
@@ -35,7 +35,7 @@
 		font-size: 1.125rem;
 		line-height: 1rem;
 		color: #475467;
-		font-weight: 500;
+		font-weight: 300;
 		margin: 0;
 		span {
 			font-weight: 600;
@@ -275,6 +275,10 @@
 			object-fit: contain;
 			margin-left: 1rem;
 			margin-right: 1rem;
+		}
+		.integrationItemWithDoc {
+			@extend .integrationItem;
+			cursor: pointer;
 		}
 	}
 }

@@ -1,0 +1,41 @@
+.wixEmbedContainer {
+	h1 {
+		font-size: 2rem;
+		text-align: center;
+	}
+
+	section {
+		margin-top: 2rem;
+	}
+	h2 {
+		font-size: 1.5rem;
+	}
+	span {
+		font-size: 1rem;
+		line-height: 1.5;
+	}
+	p {
+		font-size: 1rem;
+		line-height: 1.5;
+		margin-left: 1rem;
+	}
+
+	ol li {
+		font-size: 1rem;
+		margin-top: 1rem;
+		span {
+			margin-left: 0;
+		}
+	}
+
+	/* Image Styles */
+	img {
+		margin-left: 1rem;
+		height: auto;
+		max-height: 40vh;
+	}
+}
+.scriptContainer {
+	max-width: 720px;
+	margin-left: 3rem;
+}

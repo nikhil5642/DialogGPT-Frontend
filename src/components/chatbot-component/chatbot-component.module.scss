@@ -8,6 +8,15 @@
 	display: flex;
 	flex-direction: column;
 	background-color: #fefdfc;
+	p,
+	a,
+	button,
+	textarea {
+		font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+			BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+			"Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+			"Segoe UI Symbol", "Noto Color Emoji";
+	}
 }
 .chatbotHeaderContainer {
 	display: flex;
@@ -30,10 +39,11 @@
 	h5 {
 		flex: 1;
 		margin: 0px;
-		font-size: 1.25rem;
+		font-size: 1.125rem;
 		align-self: center;
 		text-align: start;
 		margin-left: 0.75rem;
+		font-weight: 500;
 	}
 }
 .chatbotHeaderRightContainer {
@@ -83,9 +93,11 @@
 	word-break: break-word;
 
 	p {
-		line-height: 1rem;
 		padding: 0;
 		margin: 0;
+		font-size: 1rem;
+		line-height: 1.5rem;
+		font-weight: 300;
 	}
 	ul {
 		margin: 0;
@@ -100,7 +112,9 @@
 	a {
 		color: black;
 		text-decoration: none; // if you want to remove the underline
-		font-weight: 600;
+		font-size: 1rem;
+		line-height: 1.5rem;
+		font-weight: 500;
 		text-decoration: underline;
 		&:hover {
 			cursor: pointer; // you can add an underline on hover, if desired
@@ -139,19 +153,25 @@
 	flex-direction: row;
 	width: 100%;
 	overflow-x: scroll;
-	padding-top: 1rem;
+	padding-top: 0.5rem;
 	background-color: #fff;
 	scrollbar-width: thin; // For Firefox
 	scrollbar-color: rgba(0, 0, 0, 0.5) rgba(255, 255, 255, 0.5); // For Firefox
 	button {
 		color: #000;
-		font-size: 1rem;
 		flex-shrink: 0;
+		font-size: 0.75rem;
+		line-height: 1rem;
+		font-weight: 400;
 		margin: 0 0.5rem 0.5rem 0;
-		padding: 0.25rem 0.5rem;
+		padding: 0.5rem 0.5rem;
 		border: none;
-		border-radius: 0.25rem;
+		border-radius: 0.5rem;
 		background-color: #f0f0f0;
+		&:hover {
+			cursor: pointer;
+			background-color: #f5f5f5;
+		}
 	}
 }
 /* For Chrome, Safari, and Opera */
@@ -172,7 +192,7 @@
 .inputContainer {
 	position: relative;
 	display: flex;
-	border: 1px solid #e5e7eb;
+	border: 1px solid #e4e4e7;
 	border-radius: 0.25rem;
 	padding: 0.25rem;
 	flex-shrink: 0;
@@ -181,7 +201,9 @@
 	flex: 1;
 	border: none;
 	font-size: 1rem;
-	padding: 0.25rem;
+	line-height: 1rem;
+	font-weight: 300;
+	padding: 0.5rem;
 	margin-right: 0.75rem;
 	resize: none;
 	overflow-y: auto;
@@ -346,88 +368,6 @@
 }
 
 @media only screen and (max-width: 720px) {
-	.chatbotContainer {
-		padding: 0 0.75rem 0.75rem 0.75rem;
-		display: flex;
-		flex-direction: column;
-	}
-	.chatbotHeaderContainer {
-		padding: 0.75rem 0;
-		img {
-			height: 2.5rem;
-			width: 2.5rem;
-		}
-		h5 {
-			font-size: 1.25rem;
-			margin-left: 1rem;
-		}
-	}
-	.chatbotHeaderRightContainer {
-		align-self: flex-start;
-		margin-top: 0.5rem;
-		button {
-			img {
-				height: 1rem;
-				width: 1rem;
-				margin-right: 0.5rem;
-				margin-top: 0.25rem;
-			}
-		}
-	}
-
-	.chatbotMessagesContainer {
-		margin-top: 0.75rem;
-	}
-
-	.incomingBubble {
-		margin-bottom: 0.75rem;
-	}
-	.outgoingBubble {
-		margin-bottom: 0.75rem;
-	}
-
-	.baseMessageContainer {
-		font-size: 1rem;
-		padding: 0.75rem 0.75rem;
-	}
-
-	.baseImage {
-		width: 2rem;
-		height: 2rem;
-		border-radius: 50%;
-	}
-	.receiverImg {
-		@extend .baseImage;
-		margin-right: 0.5rem;
-	}
-
-	.senderImg {
-		@extend .baseImage;
-		margin-left: 0.5rem;
-	}
-
-	.chatbotPromptsContainer {
-		padding-top: 1.25rem;
-
-		button {
-			font-size: 1rem;
-			padding: 0.5rem 0.5rem;
-			border-radius: 0.5rem;
-		}
-	}
-
-	.inputContainer {
-		border-radius: 0.5rem;
-		margin-top: 0.5rem;
-		padding: 0.1rem;
-	}
-
-	.inputTextArea {
-		font-size: 1rem;
-		padding: 0.5rem;
-		margin-right: 1rem;
-	}
-
 	.sendButton {
 		img {
 			width: 1.25rem;
