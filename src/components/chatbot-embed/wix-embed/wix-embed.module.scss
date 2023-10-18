@@ -34,6 +34,20 @@
 		height: auto;
 		max-height: 40vh;
 	}
+	/* styles/YouTubeVideo.module.css */
+	.youtubeContainer {
+		margin-top: 1rem;
+		height: 0;
+		position: relative;
+		padding-bottom: 550px;
+		iframe {
+			position: absolute;
+			left: 0;
+			top: 0;
+			height: 550px;
+			width: 800px;
+		}
+	}
 }
 .scriptContainer {
 	max-width: 720px;
