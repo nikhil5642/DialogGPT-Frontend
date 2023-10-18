@@ -13,7 +13,7 @@ const ChatBotOptionLabels = {
 	[ChatBotOptionsEnum.SETTINGS]: "Settings",
 	[ChatBotOptionsEnum.CHATBOT]: "Chatbot",
 	[ChatBotOptionsEnum.DASHBOARD]: "Dashboard",
-	[ChatBotOptionsEnum.EMBED]: "Embed on Site",
+	[ChatBotOptionsEnum.EMBED]: "Add to WebSite",
 };
 
 export const ChatBotOptionSelector = ({ botID, selector, setSelector }) => {

@@ -58,13 +58,12 @@
 
 		.tick {
 			color: #27ae60;
-			font-weight: 600;
+			font-weight: 500;
 			margin-right: 0.75rem; // This ensures a gap between the tick and the text
 			font-size: 1rem;
 			line-height: 1.5rem;
 		}
 		.text {
-			color: #3f3f46;
 			font-size: 1.25rem;
 			line-height: 1.5rem;
 			font-weight: 400;
@@ -73,38 +72,8 @@
 	.price {
 		font-size: 2rem; /* slightly bigger font size for price */
 		color: #2c3e50; /* darker color for emphasis */
-
-		font-weight: bold;
 		margin: 1rem 0;
 		margin-left: 0.5rem;
-	}
-}
-
-@media only screen and (max-width: 720px) {
-	.planCard {
-		margin: 1.5rem;
-
-		h3 {
-			margin: 0.5rem 0rem 1.25rem 0.5rem;
-		}
-		.tickWrapper {
-			margin-left: 0.75rem;
-			margin-bottom: 0.5rem;
-			.tick {
-				color: green;
-				margin-right: 0.5rem; // This ensures a gap between the tick and the text
-				font-size: 1.5rem;
-				line-height: 1.75rem;
-			}
-			.text {
-				font-size: 1.5rem;
-				line-height: 1.75rem;
-			}
-		}
-		.subscribeBtn {
-			font-size: 1rem;
-			font-weight: 700;
-			padding: 0.75rem 0.25rem;
-		}
+		font-weight: 500;
 	}
 }

@@ -239,14 +239,15 @@ export default function ChatBotComponent({ config }) {
 				)}
 				{!sending &&
 					leadsSubmitted == false &&
-					messages.filter((message) => message.type === "outgoing").length > 0 && (
+					messages.filter((message) => message.type === "outgoing").length >
+						0 && (
 						<LeadCollectionView
 							botID={botID}
 							chatId={chatId}
 							leadsCollection={leadsCollection}
 							onLeadSubmit={handleLeadSubmit}
 							onLeadCancelled={handleLeadSubmit}
-						/>,
+						/>
 					)}
 				{source != ChatBotSource.SETTINGS && <div ref={messagesEndRef} />}
 			</div>
@@ -267,7 +268,7 @@ export default function ChatBotComponent({ config }) {
 			<div className={styles.inputContainer}>
 				<textarea
 					rows={rows}
-					placeholder="Type a message..."
+					placeholder=""
 					value={newMessage}
 					onChange={(e) => setNewMessage(e.target.value)}
 					onKeyPress={handleKeyPress}

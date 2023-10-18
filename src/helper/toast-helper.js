@@ -9,7 +9,6 @@ export function showSuccessToast(msg) {
 		pauseOnHover: true,
 		draggable: true,
 		style: {
-			fontFamily: "Roboto, sans-serif",
 			fontWeight: 400,
 			fontSize: "0.95rem",
 			lineHeight: "1.4",
@@ -32,7 +31,6 @@ export function showErrorToast(msg) {
 		pauseOnHover: true,
 		draggable: true,
 		style: {
-			fontFamily: "Roboto, sans-serif",
 			fontWeight: 400,
 			fontSize: "0.95rem",
 			lineHeight: "1.4",
