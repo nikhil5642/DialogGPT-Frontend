@@ -6,3 +6,5 @@ https://dialoggpt.io/signin
 https://dialoggpt.io/support
 https://dialoggpt.io/terms
 https://dialoggpt.io/privacy
+https://dialoggpt.io/docs
+https://dialoggpt.io/docs/wix

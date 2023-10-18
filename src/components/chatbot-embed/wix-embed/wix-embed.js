@@ -9,10 +9,18 @@ export const WixEmbedComponent = ({ botID }) => {
 			<h1>Add Chatbot to Your Wix Website</h1>
 			<section>
 				<h2>Option 1: Adding a Chat Bubble</h2>
-				<span>
-					Follow these steps to add a chat bubble to the bottom right corner of
-					your Wix website:
-				</span>
+				<span>Watch this Video to add Chat bubble to your wix website.</span>
+				<div className={styles.youtubeContainer}>
+					<iframe
+						src={`https://www.youtube.com/embed/YVss1z36ufY`}
+						frameBorder="0"
+						allowFullScreen
+						title="Wix Chat Bubble"
+					></iframe>
+				</div>
+				<h3>OR</h3>
+
+				<span>Follow the steps below:</span>
 				<ol>
 					<li>
 						Log in to your <strong>Wix</strong> account.
@@ -98,9 +106,7 @@ export const WixEmbedComponent = ({ botID }) => {
 						see the chat bubble on your website.
 					</li>
 				</ol>
-
 				<p>Here's how the ChatBubble will look on your website:</p>
-
 				<img
 					src="/assets/wix_chat_bubble_final.png"
 					alt="Final Output: ChatBubble on Your Website"
@@ -109,9 +115,19 @@ export const WixEmbedComponent = ({ botID }) => {
 			<section>
 				<h2>Option 2: Add the Chat Window Anywhere on the Website</h2>
 				<span>
-					If you want to add the chat window in any section of your website, you
-					can do so with the following steps:
+					Watch this Video to add Chat Widow Anywhere in your Wix website.
 				</span>
+				<div className={styles.youtubeContainer}>
+					<iframe
+						src={`https://www.youtube.com/embed/s1MGoYP_0YA`}
+						frameBorder="0"
+						allowFullScreen
+						title="Wix Chat Widget"
+					></iframe>
+				</div>
+				<h3>OR</h3>
+
+				<span>Follow the steps below:</span>
 				<ol>
 					<li>
 						Log in to your <strong>Wix</strong> account.
