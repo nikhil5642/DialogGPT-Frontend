@@ -11,7 +11,7 @@ export const ChatbotEmbedOptions = {
 	},
 	WIX: {
 		id: "WIX",
-		icon: "/assets/ic_wix.png",
+		icon: "/assets/ic_wix_small.png",
 		text: "Wix.com",
 	},
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { IntegratedSidebarComponent } from "../integrated-sidebar-component/integrated-sidebar-component";
 import { ChatbotEmbedOptions } from "./chatbot-embed.utils";
 import { IFrameEmbedComponent } from "./iframe-embed/iframe-embed";

@@ -217,7 +217,10 @@ const AvailableIntegrations = () => {
 					height={150}
 				/>
 				<Image
-					className={styles.integrationItem}
+					onClick={() => {
+						window.location.href = `/docs/wix`;
+					}}
+					className={styles.integrationItemWithDoc}
 					src="/assets/ic_wix.png"
 					alt="Wix Logo"
 					title="DialogGPT integration with Wix"
