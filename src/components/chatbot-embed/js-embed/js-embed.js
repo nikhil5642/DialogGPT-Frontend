@@ -4,7 +4,7 @@ import CopyComponent from "src/components/copy-component/copy-component";
 export const JSEmbedComponent = ({ botID, title }) => {
 	const scriptContent = `<script
 src="https://www.dialoggpt.io/embed-chatbot.js"
-id="${botID}"
+id="${botID ?? "your-chatbot-id"}"
 defer>
 </script>`;
 	return (

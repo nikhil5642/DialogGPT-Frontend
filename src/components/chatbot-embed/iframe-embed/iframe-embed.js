@@ -3,7 +3,7 @@ import CopyComponent from "src/components/copy-component/copy-component";
 
 export const IFrameEmbedComponent = ({ botID, title }) => {
 	const iframeContent = `<iframe
-src="https://www.dialoggpt.io/iframe/${botID}"
+src="https://www.dialoggpt.io/iframe/${botID ?? "your-chatbot-id"}"
 width="100%"
 style="height: 100%; min-height: 600px"
 frameBorder="0">

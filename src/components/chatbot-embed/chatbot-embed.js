@@ -3,9 +3,10 @@ import { IntegratedSidebarComponent } from "../integrated-sidebar-component/inte
 import { ChatbotEmbedOptions } from "./chatbot-embed.utils";
 import { IFrameEmbedComponent } from "./iframe-embed/iframe-embed";
 import { JSEmbedComponent } from "./js-embed/js-embed";
+import { WixEmbedComponent } from "./wix-embed/wix-embed";
 
 export default function EmbedComponent({ data }) {
-	const [selectedKey, setSelectedKey] = useState(ChatbotEmbedOptions.IFRAME.id);
+	const [selectedKey, setSelectedKey] = useState(ChatbotEmbedOptions.WIX.id);
 
 	const optionsList = {
 		IFRAME: {
@@ -29,6 +30,10 @@ export default function EmbedComponent({ data }) {
 					}
 				/>
 			),
+		},
+		WIX: {
+			details: ChatbotEmbedOptions.WIX,
+			view: <WixEmbedComponent botID={data.id} />,
 		},
 	};
 
