@@ -1,6 +1,7 @@
 .wixEmbedContainer {
 	h1 {
 		font-size: 2rem;
+		text-align: center;
 	}
 
 	section {
@@ -12,15 +13,10 @@
 	span {
 		font-size: 1rem;
 		line-height: 1.5;
-		margin-left: 1rem;
 	}
 	p {
 		font-size: 1rem;
 		line-height: 1.5;
-		margin-left: 3rem;
-	}
-
-	ol {
 		margin-left: 1rem;
 	}
 
@@ -34,7 +30,7 @@
 
 	/* Image Styles */
 	img {
-		margin-left: 3rem;
+		margin-left: 1rem;
 		height: auto;
 		max-height: 40vh;
 	}
