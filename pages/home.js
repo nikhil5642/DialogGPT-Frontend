@@ -103,6 +103,12 @@ const FeaturesOverviewComponent = () => {
 		},
 		{
 			key: "3",
+			title: "Leads Collection",
+			desc: "A comprehensive record of all potential leads for efficient tracking and follow-up.",
+			icon: "/assets/demo_leads_collection.png",
+		},
+		{
+			key: "4",
 			title: "Chat History",
 			desc: " A snapshot of every conversation for quick reference and analysis.",
 			icon: "/assets/demo_chat_history.png",
