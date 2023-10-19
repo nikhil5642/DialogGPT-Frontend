@@ -62,17 +62,6 @@ export const postRequest = async (
 function handleHttpError(error) {
 	if (!error.response || !error.response.status) {
 		showErrorToast("Something went wrong!");
-	} else if (
-		error.response.status == 400 &&
-		error.response.data.detail.includes("maximum limit")
-	) {
-		Router.push("/pricing");
-		showErrorToast(
-			<>
-				You have reached the maximum limit of your plan. <br /> <br /> Upgrade
-				Now!
-			</>,
-		);
 	} else if (error.response.status == 401) {
 		Router.push("/signin");
 	} else if (error.response.status == 501) {

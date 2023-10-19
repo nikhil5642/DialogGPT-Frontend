@@ -17,7 +17,7 @@ const PricingFeatures = {
 };
 
 export const PricingPlans = {
-	FREE: {
+	BASIC: {
 		name: "Basic",
 		id: "basic",
 		features: [

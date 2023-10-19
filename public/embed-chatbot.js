@@ -33,7 +33,7 @@
             position: fixed;
             bottom: 4rem;
             right: 1rem;
-            z-index: 999;
+            z-index: 100000;
             border-radius: 0.75rem;
 			background-color: #fefdfc;
             border: 1px solid #e5e7eb;

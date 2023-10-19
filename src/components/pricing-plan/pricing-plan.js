@@ -82,6 +82,7 @@ function PricingPlan({ plan, currentPlan }) {
 					</li>
 				))}
 			</ul>
+
 			<div className={styles.price}>{plan.price}</div>
 
 			<LoadingButton

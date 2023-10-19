@@ -1,5 +1,5 @@
 import styles from "./my-chatbots.module.scss";
-import { useRouter } from "next/router";
+import PricingDialog from "../pricing-dialog/pricing-dialog";
 import { getRequest, postRequest } from "../../helper/http-helper";
 import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
@@ -10,8 +10,10 @@ import { useTrackEvent } from "../../helper/event-tracker";
 export default function MyChatBots() {
 	const { trackEvent, trackScreenView } = useTrackEvent();
 	const { showLoader, hideLoader } = useContext(LoaderContext);
-	const [chatbotLimit, setChatbotLimit] = useState(1);
+	const [chatbotLimit, setChatbotLimit] = useState(0);
 	const [chatbotsList, setChatBotsList] = useState([]);
+	const [isPricingDialogOpen, setPricingDialogOpen] = useState(false);
+
 	const createNewChatBot = () => {
 		showLoader("Creating a bot...");
 		postRequest("/create_bot", {
@@ -22,18 +24,21 @@ export default function MyChatBots() {
 				window.location.href = `/chatbot/${res.chatbot_id}/sources`;
 				trackEvent("create-new-chatbot-success", { name: res.chatbot_name });
 			})
-			.catch(() => {
+			.catch((err) => {
 				hideLoader();
 				trackEvent("create-new-chatbot-failure");
+				if (
+					err.response.status == 400 &&
+					err.response.data.detail.includes("maximum limit")
+				) {
+					setPricingDialogOpen(true);
+				} else {
+					showErrorToast(err.response.data.detail);
+				}
 			});
 	};
 	function handleChatbotClick(index, chatbotId) {
 		if (index >= chatbotLimit) {
-			showErrorToast(
-				"You are limited to accessing " +
-					chatbotLimit +
-					" chatbots under your current plan.",
-			);
 			trackEvent("chatbot-click-limit-reached", { index: index });
 			return;
 		} else {
@@ -49,7 +54,6 @@ export default function MyChatBots() {
 		getRequest("/my_chatbots")
 			.then((res) => {
 				setChatBotsList(res.chatbot_list);
-				setChatbotLimit(res.chatbot_limit);
 				hideLoader();
 				trackEvent("my-chatbot-fetch-success");
 			})
@@ -61,6 +65,20 @@ export default function MyChatBots() {
 
 	return (
 		<div className={styles.myChatBotContainer}>
+			<PricingDialog
+				isOpen={isPricingDialogOpen}
+				onClose={() => setPricingDialogOpen(false)}
+				title={(() => {
+					if (chatbotLimit === 0) {
+						return "Start Your Free Trial Now!";
+					} else if (chatbotLimit === 1) {
+						return "Unlock Essential Today!";
+					} else {
+						return "Go Pro and Maximize Benefits!";
+					}
+				})()}
+			/>
+
 			<h1 className={styles.myChatBotTitleHeading}>My ChatBots</h1>
 			<p className={styles.myChatBotTitleSubHeading}>
 				({chatbotLimit} ChatBot Limit)
