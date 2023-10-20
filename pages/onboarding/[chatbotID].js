@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import { useRouter } from "next/router";
 import { postRequest } from "../../src/helper/http-helper";
 import LoaderContext from "../../src/components/loader/loader-context";
@@ -22,6 +22,7 @@ function OnboardingPage() {
 			loadChatBotData(chatbotID);
 		}
 	}, [chatbotID]);
+	const nodeRef = useRef(null);
 
 	const loadChatBotData = (chatbotID) => {
 		if (chatbotID) {
@@ -58,8 +59,13 @@ function OnboardingPage() {
 		<div className={styles.onBoardingContainer}>
 			<h1>{step.title}</h1>
 			<p>{step.desc}</p>
-			<div className={styles.stepContainer}>
-				{step === STEPS.ADD_URL && (
+			<div className={styles.allStepsContainer}>
+				<div
+					className={
+						styles.stepContainer +
+						(step !== STEPS.ADD_URL ? ` ${styles.hidden}` : "")
+					}
+				>
 					<WebisteLoader
 						bot_id={chatbotData.id}
 						data={data}
@@ -67,27 +73,43 @@ function OnboardingPage() {
 						chatbotInfoData={chatbotData}
 						setChatbotInfoData={setChatbotData}
 					/>
-				)}
-				{step === STEPS.ADD_TEXT && (
+				</div>
+
+				<div
+					className={
+						styles.stepContainer +
+						(step !== STEPS.ADD_TEXT ? ` ${styles.hidden}` : "")
+					}
+				>
 					<TextLoader
 						bot_id={chatbotData.id}
 						data={data}
 						setData={setData}
 						chatbotInfoData={chatbotData}
 						setChatbotInfoData={setChatbotData}
-					></TextLoader>
-				)}
-				{step == STEPS.TRAIN && (
+					/>
+				</div>
+
+				<div
+					className={
+						styles.stepContainer +
+						(step !== STEPS.TRAIN ? ` ${styles.hidden}` : "")
+					}
+				>
 					<TrainComponent
 						data={data}
 						chatbotInfoData={chatbotData}
 						setChatbotInfoData={setChatbotData}
 					/>
-				)}
+				</div>
 			</div>
 			<div className={styles.buttonContainer}>
-				{step !== STEPS.ADD_URL && <button onClick={handlePrev}>Prev</button>}
-				{step !== STEPS.TRAIN && <button onClick={handleNext}>Next</button>}
+				{step !== STEPS.ADD_URL && (
+					<button onClick={handlePrev} className={styles.prev}>
+						{"< back"}
+					</button>
+				)}
+				{step !== STEPS.TRAIN && <button onClick={handleNext}>{"Next"}</button>}
 			</div>
 		</div>
 	);

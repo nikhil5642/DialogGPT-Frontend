@@ -201,7 +201,7 @@ export default function ChatBotComponent({ config }) {
 					</button>
 					{source === ChatBotSource.SETTINGS && (
 						<button onClick={() => {}}>
-							<img src="/assets/close.png"></img>
+							<img src="/assets/close.png" className={styles.closePng}></img>
 						</button>
 					)}
 				</div>

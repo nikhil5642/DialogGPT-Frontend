@@ -18,7 +18,7 @@ const LoaderProvider = ({ children }) => {
 		loaderTimeout.current = setTimeout(() => {
 			setMessage("");
 			setIsLoading(false);
-		}, 500); // Ensures loader displays for at least 500ms
+		}, 2000); // Ensures loader displays for at least 500ms
 	};
 
 	return (

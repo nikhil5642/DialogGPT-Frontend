@@ -66,7 +66,6 @@ export default function MyChatBots() {
 				} else if (res?.is_first_time_user) {
 					window.location.href = `/onboarding/${res.chatbot_list[0].chatbot_id}`;
 				}
-				hideLoader();
 				trackEvent("my-chatbot-fetch-success");
 			})
 			.catch(() => {

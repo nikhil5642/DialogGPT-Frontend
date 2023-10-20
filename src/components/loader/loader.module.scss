@@ -1,6 +1,6 @@
 .loaderOverlay {
 	position: fixed; /* Use fixed to ensure it covers the entire viewport */
-	top: 0;
+	top: 4rem;
 	left: 0;
 	right: 0;
 	bottom: 0;
@@ -8,7 +8,7 @@
 	align-items: center;
 	justify-content: center;
 	z-index: 1000;
-	background-color: rgba(255, 255, 255);
+	background-color: #f5f5f5;
 	transition: opacity 0.3s ease-in-out;
 }
 
@@ -20,7 +20,6 @@
 	justify-content: center;
 	padding: 50px;
 	border-radius: 15px;
-	background: rgba(255, 255, 255, 0.9);
 }
 
 .spinner {

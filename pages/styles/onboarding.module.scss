@@ -19,12 +19,32 @@
 		font-weight: 500;
 		margin-bottom: 0;
 	}
-	.stepContainer {
+	.allStepsContainer {
 		display: flex;
 		justify-content: center;
+		flex-direction: column;
 		margin-top: 2rem;
 		width: 100%;
 		max-width: 1080px;
+		min-height: 300px;
+
+		.stepContainer {
+			transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+			max-height: 1000px; // Adjust this value based on your content's maximum height
+			display: flex;
+			justify-content: center;
+			opacity: 1;
+			visibility: visible;
+			transform: translateY(-20px);
+
+			&.hidden {
+				opacity: 0;
+				max-height: 0;
+				visibility: hidden;
+				overflow: hidden; // Ensures content doesn't spill out during transition
+				transform: translateY(0);
+			}
+		}
 	}
 
 	.buttonContainer {
@@ -48,6 +68,10 @@
 			transition: background-color 0.3s;
 			font-size: 1rem;
 			font-weight: 600;
+		}
+		.prev {
+			background-color: #f5f5f5;
+			color: #428dff;
 		}
 	}
 }
