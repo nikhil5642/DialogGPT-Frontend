@@ -14,14 +14,20 @@ export default function MyChatBots() {
 	const [chatbotsList, setChatBotsList] = useState([]);
 	const [isPricingDialogOpen, setPricingDialogOpen] = useState(false);
 
-	const createNewChatBot = () => {
+	const createNewChatBot = (isOnBoarding) => {
 		showLoader("Creating a bot...");
 		postRequest("/create_bot", {
-			chatBotName: "Untitled Chatbot " + (chatbotsList.length + 1),
+			chatBotName: isOnBoarding
+				? "My First Chatbot"
+				: "Untitled Chatbot " + (chatbotsList.length + 1),
 		})
 			.then((res) => {
 				hideLoader();
-				window.location.href = `/chatbot/${res.chatbot_id}/sources`;
+				if (isOnBoarding) {
+					window.location.href = `/onboarding/${res.chatbot_id}`;
+				} else {
+					window.location.href = `/chatbot/${res.chatbot_id}`;
+				}
 				trackEvent("create-new-chatbot-success", { name: res.chatbot_name });
 			})
 			.catch((err) => {
@@ -54,6 +60,12 @@ export default function MyChatBots() {
 		getRequest("/my_chatbots")
 			.then((res) => {
 				setChatBotsList(res.chatbot_list);
+				setChatbotLimit(res.chatbot_limit);
+				if (res?.is_first_time_user && res.chatbot_list.length === 0) {
+					createNewChatBot(true);
+				} else if (res?.is_first_time_user) {
+					window.location.href = `/onboarding/${res.chatbot_list[0].chatbot_id}`;
+				}
 				hideLoader();
 				trackEvent("my-chatbot-fetch-success");
 			})

@@ -6,6 +6,7 @@ import LoadingButton from "src/components/loading-button/loading-button";
 import { showErrorToast, showSuccessToast } from "src/helper/toast-helper";
 import { useTrackEvent } from "src/helper/event-tracker";
 import TrainComponent from "../train-component/train-component";
+import { useRouter } from "next/router";
 export default function TextLoader({
 	bot_id,
 	data,
@@ -13,6 +14,9 @@ export default function TextLoader({
 	chatbotInfoData,
 	setChatbotInfoData,
 }) {
+	const router = useRouter();
+	const isOnboarding = router.asPath.includes("onboarding");
+
 	const { trackEvent } = useTrackEvent();
 	const [text, setText] = useState("");
 	const { showLoader, hideLoader } = useContext(LoaderContext);
@@ -82,13 +86,15 @@ export default function TextLoader({
 					isLoading={loader}
 				/>
 			</div>
-			<div className={styles.trainComponentContainer}>
-				<TrainComponent
-					data={data}
-					chatbotInfoData={chatbotInfoData}
-					setChatbotInfoData={setChatbotInfoData}
-				/>
-			</div>
+			{!isOnboarding && (
+				<div className={styles.trainComponentContainer}>
+					<TrainComponent
+						data={data}
+						chatbotInfoData={chatbotInfoData}
+						setChatbotInfoData={setChatbotInfoData}
+					/>
+				</div>
+			)}
 		</div>
 	);
 }

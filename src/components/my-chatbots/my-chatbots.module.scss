@@ -5,6 +5,7 @@
 	flex-direction: column;
 	padding-top: 12px;
 	padding-bottom: 18px;
+	transition: padding 0.3s ease-in-out;
 }
 .myChatBotTitleHeading {
 	font-size: 1.5rem;
@@ -15,6 +16,7 @@
 	padding-bottom: 8px;
 	font-weight: 500;
 	color: #101828;
+	transition: font-size 0.3s ease-in-out;
 }
 .myChatBotTitleSubHeading {
 	font-size: 1rem;
@@ -25,6 +27,7 @@
 	padding-top: 8px;
 	padding-bottom: 8px;
 	color: #444;
+	transition: font-size 0.3s ease-in-out;
 }
 
 .createButtonContainer {
@@ -52,11 +55,12 @@
 	text-decoration: none;
 	background-color: #ffffff;
 	border: 1px solid #e0e0e0;
-	transition: box-shadow 0.3s ease;
+	transition: box-shadow 0.3s ease, transform 0.3s ease; /* Combined transitions */
 	text-decoration: none;
 	color: #333;
 	&:hover {
 		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+		transform: translateY(-5px); /* Subtle lift effect */
 	}
 }
 

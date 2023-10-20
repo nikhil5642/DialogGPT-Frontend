@@ -1,0 +1,53 @@
+.onBoardingContainer {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	overflow-y: scroll;
+	overflow-x: scroll;
+
+	h1 {
+		text-align: center;
+		font-size: 2rem;
+		font-weight: 500;
+		margin-bottom: 0;
+	}
+	.stepContainer {
+		display: flex;
+		justify-content: center;
+		margin-top: 2rem;
+		width: 100%;
+		max-width: 1080px;
+	}
+
+	.buttonContainer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-direction: row;
+		margin-top: 2rem;
+		button {
+			margin-left: 1rem;
+			margin-right: 1rem;
+			padding-left: 1rem;
+			padding-right: 1rem;
+			padding-top: 0.5rem;
+			padding-bottom: 0.5rem;
+			border-radius: 0.25rem;
+			background-color: #428dff;
+			border: none;
+			color: white;
+			cursor: pointer;
+			transition: background-color 0.3s;
+			font-size: 1rem;
+			font-weight: 600;
+		}
+	}
+}

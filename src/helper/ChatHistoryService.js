@@ -2,9 +2,13 @@ import { storeCookie, getCookie, removeCookie } from "./cookie-helper.js";
 
 export const ChatHistoryService = {
 	// Retrieve the chat history from the cookie or create a new one if it doesn't exist
-	getChatHistory: async () => {
+	getChatHistory: async (chatbotId) => {
 		try {
-			const chatData = getCookie("chatData");
+			const allChatData = getCookie("chatData")
+				? JSON.parse(getCookie("chatData"))
+				: {};
+			const chatData = allChatData[chatbotId];
+
 			if (chatData) {
 				return JSON.parse(chatData);
 			} else {
@@ -14,7 +18,8 @@ export const ChatHistoryService = {
 					history: [],
 					leadsSubmitted: false,
 				};
-				storeCookie("chatData", JSON.stringify(newChatData));
+				allChatData[chatbotId] = newChatData;
+				storeCookie("chatData", JSON.stringify(allChatData));
 				return newChatData;
 			}
 		} catch (error) {
@@ -22,22 +27,30 @@ export const ChatHistoryService = {
 		}
 	},
 	// Store the chat history in a cookie
-	storeChatHistory: async (chatId, leadsSubmitted, history) => {
+	storeChatHistory: async (chatbotId, chatId, leadsSubmitted, history) => {
 		try {
+			const allChatData = getCookie("chatData")
+				? JSON.parse(getCookie("chatData"))
+				: {};
 			const chatData = {
 				chatId: chatId,
 				history: history,
 				leadsSubmitted: leadsSubmitted,
 			};
-			await storeCookie("chatData", JSON.stringify(chatData));
+			allChatData[chatbotId] = chatData;
+			await storeCookie("chatData", JSON.stringify(allChatData));
 		} catch (error) {
 			console.error(error);
 		}
 	},
 
 	// Clear the chat history from the cookie
-	clearChatHistory: async () => {
-		removeCookie("chatData");
+	clearChatHistory: async (chatbotId) => {
+		const allChatData = getCookie("chatData")
+			? JSON.parse(getCookie("chatData"))
+			: {};
+		delete allChatData[chatbotId];
+		storeCookie("chatData", JSON.stringify(allChatData));
 	},
 };
 
