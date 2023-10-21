@@ -4,7 +4,45 @@ import PricingFAQs from "src/components/pricing-faqs/pricing-faqs";
 import ConfettiExplosion from "react-confetti-explosion";
 import BottomTryNowComponent from "../src/components/bottom-try-now-component/bottom-try-now-component";
 import PricingWidget from "../src/components/pricing-widget/pricing-widget";
+import { useState, useRef, useEffect } from "react";
 function PricingScreen() {
+	const pricingWidgetRef = useRef(null);
+	const [pricingWidgetVisible, setPricingWidgetVisible] = useState(false);
+	const [showConfetti, setShowConfetti] = useState(false);
+
+	useEffect(() => {
+		if (pricingWidgetVisible) {
+			setShowConfetti(true);
+		}
+	}, [pricingWidgetVisible]);
+
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.target === pricingWidgetRef.current) {
+						setPricingWidgetVisible(entry.isIntersecting);
+					}
+				});
+			},
+			{
+				root: null,
+				rootMargin: "0px",
+				threshold: 0.1,
+			},
+		);
+
+		if (pricingWidgetRef.current) {
+			observer.observe(pricingWidgetRef.current);
+		}
+
+		return () => {
+			if (pricingWidgetRef.current) {
+				observer.unobserve(pricingWidgetRef.current);
+			}
+		};
+	}, []);
+
 	return (
 		<>
 			<Head>
@@ -25,18 +63,26 @@ function PricingScreen() {
 					})}
 				</script>
 			</Head>
-
 			<div className={styles.pricingScreenContainer}>
-				<ConfettiExplosion
-					force={1.5}
-					duration={5000}
-					particleCount={250}
-					width={3000}
-					zIndex={1000}
-				/>
+				{showConfetti && (
+					<ConfettiExplosion
+						force={1.5}
+						duration={5000}
+						particleCount={250}
+						width={3000}
+						zIndex={1000}
+					/>
+				)}
 				<h1 className={styles.pricingHeader}>Pricing Plans</h1>
 
-				<PricingWidget />
+				<div
+					ref={pricingWidgetRef}
+					className={`${styles.fadeInUp} ${
+						pricingWidgetVisible ? styles.visible : ""
+					}`}
+				>
+					<PricingWidget />
+				</div>
 				<PricingFAQs />
 				<BottomTryNowComponent />
 			</div>
