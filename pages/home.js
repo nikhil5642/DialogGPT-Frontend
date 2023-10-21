@@ -2,7 +2,7 @@ import styles from "./styles/home.module.scss";
 import Head from "next/head";
 import AuthService from "../src/helper/AuthService";
 import { useTrackEvent } from "../src/helper/event-tracker";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import BottomTryNowComponent from "../src/components/bottom-try-now-component/bottom-try-now-component";
 function HomeScreen() {
@@ -19,7 +19,97 @@ function HomeScreen() {
 			description: "Build a chatbot for your website, try now!",
 		},
 	];
+	const topOverviewRef = useRef(null);
+	const liveDemoRef = useRef(null);
+	const videoDemoRef = useRef(null);
+	const featuresOverviewRef = useRef(null);
+	const availableIntegrationsRef = useRef(null);
+	const faqRef = useRef(null);
+	const bottomTryNowRef = useRef(null);
 
+	const [topOverviewVisible, setTopOverviewVisible] = useState(false);
+	const [liveDemoVisible, setLiveDemoVisible] = useState(false);
+	const [videoDemoVisible, setVideoDemoVisible] = useState(false);
+	const [featuresOverviewVisible, setFeaturesOverviewVisible] = useState(false);
+	const [availableIntegrationsVisible, setAvailableIntegrationsVisible] =
+		useState(false);
+	const [faqVisible, setFaqVisible] = useState(false);
+	const [bottomTryNowVisible, setBottomTryNowVisible] = useState(false);
+
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.target === topOverviewRef.current) {
+						setTopOverviewVisible(entry.isIntersecting);
+					} else if (entry.target === liveDemoRef.current) {
+						setLiveDemoVisible(entry.isIntersecting);
+					} else if (entry.target === videoDemoRef.current) {
+						setVideoDemoVisible(entry.isIntersecting);
+					} else if (entry.target === featuresOverviewRef.current) {
+						setFeaturesOverviewVisible(entry.isIntersecting);
+					} else if (entry.target === availableIntegrationsRef.current) {
+						setAvailableIntegrationsVisible(entry.isIntersecting);
+					} else if (entry.target === faqRef.current) {
+						setFaqVisible(entry.isIntersecting);
+					} else if (entry.target === bottomTryNowRef.current) {
+						setBottomTryNowVisible(entry.isIntersecting);
+					}
+				});
+			},
+			{
+				root: null,
+				rootMargin: "0px",
+				threshold: 0.1,
+			},
+		);
+
+		if (topOverviewRef.current) {
+			observer.observe(topOverviewRef.current);
+		}
+		if (liveDemoRef.current) {
+			observer.observe(liveDemoRef.current);
+		}
+		if (videoDemoRef.current) {
+			observer.observe(videoDemoRef.current);
+		}
+		if (featuresOverviewRef.current) {
+			observer.observe(featuresOverviewRef.current);
+		}
+		if (availableIntegrationsRef.current) {
+			observer.observe(availableIntegrationsRef.current);
+		}
+		if (faqRef.current) {
+			observer.observe(faqRef.current);
+		}
+		if (bottomTryNowRef.current) {
+			observer.observe(bottomTryNowRef.current);
+		}
+
+		return () => {
+			if (topOverviewRef.current) {
+				observer.unobserve(topOverviewRef.current);
+			}
+			if (liveDemoRef.current) {
+				observer.unobserve(liveDemoRef.current);
+			}
+			if (videoDemoRef.current) {
+				observer.unobserve(videoDemoRef.current);
+			}
+			if (featuresOverviewRef.current) {
+				observer.unobserve(featuresOverviewRef.current);
+			}
+			if (availableIntegrationsRef.current) {
+				observer.unobserve(availableIntegrationsRef.current);
+			}
+			if (faqRef.current) {
+				observer.unobserve(faqRef.current);
+			}
+			if (bottomTryNowRef.current) {
+				observer.unobserve(bottomTryNowRef.current);
+			}
+		};
+	}, []);
 	return (
 		<>
 			<Head>
@@ -35,13 +125,45 @@ function HomeScreen() {
 			</Head>
 
 			<div className={styles.homeScreenContainer}>
-				<TopOverviewComponent />
-				<LiveDemoComponent />
-				<VideoDemoComponent />
-				<FeaturesOverviewComponent />
-				<AvailableIntegrations />
-				<FAQComponent />
-				<BottomTryNowComponent />
+				<div
+					ref={topOverviewRef}
+					className={topOverviewVisible ? styles.fadeInUp : ""}
+				>
+					<TopOverviewComponent />
+				</div>
+				<div
+					ref={liveDemoRef}
+					className={liveDemoVisible ? styles.fadeInLeft : ""}
+				>
+					<LiveDemoComponent />
+				</div>
+				<div
+					ref={videoDemoRef}
+					className={videoDemoVisible ? styles.fadeInUp : ""}
+				>
+					<VideoDemoComponent />
+				</div>
+				<div
+					ref={featuresOverviewRef}
+					className={featuresOverviewVisible ? styles.fadeInUp : ""}
+				>
+					<FeaturesOverviewComponent />
+				</div>
+				<div
+					ref={availableIntegrationsRef}
+					className={availableIntegrationsVisible ? styles.fadeInLeft : ""}
+				>
+					<AvailableIntegrations />
+				</div>
+				<div ref={faqRef} className={faqVisible ? styles.fadeInRight : ""}>
+					<FAQComponent />
+				</div>
+				<div
+					ref={bottomTryNowRef}
+					className={bottomTryNowVisible ? styles.fadeInUp : ""}
+				>
+					<BottomTryNowComponent />
+				</div>
 			</div>
 		</>
 	);

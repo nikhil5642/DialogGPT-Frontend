@@ -4,9 +4,12 @@ import Image from "next/image";
 import PricingWidget from "../pricing-widget/pricing-widget";
 
 function PricingDialog({ isOpen, onClose, title }) {
-	if (!isOpen) return null;
 	return (
-		<div className={styles.pricingDialogContainter}>
+		<div
+			className={`${styles.pricingDialogContainter} ${
+				isOpen ? styles.active : ""
+			}`}
+		>
 			<h1 className={styles.pricingHeader}>{title}</h1>
 			<div className={styles.pricingWidgetContainer}>
 				<PricingWidget />

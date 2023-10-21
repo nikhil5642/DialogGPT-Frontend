@@ -23,6 +23,10 @@
 	padding: 1rem;
 	position: fixed;
 	transition: all 0.3s ease-in-out; /* Smooth transitions */
+	opacity: 0;
+	visibility: hidden;
+	transform: scale(0.9);
+	transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
 
 	h1 {
 		text-align: center;
@@ -43,6 +47,11 @@
 	}
 
 	z-index: 1000;
+}
+.pricingDialogContainter.active {
+	opacity: 1;
+	visibility: visible;
+	transform: scale(1); // Normal size
 }
 
 @media only screen and (max-width: 1080px) {

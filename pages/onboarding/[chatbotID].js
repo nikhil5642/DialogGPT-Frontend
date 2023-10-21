@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, useRef } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useRouter } from "next/router";
 import { postRequest } from "../../src/helper/http-helper";
 import LoaderContext from "../../src/components/loader/loader-context";
@@ -7,6 +7,7 @@ import WebisteLoader from "../../src/components/chatbot-source-editor/website-lo
 import TextLoader from "../../src/components/chatbot-source-editor/text-loader/text-loader";
 import styles from "../styles/onboarding.module.scss";
 import TrainComponent from "../../src/components/chatbot-source-editor/train-component/train-component";
+import Image from "next/image";
 function OnboardingPage() {
 	const { chatbotID } = useRouter().query;
 	const { trackEvent } = useTrackEvent();
@@ -22,7 +23,6 @@ function OnboardingPage() {
 			loadChatBotData(chatbotID);
 		}
 	}, [chatbotID]);
-	const nodeRef = useRef(null);
 
 	const loadChatBotData = (chatbotID) => {
 		if (chatbotID) {
@@ -57,6 +57,18 @@ function OnboardingPage() {
 
 	return (
 		<div className={styles.onBoardingContainer}>
+			<a className={styles.headerLogoContainer} href="/home">
+				<Image
+					className={styles.headerLogo}
+					src="/assets/dialog_gpt_logo_icon_with_text.png"
+					alt={"DialogGPT"}
+					title={"DialogGPT"}
+					loading="eager"
+					priority={true}
+					height={50}
+					width={250}
+				></Image>
+			</a>
 			<h1>{step.title}</h1>
 			<p>{step.desc}</p>
 			<div className={styles.allStepsContainer}>

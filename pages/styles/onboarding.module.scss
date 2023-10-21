@@ -13,6 +13,25 @@
 	overflow-y: scroll;
 	overflow-x: scroll;
 
+	.headerLogoContainer {
+		display: flex;
+		padding-top: 0.75rem;
+		padding-bottom: 0.75rem;
+		justify-content: center;
+		align-items: center;
+		&:active,
+		&:focus {
+			outline: none;
+			-webkit-tap-highlight-color: transparent; // For mobile web views
+		}
+	}
+
+	.headerLogo {
+		object-fit: contain;
+		height: 50px;
+		width: 250px;
+	}
+
 	h1 {
 		text-align: center;
 		font-size: 2rem;
@@ -73,5 +92,18 @@
 			background-color: #f5f5f5;
 			color: #428dff;
 		}
+	}
+}
+
+@media only screen and (max-width: 1080px) {
+	.headerLogoContainer {
+		padding-top: 0rem;
+		padding-bottom: 0.75rem;
+	}
+	.headerLogo {
+		object-fit: contain;
+		margin-top: 8px;
+		height: 40px;
+		width: 160px;
 	}
 }
