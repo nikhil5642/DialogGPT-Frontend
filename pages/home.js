@@ -44,8 +44,6 @@ function HomeScreen() {
 						setTopOverviewVisible(entry.isIntersecting);
 					} else if (entry.target === liveDemoRef.current) {
 						setLiveDemoVisible(entry.isIntersecting);
-					} else if (entry.target === videoDemoRef.current) {
-						setVideoDemoVisible(entry.isIntersecting);
 					} else if (entry.target === featuresOverviewRef.current) {
 						setFeaturesOverviewVisible(entry.isIntersecting);
 					} else if (entry.target === availableIntegrationsRef.current) {
@@ -70,9 +68,7 @@ function HomeScreen() {
 		if (liveDemoRef.current) {
 			observer.observe(liveDemoRef.current);
 		}
-		if (videoDemoRef.current) {
-			observer.observe(videoDemoRef.current);
-		}
+
 		if (featuresOverviewRef.current) {
 			observer.observe(featuresOverviewRef.current);
 		}
@@ -93,9 +89,7 @@ function HomeScreen() {
 			if (liveDemoRef.current) {
 				observer.unobserve(liveDemoRef.current);
 			}
-			if (videoDemoRef.current) {
-				observer.unobserve(videoDemoRef.current);
-			}
+
 			if (featuresOverviewRef.current) {
 				observer.unobserve(featuresOverviewRef.current);
 			}
@@ -137,12 +131,8 @@ function HomeScreen() {
 				>
 					<LiveDemoComponent />
 				</div>
-				<div
-					ref={videoDemoRef}
-					className={videoDemoVisible ? styles.fadeInUp : ""}
-				>
-					<VideoDemoComponent />
-				</div>
+
+				<VideoDemoComponent />
 				<div
 					ref={featuresOverviewRef}
 					className={featuresOverviewVisible ? styles.fadeInUp : ""}
