@@ -12,16 +12,13 @@ function PricingWidget() {
 	const { showLoader, hideLoader } = useContext(LoaderContext);
 	useEffect(() => {
 		trackScreenView("PricingScreen", "PricingScreen");
-		showLoader("Loading...");
 		if (AuthService.isAuthenticated()) {
 			getRequest("/current_subscription_plan")
 				.then((res) => {
 					setCurrentPlan(res?.result);
 					trackEvent("current_subscription_plan_loaded", { plan: res?.result });
-					hideLoader();
 				})
 				.catch(() => {
-					hideLoader();
 					trackEvent("current_subscription_plan_load_failed", {});
 				});
 		}
