@@ -1,0 +1,64 @@
+.pricingDialogContainter {
+	left: 4rem;
+	right: 4rem;
+	top: 4rem;
+	bottom: 4rem;
+	background: rgba(
+		66,
+		141,
+		255,
+		0.1
+	); /* Slight blue tint for the glass effect */
+	backdrop-filter: blur(
+		15px
+	); /* Stronger blur for a more pronounced glass effect */
+	border: 1px solid rgba(66, 141, 255, 0.2); /* Subtle blue border */
+	box-shadow: 0 4px 15px rgba(66, 141, 255, 0.2); /* Soft blue shadow for depth */
+
+	border-radius: 8px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center; /* Center the children */
+	align-items: stretch;
+	padding: 1rem;
+	position: fixed;
+	transition: all 0.3s ease-in-out; /* Smooth transitions */
+	opacity: 0;
+	visibility: hidden;
+	transform: scale(0.9);
+	transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
+
+	h1 {
+		text-align: center;
+		margin: 0;
+	}
+	img {
+		position: fixed;
+		top: 1rem;
+		right: 1rem;
+		height: 1rem;
+		width: 1rem;
+	}
+	.pricingWidgetContainer {
+		flex: 1;
+		overflow: auto;
+		margin-top: 1rem;
+		align-items: center;
+	}
+
+	z-index: 1000;
+}
+.pricingDialogContainter.active {
+	opacity: 1;
+	visibility: visible;
+	transform: scale(1); // Normal size
+}
+
+@media only screen and (max-width: 1080px) {
+	.pricingDialogContainter {
+		left: 1rem;
+		right: 1rem;
+		top: 1rem;
+		bottom: 1rem;
+	}
+}

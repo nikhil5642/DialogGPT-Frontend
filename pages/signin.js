@@ -97,7 +97,7 @@ const SignInPage = () => {
 					.getIdToken()
 					.then((token) => {
 						trackEvent("login-success");
-						AuthService.login(token).then(() => router.push("/pricing"));
+						AuthService.login(token).then(() => router.push("/my-chatbots"));
 						hideLoader();
 					})
 					.catch(() => {
@@ -245,7 +245,7 @@ const SignInPage = () => {
 			</Head>
 			<div className={styles.container}>
 				<div className={styles.card}>
-					<h2>{isSignUp ? "Sign Up" : "Sign In"}</h2>
+					<h2>{isSignUp ? "Sign Up" : "Log In"}</h2>
 					{featureVisibility.google && (
 						<button
 							className={styles.googleButton}

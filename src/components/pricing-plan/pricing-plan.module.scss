@@ -14,7 +14,11 @@
 	flex: 1;
 	justify-content: space-between;
 	min-height: 60vh;
+	width: 0;
 	position: relative;
+	white-space: pre-wrap;
+	word-break: break-word;
+
 	h3 {
 		font-size: 1.5rem;
 		font-weight: 600;
@@ -75,5 +79,11 @@
 		margin: 1rem 0;
 		margin-left: 0.5rem;
 		font-weight: 500;
+	}
+}
+
+@media only screen and (max-width: 1080px) {
+	.planCard {
+		width: calc(100vw - 8rem);
 	}
 }

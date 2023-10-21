@@ -118,14 +118,19 @@ export default function ChatBotComponent({ config }) {
 			container.scrollTop = container.scrollHeight;
 		}
 		if (chatId != null) {
-			ChatHistoryService.storeChatHistory(chatId, leadsSubmitted, messages);
+			ChatHistoryService.storeChatHistory(
+				botID,
+				chatId,
+				leadsSubmitted,
+				messages,
+			);
 		}
 	}, [messages, chatId]);
 
 	const handleLeadSubmit = () => {
 		setLeadsSubmitted(true);
 		if (chatId != null) {
-			ChatHistoryService.storeChatHistory(chatId, true, messages);
+			ChatHistoryService.storeChatHistory(botID, chatId, true, messages);
 		}
 	};
 
@@ -164,7 +169,7 @@ export default function ChatBotComponent({ config }) {
 	};
 
 	const refresh = () => {
-		ChatHistoryService.clearChatHistory().then(() => {
+		ChatHistoryService.clearChatHistory(botID).then(() => {
 			ChatHistoryService.getChatHistory(botID)
 				.then((res) => {
 					if (res) {
@@ -192,11 +197,11 @@ export default function ChatBotComponent({ config }) {
 
 				<div className={styles.chatbotHeaderRightContainer}>
 					<button onClick={refresh}>
-						<img src="/assets/refresh_grey.png"></img>
+						<img src="/assets/ic_refresh.png"></img>
 					</button>
 					{source === ChatBotSource.SETTINGS && (
 						<button onClick={() => {}}>
-							<img src="/assets/close_grey.png"></img>
+							<img src="/assets/close.png" className={styles.closePng}></img>
 						</button>
 					)}
 				</div>
@@ -239,6 +244,7 @@ export default function ChatBotComponent({ config }) {
 				)}
 				{!sending &&
 					leadsSubmitted == false &&
+					source != ChatBotSource.SETTINGS &&
 					messages.filter((message) => message.type === "outgoing").length >
 						0 && (
 						<LeadCollectionView

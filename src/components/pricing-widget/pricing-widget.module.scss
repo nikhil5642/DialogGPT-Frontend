@@ -1,0 +1,12 @@
+.pricingPlansContainer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between; /* Distributes the cards evenly */
+}
+
+@media only screen and (max-width: 1080px) {
+	.pricingPlansContainer {
+		flex-direction: column;
+		align-items: center;
+	}
+}

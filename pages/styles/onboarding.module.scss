@@ -1,0 +1,109 @@
+.onBoardingContainer {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	overflow-y: scroll;
+	overflow-x: scroll;
+
+	.headerLogoContainer {
+		display: flex;
+		padding-top: 0.75rem;
+		padding-bottom: 0.75rem;
+		justify-content: center;
+		align-items: center;
+		&:active,
+		&:focus {
+			outline: none;
+			-webkit-tap-highlight-color: transparent; // For mobile web views
+		}
+	}
+
+	.headerLogo {
+		object-fit: contain;
+		height: 50px;
+		width: 250px;
+	}
+
+	h1 {
+		text-align: center;
+		font-size: 2rem;
+		font-weight: 500;
+		margin-bottom: 0;
+	}
+	.allStepsContainer {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		margin-top: 2rem;
+		width: 100%;
+		max-width: 1080px;
+		min-height: 300px;
+
+		.stepContainer {
+			transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+			max-height: 1000px; // Adjust this value based on your content's maximum height
+			display: flex;
+			justify-content: center;
+			opacity: 1;
+			visibility: visible;
+			transform: translateY(-20px);
+
+			&.hidden {
+				opacity: 0;
+				max-height: 0;
+				visibility: hidden;
+				overflow: hidden; // Ensures content doesn't spill out during transition
+				transform: translateY(0);
+			}
+		}
+	}
+
+	.buttonContainer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-direction: row;
+		margin-top: 2rem;
+		button {
+			margin-left: 1rem;
+			margin-right: 1rem;
+			padding-left: 1rem;
+			padding-right: 1rem;
+			padding-top: 0.5rem;
+			padding-bottom: 0.5rem;
+			border-radius: 0.25rem;
+			background-color: #428dff;
+			border: none;
+			color: white;
+			cursor: pointer;
+			transition: background-color 0.3s;
+			font-size: 1rem;
+			font-weight: 600;
+		}
+		.prev {
+			background-color: #f5f5f5;
+			color: #428dff;
+		}
+	}
+}
+
+@media only screen and (max-width: 1080px) {
+	.headerLogoContainer {
+		padding-top: 0rem;
+		padding-bottom: 0.75rem;
+	}
+	.headerLogo {
+		object-fit: contain;
+		margin-top: 8px;
+		height: 40px;
+		width: 160px;
+	}
+}

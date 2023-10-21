@@ -8,6 +8,7 @@ import { useTrackEvent } from "src/helper/event-tracker";
 import { URLStatus, URLStatusText } from "./website-loader.utils";
 import { showSuccessToast } from "src/helper/toast-helper";
 import TrainComponent from "../train-component/train-component";
+import { useRouter } from "next/router";
 export default function WebisteLoader({
 	bot_id,
 	data,
@@ -15,6 +16,9 @@ export default function WebisteLoader({
 	chatbotInfoData,
 	setChatbotInfoData,
 }) {
+	const router = useRouter();
+	const isOnboarding = router.asPath.includes("onboarding");
+
 	const { trackEvent } = useTrackEvent();
 	const [url, setUrl] = useState("");
 	const [loader, setLoader] = useState({
@@ -88,7 +92,11 @@ export default function WebisteLoader({
 
 	return (
 		<div className={styles.container}>
-			<h4>Crawl</h4>
+			<h4>
+				{isOnboarding
+					? "Enter your website URL below and hit 'Fetch Links'"
+					: "Crawl"}
+			</h4>
 			<div className={styles.urlCrawlerView}>
 				<div className={styles.fetchLinksInput}>
 					<URLEditBoxComponent
@@ -107,8 +115,8 @@ export default function WebisteLoader({
 				</div>
 			</div>
 			<p className={styles.urlCrawlerDesc}>
-				This will crawl all the links starting with the URL (not including files
-				on the website).
+				We will navigate through all the links on the given Website (not
+				including files on the website).
 			</p>
 			<ul>
 				{data
@@ -156,24 +164,29 @@ export default function WebisteLoader({
 				{"  "}
 				Char Detected
 			</p>
-
-			<div className={styles.addURLContainer}>
-				<LoadingButton title={"Add URL"} onClick={addURL} />
-			</div>
-			<div className={styles.updateURLContainer}>
-				<LoadingButton
-					title={"Save URL's Changes"}
-					onClick={updateURL}
-					isLoading={loader.updateURL}
-				/>
-			</div>
-			<div className={styles.trainComponentContainer}>
-				<TrainComponent
-					data={data}
-					chatbotInfoData={chatbotInfoData}
-					setChatbotInfoData={setChatbotInfoData}
-				/>
-			</div>
+			{!isOnboarding && (
+				<div className={styles.addURLContainer}>
+					<LoadingButton title={"Add URL"} onClick={addURL} />
+				</div>
+			)}
+			{!isOnboarding && (
+				<div className={styles.updateURLContainer}>
+					<LoadingButton
+						title={"Save Changes"}
+						onClick={updateURL}
+						isLoading={loader.updateURL}
+					/>
+				</div>
+			)}
+			{!isOnboarding && (
+				<div className={styles.trainComponentContainer}>
+					<TrainComponent
+						data={data}
+						chatbotInfoData={chatbotInfoData}
+						setChatbotInfoData={setChatbotInfoData}
+					/>
+				</div>
+			)}
 		</div>
 	);
 }

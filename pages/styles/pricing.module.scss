@@ -17,22 +17,11 @@
 	color: #101828;
 }
 
-.pricingPlansContainer {
-	margin-top: 1rem;
-	display: flex;
-	flex-direction: row;
-	flex: 1;
-	width: 100%;
-}
-
 @media only screen and (max-width: 1080px) {
 	.pricingHeader {
 		font-size: 2rem;
 		align-self: flex-start;
 		margin-left: 2rem;
 		margin-top: 1rem;
-	}
-	.pricingPlansContainer {
-		flex-direction: column;
 	}
 }

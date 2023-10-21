@@ -4,7 +4,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	padding: 0 0.5rem 0.5rem 0.5rem;
+	padding: 0.1rem 0.5rem 0.5rem 0.5rem;
 	display: flex;
 	flex-direction: column;
 	background-color: #fefdfc;
@@ -58,6 +58,12 @@
 			height: 1rem;
 			width: 1rem;
 			border-radius: 0px;
+		}
+		.closePng {
+			height: 0.75rem;
+			width: 0.75rem;
+			margin-top: 0.125rem;
+			margin-bottom: 0.125rem;
 		}
 	}
 }

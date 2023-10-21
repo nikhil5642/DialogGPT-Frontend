@@ -1,12 +1,14 @@
 import styles from "./train-component.module.scss";
 import { useState, useEffect, useContext } from "react";
-import { postRequest } from "../../../helper/http-helper";
+import { postRequest, getRequest } from "../../../helper/http-helper";
 import LoadingButton from "src/components/loading-button/loading-button";
 import { URLStatus } from "../website-loader/website-loader.utils";
 import { useRouter } from "next/router";
 import { ChatBotOptionsEnum } from "../../chatbot-editor/chatbot-editor.utits";
 import LoaderContext from "src/components/loader/loader-context";
 import { useTrackEvent } from "../../../helper/event-tracker";
+import PricingDialog from "../../pricing-dialog/pricing-dialog";
+
 const initialData = {
 	texts: { charLength: 0 },
 	urls: { count: 0, charLength: 0 },
@@ -19,10 +21,14 @@ export default function TrainComponent({
 	setChatbotInfoData,
 }) {
 	const router = useRouter();
+	const isOnBoarding = router.asPath.includes("onboarding");
+
 	const [trainingData, setTrainingData] = useState(initialData);
 	const [totalChars, setTotalChars] = useState(0);
 	const [trainingError, setTrainingError] = useState("");
 	const { showLoader, hideLoader } = useContext(LoaderContext);
+	const [isPricingDialogOpen, setPricingDialogOpen] = useState(false);
+
 	const { trackEvent } = useTrackEvent();
 
 	useEffect(() => {
@@ -37,9 +43,32 @@ export default function TrainComponent({
 		}
 	}, [trainingData]);
 
+	const checkSubscriptionPlanAndTrain = () => {
+		if (isOnBoarding) {
+			showLoader("Please Wait...");
+			getRequest("/current_subscription_plan")
+				.then((res) => {
+					if (res?.result === "free") {
+						hideLoader();
+						setPricingDialogOpen(true);
+					} else {
+						hideLoader();
+						trainChatBot();
+					}
+				})
+				.catch(() => {
+					hideLoader();
+				});
+		} else {
+			trainChatBot();
+		}
+	};
+
 	const trainChatBot = () => {
 		if (totalChars < 1000) {
-			setTrainingError("***Minimum 1000 characters required to train");
+			setTrainingError(
+				"***Your input needs to be at least 1,000 characters for training.",
+			);
 			return;
 		}
 		router.push(
@@ -56,18 +85,8 @@ export default function TrainComponent({
 			.then(() => {
 				trackEvent("chatbot-editor-train", { botID: chatbotInfoData.id });
 				hideLoader();
-				router
-					.push(
-						{
-							pathname: router.pathname,
-							query: { ...router.query, page: ChatBotOptionsEnum.CHATBOT },
-						},
-						undefined,
-						{ shallow: true },
-					)
-					.then(() => {
-						window.scrollTo(0, 0);
-					});
+				window.location.href = `/chatbot/${chatbotInfoData.id}/chatbots`;
+				window.scrollTo(0, 0);
 			})
 			.catch(() => {
 				trackEvent("chatbot-editor-train-failed", {
@@ -143,9 +162,17 @@ export default function TrainComponent({
 			<div className={styles.trainButtonContainer}>
 				<LoadingButton
 					title={"Train ChatBot"}
-					onClick={trainChatBot}
+					onClick={checkSubscriptionPlanAndTrain}
 				></LoadingButton>
 			</div>
+			{isOnBoarding && (
+				<PricingDialog
+					isOpen={isPricingDialogOpen}
+					onClose={() => setPricingDialogOpen(false)}
+					title={(() => {})()}
+				/>
+			)}
+
 			{trainingError && <p className={styles.trainingError}>{trainingError}</p>}
 		</div>
 	);

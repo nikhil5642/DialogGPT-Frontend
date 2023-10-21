@@ -14,10 +14,11 @@ const PricingFeatures = {
 	GPT4_OPTION: "Access to GPT-4",
 	SUPPORT_24_7: "24/7 Support",
 	PRIORITY_SUPPORT: "Priority Support",
+	FREE_TRIAL: "Free Trial Available",
 };
 
 export const PricingPlans = {
-	FREE: {
+	BASIC: {
 		name: "Basic",
 		id: "basic",
 		features: [
@@ -26,7 +27,7 @@ export const PricingPlans = {
 			PricingFeatures.EMBED_UNLIMITED_WEBSITES,
 			PricingFeatures.GPT35_OPTION,
 			PricingFeatures.MESSAGE_CREDITS_GPT3_2000,
-			PricingFeatures.SUPPORT_24_7,
+			PricingFeatures.FREE_TRIAL,
 		],
 		buttonText: "Start Trial",
 		price: "$29/month",
