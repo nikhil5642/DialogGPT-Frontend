@@ -127,7 +127,7 @@ function HomeScreen() {
 				</div>
 				<div
 					ref={liveDemoRef}
-					className={liveDemoVisible ? styles.fadeInLeft : ""}
+					className={liveDemoVisible ? styles.fadeInUp : ""}
 				>
 					<LiveDemoComponent />
 				</div>
