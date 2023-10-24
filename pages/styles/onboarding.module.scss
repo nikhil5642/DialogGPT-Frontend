@@ -54,14 +54,12 @@
 			justify-content: center;
 			opacity: 1;
 			visibility: visible;
-			transform: translateY(-20px);
 
 			&.hidden {
 				opacity: 0;
 				max-height: 0;
 				visibility: hidden;
-				overflow: hidden; // Ensures content doesn't spill out during transition
-				transform: translateY(0);
+				overflow: hidden;
 			}
 		}
 	}

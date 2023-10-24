@@ -164,7 +164,7 @@ export default function TrainComponent({
 			<PricingDialog
 				isOpen={isPricingDialogOpen}
 				onClose={() => setPricingDialogOpen(false)}
-				title={(() => {})()}
+				title={"Start your trial Now!"}
 			/>
 
 			{trainingError && <p className={styles.trainingError}>{trainingError}</p>}
