@@ -10,7 +10,7 @@ export const ChatHistoryService = {
 			const chatData = allChatData[chatbotId];
 
 			if (chatData) {
-				return JSON.parse(chatData);
+				return chatData;
 			} else {
 				// Create a new chat history if it doesn't exist
 				const newChatData = {
