@@ -75,7 +75,7 @@ function PricingPlan({ plan, currentPlan }) {
 				<div className={styles.popularTag}>Most Popular</div>
 			)} */}
 			{plan.id == "basic" && (
-				<div className={styles.popularTag}>Free Trail</div>
+				<div className={styles.popularTag}>Free Trial</div>
 			)}
 			<ul className={styles.features}>
 				{plan.features.map((feature, index) => (
