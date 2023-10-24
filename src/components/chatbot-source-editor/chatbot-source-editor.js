@@ -63,28 +63,7 @@ export default function ChatBotSourceEditor({
 						},
 				  }
 				: {}),
-			...(firebaseChecks.TEXT
-				? {
-						TEXT: {
-							details: SourceOptions.TEXT,
-							view: (
-								<>
-									{trackScreenView(
-										"ChatbotTextEditorScreen",
-										"ChatBotEditorScreen",
-									)}
-									<TextLoader
-										bot_id={chatbotInfoData.id}
-										data={data}
-										setData={setData}
-										chatbotInfoData={chatbotInfoData}
-										setChatbotInfoData={setChatbotInfoData}
-									></TextLoader>
-								</>
-							),
-						},
-				  }
-				: {}),
+
 			...(firebaseChecks.URL
 				? {
 						URL: {
@@ -102,6 +81,28 @@ export default function ChatBotSourceEditor({
 										chatbotInfoData={chatbotInfoData}
 										setChatbotInfoData={setChatbotInfoData}
 									/>
+								</>
+							),
+						},
+				  }
+				: {}),
+			...(firebaseChecks.TEXT
+				? {
+						TEXT: {
+							details: SourceOptions.TEXT,
+							view: (
+								<>
+									{trackScreenView(
+										"ChatbotTextEditorScreen",
+										"ChatBotEditorScreen",
+									)}
+									<TextLoader
+										bot_id={chatbotInfoData.id}
+										data={data}
+										setData={setData}
+										chatbotInfoData={chatbotInfoData}
+										setChatbotInfoData={setChatbotInfoData}
+									></TextLoader>
 								</>
 							),
 						},
@@ -126,7 +127,7 @@ export default function ChatBotSourceEditor({
 		};
 	}
 
-	const [source, setSource] = useState(SourceOptions.TEXT.id);
+	const [source, setSource] = useState(SourceOptions.URL.id);
 	useEffect(() => {
 		const pathWithoutQuery = router.asPath.split("?")[0];
 

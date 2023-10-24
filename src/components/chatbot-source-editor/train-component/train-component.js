@@ -21,7 +21,6 @@ export default function TrainComponent({
 	setChatbotInfoData,
 }) {
 	const router = useRouter();
-	const isOnBoarding = router.asPath.includes("onboarding");
 
 	const [trainingData, setTrainingData] = useState(initialData);
 	const [totalChars, setTotalChars] = useState(0);
@@ -44,24 +43,20 @@ export default function TrainComponent({
 	}, [trainingData]);
 
 	const checkSubscriptionPlanAndTrain = () => {
-		if (isOnBoarding) {
-			showLoader("Please Wait...");
-			getRequest("/current_subscription_plan")
-				.then((res) => {
-					if (res?.result === "free") {
-						hideLoader();
-						setPricingDialogOpen(true);
-					} else {
-						hideLoader();
-						trainChatBot();
-					}
-				})
-				.catch(() => {
+		showLoader("Please Wait...");
+		getRequest("/current_subscription_plan")
+			.then((res) => {
+				if (res?.result === "free") {
 					hideLoader();
-				});
-		} else {
-			trainChatBot();
-		}
+					setPricingDialogOpen(true);
+				} else {
+					hideLoader();
+					trainChatBot();
+				}
+			})
+			.catch(() => {
+				hideLoader();
+			});
 	};
 
 	const trainChatBot = () => {
@@ -165,13 +160,12 @@ export default function TrainComponent({
 					onClick={checkSubscriptionPlanAndTrain}
 				></LoadingButton>
 			</div>
-			{isOnBoarding && (
-				<PricingDialog
-					isOpen={isPricingDialogOpen}
-					onClose={() => setPricingDialogOpen(false)}
-					title={(() => {})()}
-				/>
-			)}
+
+			<PricingDialog
+				isOpen={isPricingDialogOpen}
+				onClose={() => setPricingDialogOpen(false)}
+				title={(() => {})()}
+			/>
 
 			{trainingError && <p className={styles.trainingError}>{trainingError}</p>}
 		</div>

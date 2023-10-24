@@ -71,8 +71,11 @@ function PricingPlan({ plan, currentPlan }) {
 	return (
 		<div className={styles.planCard}>
 			<h3>{plan.name} Plan</h3>
-			{plan.id == "essential" && (
+			{/* {plan.id == "essential" && (
 				<div className={styles.popularTag}>Most Popular</div>
+			)} */}
+			{plan.id == "basic" && (
+				<div className={styles.popularTag}>Free Trail</div>
 			)}
 			<ul className={styles.features}>
 				{plan.features.map((feature, index) => (
@@ -86,6 +89,7 @@ function PricingPlan({ plan, currentPlan }) {
 			<div className={styles.price}>{plan.price}</div>
 
 			<LoadingButton
+				backgroundColour={plan.id == "basic" ? "#4169E1" : "#101828"}
 				onClick={onButtonPress}
 				isLoading={loading}
 				title={alreadySubscribed ? "Manage Subscription" : plan.buttonText}

@@ -31,8 +31,8 @@ export default function Header() {
 					title={"DialogGPT"}
 					loading="eager"
 					priority={true}
-					height={50}
-					width={250}
+					height={40}
+					width={200}
 				></Image>
 			</a>
 
