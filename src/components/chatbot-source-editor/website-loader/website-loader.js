@@ -1,5 +1,5 @@
 import styles from "./website-loader.module.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import URLEditBoxComponent from "../../url-editbox-component/url-editbox-component";
 import { postRequest } from "../../../helper/http-helper";
 import { generateRandomString } from "../chatbot-source-editor.utils";
@@ -24,13 +24,22 @@ export default function WebisteLoader({
 	const [loader, setLoader] = useState({
 		fetchLinks: false,
 		updateURL: false,
+		lintFetchComplete: false,
 	});
 	const fetchUrls = () => {
-		setLoader((val) => ({ ...val, fetchLinks: true }));
+		setLoader((val) => ({
+			...val,
+			fetchLinks: true,
+			lintFetchComplete: false,
+		}));
 		postRequest("/fetch_urls", { url: url, botID: bot_id }, {}, 10000000)
 			.then((res) => {
 				setData((prevData) => [...prevData, ...res.result]);
-				setLoader((val) => ({ ...val, fetchLinks: false }));
+				setLoader((val) => ({
+					...val,
+					fetchLinks: false,
+					lintFetchComplete: true,
+				}));
 				trackEvent("urls_fetched", { botID: bot_id, url: url });
 			})
 			.catch(() => {
@@ -118,6 +127,10 @@ export default function WebisteLoader({
 				We will navigate through all the links on the given Website (not
 				including files on the website).
 			</p>
+			<ProgressLoader
+				start={loader.fetchLinks}
+				complete={loader.lintFetchComplete}
+			/>
 			<ul>
 				{data
 					.filter((item) => item.source_type === "url")
@@ -198,6 +211,50 @@ function StatusItem({ item }) {
 			<p className={`${styles.statusLabel} ${styles[item.status]}`}>
 				{URLStatusText[item.status]}
 			</p>
+		)
+	);
+}
+
+function ProgressLoader({ start, complete }) {
+	const [progress, setProgress] = useState(0);
+
+	useEffect(() => {
+		if (complete) {
+			setProgress(100);
+			return;
+		}
+
+		if (start) {
+			const incrementValue = 100 / (120 * 10); // Update the progress every 100ms
+
+			const interval = setInterval(() => {
+				setProgress((prevProgress) => {
+					if (prevProgress >= 100) {
+						clearInterval(interval);
+						return 100;
+					}
+					return prevProgress + incrementValue;
+				});
+			}, 100);
+
+			return () => clearInterval(interval); // Cleanup interval on component unmount
+		}
+	}, [start, complete]);
+
+	return (
+		(progress > 0 || complete) && (
+			<div className={styles.progressContainer}>
+				<div
+					style={{
+						position: "absolute",
+						borderRadius: "4px",
+						height: "4px",
+						width: `${progress}%`,
+						backgroundColor: "#6200ea",
+					}}
+				></div>
+				<p>{progress.toFixed(0)}%</p>
+			</div>
 		)
 	);
 }

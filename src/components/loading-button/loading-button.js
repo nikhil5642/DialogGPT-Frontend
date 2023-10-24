@@ -1,7 +1,12 @@
 import styles from "./loading-button.module.scss";
 import React, { useState, useCallback } from "react";
 
-function LoadingButton({ title, isLoading, onClick }) {
+function LoadingButton({
+	title,
+	isLoading,
+	onClick,
+	backgroundColour = "#101828",
+}) {
 	const [lastClicked, setLastClicked] = useState(0);
 
 	const debouncedOnClick = useCallback(
@@ -20,6 +25,7 @@ function LoadingButton({ title, isLoading, onClick }) {
 	);
 	return (
 		<button
+			style={{ backgroundColor: backgroundColour }}
 			className={styles.elegantButton}
 			onClick={debouncedOnClick}
 			disabled={isLoading}

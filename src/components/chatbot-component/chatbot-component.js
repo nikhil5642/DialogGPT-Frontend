@@ -197,7 +197,7 @@ export default function ChatBotComponent({ config }) {
 
 				<div className={styles.chatbotHeaderRightContainer}>
 					<button onClick={refresh}>
-						<img src="/assets/ic_refresh.png"></img>
+						<img src="/assets/refresh_grey.png"></img>
 					</button>
 					{source === ChatBotSource.SETTINGS && (
 						<button onClick={() => {}}>

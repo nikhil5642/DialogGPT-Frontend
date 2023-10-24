@@ -131,4 +131,12 @@
 	justify-content: center;
 	width: 100%;
 	margin-top: 1rem;
+	overflow: hidden;
+}
+.progressContainer {
+	position: relative;
+	width: 100%;
+	max-width: 1080px;
+	background-color: "#e0e0e0";
+	margin-top: 1rem;
 }

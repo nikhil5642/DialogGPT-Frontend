@@ -3,7 +3,7 @@ import { JSEmbedComponent } from "../js-embed/js-embed";
 import { IFrameEmbedComponent } from "../iframe-embed/iframe-embed";
 import styles from "../embings-style.module.scss";
 
-export const WixEmbedComponent = ({ botID }) => {
+export const WordPressEmbedComponent = ({ botID }) => {
 	return (
 		<div className={styles.wixEmbedContainer}>
 			<h1>Add Chatbot to Your Wix Website</h1>

@@ -53,8 +53,8 @@
 	display: flex;
 	padding-top: 5vh;
 
-	padding-left: 1rem;
-	padding-right: 1rem;
+	margin-left: 1rem;
+	margin-right: 1rem;
 	p {
 		margin-top: 2rem;
 	}
@@ -257,6 +257,9 @@
 	align-self: center;
 	flex-direction: column;
 	width: 100%;
+	margin-left: 1rem;
+	margin-right: 1rem;
+
 	h2 {
 		padding-left: 1rem;
 		padding-right: 1rem;
@@ -265,7 +268,7 @@
 	.availableIntegrationsRow {
 		margin-top: 4rem;
 		display: grid;
-		justify-content: center;
+		justify-content: space-between;
 		grid-template-columns: repeat(3, auto);
 		column-gap: 4rem;
 		row-gap: 2rem;
@@ -275,8 +278,6 @@
 			max-width: 250px;
 			max-height: 150px;
 			object-fit: contain;
-			margin-left: 1rem;
-			margin-right: 1rem;
 		}
 		.integrationItemWithDoc {
 			@extend .integrationItem;
@@ -292,6 +293,8 @@
 	width: 100%;
 	max-width: 1080px;
 	align-self: center;
+	margin-left: 1rem;
+	margin-right: 1rem;
 
 	h2 {
 		padding-bottom: 1.5rem;
@@ -304,8 +307,6 @@
 	border-bottom: 1px solid #e0e0e0;
 	padding: 0.75rem 0;
 	position: relative;
-	margin-left: 1rem;
-	margin-right: 1rem;
 
 	&:last-child {
 		border-bottom: none;
@@ -329,6 +330,62 @@
 		font-size: 1rem;
 		line-height: 1.25rem;
 	}
+}
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeInLeft {
+	from {
+		opacity: 0;
+		transform: translateX(-30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes fadeInRight {
+	from {
+		opacity: 0;
+		transform: translateX(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+.fadeInUp {
+	display: flex;
+	justify-content: center;
+	animation-name: fadeInUp;
+	animation-duration: 1s;
+	animation-fill-mode: both;
+}
+
+.fadeInLeft {
+	display: flex;
+	justify-content: center;
+	animation-name: fadeInLeft;
+	animation-duration: 1s;
+	animation-fill-mode: both;
+}
+
+.fadeInRight {
+	display: flex;
+	justify-content: center;
+	animation-name: fadeInRight;
+	animation-duration: 1s;
+	animation-fill-mode: both;
 }
 
 @media only screen and (max-width: 1080px) {
@@ -425,6 +482,7 @@
 			margin-top: 3rem;
 			grid-template-columns: repeat(2, auto);
 			column-gap: 2rem;
+			justify-content: space-around;
 			row-gap: 0rem;
 			.integrationItem {
 				max-width: 150px;
@@ -435,61 +493,11 @@
 	.faqContainer {
 		margin-top: 5rem;
 	}
-}
 
-@keyframes fadeInUp {
-	from {
-		opacity: 0;
-		transform: translateY(30px);
+	.fadeInRight {
+		animation-name: fadeInUp;
 	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
+	.fadeInLeft {
+		animation-name: fadeInUp;
 	}
-}
-
-@keyframes fadeInLeft {
-	from {
-		opacity: 0;
-		transform: translateX(-30px);
-	}
-	to {
-		opacity: 1;
-		transform: translateX(0);
-	}
-}
-
-@keyframes fadeInRight {
-	from {
-		opacity: 0;
-		transform: translateX(30px);
-	}
-	to {
-		opacity: 1;
-		transform: translateX(0);
-	}
-}
-
-.fadeInUp {
-	display: flex;
-	justify-content: center;
-	animation-name: fadeInUp;
-	animation-duration: 1s;
-	animation-fill-mode: both;
-}
-
-.fadeInLeft {
-	display: flex;
-	justify-content: center;
-	animation-name: fadeInLeft;
-	animation-duration: 1s;
-	animation-fill-mode: both;
-}
-
-.fadeInRight {
-	display: flex;
-	justify-content: center;
-	animation-name: fadeInRight;
-	animation-duration: 0.6s;
-	animation-fill-mode: both;
 }

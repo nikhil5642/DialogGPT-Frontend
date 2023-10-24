@@ -44,7 +44,7 @@ const SignInPage = () => {
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [isSignUp, setIsSignUp] = useState(false);
+	const [isSignUp, setIsSignUp] = useState(true);
 	const router = useRouter();
 	const auth = getAuth();
 	const { showLoader, hideLoader } = useContext(LoaderContext);
