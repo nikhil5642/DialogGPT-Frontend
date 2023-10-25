@@ -71,12 +71,12 @@ function PricingPlan({ plan, currentPlan }) {
 	return (
 		<div className={styles.planCard}>
 			<h3>{plan.name} Plan</h3>
-			{/* {plan.id == "essential" && (
+			{plan.id == "essential" && (
 				<div className={styles.popularTag}>Most Popular</div>
-			)} */}
-			{plan.id == "basic" && (
-				<div className={styles.popularTag}>Free Trial</div>
 			)}
+			{/* {plan.id == "basic" && (
+				<div className={styles.popularTag}>Free Trial</div>
+			)} */}
 			<ul className={styles.features}>
 				{plan.features.map((feature, index) => (
 					<li key={index} className={styles.tickWrapper}>
