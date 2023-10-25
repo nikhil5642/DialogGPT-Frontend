@@ -150,7 +150,9 @@ function HomeScreen() {
 				</div>
 				<div
 					ref={bottomTryNowRef}
-					className={bottomTryNowVisible ? styles.fadeInUp : ""}
+					className={
+						bottomTryNowVisible ? styles.bottomTryNowVisibleContainer : ""
+					}
 				>
 					<BottomTryNowComponent />
 				</div>

@@ -388,6 +388,11 @@
 	animation-fill-mode: both;
 }
 
+.bottomTryNowVisibleContainer {
+	@extend .fadeInUp;
+	align-self: center;
+}
+
 @media only screen and (max-width: 1080px) {
 	.homeScreenContainer {
 		height: calc(50vw - 60px); // Adjusted for mobile
