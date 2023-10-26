@@ -83,7 +83,7 @@ export default function Header() {
 						href="/signin"
 						onClick={() => trackEvent("login_link_click", { source: "header" })}
 					>
-						{"Log In"}
+						{"Sign Up"}
 					</a>
 				)}
 			</div>
