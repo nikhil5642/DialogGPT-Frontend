@@ -184,7 +184,7 @@ export default function Header() {
 										trackEvent("login_link_click", { source: "hamburger" });
 									}}
 								>
-									Log In
+									Sign Up
 								</a>
 							)}
 						</li>
