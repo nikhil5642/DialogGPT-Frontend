@@ -37,8 +37,8 @@ function HomeScreen() {
 			<div className={styles.homeScreenContainer}>
 				<TopOverviewComponent />
 				<VideoDemoComponent />
-				<LiveDemoComponent />
 				<FeaturesOverviewComponent />
+				<LiveDemoComponent />
 				<AvailableIntegrations />
 				<FAQComponent />
 				<BottomTryNowComponent />
@@ -157,7 +157,7 @@ const VideoDemoComponent = () => {
 		}
 	}
 	return (
-		<div className={styles.videoDemoContainer} id="Demo">
+		<div className={styles.videoDemoContainer}>
 			<h2>Create Your AI Chatbot in Just 2 Minutes</h2>
 			<p>
 				Watch our demo where we trained a chatbot on the{" "}
@@ -181,7 +181,7 @@ const VideoDemoComponent = () => {
 const LiveDemoComponent = () => {
 	const [iframeLoading, setIframeLoading] = useState(false);
 	return (
-		<div className={styles.liveDemoContainer}>
+		<div className={styles.liveDemoContainer} id="Demo">
 			<h2>Live Demo</h2>
 			<p>This chatbot was trained on a document explaining DialogGPT.</p>
 

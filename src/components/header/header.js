@@ -92,7 +92,7 @@ export default function Header() {
 						href="/signup"
 						onClick={() => trackEvent("Try Now clicked", { source: "header" })}
 					>
-						{"Try Now ->"}
+						{"Try Now →"}
 					</a>
 				)}
 			</div>
@@ -206,7 +206,7 @@ export default function Header() {
 										trackEvent("try_now_clicked", { source: "hamburger" })
 									}
 								>
-									{"Try Now ->"}
+									{"Try Now →"}
 								</a>
 							</li>
 						)}

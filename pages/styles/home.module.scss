@@ -46,11 +46,10 @@
 .topOverviewContainer {
 	flex: 1;
 	display: flex;
+	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	width: 100%;
-	display: flex;
 	padding-top: 5vh;
 	margin-left: 1rem;
 	margin-right: 1rem;
@@ -394,6 +393,7 @@
 		height: calc(50vw - 60px); // Adjusted for mobile
 		h1 {
 			font-size: 3rem;
+			line-height: 4rem;
 		}
 		h2 {
 			font-size: 2rem;
