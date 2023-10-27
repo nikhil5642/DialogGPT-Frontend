@@ -83,7 +83,16 @@ export default function Header() {
 						href="/signin"
 						onClick={() => trackEvent("login_link_click", { source: "header" })}
 					>
-						{"Sign Up"}
+						{"Log In"}
+					</a>
+				)}
+				{!isUserAuthenticated && (
+					<a
+						className={styles.tryNowButton}
+						href="/signup"
+						onClick={() => trackEvent("Try Now clicked", { source: "header" })}
+					>
+						{"Try Now ->"}
 					</a>
 				)}
 			</div>
@@ -178,17 +187,29 @@ export default function Header() {
 								</a>
 							) : (
 								<a
+									className={styles.signUpStyle}
 									href="/signin"
 									onClick={() => {
 										setMenuVisible(false);
 										trackEvent("login_link_click", { source: "hamburger" });
 									}}
 								>
-									Sign Up
+									Log In
 								</a>
 							)}
 						</li>
 					</ul>
+					{!isUserAuthenticated && (
+						<a
+							className={styles.tryNowButtonMenu}
+							href="/signup"
+							onClick={() =>
+								trackEvent("try_now_clicked", { source: "hamburger" })
+							}
+						>
+							<p>{"Try Now ->"}</p>
+						</a>
+					)}
 				</div>
 			)}
 		</div>
