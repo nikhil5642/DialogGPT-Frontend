@@ -198,18 +198,19 @@ export default function Header() {
 								</a>
 							)}
 						</li>
+						{!isUserAuthenticated && (
+							<li className={styles.tryNowButtonMenu}>
+								<a
+									href="/signup"
+									onClick={() =>
+										trackEvent("try_now_clicked", { source: "hamburger" })
+									}
+								>
+									{"Try Now ->"}
+								</a>
+							</li>
+						)}
 					</ul>
-					{!isUserAuthenticated && (
-						<a
-							className={styles.tryNowButtonMenu}
-							href="/signup"
-							onClick={() =>
-								trackEvent("try_now_clicked", { source: "hamburger" })
-							}
-						>
-							<p>{"Try Now ->"}</p>
-						</a>
-					)}
 				</div>
 			)}
 		</div>
