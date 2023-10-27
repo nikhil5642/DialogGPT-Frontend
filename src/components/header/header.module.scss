@@ -14,7 +14,7 @@
 }
 
 .headerLogoContainer {
-	display: flex;
+	display: flehox;
 	padding-top: 0.75rem;
 	padding-bottom: 0.75rem;
 	justify-content: center;
@@ -145,14 +145,25 @@
 }
 
 .tryNowButtonMenu {
-	padding: 0.5rem 1rem 0.5rem 1rem;
-
-	background-color: #428dff;
-	margin-bottom: 2rem;
-	p {
+	display: flex;
+	justify-content: center;
+	align-items: center; //
+	a {
+		display: inline-block; // This ensures the <a> tag only takes up the space it requires
+		flex: none;
+		padding: 1rem 1rem 1rem 1rem;
 		color: #ffffff;
-		font-weight: 600;
-		margin: 0;
+		background-color: #428dff;
+		margin-top: 1rem;
+		align-self: center;
+		text-align: center; // This centers the text inside the <a> tag
+		text-decoration: none;
+		padding: 1rem 1.5rem 1rem 1.5rem;
+		&:hover {
+			cursor: pointer;
+			background-color: #2a6fd4;
+			transform: translateY(-2px);
+		}
 	}
 }
 @media only screen and (max-width: 1080px) {
