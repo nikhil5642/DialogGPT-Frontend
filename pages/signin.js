@@ -39,12 +39,12 @@ try {
 	app = getApps()[0];
 }
 
-const SignInPage = () => {
+const SignInPage = ({ signUp = false }) => {
 	const { trackEvent, trackScreenView } = useTrackEvent(); // Extract analytics instance from context
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [isSignUp, setIsSignUp] = useState(true);
+	const [isSignUp, setIsSignUp] = useState(signUp);
 	const router = useRouter();
 	const auth = getAuth();
 	const { showLoader, hideLoader } = useContext(LoaderContext);
