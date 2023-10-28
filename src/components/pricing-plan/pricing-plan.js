@@ -30,13 +30,13 @@ function PricingPlan({ plan, currentPlan, timeFrame }) {
 				error: result.error,
 				sessionId: sessionId,
 				plan: plan.id,
-				time: timeFrame,
+				duration: timeFrame,
 			});
 		} else {
 			trackEvent("stripe-checkout-success", {
 				sessionId: sessionId,
 				plan: plan.id,
-				time: timeFrame,
+				duration: timeFrame,
 			});
 		}
 	};
@@ -54,18 +54,19 @@ function PricingPlan({ plan, currentPlan, timeFrame }) {
 				});
 			trackEvent("pricing-already-subscribed", {
 				plan: plan.id,
-				time: timeFrame,
+				duration: timeFrame,
 			});
 		} else if (!AuthService.isAuthenticated()) {
 			router.push("/signin");
 			trackEvent("pricing-not-authenticated", {
 				plan: plan.id,
-				time: timeFrame,
+				duration: timeFrame,
 			});
 		} else {
 			setLoading(true);
 			postRequest("/create_checkout_session", {
 				planId: plan.id,
+				duration: timeFrame,
 			})
 				.then((res) => {
 					setLoading(false);
