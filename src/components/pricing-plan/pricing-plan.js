@@ -8,10 +8,11 @@ import { PrivateKeys } from "../../helper/private-keys";
 import { showErrorToast, showSuccessToast } from "src/helper/toast-helper";
 import { useTrackEvent } from "../../helper/event-tracker";
 import LoadingButton from "../loading-button/loading-button";
+import { PricingTimeFrame } from "../pricing-widget/pricing-widget.utils";
 const stripePromise = loadStripe(
 	PrivateKeys.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
 );
-function PricingPlan({ plan, currentPlan }) {
+function PricingPlan({ plan, currentPlan, timeFrame }) {
 	const { trackEvent } = useTrackEvent();
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
@@ -29,11 +30,13 @@ function PricingPlan({ plan, currentPlan }) {
 				error: result.error,
 				sessionId: sessionId,
 				plan: plan.id,
+				duration: timeFrame,
 			});
 		} else {
 			trackEvent("stripe-checkout-success", {
 				sessionId: sessionId,
 				plan: plan.id,
+				duration: timeFrame,
 			});
 		}
 	};
@@ -49,14 +52,21 @@ function PricingPlan({ plan, currentPlan }) {
 				.catch((err) => {
 					setLoading(false);
 				});
-			trackEvent("pricing-already-subscribed", { plan: plan.id });
+			trackEvent("pricing-already-subscribed", {
+				plan: plan.id,
+				duration: timeFrame,
+			});
 		} else if (!AuthService.isAuthenticated()) {
 			router.push("/signin");
-			trackEvent("pricing-not-authenticated", { plan: plan.id });
+			trackEvent("pricing-not-authenticated", {
+				plan: plan.id,
+				duration: timeFrame,
+			});
 		} else {
 			setLoading(true);
 			postRequest("/create_checkout_session", {
 				planId: plan.id,
+				duration: timeFrame,
 			})
 				.then((res) => {
 					setLoading(false);
@@ -86,7 +96,11 @@ function PricingPlan({ plan, currentPlan }) {
 				))}
 			</ul>
 
-			<div className={styles.price}>{plan.price}</div>
+			<div className={styles.price}>
+				{timeFrame == PricingTimeFrame.MONTLY
+					? plan.monthlyPrice
+					: plan.yearlyPrice}
+			</div>
 
 			<LoadingButton
 				backgroundColour={plan.id == "basic" ? "#4169E1" : "#101828"}

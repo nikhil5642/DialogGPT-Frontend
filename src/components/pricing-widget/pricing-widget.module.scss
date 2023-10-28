@@ -1,5 +1,48 @@
-.pricingPlansContainer {
+.pricingWidgetContainer {
 	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+.timeFrameContainer {
+	display: flex;
+	padding: 0.25rem;
+	margin-top: 2rem;
+	background-color: #e7e7e7;
+	border-radius: 8px;
+	width: auto;
+	gap: 0.5rem; // Adds space between the child divs
+	border: 1px solid #d1d1d1; /* A subtle border color */
+	div {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.5rem 1.5rem;
+		text-align: center;
+		color: #475467;
+		font-size: 1rem;
+		line-height: 1.5rem;
+		font-weight: 400;
+		margin: 0;
+		border-radius: 8px;
+		cursor: pointer; // Indicates the option is clickable
+		transition: background-color 0.3s ease; // Smooth transition for background color change
+	}
+
+	.selected {
+		color: black;
+		background-color: #d4d4d8;
+	}
+
+	div:hover {
+		background-color: #d4d4d8;
+	}
+}
+
+.pricingPlansContainer {
+	margin-top: 1rem;
+	display: flex;
+	width: 100%;
 	flex-direction: row;
 	justify-content: space-between; /* Distributes the cards evenly */
 }

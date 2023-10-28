@@ -30,7 +30,8 @@ export const PricingPlans = {
 			PricingFeatures.FREE_TRIAL,
 		],
 		buttonText: "Start Free",
-		price: "$29/month",
+		monthlyPrice: "$29/month",
+		yearlyPrice: "$299/year",
 	},
 	ESSENTIAL: {
 		name: "Essential",
@@ -44,7 +45,8 @@ export const PricingPlans = {
 			PricingFeatures.SUPPORT_24_7,
 		],
 		buttonText: "Subscribe",
-		price: "$49/month",
+		monthlyPrice: "$49/month",
+		yearlyPrice: "$499/year",
 	},
 	PRO: {
 		name: "Pro",
@@ -60,6 +62,7 @@ export const PricingPlans = {
 			PricingFeatures.PRIORITY_SUPPORT,
 		],
 		buttonText: "Go Pro",
-		price: "$99/month",
+		monthlyPrice: "$99/month",
+		yearlyPrice: "$999/year",
 	},
 };
