@@ -9,6 +9,7 @@ import { getRequest } from "../src/helper/http-helper";
 import LoaderContext from "../src/components/loader/loader-context";
 import LoadingButton from "src/components/loading-button/loading-button";
 import { useTrackEvent } from "../src/helper/event-tracker";
+
 function AccountScreen() {
 	const { trackEvent, trackScreenView } = useTrackEvent(); // Extract analytics instance from context
 	const router = useRouter();
@@ -51,6 +52,17 @@ function AccountScreen() {
 				trackEvent("logout-failure");
 			});
 	};
+	const manageSubscription = () => {
+		if (accountInfo.subscription_plan === "free") {
+			window.location.href = "/pricing";
+			return;
+		}
+		getRequest("/manage_subscription")
+			.then((res) => {
+				window.location.href = res.result;
+			})
+			.catch((err) => {});
+	};
 	return (
 		<>
 			<Head>
@@ -85,7 +97,19 @@ function AccountScreen() {
 					<h5>Your Email</h5>
 					<p>{accountInfo.email}</p>
 				</div>
+				<div className={styles.subscriptionItemContainer}>
+					<div>
+						<h5>Current Plan</h5>
+						<p>{accountInfo.subscription_plan?.toUpperCase()}</p>
+					</div>
 
+					<button
+						className={styles.manageSubscriptionButton}
+						onClick={manageSubscription}
+					>
+						{accountInfo.subscription_plan === "free" ? "Upgrade" : "Manage"}
+					</button>
+				</div>
 				<div className={styles.logoutButton}>
 					<LoadingButton title={"Sign Out"} onClick={onLogout}></LoadingButton>
 				</div>
