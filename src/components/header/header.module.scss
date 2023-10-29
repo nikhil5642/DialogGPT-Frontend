@@ -6,6 +6,7 @@
 	padding-right: 2rem;
 	background-color: #fafafa;
 	height: 3rem;
+	align-items: center;
 }
 
 .headerLogoContainer {
@@ -14,6 +15,7 @@
 	padding-bottom: 0.75rem;
 	justify-content: center;
 	align-items: center;
+
 	&:active,
 	&:focus {
 		outline: none;
