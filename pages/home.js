@@ -64,21 +64,35 @@ const TopOverviewComponent = () => {
 
 	return (
 		<div className={styles.topOverviewContainer}>
-			<h1>
-				<span>AI-Driven</span> Support
-				<br />
-				Tailored for Your <span>Website</span>
-			</h1>
-			<br></br>
-			<p>
-				Enhance your website with our smart <strong>AI Assistant</strong>.
+			<div className={styles.leftContainer}>
+				<h1>
+					<span>AI-Driven</span> Support
+					<br />
+					Tailored for Your <span>Website</span>
+				</h1>
 				<br></br>
-				<br></br>
-				Offer instant responses to visitor queries and improve user engagement.
-				<br></br>
-				<br></br> No technical expertise required.
-			</p>
-			<button onClick={onCreateChatbot}>Create your Assistant Now →</button>
+				<p>
+					Resolve customer queries, collect leads, and drive conversions with
+					your own AI Assistant. Only 2 minutes to set up!
+				</p>
+				<div className={styles.buttonContainer}>
+					<button onClick={onCreateChatbot}>Create Now →</button>
+					<a
+						href="https://calendly.com/dialoggpt/30min"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Schedule Demo
+					</a>
+				</div>
+			</div>
+			<div className={styles.rightContainer}>
+				<img
+					src={"/assets/demo_chatbot.png"}
+					loading="lazy"
+					alt={"DialogGPT Image"}
+				/>
+			</div>
 		</div>
 	);
 };

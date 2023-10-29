@@ -49,11 +49,12 @@
 
 		.stepContainer {
 			transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
-			max-height: 1000px; // Adjust this value based on your content's maximum height
+			max-height: 1000px;
 			display: flex;
 			justify-content: center;
 			opacity: 1;
 			visibility: visible;
+			overflow: scroll;
 
 			&.hidden {
 				opacity: 0;
@@ -70,6 +71,8 @@
 		align-items: center;
 		flex-direction: row;
 		margin-top: 2rem;
+		margin-bottom: 2rem;
+
 		button {
 			margin-left: 1rem;
 			margin-right: 1rem;
