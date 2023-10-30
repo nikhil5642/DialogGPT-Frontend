@@ -225,17 +225,18 @@ function ProgressLoader({ start, complete }) {
 		}
 
 		if (start) {
+			setProgress(0);
 			const incrementValue = 100 / (120 * 10); // Update the progress every 100ms
 
 			const interval = setInterval(() => {
 				setProgress((prevProgress) => {
-					if (prevProgress >= 100) {
+					if (prevProgress >= 99) {
 						clearInterval(interval);
-						return 100;
+						return 99;
 					}
 					return prevProgress + incrementValue;
 				});
-			}, 100);
+			}, 99);
 
 			return () => clearInterval(interval); // Cleanup interval on component unmount
 		}
