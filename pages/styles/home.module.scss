@@ -53,6 +53,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 	padding-top: 5vh;
 	margin-left: 1rem;
 	margin-right: 1rem;
@@ -103,7 +104,6 @@
 				border-radius: 0.75rem;
 				transition: all 0.3s ease, transform 0.2s ease; // Separate transition for transform
 				margin-left: 0px;
-				margin-right: auto;
 				position: relative; // Relative positioning to allow ::before & ::after styling
 
 				&:hover {
@@ -117,7 +117,6 @@
 			}
 			a {
 				@extend button;
-
 				text-decoration: none;
 				align-self: center;
 				background: #f0f0f0;
@@ -126,6 +125,8 @@
 				border-radius: 1.5rem;
 				margin-top: auto;
 				margin-bottom: auto;
+				margin-left: 2rem;
+				margin-right: auto;
 			}
 		}
 	}
@@ -494,6 +495,7 @@
 				}
 				a {
 					margin-top: 2rem;
+					margin-left: auto;
 				}
 			}
 		}
