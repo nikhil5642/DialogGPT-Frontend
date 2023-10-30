@@ -243,6 +243,7 @@ export default function ChatBotComponent({ config }) {
 					</div>
 				)}
 				{!sending &&
+					leadsCollection.length > 0 &&
 					leadsSubmitted == false &&
 					source != ChatBotSource.SETTINGS &&
 					messages.filter((message) => message.type === "outgoing").length >
