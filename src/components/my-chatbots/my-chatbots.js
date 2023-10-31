@@ -46,7 +46,7 @@ export default function MyChatBots() {
 	function handleChatbotClick(index, chatbotId) {
 		if (index >= chatbotLimit) {
 			trackEvent("chatbot-click-limit-reached", { index: index });
-			return;
+			// return;
 		} else {
 			trackEvent("chatbot-click-openened", { index: index });
 		}
