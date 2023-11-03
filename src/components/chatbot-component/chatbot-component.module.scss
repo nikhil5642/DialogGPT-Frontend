@@ -49,8 +49,12 @@
 .chatbotHeaderRightContainer {
 	align-self: flex-end;
 	margin-left: auto;
-
+	display: flex;
+	padding-bottom: 0.25rem;
 	button {
+		display: flex;
+		flex-direction: row;
+		align-self: center;
 		padding: 0px;
 		background: none;
 		border: none;
@@ -58,8 +62,9 @@
 		img {
 			height: 1rem;
 			width: 1rem;
+			align-self: center;
+			justify-content: center;
 			border-radius: 0px;
-			margin-bottom: 0.25rem;
 		}
 		.closePng {
 			height: 0.75rem;
