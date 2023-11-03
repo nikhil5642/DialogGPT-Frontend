@@ -47,6 +47,8 @@ export default function ChatBotComponent({ config }) {
 				.catch((e) => {
 					initialView();
 				});
+		} else {
+			initialView();
 		}
 	}, [initialMessage, source]);
 
