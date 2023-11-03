@@ -28,7 +28,11 @@ export default function ChatBotComponent({ config }) {
 	const [rows, setRows] = useState(1);
 
 	useEffect(() => {
-		if (source != ChatBotSource.SETTINGS) {
+		if (
+			initialMessage != "" &&
+			source != ChatBotSource.SETTINGS &&
+			source != ChatBotSource.CHATBOT
+		) {
 			ChatHistoryService.getChatHistory(botID)
 				.then((res) => {
 					if (res) {
@@ -44,7 +48,7 @@ export default function ChatBotComponent({ config }) {
 					initialView();
 				});
 		}
-	}, []);
+	}, [initialMessage, source]);
 
 	const renderers = {
 		a: ({ href, children }) => {
