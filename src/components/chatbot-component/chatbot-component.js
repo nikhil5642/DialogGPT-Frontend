@@ -28,7 +28,7 @@ export default function ChatBotComponent({ config }) {
 	const [rows, setRows] = useState(1);
 
 	useEffect(() => {
-		if (initialMessage != "") {
+		if (source != ChatBotSource.SETTINGS) {
 			ChatHistoryService.getChatHistory(botID)
 				.then((res) => {
 					if (res) {
@@ -44,7 +44,7 @@ export default function ChatBotComponent({ config }) {
 					initialView();
 				});
 		}
-	}, [initialMessage]);
+	}, []);
 
 	const renderers = {
 		a: ({ href, children }) => {
