@@ -4,7 +4,9 @@ import styles from "./chatbot-component.module.scss";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import { ChatBotSource } from "./chatbot-component.utils";
-import ChatHistoryService from "../../helper/ChatHistoryService";
+import ChatHistoryService, {
+	generateNewChatId,
+} from "../../helper/ChatHistoryService";
 import LoadingButton from "../loading-button/loading-button";
 
 export default function ChatBotComponent({ config }) {
@@ -91,6 +93,7 @@ export default function ChatBotComponent({ config }) {
 
 	const initialView = () => {
 		setMessages([]);
+		setChatId(generateNewChatId());
 		const lines = getSplittedMessages(initialMessage);
 		lines.forEach((line, _) => {
 			setMessages((prevMessages) => [
