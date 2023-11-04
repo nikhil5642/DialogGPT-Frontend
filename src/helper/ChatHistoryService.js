@@ -54,7 +54,7 @@ export const ChatHistoryService = {
 	},
 };
 
-function generateNewChatId() {
+export function generateNewChatId() {
 	const timestamp = new Date().getTime().toString(36); // Current time in base 36
 	const randomPart = Math.random().toString(36).substr(2, 9); // Random string
 	return timestamp + "-" + randomPart;
