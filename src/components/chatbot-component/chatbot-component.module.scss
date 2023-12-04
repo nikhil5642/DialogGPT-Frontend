@@ -39,7 +39,7 @@
 	h5 {
 		flex: 1;
 		margin: 0px;
-		font-size: 1.125rem;
+		font-size: 1rem;
 		align-self: center;
 		text-align: start;
 		margin-left: 0.75rem;
@@ -47,10 +47,8 @@
 	}
 }
 .chatbotHeaderRightContainer {
-	align-self: flex-end;
 	margin-left: auto;
 	display: flex;
-	padding-bottom: 0.25rem;
 	button {
 		display: flex;
 		flex-direction: row;
@@ -58,10 +56,9 @@
 		padding: 0px;
 		background: none;
 		border: none;
-		margin-left: 1rem;
 		img {
-			height: 1rem;
-			width: 1rem;
+			height: 1.25rem;
+			width: 1.25rem;
 			align-self: center;
 			justify-content: center;
 			border-radius: 0px;

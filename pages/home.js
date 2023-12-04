@@ -15,7 +15,7 @@ function HomeScreen() {
 			"@context": "http://schema.org",
 			"@type": "WebSite",
 			name: "DialogGPT.io",
-			url: "https://dialoggpt.io/home",
+			url: "http://localhost:3000/home",
 			description: "Build a chatbot for your website, try now!",
 		},
 	];
@@ -28,7 +28,7 @@ function HomeScreen() {
 					name="description"
 					content="Empower your website with DialogGPT, the next-generation chatbot solution. Enhance user engagement, answer queries in real-time, and drive conversions. Try it today!"
 				/>
-				<link rel="canonical" href="https://dialoggpt.io/home" />
+				<link rel="canonical" href="http://localhost:3000/home" />
 				<script type="application/ld+json">
 					{JSON.stringify(structuredData)}
 				</script>
@@ -205,7 +205,7 @@ const LiveDemoComponent = () => {
 				<iframe
 					loading="lazy"
 					className={styles.liveDemoIframe}
-					src="https://dialoggpt.io/iframe/23b3dc28-ae71-4cf2-a5b1-652f561c4641"
+					src="http://localhost:3000/iframe/23b3dc28-ae71-4cf2-a5b1-652f561c4641"
 					frameBorder="0"
 					title="DialogGPT Chatbot Demo"
 					onLoad={() => setIframeLoading(false)}
