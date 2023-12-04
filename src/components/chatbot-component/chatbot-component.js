@@ -116,7 +116,18 @@ export default function ChatBotComponent({ config }) {
 			handleSend();
 		}
 	};
+
+	const triggerSendRef = useRef(false);
+	const promptClickHandler = (prompt) => {
+		triggerSendRef.current = true; // Set the ref to indicate specific update
+		setNewMessage(prompt);
+	};
 	useEffect(() => {
+		if (triggerSendRef.current) {
+			handleSend();
+			triggerSendRef.current = false; // Reset the ref after handling
+			return;
+		}
 		const numOfLineBreaks = (newMessage.match(/\n/g) || []).length;
 		setRows(Math.min(numOfLineBreaks + 1, 5));
 	}, [newMessage]);
@@ -254,7 +265,7 @@ export default function ChatBotComponent({ config }) {
 				{!sending &&
 					leadsCollection.length > 0 &&
 					leadsSubmitted == false &&
-					source != ChatBotSource.SETTINGS &&
+					source !== ChatBotSource.SETTINGS &&
 					messages.filter((message) => message.type === "outgoing").length >
 						0 && (
 						<LeadCollectionView
@@ -265,7 +276,7 @@ export default function ChatBotComponent({ config }) {
 							onLeadCancelled={handleLeadSubmit}
 						/>
 					)}
-				{source != ChatBotSource.SETTINGS && <div ref={messagesEndRef} />}
+				{source !== ChatBotSource.SETTINGS && <div ref={messagesEndRef} />}
 			</div>
 			<div className={styles.chatbotPromptsContainer}>
 				{getSplittedMessages(quickPrompts).map((prompt) => (
@@ -273,8 +284,7 @@ export default function ChatBotComponent({ config }) {
 						key={prompt}
 						className={styles.quickPrompt}
 						onClick={() => {
-							setNewMessage(prompt);
-							handleSend();
+							promptClickHandler(prompt);
 						}}
 					>
 						{prompt}

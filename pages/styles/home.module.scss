@@ -18,7 +18,9 @@
 		color: #101828;
 		font-weight: 800;
 		span {
-			color: #428dff;
+			background: linear-gradient(to right, #4568dc, #b06ab3);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
 			font-weight: 900;
 		}
 	}

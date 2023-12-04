@@ -53,3 +53,7 @@ strong,
 b {
 	font-weight: 700; // Bold
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

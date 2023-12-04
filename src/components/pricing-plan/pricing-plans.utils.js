@@ -1,4 +1,5 @@
 const PricingFeatures = {
+	MESSAGE_CREDITS_GPT3_100: "100 Free GPT 3.5 Messages/month",
 	MESSAGE_CREDITS_GPT3_2000: "2,000 GPT 3.5 Messages/month",
 	MESSAGE_CREDITS_GPT3_5000: "5,000 GPT 3.5 Messages/month",
 	MESSAGE_CREDITS_GPT3_10000: "10,000 GPT 3.5 Messages/month",
@@ -18,6 +19,20 @@ const PricingFeatures = {
 };
 
 export const PricingPlans = {
+	FREE: {
+		name: "Free",
+		id: "free",
+		features: [
+			PricingFeatures.CHATBOT_1,
+			PricingFeatures.CHARACTERS_400K,
+			PricingFeatures.EMBED_UNLIMITED_WEBSITES,
+			PricingFeatures.GPT35_OPTION,
+			PricingFeatures.MESSAGE_CREDITS_GPT3_100,
+		],
+		buttonText: "Try Now !",
+		monthlyPrice: "Free",
+		yearlyPrice: "Free",
+	},
 	BASIC: {
 		name: "Basic",
 		id: "basic",

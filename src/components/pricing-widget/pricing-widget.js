@@ -48,6 +48,11 @@ function PricingWidget() {
 			</div>
 			<div className={styles.pricingPlansContainer}>
 				<PricingPlan
+					plan={PricingPlans.FREE}
+					currentPlan={currentPlan}
+					timeFrame={timeFrame}
+				/>
+				<PricingPlan
 					plan={PricingPlans.BASIC}
 					currentPlan={currentPlan}
 					timeFrame={timeFrame}

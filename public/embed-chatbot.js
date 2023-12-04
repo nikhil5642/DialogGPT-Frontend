@@ -29,9 +29,11 @@
 
         #chatbotIframe {
             width: 22rem;
-            height: 35rem;
+            height: 36rem;
             position: fixed;
-            bottom: 4rem;
+            bottom: 5rem;
+			max-width: 90%;
+			max-height: 80%;
             right: 1rem;
             z-index: 100000;
             border-radius: 0.75rem;
