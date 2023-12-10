@@ -51,13 +51,13 @@ function PricingScreen() {
 					name="description"
 					content="Explore affordable pricing plans for DialogGPT.io. Choose the best chatbot solution tailored to your business needs."
 				/>
-				<link rel="canonical" href="https://dialoggpt.io//pricing" />
+				<link rel="canonical" href="https://dialoggpt.io/pricing" />
 				<script type="application/ld+json">
 					{JSON.stringify({
 						"@context": "http://schema.org",
 						"@type": "WebSite",
 						name: "DialogGPT.io",
-						url: "https://dialoggpt.io//pricing", // Corrected the URL to match the canonical link
+						url: "https://dialoggpt.io/pricing", // Corrected the URL to match the canonical link
 						description:
 							"Explore affordable pricing plans for DialogGPT.io. Choose the best chatbot solution tailored to your business needs.",
 					})}

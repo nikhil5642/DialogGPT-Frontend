@@ -6,7 +6,7 @@ function WixPage() {
 		<>
 			<Head>
 				<title>Embed Chatbot in Wix Website</title> {/* Updated title */}
-				<link rel="canonical" href="https://dialoggpt.io//docs/wix" />{" "}
+				<link rel="canonical" href="https://dialoggpt.io/docs/wix" />{" "}
 				{/* Updated URL */}
 				<meta
 					name="description"
@@ -18,7 +18,7 @@ function WixPage() {
 						"@context": "http://schema.org",
 						"@type": "WebSite",
 						name: "DialogGPT.io",
-						url: "https://dialoggpt.io//docs/wix", // Updated URL
+						url: "https://dialoggpt.io/docs/wix", // Updated URL
 						description: "Learn how to embed a chatbot in your Wix website.", // Updated description
 					})}
 				</script>
