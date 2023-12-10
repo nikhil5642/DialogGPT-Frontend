@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://dialogpt.io/
+Host: https://dialoggpt.io//
 
 # Sitemaps
-Sitemap: https://dialogpt.io/sitemap.xml
+Sitemap: https://dialoggpt.io//sitemap.xml

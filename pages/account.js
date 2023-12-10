@@ -67,14 +67,14 @@ function AccountScreen() {
 		<>
 			<Head>
 				<title>DialogGPT Account</title>
-				<link rel="canonical" href="https://dialogpt.io/account" />
+				<link rel="canonical" href="https://dialoggpt.io//account" />
 				<meta name="description" content="DialogGPT Account Page" />
 				<script type="application/ld+json">
 					{JSON.stringify({
 						"@context": "http://schema.org",
 						"@type": "WebSite",
 						name: "DialogGPT.io",
-						url: "https://dialogpt.io/account",
+						url: "https://dialoggpt.io//account",
 						description: "DialogGPT Account Page",
 					})}
 				</script>

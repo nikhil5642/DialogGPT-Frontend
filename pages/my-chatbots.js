@@ -7,14 +7,14 @@ function MyChatBotsPage() {
 		<>
 			<Head>
 				<title>Chatbots List</title>
-				<link rel="canonical" href="https://dialogpt.io/my-chatbots" />
+				<link rel="canonical" href="https://dialoggpt.io//my-chatbots" />
 				<meta name="description" content="List of already trained chatbots" />
 				<script type="application/ld+json">
 					{JSON.stringify({
 						"@context": "http://schema.org",
 						"@type": "WebSite",
 						name: "DialogGPT.io",
-						url: "https://dialogpt.io/my-chatbots",
+						url: "https://dialoggpt.io//my-chatbots",
 						description: "List of already trained chatbots",
 					})}
 				</script>

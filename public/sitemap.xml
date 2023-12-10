@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://dialogpt.io/</loc>
+        <loc>https://dialoggpt.io//</loc>
         <changefreq>dialy</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://dialogpt.io/home</loc>
+        <loc>https://dialoggpt.io//home</loc>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://dialogpt.io/pricing</loc>
+        <loc>https://dialoggpt.io//pricing</loc>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://dialogpt.io/my-chatbots</loc>
+        <loc>https://dialoggpt.io//my-chatbots</loc>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://dialogpt.io/signin</loc>
+        <loc>https://dialoggpt.io//signin</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://dialogpt.io/support</loc>
+        <loc>https://dialoggpt.io//support</loc>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://dialogpt.io/terms</loc>
+        <loc>https://dialoggpt.io//terms</loc>
         <changefreq>weekly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>https://dialogpt.io/privacy</loc>
+        <loc>https://dialoggpt.io//privacy</loc>
         <changefreq>weekly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>https://dialogpt.io/docs</loc>
+        <loc>https://dialoggpt.io//docs</loc>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://dialogpt.io/docs/wix</loc>
+        <loc>https://dialoggpt.io//docs/wix</loc>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
