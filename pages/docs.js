@@ -7,7 +7,7 @@ function SupportPage() {
 		<div>
 			<Head>
 				<title>Support - DialogGPT</title>
-				<link rel="canonical" href="https://dialoggpt.io/docs" />
+				<link rel="canonical" href="http://localhost:3000/docs" />
 				<meta
 					name="description"
 					content="Get assistance with DialogGPT. For queries, issues, or feedback, reach out to us at support@dialoggpt.io."
@@ -17,7 +17,7 @@ function SupportPage() {
 						"@context": "http://schema.org",
 						"@type": "WebSite",
 						name: "DialogGPT.io",
-						url: "https://dialoggpt.io/docs",
+						url: "http://localhost:3000/docs",
 						description:
 							"Get assistance with DialogGPT. For queries, issues, or feedback, reach out to us at support@dialoggpt.io.",
 					})}

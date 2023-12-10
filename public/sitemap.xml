@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://dialoggpt.io/</loc>
+        <loc>http://localhost:3000/</loc>
         <changefreq>dialy</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://dialoggpt.io/home</loc>
+        <loc>http://localhost:3000/home</loc>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://dialoggpt.io/pricing</loc>
+        <loc>http://localhost:3000/pricing</loc>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://dialoggpt.io/my-chatbots</loc>
+        <loc>http://localhost:3000/my-chatbots</loc>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://dialoggpt.io/signin</loc>
+        <loc>http://localhost:3000/signin</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://dialoggpt.io/support</loc>
+        <loc>http://localhost:3000/support</loc>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://dialoggpt.io/terms</loc>
+        <loc>http://localhost:3000/terms</loc>
         <changefreq>weekly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>https://dialoggpt.io/privacy</loc>
+        <loc>http://localhost:3000/privacy</loc>
         <changefreq>weekly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>https://dialoggpt.io/docs</loc>
+        <loc>http://localhost:3000/docs</loc>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://dialoggpt.io/docs/wix</loc>
+        <loc>http://localhost:3000/docs/wix</loc>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
