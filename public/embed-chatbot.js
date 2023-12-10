@@ -95,7 +95,7 @@
 	// Create the chat bubble
 	var chatBubble = document.createElement("div");
 	chatBubble.id = "chatbotBubble";
-	chatBubble.innerHTML = `<img src="http://localhost:3000/assets/chat_icon.png" alt="Chat" loading="lazy" style="height: ${smallIconSize}; width: ${smallIconSize};">`;
+	chatBubble.innerHTML = `<img src="https://dialogpt.io/assets/chat_icon.png" alt="Chat" loading="lazy" style="height: ${smallIconSize}; width: ${smallIconSize};">`;
 
 	document.body.appendChild(chatBubble);
 
@@ -108,7 +108,7 @@
 	var iframe = document.createElement("iframe");
 	iframe.id = "chatbotIframe";
 	iframe.src =
-		"http://localhost:3000/iframe/" + chatbotID + "?source=chat-bubble";
+		"https://dialogpt.io/iframe/" + chatbotID + "?source=chat-bubble";
 	iframe.loading = "lazy";
 	iframe.onload = function () {
 		loader.style.display = "none";
@@ -128,7 +128,7 @@
 					? window.chatbotSettings.chatBubbleColor
 					: "#000000";
 			chatBubble.style.backgroundColor = bgColor;
-			chatBubble.innerHTML = `<img src="http://localhost:3000/assets/chat_icon.png" alt="Chat" loading="lazy" style="height: ${smallIconSize}; width: ${smallIconSize};">`;
+			chatBubble.innerHTML = `<img src="https://dialogpt.io/assets/chat_icon.png" alt="Chat" loading="lazy" style="height: ${smallIconSize}; width: ${smallIconSize};">`;
 		}
 	}
 	function cleanupEventListeners() {
@@ -149,7 +149,7 @@
 					: "#000000";
 			chatBubble.style.backgroundColor = bgColor;
 			chatBubble.style.backgroundColor = bgColor;
-			chatBubble.innerHTML = `<img src="http://localhost:3000/assets/down_arrow_white.png" alt="Down" loading="lazy" style="height: 32px; width: 32px;">`; // Down arrow icon when iframe is visible
+			chatBubble.innerHTML = `<img src="https://dialogpt.io/assets/down_arrow_white.png" alt="Down" loading="lazy" style="height: 32px; width: 32px;">`; // Down arrow icon when iframe is visible
 		} else {
 			iframe.style.display = "none";
 			loader.style.display = "none"; // Hide the loader

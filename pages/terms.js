@@ -5,14 +5,14 @@ function Terms() {
 		<div className={styles.container}>
 			<Head>
 				<title>Terms of Service</title>
-				<link rel="canonical" href="http://localhost:3000/terms" />
+				<link rel="canonical" href="https://dialogpt.io/terms" />
 				<meta name="description" content="Terms of Service for DialogGPT.io" />
 				<script type="application/ld+json">
 					{JSON.stringify({
 						"@context": "http://schema.org",
 						"@type": "WebSite",
 						name: "DialogGPT.io",
-						url: "http://localhost:3000/terms",
+						url: "https://dialogpt.io/terms",
 						description: "Terms of Service for DialogGPT.io",
 					})}
 				</script>

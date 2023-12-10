@@ -5,14 +5,14 @@ function Privacy() {
 		<div className={styles.container}>
 			<Head>
 				<title>Privacy Policy</title>
-				<link rel="canonical" href="http://localhost:3000/privacy" />
+				<link rel="canonical" href="https://dialogpt.io/privacy" />
 				<meta name="description" content="Privacy Policy of DialogGPT.io" />
 				<script type="application/ld+json">
 					{JSON.stringify({
 						"@context": "http://schema.org",
 						"@type": "WebSite",
 						name: "DialogGPT.io",
-						url: "http://localhost:3000/privacy",
+						url: "https://dialogpt.io/privacy",
 						description: "Privacy Policy of DialogGPT.io",
 					})}
 				</script>

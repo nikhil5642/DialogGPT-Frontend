@@ -231,14 +231,14 @@ const SignInPage = ({ signUp = false }) => {
 		<>
 			<Head>
 				<title>DialogGPT Login</title>
-				<link rel="canonical" href="http://localhost:3000/signin" />
+				<link rel="canonical" href="https://dialogpt.io/signin" />
 				<meta name="description" content="Sign in to DialogGPT.io" />
 				<script type="application/ld+json">
 					{JSON.stringify({
 						"@context": "http://schema.org",
 						"@type": "WebSite",
 						name: "DialogGPT.io",
-						url: "http://localhost:3000/signin",
+						url: "https://dialogpt.io/signin",
 						description: "Sign in to DialogGPT.io",
 					})}
 				</script>
