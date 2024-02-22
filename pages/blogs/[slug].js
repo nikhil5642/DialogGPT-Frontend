@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { useEffect ,useState} from 'react';
-import { getContentfulClient,fixContentUrl } from 'src/helper/contentful-client';
-import styles from "./blogs.module.scss"
+import { getContentfulClient } from 'src/helper/contentful-client';
+import styles from "./blogPost.module.scss"
 
 const BlogPost = () => {
   const router = useRouter(); 
