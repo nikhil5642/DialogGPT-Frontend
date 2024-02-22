@@ -13,4 +13,7 @@ module.exports = withBundleAnalyzer({
 		];
 	},
 	distDir: "build",
+	images: {
+		domains: ["images.ctfassets.net"], // Add your CMS's image domain here
+	},
 });
