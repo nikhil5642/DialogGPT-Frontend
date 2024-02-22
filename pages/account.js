@@ -120,3 +120,14 @@ function AccountScreen() {
 
 AccountScreen.showHeaderFooter = true;
 export default AccountScreen;
+export async function getStaticProps() {
+	const client = getContentfulClient();
+
+	const res = await client.getEntries({ content_type: "blogs" });
+
+	return {
+		props: {
+			entries: res.items,
+		},
+	};
+}
