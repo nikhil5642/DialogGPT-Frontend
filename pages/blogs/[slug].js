@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { useEffect ,useState} from 'react';
-import { getContentfulClient } from 'src/helper/contentful-client';
+import { fixContentUrl, getContentfulClient } from 'src/helper/contentful-client';
 import styles from "./blogPost.module.scss"
+import Image from 'next/image';
 
 const BlogPost = () => {
   const router = useRouter(); 
@@ -28,10 +29,23 @@ const BlogPost = () => {
       <h1>{blog.title}</h1>
       <p>{blog.description}</p>
         <div>
-            {documentToReactComponents(blog?.content)}
+            {documentToReactComponents(blog?.content,options)}
         </div>
     </div>
   );
+};
+
+const options = {
+	renderNode: {
+		"embedded-asset-block": (node) => {
+			// Assuming your image data is correctly located in the node
+      const { url} = node.data.target.fields.file;
+      const { width, height } = node.data.target.fields.file.details.image;
+      const alt = node.data.target.fields.title;
+      console.log("url", url, width, height);
+			return <Image src={fixContentUrl(url)} width={width} height={height} alt={alt} />;
+		},
+	},
 };
 
 export async function getBlogsData(slug) {
