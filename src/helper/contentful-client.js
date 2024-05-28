@@ -2,8 +2,8 @@ const contentful = require("contentful");
 
 export function getContentfulClient() {
 	return contentful.createClient({
-		space: "zp70y861mhp1",
-		accessToken: "6d2DJyEbo04eAGqODifAcuiaSa8Y3Y_oI70cH9cstdc",
+		space: process.env.CONTENTFUL_SPACE_ID,
+		accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
 	});
 }
 

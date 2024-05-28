@@ -6,13 +6,13 @@ import { getAnalytics } from "firebase/analytics";
 import { FirebaseFeatures } from "./feature-flags";
 
 export const firebaseConfig = {
-	apiKey: "AIzaSyCJ8u8nMGdqmaPeq9NBG5_wFJiKaTAozhA",
-	authDomain: "auth.dialoggpt.io",
-	projectId: "chatbot-37637",
-	storageBucket: "chatbot-37637.appspot.com",
-	messagingSenderId: "570891403073",
-	appId: "1:570891403073:web:aacbae1b1436bcd98d2bc0",
-	measurementId: "G-YH1V9X5434",
+	apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+	authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+	projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+	storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+	appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+	measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
 const FirebaseContext = createContext();
