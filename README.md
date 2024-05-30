@@ -10,6 +10,9 @@ Welcome to the DialogGPT-Frontend repository. This project is the frontend of Di
 
 Check out the live version of this tool [here](https://dialoggpt.io/home).
 
+![DialogGPT Demo](https://dialoggpt.io/videos/video_demo.gif)
+
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -97,4 +100,3 @@ Contributions are what make the open-source community such an amazing place to l
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
