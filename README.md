@@ -10,7 +10,8 @@ Welcome to the DialogGPT-Frontend repository. This project is the frontend of Di
 
 Check out the live version of this tool [here](https://dialoggpt.io/home).
 
-![DialogGPT Demo](https://dialoggpt.io/videos/video_demo.gif)
+<img src="/public/videos/video_demo.gif" width="800px">
+
 
 
 ## Table of Contents
