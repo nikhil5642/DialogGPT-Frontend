@@ -48,7 +48,7 @@ export default function ChatBotComponent({ config }) {
 		} else {
 			initialView();
 		}
-	}, [source]);
+	}, [initialMessage, source]);
 
 	const renderers = {
 		a: ({ href, children }) => {
