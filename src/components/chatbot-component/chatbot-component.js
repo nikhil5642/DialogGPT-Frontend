@@ -133,7 +133,7 @@ export default function ChatBotComponent({ config }) {
 			const container = messagesEndRef.current.parentElement;
 			container.scrollTop = container.scrollHeight;
 		}
-		if (chatId != null) {
+		if (chatId != null && source != ChatBotSource.SETTINGS) {
 			ChatHistoryService.storeChatHistory(
 				botID,
 				chatId,
