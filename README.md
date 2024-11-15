@@ -1,7 +1,3 @@
-Sure, here is the updated README with the link to the LICENSE file:
-
----
-
 # DialogGPT-Frontend
 
 Welcome to the DialogGPT-Frontend repository. This project is the frontend of DialogGPT, a powerful conversational AI tool designed to enhance your communication capabilities. 
