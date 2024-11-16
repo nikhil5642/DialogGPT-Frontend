@@ -97,19 +97,22 @@ function AccountScreen() {
 					<h5>Your Email</h5>
 					<p>{accountInfo.email}</p>
 				</div>
-				<div className={styles.subscriptionItemContainer}>
-					<div>
-						<h5>Current Plan</h5>
-						<p>{accountInfo.subscription_plan?.toUpperCase()}</p>
-					</div>
 
-					<button
-						className={styles.manageSubscriptionButton}
-						onClick={manageSubscription}
-					>
-						{accountInfo.subscription_plan === "free" ? "Upgrade" : "Manage"}
-					</button>
-				</div>
+				{accountInfo.subscription_plan && (
+					<div className={styles.subscriptionItemContainer}>
+						<div>
+							<h5>Current Plan</h5>
+							<p>{accountInfo.subscription_plan?.toUpperCase()}</p>
+						</div>
+
+						<button
+							className={styles.manageSubscriptionButton}
+							onClick={manageSubscription}
+						>
+							{accountInfo.subscription_plan === "free" ? "Upgrade" : "Manage"}
+						</button>
+					</div>
+				)}
 				<div className={styles.logoutButton}>
 					<LoadingButton title={"Sign Out"} onClick={onLogout}></LoadingButton>
 				</div>
