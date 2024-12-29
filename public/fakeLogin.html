@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Intent Race Test</title>
+	</head>
+	<body>
+		<h3>Intent Race Test</h3>
+		<div>
+			<!-- Remove the curly braces in onClick -->
+			<button onclick="handleIntentTrigger()">Test Intent</button>
+		</div>
+		<script>
+			// Function needs to be defined before it's used
+			function handleIntentTrigger() {
+				window.location =
+					"intent:#Intent;action=android.intent.action.VIEW;data=https://www.google.com;end";
+			}
+		</script>
+		<div id="log"></div>
+	</body>
+</html>
