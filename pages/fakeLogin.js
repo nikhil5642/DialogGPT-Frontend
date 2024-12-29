@@ -3,19 +3,20 @@ import Head from "next/head";
 
 const BasicIntentTrigger = () => {
 	const handleIntentTrigger = () => {
-		window.location.href =
+		window.location =
 			"intent:#Intent;action=android.intent.action.VIEW;data=https://www.google.com;end";
 	};
 
 	return (
 		<>
 			<Head>
-				<title>Basic Intent Trigger</title>
-				<meta name="description" content="Test Android Intent Triggers" />
+				<title>Intent Race Test</title>
 			</Head>
+			<h3>Intent Race Test</h3>
 			<div>
-				<button onClick={handleIntentTrigger}>Test Basic Intent</button>
+				<button onClick={handleIntentTrigger}>Test Intent</button>
 			</div>
+			<div id="log"></div>
 		</>
 	);
 };
