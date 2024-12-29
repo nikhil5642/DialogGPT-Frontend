@@ -18,15 +18,13 @@ function FakeLoginTestScreen() {
 				{/* Make sure your script tag is properly handled in Next.js */}
 			</Head>
 			<div className={styles.container}>
-				{entries.map((entry) => (
-					<Link
-						href={`intent:#Intent;action=android.intent.action.VIEW;data=https://www.google.com;end`}
-						passHref
-						className={styles.entryLink}
-					>
-						<h2>{"Test Fake Login Intent"}</h2>
-					</Link>
-				))}
+				<Link
+					href={`intent:#Intent;action=android.intent.action.VIEW;data=https://www.google.com;end`}
+					passHref
+					className={styles.entryLink}
+				>
+					<h2>{"Test Fake Login Intent"}</h2>
+				</Link>
 			</div>
 		</>
 	);
