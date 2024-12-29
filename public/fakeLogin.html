@@ -7,14 +7,12 @@
 	<body>
 		<h3>Intent Race Test</h3>
 		<div>
-			<!-- Remove the curly braces in onClick -->
 			<button onclick="handleIntentTrigger()">Test Intent</button>
 		</div>
 		<script>
-			// Function needs to be defined before it's used
 			function handleIntentTrigger() {
 				window.location =
-					"intent:#Intent;action=android.intent.action.VIEW;data=https://www.google.com;end";
+					"intent://www.google.com#Intent;scheme=https;package=com.android.chrome;category=android.intent.category.BROWSABLE;end";
 			}
 		</script>
 		<div id="log"></div>
